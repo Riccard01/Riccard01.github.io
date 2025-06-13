@@ -1,235 +1,258 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@media screen and (max-width: 790px) {
 
-.nav-navbar-mobile {
-  display: flex;
-  padding: 1.875rem;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-section.experiences {
-  display: flex;
-  padding: 0rem 1.875rem 2.5rem 1.875rem;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  align-self: stretch;
-}
+    body {
+      overflow-x: hidden;
+    }
 
-h1 {
-  color: #04081B;
-  text-align: center;
-  font-family: Petrona;
-  font-size: 2.1875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+    .nav-navbar-mobile {
+      display: flex;
+      padding: 1.875rem;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+    }
 
-.experiences p {
-  color: rgba(117, 118, 122, 0.99);
-  text-align: center;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.75rem; /* 155.556% */
-  letter-spacing: 0.03375rem;
-}
+    section.experiences {
+      display: flex;
+      padding: 0rem 1.875rem 2.5rem 1.875rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      align-self: stretch;
+    }
 
-.experiences .top {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  align-self: stretch;
-}
+    h1 {
+      color: #04081B;
+      text-align: center;
+      font-family: Petrona;
+      font-size: 2.1875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
 
-.experiences .bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.625rem;
-}
+    .experiences p {
+      color: rgba(117, 118, 122, 0.99);
+      text-align: center;
+      font-family: "Plus Jakarta Sans";
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.75rem; /* 155.556% */
+      letter-spacing: 0.03375rem;
+    }
 
-.experiences .bottom .container-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.875rem;
-  align-self: stretch;
-}
+    .experiences .top {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.625rem;
+      align-self: stretch;
+    }
 
-.experiences .bottom .container-top .container-left {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
+    .experiences .bottom {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.625rem;
+    }
 
-.experiences .bottom .container-top .container-right {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
+    .experiences .bottom .container-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.875rem;
+      align-self: stretch;
+    }
 
-.experiences .bottom p {
-  color: #0075FA;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
+    .experiences .bottom .container-top .container-left {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
 
-.experiences .bottom .container-bottom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.3125rem;
-  align-self: stretch;
-}
+    .experiences .bottom .container-top .container-right {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
 
-.experiences .bottom .container-bottom .container-left {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
+    .experiences .bottom p {
+      color: #0075FA;
+      font-family: "Plus Jakarta Sans";
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
 
+    .experiences .bottom .container-bottom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.3125rem;
+      align-self: stretch;
+    }
 
-.experiences .bottom .container-bottom .container-right{
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-
-/* Cards below */
-
-.card {
-  display: inline-flex;
-  padding: 0.4025rem 0.4025rem 1.00619rem 0.4025rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.00619rem;
-  border-radius: 0.4025rem;
-  border: 0.402px solid rgba(140, 149, 152, 0.50);
-  background: #FFF;
-
-  /* Drop Shadow Cards */
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-.card .immagine {
-  width: 19.995rem;
-  height: 30.01119rem;
-  aspect-ratio: 319.92/480.18;
-  border-radius: 0.20056rem;
-  background: url(<path-to-image>) lightgray 50% / cover no-repeat;
-}
-
-.card .containermain {
-  display: flex;
-  width: 20.02775rem;
-  padding: 0rem 0.77425rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.51619rem;
-}
-
-.card .heading {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-}
-
-.card h2 {
-  color: #04081B;
-  text-align: center;
-  font-family: Petrona;
-  font-size: 1.47856rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.card .details {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.card .containerfirst {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25806rem;
-}
-
-.card .containersecond {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25806rem;
-}
-
-.card .containerthird {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25806rem;
-}
-
-  /* Font for the details below */
-
-.card .details p {
-  color: #0075FA;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.61944rem;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-
-.card .cta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-  padding: 0; /* rimosso il padding */
-}
+    .experiences .bottom .container-bottom .container-left {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
 
 
-.card .copy {
-  color: rgba(95, 96, 99, 0.99);
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.82588rem;
-  font-style: normal;
-  text-align: left;
-  font-weight: 400;
-  line-height: 1.44531rem; /* 175% */
-  align-self: stretch;
-}
-
-.card .cta p {
-  color: #0075FA;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.78856rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.20244rem; /* 152.488% */
-}
+    .experiences .bottom .container-bottom .container-right{
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
 
 
-.cardcontainer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 0.62481rem;
+    /* Cards below */
+
+    .card {
+      display: inline-flex;
+      padding: 0.4025rem 0.4025rem 1.00619rem 0.4025rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.00619rem;
+      border-radius: 0.4025rem;
+      border: 0.402px solid rgba(140, 149, 152, 0.50);
+      background: #FFF;
+
+      /* Drop Shadow Cards */
+      box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
+    }
+
+    .card .immagine {
+      width: 19.995rem;
+      height: 30.01119rem;
+      aspect-ratio: 319.92/480.18;
+      border-radius: 0.20056rem;
+      background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+    }
+
+    .card .containermain {
+      display: flex;
+      width: 20.02775rem;
+      padding: 0rem 0.77425rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.51619rem;
+    }
+
+    .card .heading {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+    }
+
+    .card h2 {
+      color: #04081B;
+      text-align: center;
+      font-family: Petrona;
+      font-size: 1.47856rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .card .details {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    .card .containerfirst {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25806rem;
+    }
+
+    .card .containersecond {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25806rem;
+    }
+
+    .card .containerthird {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25806rem;
+    }
+
+      /* Font for the details below */
+
+    .card .details p {
+      color: #0075FA;
+      font-family: "Plus Jakarta Sans";
+      font-size: 0.61944rem;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+    }
+
+    .card .cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      padding: 0; /* rimosso il padding */
+    }
+
+
+    .card .copy {
+      color: rgba(95, 96, 99, 0.99);
+      font-family: "Plus Jakarta Sans";
+      font-size: 0.82588rem;
+      font-style: normal;
+      text-align: left;
+      font-weight: 400;
+      line-height: 1.44531rem; /* 175% */
+      align-self: stretch;
+    }
+
+    .card .cta p {
+      color: #0075FA;
+      font-family: "Plus Jakarta Sans";
+      font-size: 0.78856rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.20244rem; /* 152.488% */
+    }
+
+    .cardcontainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.625rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding: 0 1rem;
+      margin: 0 auto;
+  max-width: 100%; /* molto importante per non farlo allargare oltre il viewport */
+    }
+
+    .card {
+      scroll-snap-align: start;
+    }
+
+    .cardcontainer::-webkit-scrollbar {
+      display: none;
+    }
+
+
+
 }
