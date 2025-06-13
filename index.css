@@ -231,6 +231,8 @@
 
   .cardcontainer {
     display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
     gap: 0.62481rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; /* per mobile smooth scroll */
