@@ -236,3 +236,25 @@ h1 {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* per mobile smooth scroll */
 }
+
+
+.card .sfumaturatop {
+  width: 19.99513rem;
+  height: 30.01125rem;
+  position: absolute;
+  left: 0.40238rem;
+  top: 0.4025rem;
+  border-radius: 0.20063rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+}
+
+.card .sfumaturabottom {
+  width: 19.99513rem;
+  height: 30.01125rem;
+  position: absolute;
+  left: 0.40238rem;
+  top: 0.4025rem;
+  border-radius: 0.20063rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, #04081B 100%);
+  background-blend-mode: overlay;
+}

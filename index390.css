@@ -1,4 +1,4 @@
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 804px) {
 
     * {
       margin: 0;
@@ -242,8 +242,11 @@
       scroll-snap-type: x mandatory;
       padding: 0 1rem;
       margin: 0 auto;
-  max-width: 100%; /* molto importante per non farlo allargare oltre il viewport */
+      max-width: 100%;
+      width: 100%;
+      touch-action: pan-x;
     }
+
 
     .card {
       scroll-snap-align: start;
