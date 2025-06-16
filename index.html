@@ -152,9 +152,6 @@
 
 
 
-
-
-
     <h2>Prenota la tua escursione</h2>
 
     <form id="prenotazioneForm">
@@ -187,7 +184,7 @@
     <div id="risultato" style="margin-top:20px; font-weight:bold;"></div>
 
     <script>
-    // Disabilita tipologia quando Full Day selezionato
+    // Gestione Full Day → forza Private e blocca selezione tipologia
     document.getElementById('tipoTurno').addEventListener('change', function() {
       const tipologia = document.getElementById('tipologia');
       if (this.value === 'FullDay') {
@@ -202,32 +199,33 @@
 
     document.getElementById('prenotazioneForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       document.getElementById('submitBtn').disabled = true;
 
       const formData = new FormData(e.target);
-      const data = new URLSearchParams();
-      formData.forEach((value, key) => data.append(key, value));
+      const urlEncodedData = new URLSearchParams();
+      formData.forEach((value, key) => urlEncodedData.append(key, value));
 
       fetch(ENDPOINT, {
         method: 'POST',
-        body: data
+        body: urlEncodedData
       })
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.text();
+      })
       .then(text => {
         document.getElementById('risultato').innerText = text;
-        if (text.includes("✅")) {
-          e.target.reset();
-        }
-        document.getElementById('submitBtn').disabled = false;
+        if (text.includes("✅")) e.target.reset();
       })
       .catch(err => {
+        console.error("Errore:", err);
         document.getElementById('risultato').innerText = "Errore durante la prenotazione.";
+      })
+      .finally(() => {
         document.getElementById('submitBtn').disabled = false;
       });
     });
     </script>
-
 
 
 
