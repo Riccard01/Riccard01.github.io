@@ -144,49 +144,104 @@
       </div>
       </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <h2>Prenota la tua escursione</h2>
 
     <form id="prenotazioneForm">
       <label>Data: <input type="date" name="data" required></label><br>
-      <label>Orario: <input type="time" name="orario" required></label><br>
+
+      <label>Tipo Tour:
+        <select name="tipoTurno" id="tipoTurno" required>
+          <option value="Morning">Morning Tour</option>
+          <option value="Afternoon">Afternoon Tour</option>
+          <option value="Sunset">Sunset Cruise</option>
+          <option value="FullDay">Full Day</option>
+        </select>
+      </label><br>
+
+      <label>Tipologia:
+        <select name="tipologia" id="tipologia" required>
+          <option value="Public">Public</option>
+          <option value="Private">Private</option>
+        </select>
+      </label><br>
+
+      <label>Numero di persone: <input type="number" name="numeroPersone" min="1" max="6" value="1" required></label><br>
       <label>Nome: <input type="text" name="nome" required></label><br>
       <label>Email: <input type="email" name="email" required></label><br>
-      <label>Numero di persone: <input type="number" name="numeroPersone" required></label><br>
       <label>Note: <textarea name="note"></textarea></label><br>
-      <button type="submit">Prenota</button>
+
+      <button type="submit" id="submitBtn">Prenota</button>
     </form>
 
     <div id="risultato" style="margin-top:20px; font-weight:bold;"></div>
 
     <script>
-    const TOKEN = "mioCharterPrenotazioni2025xyz";
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbw0gq6nFntQ3uDegOc9rfi0O3o11Oto2bRps37aIMTKGBDT8Pmp9_P7eeoqNdIzAIzu/exec";
+    // Disabilita tipologia quando Full Day selezionato
+    document.getElementById('tipoTurno').addEventListener('change', function() {
+      const tipologia = document.getElementById('tipologia');
+      if (this.value === 'FullDay') {
+        tipologia.value = 'Private';
+        tipologia.disabled = true;
+      } else {
+        tipologia.disabled = false;
+      }
+    });
+
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbypc3gLG0ZiSMQB3XFPq8KZ3qi2t1MAcGyGjvrRSYtq-_bRPHRisGQ8eCIPbmOaP1sGdg/exec";
 
     document.getElementById('prenotazioneForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
+      document.getElementById('submitBtn').disabled = true;
+
       const formData = new FormData(e.target);
       const data = {};
       formData.forEach((value, key) => data[key] = value);
-      data.token = TOKEN;
 
       fetch(ENDPOINT, {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       })
       .then(res => res.text())
       .then(text => {
         document.getElementById('risultato').innerText = text;
-        e.target.reset();
+        if (text.includes("✅")) {
+          e.target.reset();
+          document.getElementById('submitBtn').disabled = false;
+        }
       })
       .catch(err => {
         document.getElementById('risultato').innerText = "Errore durante la prenotazione.";
+        document.getElementById('submitBtn').disabled = false;
       });
     });
     </script>
+
+
+
+
+
+
+
+
+
+
+
 
   </body>
 </html>
