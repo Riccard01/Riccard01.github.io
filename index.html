@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="index390.css">
-<link rel="code" href="index.js">
+<script src="index.js"></script>
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,38 +50,7 @@
             <!-- Here goes the slider and then the cards-->
       <div class="cardcontainer">
         <div class="card">
-          <img src="" alt="Image goes here" class="immagine">
-          <div class="containermain">
-            <div class="heading">
-              <h2>Full day</h2>
-            </div>
-            <div class="details">
-              <div class="containerfirst">
-                <img src="assets/icons/euro.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
-                <p>1200</p>
-              </div>
-              <div class="containersecond">
-                <img src="assets/icons/people.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
-                <p>6</p>
-              </div>
-              <div class="containerthird">
-                <img src="assets/icons/clock.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
-                <p>placeholder</p>
-              </div>
-            </div>
-            <p class="copy">Spend the full day at sea. Set your own itinerary and explore the Riviera from Genoa to Portofino, live the Dolce Vita!</p>
-            <div class="cta">
-              <p>See details</p>
-              <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
-            </div>
-            <div class="sfumaturatop">
-            </div>
-            <div class="sfumaturabottom">
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="" alt="Image goes here" class="immagine">
+          <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
           <div class="containermain">
             <div class="heading">
               <h2>Full day</h2>
@@ -105,9 +75,44 @@
               <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
             </div>
           </div>
+          <div class="sfumaturatop">
+          </div>
+          <div class="sfumaturabottom">
+          </div>
         </div>
         <div class="card">
-        <img src="" alt="Image goes here" class="immagine">
+          <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
+          <div class="containermain">
+            <div class="heading">
+              <h2>Full day</h2>
+            </div>
+            <div class="details">
+              <div class="containerfirst">
+                <img src="assets/icons/euro.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>1200</p>
+              </div>
+              <div class="containersecond">
+                <img src="assets/icons/people.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>6</p>
+              </div>
+              <div class="containerthird">
+                <img src="assets/icons/clock.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>placeholder</p>
+              </div>
+            </div>
+            <p class="copy">Spend the full day at sea. Set your own itinerary and explore the Riviera from Genoa to Portofino, live the Dolce Vita!</p>
+            <div class="cta">
+              <p>See details</p>
+              <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
+            </div>
+          </div>
+          <div class="sfumaturatop">
+          </div>
+          <div class="sfumaturabottom">
+          </div>
+        </div>
+        <div class="card">
+        <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
         <div class="containermain">
           <div class="heading">
             <h2>Full day</h2>
@@ -132,9 +137,57 @@
             <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
           </div>
         </div>
+        <div class="sfumaturatop">
+        </div>
+        <div class="sfumaturabottom">
+        </div>
       </div>
       </div>
     </section>
+    <h2>Prenota la tua escursione</h2>
+
+    <form id="prenotazioneForm">
+      <label>Data: <input type="date" name="data" required></label><br>
+      <label>Orario: <input type="time" name="orario" required></label><br>
+      <label>Nome: <input type="text" name="nome" required></label><br>
+      <label>Email: <input type="email" name="email" required></label><br>
+      <label>Numero di persone: <input type="number" name="numeroPersone" required></label><br>
+      <label>Note: <textarea name="note"></textarea></label><br>
+      <button type="submit">Prenota</button>
+    </form>
+
+    <div id="risultato" style="margin-top:20px; font-weight:bold;"></div>
+
+    <script>
+    const TOKEN = "mioCharterPrenotazioni2025xyz";
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbw0gq6nFntQ3uDegOc9rfi0O3o11Oto2bRps37aIMTKGBDT8Pmp9_P7eeoqNdIzAIzu/exec";
+
+    document.getElementById('prenotazioneForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+      data.token = TOKEN;
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.text())
+      .then(text => {
+        document.getElementById('risultato').innerText = text;
+        e.target.reset();
+      })
+      .catch(err => {
+        document.getElementById('risultato').innerText = "Errore durante la prenotazione.";
+      });
+    });
+    </script>
+
   </body>
 </html>
 
@@ -143,7 +196,7 @@
 
 
 
-      img src="icons/check.svg" alt=""> Fuel
+
 
 
 

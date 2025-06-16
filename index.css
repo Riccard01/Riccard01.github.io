@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #EAEAEA;
+}
+
 .nav-navbar-mobile {
   display: flex;
   padding: 1.875rem;
@@ -122,18 +126,10 @@ h1 {
   border-radius: 0.4025rem;
   border: 0.402px solid rgba(140, 149, 152, 0.50);
   background: #FFF;
-
-  /* Drop Shadow Cards */
+  position: relative;
   box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
 }
 
-.card .immagine {
-  width: 19.995rem;
-  height: 30.01119rem;
-  aspect-ratio: 319.92/480.18;
-  border-radius: 0.20056rem;
-  background: url(<path-to-image>) lightgray 50% / cover no-repeat;
-}
 
 .card .containermain {
   display: flex;
@@ -245,7 +241,8 @@ h1 {
   left: 0.40238rem;
   top: 0.4025rem;
   border-radius: 0.20063rem;
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+  background: linear-gradient(360deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+  background-blend-mode: overlay;
 }
 
 .card .sfumaturabottom {
@@ -253,8 +250,16 @@ h1 {
   height: 30.01125rem;
   position: absolute;
   left: 0.40238rem;
-  top: 0.4025rem;
+  top: 0.40244rem;
   border-radius: 0.20063rem;
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, #04081B 100%);
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
   background-blend-mode: overlay;
+}
+
+
+.card .immagine {
+  width: 19.997rem;
+  height: 30.01119rem;
+  aspect-ratio: 319.92/480.18;
+  border-radius: 0.20056rem;
 }
