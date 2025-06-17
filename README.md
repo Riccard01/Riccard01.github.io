@@ -1,1 +1,1 @@
-Ciao
+All rights reserved.
