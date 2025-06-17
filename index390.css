@@ -1,25 +1,26 @@
 @media screen and (max-width: 804px) {
 
-    .cardcontainer {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 0.625rem;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
-      padding: 0 1rem;
-      margin: 0 auto;
-      max-width: 100%;
-      width: 100%;
-      touch-action: pan-x;
-    }
+  .cardcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.625rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 1rem;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+    touch-action: pan-x;
+  }
 
 
-    .card {
-      scroll-snap-align: start;
-    }
+  .card {
+    scroll-snap-align: start;
+  }
 
-    .cardcontainer::-webkit-scrollbar {
-      display: none;
-    }
+  .cardcontainer::-webkit-scrollbar {
+    display: none;
+  }
+}
