@@ -263,3 +263,68 @@ h1 {
   aspect-ratio: 319.92/480.18;
   border-radius: 0.20056rem;
 }
+
+.wrapper-filter {
+  display: inline-flex;
+  padding: 0.3125rem;
+  align-items: flex-start;
+  gap: 1.00619rem;
+  border-radius: 0.75rem;
+  border: 0.402px solid rgba(140, 149, 152, 0.50);
+  background: #FFF;
+
+  /* Drop Shadow Cards */
+  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
+}
+
+.wrapper-filter .first {
+  display: flex;
+  height: 1.875rem;
+  min-width: 10.375rem;
+  padding: 0.3125rem 0.9375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.4375rem;
+  background: #04081B;
+}
+.wrapper-filter .second {
+  display: flex;
+  width: 10.375rem;
+  min-width: 10.375rem;
+  padding: 0.3125rem 0.9375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.4375rem;
+}
+
+.wrapper-filter .first p{
+  flex: 1 0 0;
+  color: #FFF;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.20244rem; /* 120.246% */
+}
+
+.wrapper-filter .second p{
+  color: #C2C2C2;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.20244rem; /* 120.246% */
+}
+
+.wrapper-filter .first:hover,
+.wrapper-filter .second:hover {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.wrapper-filter .first p,
+.wrapper-filter .second p {
+  transition: color 0.3s ease;
+}

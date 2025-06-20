@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="index390.css">
 <script src="index.js"></script>
+<script src="filters.js"></script>
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +24,7 @@
     <section class="experiences">
       <div class="top">
         <img src="assets/icons/whirl.svg" alt="">
-        <h1>Our Experiences (Test)</h1>
+        <h1>Our Experiences</h1>
         <p>It reads Leggero, it spells breathe</p>
       </div>
       <div class="bottom">
@@ -48,7 +49,13 @@
           </div>
         </div>
       </div>
-            <!-- Here goes the slider and then the cards-->
+      
+
+      <div class="wrapper-filter">
+        <div class="first"><p>Main Experiences</p></div>
+        <div class="second"><p>Special Events</p></div>
+      </div>
+
       <div class="cardcontainer">
         <div class="card">
           <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
@@ -144,89 +151,105 @@
         </div>
       </div>
       </div>
+
+            <div class="cardcontainer" id="special">
+        <div class="card">
+          <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
+          <div class="containermain">
+            <div class="heading">
+              <h2>Special</h2>
+            </div>
+            <div class="details">
+              <div class="containerfirst">
+                <img src="assets/icons/euro.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>1200</p>
+              </div>
+              <div class="containersecond">
+                <img src="assets/icons/people.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>6</p>
+              </div>
+              <div class="containerthird">
+                <img src="assets/icons/clock.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>placeholder</p>
+              </div>
+            </div>
+            <p class="copy">Spend the full day at sea. Set your own itinerary and explore the Riviera from Genoa to Portofino, live the Dolce Vita!</p>
+            <div class="cta">
+              <p>See details</p>
+              <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
+            </div>
+          </div>
+          <div class="sfumaturatop">
+          </div>
+          <div class="sfumaturabottom">
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
+          <div class="containermain">
+            <div class="heading">
+              <h2>Full day</h2>
+            </div>
+            <div class="details">
+              <div class="containerfirst">
+                <img src="assets/icons/euro.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>1200</p>
+              </div>
+              <div class="containersecond">
+                <img src="assets/icons/people.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>6</p>
+              </div>
+              <div class="containerthird">
+                <img src="assets/icons/clock.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+                <p>placeholder</p>
+              </div>
+            </div>
+            <p class="copy">Spend the full day at sea. Set your own itinerary and explore the Riviera from Genoa to Portofino, live the Dolce Vita!</p>
+            <div class="cta">
+              <p>See details</p>
+              <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
+            </div>
+          </div>
+          <div class="sfumaturatop">
+          </div>
+          <div class="sfumaturabottom">
+          </div>
+        </div>
+        <div class="card">
+        <img src="assets/images/food.jpg" alt="Image goes here" class="immagine">
+        <div class="containermain">
+          <div class="heading">
+            <h2>Full day</h2>
+          </div>
+          <div class="details">
+            <div class="containerfirst">
+              <img src="assets/icons/euro.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+              <p>1200</p>
+            </div>
+            <div class="containersecond">
+              <img src="assets/icons/people.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+              <p>6</p>
+            </div>
+            <div class="containerthird">
+              <img src="assets/icons/clock.svg" alt="" style="width: 0.87088rem; height: 0.87088rem;">
+              <p>placeholder</p>
+            </div>
+          </div>
+          <p class="copy">Spend the full day at sea. Set your own itinerary and explore the Riviera from Genoa to Portofino, live the Dolce Vita!</p>
+          <div class="cta">
+            <p>See details</p>
+            <img src="assets/icons/arrow-right.svg" alt="" style="width: 1.07644rem; height: 1.07644rem;">
+          </div>
+        </div>
+        <div class="sfumaturatop">
+        </div>
+        <div class="sfumaturabottom">
+        </div>
+      </div>
+      </div>
+
     </section>
 
-
-
-
-
-
-
-
-    <h2>Prenota la tua escursione</h2>
-
-    <form id="prenotazioneForm">
-      <label>Data: <input type="date" name="data" required></label><br>
-
-      <label>Tipo Tour:
-        <select name="tipoTurno" id="tipoTurno" required>
-          <option value="Morning">Morning Tour</option>
-          <option value="Afternoon">Afternoon Tour</option>
-          <option value="Sunset">Sunset Cruise</option>
-          <option value="FullDay">Full Day</option>
-        </select>
-      </label><br>
-
-      <label>Tipologia:
-        <select name="tipologia" id="tipologia" required>
-          <option value="Public">Public</option>
-          <option value="Private">Private</option>
-        </select>
-      </label><br>
-
-      <label>Numero di persone: <input type="number" name="numeroPersone" min="1" max="6" value="1" required></label><br>
-      <label>Nome: <input type="text" name="nome" required></label><br>
-      <label>Email: <input type="email" name="email" required></label><br>
-      <label>Note: <textarea name="note"></textarea></label><br>
-
-      <button type="submit" id="submitBtn">Prenota</button>
-    </form>
-
-    <div id="risultato" style="margin-top:20px; font-weight:bold;"></div>
-
-    <script>
-    // Gestione Full Day → forza Private e blocca selezione tipologia
-    document.getElementById('tipoTurno').addEventListener('change', function() {
-      const tipologia = document.getElementById('tipologia');
-      if (this.value === 'FullDay') {
-        tipologia.value = 'Private';
-        tipologia.disabled = true;
-      } else {
-        tipologia.disabled = false;
-      }
-    });
-
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbypc3gLG0ZiSMQB3XFPq8KZ3qi2t1MAcGyGjvrRSYtq-_bRPHRisGQ8eCIPbmOaP1sGdg/exec";
-
-    document.getElementById('prenotazioneForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('submitBtn').disabled = true;
-
-      const formData = new FormData(e.target);
-      const urlEncodedData = new URLSearchParams();
-      formData.forEach((value, key) => urlEncodedData.append(key, value));
-
-      fetch(ENDPOINT, {
-        method: 'POST',
-        body: urlEncodedData
-      })
-      .then(res => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.text();
-      })
-      .then(text => {
-        document.getElementById('risultato').innerText = text;
-        if (text.includes("✅")) e.target.reset();
-      })
-      .catch(err => {
-        console.error("Errore:", err);
-        document.getElementById('risultato').innerText = "Errore durante la prenotazione.";
-      })
-      .finally(() => {
-        document.getElementById('submitBtn').disabled = false;
-      });
-    });
-    </script>
 
 
 
