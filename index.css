@@ -10,6 +10,18 @@ body {
   background: #EAEAEA;
 }
 
+.ellipse {
+z-index: 0; 
+top: 18rem;
+position: absolute;
+width: 43.44475rem;
+height: 26.73963rem;
+flex-shrink: 0;
+border-radius: 43.44475rem;
+background: #FFF;
+filter: blur(38.63275909423828px);
+}
+
 .nav-navbar-mobile {
   display: flex;
   padding: 1.875rem;
@@ -19,6 +31,7 @@ body {
 }
 
 section.experiences {
+  z-index: 123;
   display: flex;
   padding: 0rem 1.875rem 2.5rem 1.875rem;
   flex-direction: column;
@@ -26,6 +39,11 @@ section.experiences {
   gap: 1.25rem;
   align-self: stretch;
 }
+
+section .top {
+  margin-top: 7rem;
+}
+
 
 h1 {
   color: #04081B;
@@ -170,7 +188,7 @@ h1 {
 .card .details p {
   color: #0075FA;
   font-family: "Plus Jakarta Sans";
-  font-size: 0.61944rem;
+  font-size: 0.71944rem;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
@@ -246,10 +264,11 @@ h1 {
 
 .wrapper-filter {
   display: inline-flex;
+  z-index: 12;
   margin-top: 1rem;
   padding: 0.3125rem;
   align-items: flex-start;
-  gap: 1.00619rem;
+  gap: .1rem;
   border-radius: 0.75rem;
   border: 0.402px solid rgba(140, 149, 152, 0.50);
   background: #FFF;

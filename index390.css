@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    gap: 0.625rem;
-    overflow-x: auto;
+    gap: 0rem;
+    overflow-x: visible;
     -webkit-overflow-scrolling: touch; /* smooth scrolling iOS */
     scroll-snap-type: x mandatory;
     padding: 0 1rem;
@@ -20,6 +20,33 @@
   .card {
     scroll-snap-align: start;
   }
+
+.cardcontainer .card#first {
+  transform: rotate(-2.81°deg);
+  margin-right: -26rem;
+  z-index: 1;
+  animation: none;
+    
+}
+
+
+.cardcontainer .card#second {
+  margin-left: -1.1rem;
+  z-index: 2;
+  animation: none;
+  scale: none;
+}
+
+
+
+.cardcontainer .card#third {
+  transform: rotate(1.87deg);
+  margin-right: -10rem;
+  z-index: 1;
+  animation: none;
+}
+
+
 
   .cardcontainer::-webkit-scrollbar {
     display: none;
