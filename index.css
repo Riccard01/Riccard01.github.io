@@ -195,7 +195,7 @@ h1 {
 }
 
 .card .cta p {
-  color: #0075FA;
+  color: #04081B;
   font-family: "Plus Jakarta Sans";
   font-size: 0.78856rem;
   font-style: normal;
@@ -246,6 +246,7 @@ h1 {
 
 .wrapper-filter {
   display: inline-flex;
+  margin-top: 1rem;
   padding: 0.3125rem;
   align-items: flex-start;
   gap: 1.00619rem;
@@ -259,6 +260,7 @@ h1 {
 .wrapper-filter .second {
   display: flex;
   height: 1.875rem;
+    white-space: nowrap;  
   min-width: 10.375rem;
   padding: 0.3125rem 0.9375rem;
   justify-content: center;
@@ -445,5 +447,52 @@ h1 {
     bottom: -2rem; }
   to   { 
     filter: blur(0px);
-    margin-left: .5rem; }
+    bottom: .5rem; }
+}
+
+
+.price {
+display: flex;
+padding: 0.1875rem 0.9375rem;
+align-items: flex-start;
+gap: 1.00619rem;
+z-index: 100000;
+position: absolute;
+right: 8.41631rem;
+bottom: 13.0045rem;
+border-radius: 0.4375rem;
+border: 0.402px solid rgba(140, 149, 152, 0.50);
+background: #FFF;
+display: none;
+/* Drop Shadow Cards */
+box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
+}
+
+.price p {
+color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 0.78856rem;
+font-style: normal;
+font-weight: 700;
+line-height: 1.20244rem; /* 152.488% */
+}
+
+.cardcontainer .card#first:hover .price  {
+  display: inline;
+  animation: priceAppearFirst 0.2s ease; /* parte subito al load */
+}
+
+
+
+  @keyframes priceAppearFirst {
+  from { 
+    filter: blur(5px);
+    bottom: 11.0045rem; }
+  to   { 
+    filter: blur(0px);
+    bottom: 13.0045rem; }
+}
+
+.bottom#amenities {
+  margin-top: 2rem;
 }
