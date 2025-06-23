@@ -319,7 +319,8 @@ h1 {
 .wrapper-filter .first:not(.active) p,
 .wrapper-filter .second:not(.active) p {
   font-weight: 500;
-  
+  color: #04081B;;
+
 }
 
 
