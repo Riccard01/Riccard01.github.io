@@ -2,17 +2,12 @@
 
   .cardcontainer {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     gap: 0rem;
-    overflow-x: visible;
+    overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch; /* smooth scrolling iOS */
     scroll-snap-type: x mandatory;
-    padding: 0 1rem;
-    margin: 0 auto;
-    max-width: 100%;
     width: 100%;
-    /* RIMOSSA: touch-action: pan-x; */
   }
 
   
@@ -22,8 +17,7 @@
   }
 
 .cardcontainer .card#first {
-  transform: rotate(-2.81°deg);
-  margin-right: -26rem;
+  transform: rotate(-2.81deg);
   z-index: 1;
   animation: none;
     
@@ -31,7 +25,6 @@
 
 
 .cardcontainer .card#second {
-  margin-left: -1.1rem;
   z-index: 2;
   animation: none;
   scale: none;
@@ -41,7 +34,6 @@
 
 .cardcontainer .card#third {
   transform: rotate(1.87deg);
-  margin-right: -10rem;
   z-index: 1;
   animation: none;
 }
@@ -52,4 +44,3 @@
     display: none;
   }
 }
-

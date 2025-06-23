@@ -6,8 +6,11 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   background: #EAEAEA;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 .ellipse {
@@ -244,9 +247,6 @@ h1 {
   background-blend-mode: overlay;
 }
 
-.card .sfumaturatop {
-  background: linear-gradient(360deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
-}
 
 .card .sfumaturabottom {
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
@@ -298,7 +298,7 @@ h1 {
 .wrapper-filter .first p,
 .wrapper-filter .second p {
   flex: 1 0 0;
-  color: #C2C2C2; /* default */
+  color: 767676; /* default */
   font-family: "Plus Jakarta Sans";
   font-size: 1rem;
   font-style: normal;
@@ -315,6 +315,12 @@ h1 {
 .wrapper-filter .second.active p {
   color: #FFF; /* active text */
 }
+
+.wrapper-filter .first:not(.active) p,
+.wrapper-filter .second:not(.active) p {
+  font-weight: 500;
+}
+
 
 /* Hover rimossi perché gestito via JS */
 
@@ -363,14 +369,13 @@ h1 {
 
 .cardcontainer .card#first:hover ~ .card#second {
   /* es. sollevala di 1rem e ingrandiscila del 5% */
-  z-index: 1;
+  z-index: 2;
   scale: 1.01;
   transition: scale 0.1s ease;
 }
 
 .cardcontainer .card#first:hover ~ .card#second {
   transition: mix-blend-mode 0.1s ease;
-  transform: rotate(-1.87deg);
   mix-blend-mode: luminosity;
 }
 
@@ -418,7 +423,6 @@ h1 {
   /* es. sollevala di 1rem e ingrandiscila del 5% */
   z-index: 1;
   scale: 1.01;
-  transform: rotate(1.87deg);
   transition: scale 0.1s ease;
   mix-blend-mode: luminosity;
 }
