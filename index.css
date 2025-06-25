@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+    div.top {
+        z-index: 1000;
+    }
+
 html, body {
   background: #EAEAEA;
   overflow-x: hidden;
@@ -259,9 +263,6 @@ h1 {
   align-items: flex-start;
   padding-top: 1.5rem;
   gap: 0rem;
-  overflow-x: visible;
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch; /* per mobile smooth scroll */
 }
 
 /* —————————————————————————————————————————————
@@ -583,3 +584,4 @@ line-height: 1.20244rem; /* 152.488% */
 .bottom#amenities {
   margin-top: 2rem;
 }
+

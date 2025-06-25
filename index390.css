@@ -1,26 +1,32 @@
 @media screen and (max-width: 804px) {
 
   .cardcontainer {
+  flex-direction: row;
     display: flex;
+    justify-content: flex-start;
+    width: 100vw;
     gap: 0rem;
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch; /* smooth scrolling iOS */
     scroll-snap-type: x mandatory;
+  }
+
+  .ellipse {
     width: 100%;
   }
 
-  
-
   .card {
     scroll-snap-align: start;
+
   }
+
 
 .cardcontainer .card#first {
   transform: rotate(-2.81deg);
   z-index: 1;
   animation: none;
-    
+  order: 3;
 }
 
 
