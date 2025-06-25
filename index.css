@@ -259,7 +259,7 @@ h1 {
 
 .cardcontainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-start;
   padding-top: 1.5rem;
   gap: 0rem;
