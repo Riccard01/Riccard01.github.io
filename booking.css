@@ -122,6 +122,10 @@ font-weight: 600;
 line-height: normal;
 }
 
+.experience-subtitle img {
+  filter: brightness(0) invert(1); /* trasforma l'immagine in bianco */
+}
+
 .experience-value {
 display: flex;
 flex-direction: column;
@@ -139,13 +143,14 @@ line-height: normal;
 }
 
 .slot {
+position: relative;
 display: flex;
 height: 3.5rem;
 padding: 0.625rem;
 align-items: center;
 flex: 1 0 0;
 border-radius: 0.4375rem;
-border: 1.4px solid rgba(140, 149, 152, 0.24);
+border: 2.4px solid rgba(140, 149, 152, 0.24);
 background: #FFF;
 }
 
@@ -183,7 +188,7 @@ align-self: stretch;
 .slot-value p {
 color: #2D2F36;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -198,9 +203,10 @@ font-weight: 500;
 line-height: normal;
 }
 
-.slot.price-influences {
+.slot img.price-influences {
 position: absolute;
-right: -0.01706rem;
+right: -0.5rem;
+top: -0.5rem;
 }
 
 .second-row-wrapper {
@@ -218,7 +224,7 @@ align-items: center;
 flex: 1 0 0;
 align-self: stretch;
 border-radius: 0.4375rem;
-border: 1.4px solid rgba(140, 149, 152, 0.24);
+border: 2.4px solid rgba(140, 149, 152, 0.24);
 background: #FFF;
 }
 
@@ -256,7 +262,7 @@ gap: 0.3125rem;
 .people-value p {
 color: #2D2F36;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -274,7 +280,7 @@ align-items: center;
 flex: 1 0 0;
 align-self: stretch;
 border-radius: 0.4375rem;
-border: 1.4px solid rgba(140, 149, 152, 0.24);
+border: 2.4px solid rgba(140, 149, 152, 0.24);
 background: #FFF;
 }
 
@@ -313,7 +319,7 @@ gap: 0.3125rem;
 .sunset-combo-value p {
 color: #2D2F36;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -331,7 +337,7 @@ align-items: center;
 flex: 1 0 0;
 align-self: stretch;
 border-radius: 0.4375rem;
-border: 1.4px solid rgba(140, 149, 152, 0.24);
+border: 2.4px solid rgba(140, 149, 152, 0.24);
 background: #FFF;
 }
 
@@ -369,8 +375,14 @@ gap: 0.3125rem;
 .group-type-value p {
 color: #2D2F36;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
 }
+
+.flatpickr-calendar {
+  transition: none !important;
+  animation: none !important;
+}
+
