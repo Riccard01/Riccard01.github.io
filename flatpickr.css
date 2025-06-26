@@ -1,0 +1,42 @@
+
+.flatpickr-calendar {
+  font-family: 'Plus Jakarta Sans';
+  border-radius: 16px;
+  padding: 6px;
+}
+
+.dayContainer {
+  padding: 8px !important;
+}
+
+.flatpickr-weekdays {
+  padding: 0 8px !important;
+}
+
+.flatpickr-day {
+  border-radius: 0.5rem;
+  transition: background 0.2s;
+}
+
+.flatpickr-day.disabled {
+  background: #f0f0f0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.flatpickr-day.selected {
+  background: #19181d;
+  border: none;
+  color: white;
+}
+
+.flatpickr-day.selected:hover {
+  background: #19181d;
+  border: none;
+  color: white;
+}
+
+.flatpickr-day.today {
+  background: #e4f1ff;
+  border: none;
+}
