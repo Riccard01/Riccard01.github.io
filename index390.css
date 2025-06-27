@@ -1,11 +1,11 @@
-@media screen and (max-width: 804px) {
+@media screen and (max-width: 390px) {
 
   .cardcontainer {
   flex-direction: row;
     display: flex;
     justify-content: flex-start;
     width: 100vw;
-    gap: 0rem;
+    gap: 2rem;
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch; /* smooth scrolling iOS */
@@ -23,10 +23,11 @@
 
 
 .cardcontainer .card#first {
-  transform: rotate(-2.81deg);
   z-index: 1;
   animation: none;
   order: 3;
+    transform: rotate(0deg);
+    padding: 0rem 0rem;
 }
 
 
@@ -34,14 +35,17 @@
   z-index: 2;
   animation: none;
   scale: none;
+  transform: rotate(0deg);
+  bottom: 0rem;
+  scale: 1.0;
 }
 
 
 
 .cardcontainer .card#third {
-  transform: rotate(1.87deg);
   z-index: 1;
   animation: none;
+    transform: rotate(0deg);
 }
 
 

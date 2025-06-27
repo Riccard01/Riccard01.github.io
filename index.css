@@ -1,587 +1,439 @@
-/* index.css */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-    div.top {
-        z-index: 1000;
-    }
-
-html, body {
-  background: #EAEAEA;
+html {
   overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
+  background: #FFF;
 }
 
-.ellipse {
-z-index: 0; 
-top: 18rem;
-position: absolute;
-width: 43.44475rem;
-height: 26.73963rem;
-flex-shrink: 0;
-border-radius: 43.44475rem;
-background: #FFF;
-filter: blur(38.63275909423828px);
-}
-
-.card {
-  will-change: transform;
-}
-
-
-.nav-navbar-mobile {
+body {
   display: flex;
-  padding: 1.875rem;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
-
-section.experiences {
-  z-index: 123;
-  display: flex;
-  padding: 0rem 1.875rem 2.5rem 1.875rem;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  max-width: 63.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0rem 1.875rem;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1.875rem 0rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.90);
+border-bottom: 1px solid #DBDBDB;
+  backdrop-filter: blur(7.800000190734863px);
+  z-index: 100;
+}
+
+nav .wrapper {
+  display: flex;
+  max-width: 63.75rem;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10.375rem;
+  padding: 0.625rem 0.9375rem;
+  gap: 0.625rem;
+  background: #0075FA;
+  border: none;
+  border-radius: 0.4375rem;
+  color: #FFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.20244rem;
+  cursor: pointer;  
+}
+
+section.heading {
+  display: flex;
+  position: relative;
+  max-width: 63.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
   align-self: stretch;
 }
 
-section .top {
-  margin-top: 7rem;
+section.heading .wrapper {
+  display: flex;
+  width: 63.75rem;
+  max-width: 63.75rem;
+  padding-top: 6rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
 }
 
-
-h1 {
+section.heading .wrapper h1 {
   color: #04081B;
-  text-align: center;
-  font-family: Petrona;
-  font-size: 2.1875rem;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.6875rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
+  margin: 0;
+  padding: 0;
 }
 
-.experiences p {
-  color: #404663;
-  text-align: center;
+section.heading .wrapper p {
+  align-self: stretch;
+  color: rgba(117, 118, 122, 0.99);
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.75rem; /* 155.556% */
   letter-spacing: 0.03375rem;
+  margin: 0;
+  padding: 0;
 }
 
-.experiences .top {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  align-self: stretch;
-}
-
-.experiences .bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.625rem;
-}
-
-.experiences .bottom .container-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.875rem;
-  align-self: stretch;
-}
-
-.experiences .bottom .container-top .container-left,
-.experiences .bottom .container-top .container-right {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.experiences .bottom p {
-  color: #0075FA;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.experiences .bottom .container-bottom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.3125rem;
-  align-self: stretch;
-}
-
-.experiences .bottom .container-bottom .container-left,
-.experiences .bottom .container-bottom .container-right {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-/* —————————————————————————————————————————————
-   CARDS
-   ————————————————————————————————————————————— */
-
-.card {
-  user-select: none;
-  cursor: pointer;
-  display: inline-flex;
-  padding: 0.4025rem 0.4025rem 1.00619rem 0.4025rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.00619rem;
-  position: relative;
-  border-radius: 0.4025rem;
-  border: 0.402px solid rgba(140, 149, 152, 0.50);
-  background: #FFF;
-  position: relative;
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-
-
-
-
-.card .containermain {
-  display: flex;
-  width: 20.02775rem;
-  padding: 0rem 0.77425rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.51619rem;
-}
-
-.card .heading {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-}
-
-.card h2 {
-  color: #04081B;
-  text-align: center;
-  font-family: Petrona;
-  font-size: 1.47856rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.card .details {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.card .containerfirst,
-.card .containersecond,
-.card .containerthird {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25806rem;
-}
-
-.card .details p {
-  color: #0075FA;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.71944rem;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-
-.card .copy {
-  color: rgba(95, 96, 99, 0.99);
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.82588rem;
-  font-style: normal;
-  text-align: left;
-  font-weight: 400;
-  line-height: 1.44531rem; /* 175% */
-  align-self: stretch;
-}
-
-.card .cta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
-
-.card .cta p {
-  color: #04081B;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.78856rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.20244rem; /* 152.488% */
-}
-
-.card .immagine {
-  width: 19.997rem;
-  height: 30.01119rem;
-  aspect-ratio: 319.92/480.18;
-  border-radius: 0.20056rem;
-}
-
-.card .sfumaturatop,
-.card .sfumaturabottom {
-  width: 19.99513rem;
-  height: 30.01125rem;
+section.heading .wrapper img {
   position: absolute;
-  left: 0.40238rem;
-  top: 0.4025rem;
-  border-radius: 0.20063rem;
-  background-blend-mode: overlay;
+  left: -3.4375rem;
+  top: 3.0625rem;
 }
 
-
-.card .sfumaturabottom {
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
-}
-
-.cardcontainer {
+section.heading .filters {
   display: flex;
-  justify-content: center;
+  width: 63.75rem;
+  max-width: 63.75rem;
+  flex-direction: column;
   align-items: flex-start;
-  padding-top: 1.5rem;
-  gap: 0rem;
+  gap: 0.625rem;
 }
 
-/* —————————————————————————————————————————————
-   WRAPPER-FILTER (Main / Special)
-   ————————————————————————————————————————————— */
-
-.wrapper-filter {
-  display: inline-flex;
-  z-index: 12;
-  margin-top: 1rem;
+section.heading .filters .wrapper {
+  display: flex;
   padding: 0.3125rem;
-  align-items: flex-start;
-  gap: .1rem;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  flex-direction: row;
+  gap: 0.3125rem;
   border-radius: 0.75rem;
-  border: 0.402px solid rgba(140, 149, 152, 0.50);
+  border: 2px solid rgba(183, 200, 219, 0.60);
   background: #FFF;
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.07);
 }
 
-.sparkles-icon {
-  transition: filter 0s ease;
-  filter: none; /* colore originale */
-}
-
-.wrapper-filter .second.active .sparkles-icon {
-  filter: brightness(0) invert(1); /* bianco */
-}
-
-
-.wrapper-filter .first,
-.wrapper-filter .second {
-  user-select: none;
+section.heading .filters .wrapper .button-main-experiences {
   display: flex;
-  height: 1.875rem;
-  white-space: nowrap;  
   min-width: 10.375rem;
   padding: 0.3125rem 0.9375rem;
   justify-content: center;
   align-items: center;
-  gap: 0.3125rem;
+  gap: 0.625rem;
+  border: none;
   border-radius: 0.4375rem;
-  background: #FFF; /* default */
-    cursor: pointer;
+  background: #0075FA;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.20244rem; /* 120.246% */
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.wrapper-filter .first p,
-.wrapper-filter .second p {
-  flex: 1 0 0;
-  color: 767676; /* default */
-  font-family: "Plus Jakarta Sans";
+section.heading .filters .wrapper .button-special-events {
+  display: flex;
+  min-width: 10.375rem;
+  padding: 0.3125rem 0.9375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border: none;
+  border-radius: 0.4375rem;
+  background: #0075FA;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-style: normal;
   font-size: 1rem;
+  line-height: 1.20244rem; /* 120.246% */
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cardcontainer {
+  display: flex;
+  max-width: 63.78938rem;
+  padding-top: 2.5rem;
+  align-items: flex-start;
+  gap: 1.25rem;
+  align-self: stretch;
+}
+
+.cardcontainer > div {
+}
+
+.the-rainbow-tour-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.the-wild-tour-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.gourmet-sunset-cruise-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.the-rainbow-tour-card .card {
+  display: flex;
+  position: relative;
+  width: 20.42981rem;
+  height: 30.66388rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.894rem;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+  background-image: url('assets/images/rainbow.jpg');
+  border: 2.043px solid rgba(255, 255, 255, 0.60);
+  background-position: center;
+}
+
+.the-rainbow-tour-card .card::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.894rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+  z-index: 1;
+}
+
+.the-rainbow-tour-card .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.the-wild-tour-card .card {
+  display: flex;
+  position: relative;
+  width: 20.42981rem;
+  height: 30.66388rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.894rem;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+  background-image: url('assets/images/wild.jpg');
+  border: 2.043px solid rgba(255, 255, 255, 0.60);
+  background-position: center;
+}
+
+.the-wild-tour-card .card::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.894rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+  z-index: 1;
+}
+
+.the-wild-tour-card .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.gourmet-sunset-cruise-card .card {
+  display: flex;
+  position: relative;
+  width: 20.42981rem;
+  height: 30.66388rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.894rem;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+  background-image: url('assets/images/gourmet.jpg');
+  border: 2.043px solid rgba(255, 255, 255, 0.60);
+  background-position: center;
+}
+
+.gourmet-sunset-cruise-card .card::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.894rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
+  z-index: 1;
+}
+
+.gourmet-sunset-cruise-card .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.the-rainbow-tour-card .card .details,
+.the-wild-tour-card .card .details,
+.gourmet-sunset-cruise-card .card .details {
+  display: flex;
+  width: 17.875rem;
+  height: 1.1875rem;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  left: 1.26963rem;
+  bottom: 1.28888rem;
+}
+
+.the-rainbow-tour-card .card .details .wrapper,
+.the-wild-tour-card .card .details .wrapper,
+.gourmet-sunset-cruise-card .card .details .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.the-rainbow-tour-card .card .details .wrapper .wrapper-1,
+.the-rainbow-tour-card .card .details .wrapper .wrapper-2,
+.the-rainbow-tour-card .card .details .wrapper .wrapper-3,
+.the-wild-tour-card .card .details .wrapper .wrapper-1,
+.the-wild-tour-card .card .details .wrapper .wrapper-2,
+.the-wild-tour-card .card .details .wrapper .wrapper-3,
+.gourmet-sunset-cruise-card .card .details .wrapper .wrapper-1,
+.gourmet-sunset-cruise-card .card .details .wrapper .wrapper-2,
+.gourmet-sunset-cruise-card .card .details .wrapper .wrapper-3 {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.the-rainbow-tour-card .card .details .wrapper p,
+.the-wild-tour-card .card .details .wrapper p,
+.gourmet-sunset-cruise-card .card .details .wrapper p {
+  color: #FFF;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.the-rainbow-tour-card .card .details img {
+
+}
+
+.the-rainbow-tour-card .copy-wrapper,
+.the-wild-tour-card .copy-wrapper,
+.gourmet-sunset-cruise-card .copy-wrapper {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.the-rainbow-tour-card .copy-wrapper h1,
+.the-wild-tour-card .copy-wrapper h1,
+.gourmet-sunset-cruise-card .copy-wrapper h1 {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.the-rainbow-tour-card .copy-wrapper p,
+.the-wild-tour-card .copy-wrapper p,
+.gourmet-sunset-cruise-card .copy-wrapper p {
+  align-self: stretch;
+  color: rgba(95, 96, 99, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.44531rem; /* 165.177% */
+  
+  margin: 0;
+  padding: 0;
+}
+
+.the-rainbow-tour-card .copy-wrapper .wrapper,
+.the-wild-tour-card .copy-wrapper .wrapper,
+.gourmet-sunset-cruise-card .copy-wrapper .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.the-rainbow-tour-card .copy-wrapper .wrapper .first,
+.the-wild-tour-card .copy-wrapper .wrapper .first,
+.gourmet-sunset-cruise-card .copy-wrapper .wrapper .first {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.the-rainbow-tour-card .copy-wrapper .wrapper .first p,
+.the-wild-tour-card .copy-wrapper .wrapper .first p,
+.gourmet-sunset-cruise-card .copy-wrapper .wrapper .first p {
+  color: #AAAEB2;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 1.20244rem; /* 120.246% */
+  line-height: normal;
+  margin: 0;
+  padding: 0;
 }
 
-.wrapper-filter .first.active,
-.wrapper-filter .second.active {
-  background: #04081B; /* active bg */
-}
-
-.wrapper-filter .first.active p,
-.wrapper-filter .second.active p {
-  color: #FFF; /* active text */
-}
-
-.wrapper-filter .first:not(.active) p,
-.wrapper-filter .second:not(.active) p {
-  font-weight: 500;
-  color: #04081B;;
+.the-rainbow-tour-card .copy-wrapper .wrapper .first img {
 
 }
 
 
-/* Hover rimossi perché gestito via JS */
-
-.cardcontainer .card#first {
-  transform: rotate(-1.87deg);
-  margin-right: -1rem;
-  z-index: 1;
-  animation: launchControlFirst 0.5s ease; /* parte subito al load */
+.the-rainbow-tour-card .copy-wrapper .wrapper p,
+.the-wild-tour-card .copy-wrapper .wrapper p,
+.gourmet-sunset-cruise-card .copy-wrapper .wrapper p {
+  color: #AAAEB2;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
 }
 
-
-
-
-  @keyframes launchControlFirst {
-  from {
-    transform: rotate(1.87deg);
-    filter: blur(5px);
-    margin-right: -20rem; }
-  to   { 
-    transform: rotate(-1.87deg);
-    filter: blur(0px);
-    margin-right: -1rem; }
-}
-
-
-.cardcontainer .card#first:hover {
-  transform: rotate(0deg);
-  margin-right: -1rem;
-  z-index: 3;
-  bottom: .5rem;
-  scale: 1.03;
-  transition: transform 0.1s ease,  /* anima rotate+scale */
-              margin-right 0.1s ease,
-              bottom 0.1s ease,
-              rotate 0.1s ease,
-              scale 0.1s ease;
-}
-
-.cardcontainer .card#second:hover {
-  transition: transform 0.1s ease,  /* anima rotate+scale */
-              margin-right 0.1s ease,
-              bottom 0.1s ease,
-              rotate 0.1s ease,
-              scale 0.1s ease;
-}
-
-.cardcontainer .card#first:hover ~ .card#second {
-  /* es. sollevala di 1rem e ingrandiscila del 5% */
-  z-index: 2;
-  scale: 1.01;
-  transition: scale 0.1s ease;
-}
-
-.cardcontainer .card#first:hover ~ .card#second {
-  transition: mix-blend-mode 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-.cardcontainer .card#first:hover ~ .card#third {
-  transition: mix-blend-mode 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-
-.cardcontainer .card#third {
-  transform: rotate(1.87deg);
-  margin-left: -1rem;
-  z-index: 1;
-  animation: launchControlThird 0.5s ease; /* parte subito al load */
-}
-
-
-  @keyframes launchControlThird {
-  from { 
-    transform: rotate(-1.87deg);
-    filter: blur(5px);
-    margin-left: -20rem; }
-  to   { 
-    transform: rotate(1.87deg);
-    filter: blur(0px);
-    margin-left: -1rem; }
-}
-
-
-.cardcontainer .card#third:hover {
-  transform: rotate(0deg);
-  margin-left: -1rem;
-  z-index: 3;
-  bottom: .5rem;
-  scale: 1.03;
-  transition: transform 0.1s ease,  /* anima rotate+scale */
-              margin-right 0.1s ease,
-              bottom 0.1s ease,
-              rotate 0.1s ease,
-              scale 0.1s ease;
-
-}
-
-.cardcontainer:has(.card#third:hover) .card#second {
-  /* es. sollevala di 1rem e ingrandiscila del 5% */
-  z-index: 1;
-  scale: 1.01;
-  transition: scale 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-
-.cardcontainer:has(.card#third:hover) .card#first {
-  transition: mix-blend-mode 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-
-
-.cardcontainer .card#second:hover {
-    scale: 1.05;
-  transition: transform 0.1s ease,  /* anima rotate+scale */
-              margin-right 0.1s ease,
-              bottom 0.1s ease,
-              rotate 0.1s ease,
-              scale 0.1s ease;
-
-}
-
-.cardcontainer:has(.card#second:hover) .card#third {
-  /* es. sollevala di 1rem e ingrandiscila del 5% */
-  z-index: 1;
-  transition: scale 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-
-.cardcontainer:has(.card#second:hover) .card#first {
-  transition: mix-blend-mode 0.1s ease;
-  mix-blend-mode: luminosity;
-}
-
-
-
-
-.cardcontainer .card#second {
-  bottom: .5rem;
-  scale: 1.03;
-  z-index: 2;
-  animation: launchControlSecond 0.5s ease; /* parte subito al load */
-}
-
-
-  @keyframes launchControlSecond {
-  from { 
-    filter: blur(5px);
-    bottom: -2rem; }
-  to   { 
-    filter: blur(0px);
-    bottom: .5rem; }
-}
-
-
-.cardcontainer .card#first .price {
-display: flex;
-padding: 0.1875rem 0.9375rem;
-align-items: flex-start;
-gap: 1.00619rem;
-z-index: 100000;
-position: absolute;
-right: 8.41631rem;
-bottom: 13.0045rem;
-border-radius: 0.4375rem;
-border: 0.402px solid rgba(140, 149, 152, 0.50);
-background: #FFF;
-display: none;
-/* Drop Shadow Cards */
-box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-.cardcontainer .card#second .price {
-display: flex;
-padding: 0.1875rem 0.9375rem;
-align-items: flex-start;
-gap: 1.00619rem;
-z-index: 100000;
-position: absolute;
-right: 8.41631rem;
-bottom: 13.0045rem;
-border-radius: 0.4375rem;
-border: 0.402px solid rgba(140, 149, 152, 0.50);
-background: #FFF;
-display: none;
-/* Drop Shadow Cards */
-box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-.cardcontainer .card#third .price {
-display: flex;
-padding: 0.1875rem 0.9375rem;
-align-items: flex-start;
-gap: 1.00619rem;
-z-index: 100000;
-position: absolute;
-white-space: nowrap;
-min-width: 10.20288rem;
-right: 50%;
-left: 50%;
-bottom:  13.0045rem; /* o quanto vuoi dal fondo */
-border-radius: 0.4375rem;
-border: 0.402px solid rgba(140, 149, 152, 0.50);
-background: #FFF;
-display: none;
-/* Drop Shadow Cards */
-box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-.price p {
-color: #04081B;
-font-family: "Plus Jakarta Sans";
-font-size: 0.78856rem;
-font-style: normal;
-font-weight: 700;
-line-height: 1.20244rem; /* 152.488% */
-}
-
-.cardcontainer .card#first:hover .price  {
-  display: inline;
-  animation: priceAppearFirst 0.2s ease; /* parte subito al load */
-}
-
-.cardcontainer .card#second:hover .price  {
-  display: inline;
-  animation: priceAppearFirst 0.2s ease; /* parte subito al load */
-}
-
-.cardcontainer .card#third:hover .price  {
-  display: inline;
-  animation: priceAppearFirst 0.2s ease; /* parte subito al load */
-}
-
-  @keyframes priceAppearFirst {
-  from { 
-    filter: blur(5px);
-    bottom: 11.0045rem; }
-  to   { 
-    filter: blur(0px);
-    bottom: 13.0045rem; }
-}
-
-.bottom#amenities {
-  margin-top: 2rem;
+.the-rainbow-tour-card .copy-wrapper h3,
+.the-wild-tour-card .copy-wrapper h3,
+.gourmet-sunset-cruise-card .copy-wrapper h3 {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
 }
 
