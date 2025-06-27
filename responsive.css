@@ -6,10 +6,6 @@
         padding: 0;
     }
 
-    * {
-        border: red solid 1px;
-    }
-
     nav {
         display: flex;
 width: 20rem;
