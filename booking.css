@@ -4,11 +4,16 @@ body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  height: 100%;
   padding-top: 2rem;
   display: flex;
   justify-content: center;
+  font-family: "Plus Jakarta Sans";
 }
 
+.noselect {
+  user-select: none;
+}
 
 * {
   margin: 0;
@@ -16,16 +21,7 @@ body {
   box-sizing: border-box;
 }
 
-.ellipse {
-  width: 100%;
-  z-index: 0;
-}
-
-.cardcontainer {
-  width: 100vw;
-}
-
-section.booking-table {
+.booking-table {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -36,6 +32,8 @@ section.booking-table {
   background: #FFF;
   width: fit-content;
   padding: 24px;
+  height: fit-content;
+  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
 }
 
 .section-heading {
@@ -49,9 +47,7 @@ section.booking-table {
   color: #04081B;
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 
 .influences-wrapper {
@@ -67,12 +63,10 @@ section.booking-table {
   color: #0075FA;
   font-family: "Plus Jakarta Sans";
   font-size: 0.75rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 
-.options{
+.options {
   width: 25em;
 }
 
@@ -84,15 +78,132 @@ section.booking-table {
   align-items: flex-start;
   gap: 0.625rem;
   align-self: stretch;
-  border-radius: 1rem; 
+  border-radius: 1rem;
   background: #FFF;
-
-  /* Drop Shadow Cards */
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
 }
 
 .option-row {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
   width: 100%;
+  border-radius: 0.4375rem;
+  border: 2.4px solid rgba(140, 149, 152, 0.24);
+  background: #FFF;
+}
+
+.option-row.dropdown-open .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 2.5rem;
+  z-index: 2;
+  background: white;
+  width: 101.3%;
+  left: -0.6%;
+  padding: 0 4px 4px 4px;
+  border: 2.4px solid rgba(140, 149, 152, 0.24);
+  border-top: none;
+  border-radius: 0 0 0.4375rem 0.4375rem;
+}
+
+.dropdown-item{
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 4px 14px;
+}
+
+.dropdown-item:hover{
+  background: #f5f5f5;
+}
+
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  flex: 1 0 0;
+  padding: 0.625rem;
+}
+
+.option-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.option-subtitle p {
+  color: #C2C2C2;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.option-subtitle img {
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.option-value {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.option-value p {
+  color: #2D2F36;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.option-value p.secondary {
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+.option-subtitle img {
+  float: right;
+}
+
+.option-row.dropdown-open .option-subtitle img {
+  transform: rotate(180deg);
+}
+
+.white p,
+.white p.secondary {
+  color: #FFF;
+}
+
+.white img {
+  filter: brightness(0) invert(1);
+}
+
+.price-influences {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.option-row.locked {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dropdown-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .experience {
@@ -107,7 +218,7 @@ section.booking-table {
   box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.27);
 }
 
-.experience-wrapper {
+.experience .option-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -115,14 +226,14 @@ section.booking-table {
   flex: 1 0 0;
 }
 
-.experience-subtitle {
+.experience .option-subtitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
 }
 
-.experience-subtitle p {
+.experience .option-subtitle p {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
   font-size: 0.625rem;
@@ -131,251 +242,20 @@ section.booking-table {
   line-height: normal;
 }
 
-.experience-subtitle img {
+.experience .option-subtitle img {
   filter: brightness(0) invert(1);
   /* trasforma l'immagine in bianco */
 }
 
-.experience-value {
+.experience .option-value {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.3125rem;
 }
 
-.experience-value p {
+.experience .option-value p {
   color: #FFF;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.slot {
-  position: relative;
-  display: flex;
-  height: 3.5rem;
-  padding: 0.625rem;
-  align-items: center;
-  flex: 1 0 0;
-  border-radius: 0.4375rem;
-  border: 2.4px solid rgba(140, 149, 152, 0.24);
-  background: #FFF;
-}
-
-.slot-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  flex: 1 0 0;
-}
-
-.slot-subtitle {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-}
-
-.slot-subtitle p {
-  flex: 1 0 0;
-  color: #C2C2C2;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.slot-value {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-self: stretch;
-}
-
-.slot-value p {
-  color: #2D2F36;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.slot-value p:nth-of-type(2) {
-  color: #2D2F36;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.slot img.price-influences {
-  position: absolute;
-  right: -0.5rem;
-  top: -0.5rem;
-}
-
-.people {
-  display: flex;
-  padding: 0.625rem;
-  align-items: center;
-  flex: 1 0 0;
-  align-self: stretch;
-  border-radius: 0.4375rem;
-  border: 2.4px solid rgba(140, 149, 152, 0.24);
-  background: #FFF;
-}
-
-.people-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  flex: 1 0 0;
-}
-
-.people-subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
-
-.people-subtitle p {
-  color: #C2C2C2;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.people-value {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3125rem;
-}
-
-.people-value p {
-  color: #2D2F36;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.people.price-influences {
-  position: absolute;
-  right: 0.00006rem;
-}
-
-.sunset-combo {
-  display: flex;
-  padding: 0.625rem;
-  align-items: center;
-  flex: 1 0 0;
-  align-self: stretch;
-  border-radius: 0.4375rem;
-  border: 2.4px solid rgba(140, 149, 152, 0.24);
-  background: #FFF;
-}
-
-.sunset-combo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  flex: 1 0 0;
-}
-
-.sunset-combo-subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
-
-.sunset-combo-subtitle p {
-  color: #C2C2C2;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-
-.sunset-combo-value {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3125rem;
-}
-
-.sunset-combo-value p {
-  color: #2D2F36;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.sunset-combo.price-influences {
-  position: absolute;
-  right: 0.02963rem;
-}
-
-.group-type {
-  display: flex;
-  padding: 0.625rem;
-  align-items: center;
-  flex: 1 0 0;
-  align-self: stretch;
-  border-radius: 0.4375rem;
-  border: 2.4px solid rgba(140, 149, 152, 0.24);
-  background: #FFF;
-}
-
-.group-type-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  flex: 1 0 0;
-}
-
-.group-type-subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-}
-
-.group-type-subtitle p {
-  color: #C2C2C2;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.group-type-value {
-  display: flex;
-  align-items: center;
-  gap: 0.3125rem;
-}
-
-.group-type-value p {
-  color: #2D2F36;
   font-family: "Plus Jakarta Sans";
   font-size: 0.875rem;
   font-style: normal;

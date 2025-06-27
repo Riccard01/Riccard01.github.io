@@ -1,8 +1,12 @@
+#calendar{
+  margin-top: 2em;
+}
 
 .flatpickr-calendar {
   font-family: 'Plus Jakarta Sans';
   border-radius: 16px;
   padding: 6px;
+  width: fit-content;
 }
 
 .dayContainer {
