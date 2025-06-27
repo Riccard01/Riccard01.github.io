@@ -181,8 +181,7 @@ section.heading .filters .wrapper .button-special-events {
   align-self: stretch;
 }
 
-.cardcontainer > div {
-}
+
 
 .the-rainbow-tour-card {
   display: flex;
@@ -231,6 +230,14 @@ section.heading .filters .wrapper .button-special-events {
 .the-rainbow-tour-card .card > * {
   position: relative;
   z-index: 2;
+}
+
+.cardcontainer#special-events {
+display: naone;
+}
+
+.the-rainbow-tour-card#barca-terapia {
+  background-image: url('assets/images/rainsbow.jpg');
 }
 
 .the-wild-tour-card .card {
@@ -288,6 +295,58 @@ section.heading .filters .wrapper .button-special-events {
   position: relative;
   z-index: 2;
 }
+
+.the-rainbow-tour-card .card:hover,
+.the-wild-tour-card .card:hover,
+.gourmet-sunset-cruise-card .card:hover {
+cursor: pointer;
+  transform: scale(1.03);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(6px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.the-rainbow-tour-card .details .freccia,
+.the-wild-tour-card .details .freccia,
+.gourmet-sunset-cruise-card .details .freccia {
+  opacity: 0.5;
+  transform: translateX(0) scale(1);
+}
+
+.the-rainbow-tour-card .card:hover .details .freccia,
+.the-wild-tour-card .card:hover .details .freccia,
+.gourmet-sunset-cruise-card .card:hover .details .freccia {
+  animation: slideInRight 0.3s ease forwards;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .the-rainbow-tour-card .card .details,
 .the-wild-tour-card .card .details,
