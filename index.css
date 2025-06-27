@@ -123,8 +123,6 @@ section.heading .wrapper img {
   align-self: stretch;
 }
 
-
-
 .the-rainbow-tour-card {
   display: flex;
   flex-direction: column;
@@ -337,12 +335,14 @@ cursor: pointer;
   gap: 0.3125rem;
 }
 
+
+
 .the-rainbow-tour-card .card .details .wrapper p,
 .the-wild-tour-card .card .details .wrapper p,
 .gourmet-sunset-cruise-card .card .details .wrapper p {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -381,7 +381,7 @@ cursor: pointer;
   align-self: stretch;
   color: rgba(95, 96, 99, 0.99);
   font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.44531rem; /* 165.177% */

@@ -1,4 +1,4 @@
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
 
     body {
         margin-left: 15px;
@@ -44,10 +44,18 @@ nav button span {
     display: none;
 }
 
+.cardcontainer .copy-wrapper p {
+font-size: 1rem;
+}
+
+.cardcontainer .card p {
+    font-size: 0.875rem!important;
+}
+
 section.heading .wrapper p {
 color: rgba(117, 118, 122, 0.99);
 font-family: "Plus Jakarta Sans";
-font-size: 0.875rem;
+font-size: 1rem;
 font-style: normal;
 font-weight: 400;
 line-height: 1.5rem; /* 171.429% */
@@ -69,6 +77,14 @@ width: 100%;
 width: 17.06263rem;
 height: 25.60975rem;
 flex-shrink: 0;
+}
+
+.cardcontainer {
+    scroll-snap-type: mandatory;
+}
+
+.card .details {
+    width: 100%;
 }
 
 
