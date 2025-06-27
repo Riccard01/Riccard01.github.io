@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script src="index.js"></script>
@@ -16,7 +17,7 @@
   <body>
     <nav>
       <div class="wrapper">
-        <img src="assets/images/logo.jpg" alt="logo_here"><button>Let's get in touch!</button>
+        <img src="assets/images/logo.jpg" alt="logo_here"><button><img src="assets/icons/phone.svg" alt=""><span>Let's get in touch!</span></button>
       </div>
     </nav>
     <section class="heading">
@@ -24,16 +25,6 @@
         <h1>The Experiences</h1>
         <p>It’s not just about waves or sunsets — it’s about how you feel. On board Leggero, you’ll feel heard, welcomed, and lighter. Because here, every journey becomes a shared story that stays with you.</p>
         <img src="assets/icons/splash.svg" alt="">
-      </div>
-      <div class="filters">
-        <div class="wrapper">
-          <button class="button-main-experiences">
-            <img src="assets/icons/experiences.svg" alt="">Main Experiences
-          </button>
-          <button class="button-special-events">
-            <img src="assets/icons/special.svg" alt="">Special Events
-          </button>
-        </div>
       </div>
     </section>
     <div class="cardcontainer">
@@ -51,19 +42,19 @@
         </div>
         <div class="copy-wrapper">
           <h1>The Rainbow Tour</h1>
-          <p>Slow down and soak in the golden afternoon light as you cruise along the Ligurian coast. A laid-back journey with calm waves, good vibes, and the perfect soundtrack to your day.</p>
+          <p>Un pomeriggio lento tra cielo dorato e onde gentili. Naviga lungo la costa ligure e lasciati cullare da musica, silenzi e panorami mozzafiato. Ideale per staccare e respirare bellezza.</p>
           <div class="wrapper">
             <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
             <p>Bogliasco</p>
           </div>
-          <h3>€450</h3>
+          <h3>€450 per group</h3>
         </div>
       </div>
       <div class="the-wild-tour-card">
         <div class="card">
           <div class="details">
             <div class="wrapper">
-              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>9</p></div>
+              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
               <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
               <div class="wrapper-3"><img src="assets/icons/check.svg" alt=""><p>Private</p></div>
             </div>
@@ -73,7 +64,7 @@
         </div>
         <div class="copy-wrapper">
           <h1>The Wild Tour</h1>
-          <p>Sail along the beautiful natural reserve of Punta Chiappa and find your love in Portofino, San Fruttuoso and Paraggi. A place where nature and history mix!</p>
+          <p>Una giornata tra natura selvaggia, baie segrete e borghi iconici. Da Punta Chiappa a Paraggi, passando per Portofino e San Fruttuoso: pura esplorazione ligure.</p>
           <div class="wrapper">
             <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
             <p>Portofino</p>
@@ -95,12 +86,12 @@
         </div>
         <div class="copy-wrapper">
           <h1>Gourmet Sunset Cruise </h1>
-          <p>Let the waves and music cradle you in the romantic village of Bocca D’Asse. Enjoy the Italian aperitivo with your friends while dolphins dance to us and stars look from above.</p>
+          <p>Goditi un ricco aperitivo ligure al tramonto, in rada a Bocca D’Asse, tra musica, onde e – con un po’ di fortuna – delfini che nuotano accanto alla barca.</p>
           <div class="wrapper">
             <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
             <p>Bocca D’Asse</p>
           </div>
-          <h3>€55 per person</h3>
+          <h3>From €55 per person</h3>
         </div>
       </div>
     </div>
@@ -108,11 +99,33 @@
 
     
     <div class="cardcontainer" id="special-events">
-      <div class="the-rainbow-tour-card">
-        <div class="card" id="barca-terapia">
+      <div class="the-rainbow-tour-card" id="barca-terapia">
+        <div class="card">
           <div class="details">
             <div class="wrapper">
               <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+              <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>5</p></div>
+              <div class="wrapper-3"><img src="assets/icons/check.svg" alt=""><p>Private</p></div>
+            </div>
+            <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
+
+          </div>
+        </div>
+        <div class="copy-wrapper">
+          <h1>Barca Terapia</h1>
+          <p>Un momento di pace per chi ne ha più bisogno. Offro questa esperienza gratuitamente ai bambini con disabilità o malattie terminali e alle loro famiglie. Un piccolo viaggio in mare per regalare leggerezza, sorrisi e un ricordo da custodire insieme.</p>
+          <div class="wrapper">
+            <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
+            <p>Unknown</p>
+          </div>
+          <h3>Free</h3>
+        </div>
+      </div>
+      <div class="the-wild-tour-card" id="blow-me-away">
+        <div class="card">
+          <div class="details">
+            <div class="wrapper">
+              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
               <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
               <div class="wrapper-3"><img src="assets/icons/check.svg" alt=""><p>Private</p></div>
             </div>
@@ -121,21 +134,21 @@
           </div>
         </div>
         <div class="copy-wrapper">
-          <h1>The Rainbow Tour</h1>
-          <p>Slow down and soak in the golden afternoon light as you cruise along the Ligurian coast. A laid-back journey with calm waves, good vibes, and the perfect soundtrack to your day.</p>
+          <h1>Blow me away</h1>
+          <p>Solo poche notti all’anno il cielo e il mare si accendono insieme. Vivi eventi spettacolari come il Castello in Fiamme di Rapallo da una barca privata, lontano dalla folla, vicino alla meraviglia. Quando succede, non te lo puoi perdere.</p>
           <div class="wrapper">
             <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
-            <p>Bogliasco</p>
+            <p>Unknown</p>
           </div>
-          <h3>€450</h3>
+          <h3>From €950 per group</h3>
         </div>
       </div>
-      <div class="the-wild-tour-card">
+      <div class="gourmet-sunset-cruise-card" id="wicked-games">
         <div class="card">
           <div class="details">
             <div class="wrapper">
-              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>9</p></div>
-              <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
+              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+              <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>2</p></div>
               <div class="wrapper-3"><img src="assets/icons/check.svg" alt=""><p>Private</p></div>
             </div>
             <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
@@ -143,35 +156,13 @@
           </div>
         </div>
         <div class="copy-wrapper">
-          <h1>The Wild Tour</h1>
-          <p>Sail along the beautiful natural reserve of Punta Chiappa and find your love in Portofino, San Fruttuoso and Paraggi. A place where nature and history mix!</p>
+          <h1>Wicked Games</h1>
+          <p>Una barca, il tramonto e una serenata dal vivo solo per voi. Se siete innamorati, lasciatevi cullare dalle onde mentre vi suono la chitarra. Un’esperienza intima, autentica, pensata per rendere eterna una sera.</p>
           <div class="wrapper">
             <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
-            <p>Portofino</p>
+            <p>Unknown</p>
           </div>
-          <h3>From €510 per group</h3>
-        </div>
-      </div>
-      <div class="gourmet-sunset-cruise-card">
-        <div class="card">
-          <div class="details">
-            <div class="wrapper">
-              <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
-              <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
-              <div class="wrapper-3"><img src="assets/icons/check.svg" alt=""><p>Private & Shared</p></div>
-            </div>
-            <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
-
-          </div>
-        </div>
-        <div class="copy-wrapper">
-          <h1>Gourmet Sunset Cruise </h1>
-          <p>Let the waves and music cradle you in the romantic village of Bocca D’Asse. Enjoy the Italian aperitivo with your friends while dolphins dance to us and stars look from above.</p>
-          <div class="wrapper">
-            <div class="first"><p>Porto Antico</p><img src="assets/icons/cheveron-right.svg" alt=""></div>
-            <p>Bocca D’Asse</p>
-          </div>
-          <h3>€55 per person</h3>
+          <h3>€350 per group</h3>
         </div>
       </div>
     </div>
@@ -180,21 +171,21 @@
 
     <div class="perks">
       <div class="first">
-        <div class="wrapper-1"><img src="" alt=""><div class="wrapper"><p></p><p></p></div></div>
-        <div class="wrapper-2"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-3"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-4"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
+        <div class="wrapper-1"><img src="assets/icons/fuel.png" alt=""><div class="wrapper"><p>Fuel Included</p><p>No extra surprises</p></div></div>
+        <div class="wrapper-2"><img src="assets/icons/foto.png" alt=""><div class="wrapper"><p>Photo Souvenir</p><p>Cheese!</p></div>
+        <div class="wrapper-3"><img src="assets/icons/sport.png" alt=""><div class="wrapper"><p>Watersports</p><p></p>Let's go!</div>
+        <div class="wrapper-4"><img src="assets/icons/pet.png" alt=""><div class="wrapper"><p>Pet Friendly</p><p>C'mon, bring them too!</p></div>
       </div>
       <div class="second">
-        <div class="wrapper-1"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-2"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-3"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-4"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
+        <div class="wrapper-1"><img src="assets/icons/disability.png" alt=""><div class="wrapper"><p>Disability Accessible</p><p>No one is left behind</p></div>
+        <div class="wrapper-2"><img src="assets/icons/towels.png" alt=""><div class="wrapper"><p>Amenities</p><p>All the essentials + extra!</p></div>
+        <div class="wrapper-3"><img src="assets/icons/snack.png" alt=""><div class="wrapper"><p>Snacks & Drinks</p><p>We like the full tummy here</p></div>
+        <div class="wrapper-4"><img src="assets/icons/easy.png" alt=""><div class="wrapper"><p>Flexible</p><p>Change plans easily</p></div>
       </div>
       <div class="third">
-        <div class="wrapper-1"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-2"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
-        <div class="wrapper-3"><img src="" alt=""><div class="wrapper"><p></p><p></p></div>
+        <div class="wrapper-1"><img src="assets/icons/music.png" alt=""><div class="wrapper"><p>Music</p><p>Of course</p></div>
+        <div class="wrapper-2"><img src="assets/icons/mask.png" alt=""><div class="wrapper"><p>Snorkeling Gear</p><p>Full face masks (L)</p></div>
+        <div class="wrapper-3"><img src="assets/icons/safety.png" alt=""><div class="wrapper"><p>Safety</p><p>Number one</p></div>
       </div>
     </div>
   </body>

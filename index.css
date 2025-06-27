@@ -1,3 +1,8 @@
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 html {
   overflow-x: hidden;
   background: #FFF;
@@ -109,69 +114,6 @@ section.heading .wrapper img {
   top: 3.0625rem;
 }
 
-section.heading .filters {
-  display: flex;
-  width: 63.75rem;
-  max-width: 63.75rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.625rem;
-}
-
-section.heading .filters .wrapper {
-  display: flex;
-  padding: 0.3125rem;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  flex-direction: row;
-  gap: 0.3125rem;
-  border-radius: 0.75rem;
-  border: 2px solid rgba(183, 200, 219, 0.60);
-  background: #FFF;
-  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.07);
-}
-
-section.heading .filters .wrapper .button-main-experiences {
-  display: flex;
-  min-width: 10.375rem;
-  padding: 0.3125rem 0.9375rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  border: none;
-  border-radius: 0.4375rem;
-  background: #0075FA;
-  color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.20244rem; /* 120.246% */
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-section.heading .filters .wrapper .button-special-events {
-  display: flex;
-  min-width: 10.375rem;
-  padding: 0.3125rem 0.9375rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  border: none;
-  border-radius: 0.4375rem;
-  background: #0075FA;
-  color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.20244rem; /* 120.246% */
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
 .cardcontainer {
   display: flex;
   max-width: 63.78938rem;
@@ -234,11 +176,23 @@ section.heading .filters .wrapper .button-special-events {
 
 .cardcontainer#special-events {
 display: naone;
+padding-top: 5rem;
 }
 
-.the-rainbow-tour-card#barca-terapia {
-  background-image: url('assets/images/rainsbow.jpg');
+.the-rainbow-tour-card#barca-terapia .card{
+  background-image: url('assets/images/bimbi.jpg');
+  background-position: left center;
 }
+
+.the-wild-tour-card#blow-me-away .card{
+  background-image: url('assets/images/fireworks.jpg');
+}
+
+.gourmet-sunset-cruise-card#wicked-games .card{
+  background-image: url('assets/images/romantic.jpg');
+  background-position: left center;
+}
+
 
 .the-wild-tour-card .card {
   display: flex;
@@ -496,3 +450,114 @@ cursor: pointer;
   padding: 0;
 }
 
+.perks {
+display: flex;
+max-width: 63.5rem;
+padding-top: 10rem;
+flex-direction: column;
+align-items: center;
+gap: 1.875rem;
+align-self: stretch;
+}
+
+.perks .wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.perks .first {
+display: flex;
+align-items: center;
+gap: 1.875rem;
+align-self: stretch;
+}
+
+.perks .second {
+display: flex;
+align-items: center;
+gap: 1.875rem;
+align-self: stretch;
+}
+
+.perks .third {
+display: flex;
+justify-content: center;
+align-items: flex-start;
+gap: 1.875rem;
+align-self: stretch;
+}
+
+.perks .first .wrapper-1,
+.perks .first .wrapper-2,
+.perks .first .wrapper-3,
+.perks .first .wrapper-4 {
+display: flex;
+align-items: center;
+gap: 1.25rem;
+flex: 1 0 0;
+}
+
+.perks .first .wrapper-1 .wrapper,
+.perks .first .wrapper-2 .wrapper,
+.perks .first .wrapper-3 .wrapper,
+.perks .first .wrapper-4 .wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.perks .second .wrapper-1 .wrapper,
+.perks .second .wrapper-2 .wrapper,
+.perks .second .wrapper-3 .wrapper,
+.perks .second .wrapper-4 .wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.perks .third .wrapper-1 .wrapper,
+.perks .third .wrapper-2 .wrapper,
+.perks .third .wrapper-3 .wrapper,
+.perks .third .wrapper-4 .wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.perks .second .wrapper-1,
+.perks .second .wrapper-2,
+.perks .second .wrapper-3,
+.perks .second .wrapper-4 {
+display: flex;
+align-items: center;
+gap: 1.25rem;
+flex: 1 0 0;
+}
+
+.perks .third .wrapper-1,
+.perks .third .wrapper-2,
+.perks .third .wrapper-3 {
+display: flex;
+align-items: center;
+gap: 1.25rem;
+flex: 1 0 0;
+}
+
+.wrapper p:first-of-type {
+color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 1.125rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.wrapper p:last-of-type {
+color: rgba(95, 96, 99, 0.99);
+font-family: "Plus Jakarta Sans";
+font-size: 0.82588rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.44531rem; /* 175% */
+}
