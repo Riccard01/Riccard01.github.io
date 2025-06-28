@@ -19,8 +19,6 @@
 
     nav .wrapper {
         display: flex;
-        padding-left: 30px;
-        padding-right: 30px;
         width: 100%;
         justify-content: space-between;
         align-items: center;
@@ -99,7 +97,7 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding-top: 1.5rem;
-        padding: 1rem 0;
+        padding-left: 1rem;
         /* spazio sopra e sotto */
     }
 
