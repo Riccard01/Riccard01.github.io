@@ -176,7 +176,6 @@ section.heading .wrapper img {
 }
 
 .cards-container#special-events {
-display: naone;
 padding-top: 2.5rem;
 }
 
@@ -447,7 +446,7 @@ cursor: pointer;
 .the-rainbow-tour-card .copy-wrapper h3,
 .the-wild-tour-card .copy-wrapper h3,
 .gourmet-sunset-cruise-card .copy-wrapper h3 {
-  color: #04081B;
+  color: #0075FA;
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
   font-style: normal;

@@ -101,6 +101,10 @@
         /* spazio sopra e sotto */
     }
 
+.cards-container#special-events {
+padding-top: 4.5rem;
+}
+
     .cards-container>div {
         flex: 0 0 auto;
         scroll-snap-align: center;
