@@ -5,10 +5,29 @@ const tourOptions = {
   groupType: ["Private", "Public"]
 };
 
-const currentDateAvailability = {
-  slot1: { max: 6, booked: 0, reserved: false },   // Wild Tour
-  slot2: { max: 6, booked: 0, reserved: false },  // Rainbow Tour
-  slot3: { max: 8, booked: 2, reserved: false }   // Gourmet Sunset
+// Example: availabilityByMonth[month][day][slot]
+const availabilityByMonth = {
+  "2025-06": {
+    "28": {
+      wild:   { max: 6, booked: 0, reserved: false },
+      rainbow:{ max: 6, booked: 3, reserved: false },
+      sunset: { max: 8, booked: 0, reserved: false }
+    },
+    "29": {
+      wild:   { max: 6, booked: 6, reserved: true },
+      rainbow:{ max: 6, booked: 0, reserved: false },
+      sunset: { max: 8, booked: 0, reserved: true }
+    }
+    // ...more days
+  },
+  "2025-07": {
+    "01": {
+      wild:   { max: 6, booked: 0, reserved: false },
+      rainbow:{ max: 6, booked: 0, reserved: false },
+      sunset: { max: 8, booked: 0, reserved: false }
+    }
+    // ...more days
+  }
 };
 
 let selections = {
@@ -16,12 +35,36 @@ let selections = {
   slot: "",
   combo: "",
   people: 2,
-  groupType: ""
+  groupType: "",
+  date: ""
 };
+
+let fp; // flatpickr instance
 
 $(document).ready(function () {
   populateDropdown("experience");
   updateUI();
+
+  // Initialize flatpickr
+  fp = flatpickr("#calendar", {
+    inline: true,
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    onChange: function(selectedDates, dateStr) {
+      selections.date = dateStr;
+    }
+  });
+
+  $('#continueBtn').on('click', function () {
+    $('#step-1').hide();
+    $('#step-2').show();
+    updateSummaryAndPrice();
+  });
+
+  $('#backBtn').on('click', function () {
+    $('#step-2').hide();
+    $('#step-1').show();
+  });
 
   // Toggle dropdowns
   $('.option-row').on('click', function (e) {
@@ -40,6 +83,7 @@ $(document).ready(function () {
     $item.closest('.option-row').find('.option-value p').first().text(selections[key]);
     $('.option-row').removeClass('dropdown-open');
     updateUI();
+    updateCalendar();
   });
 
   // Close dropdowns when clicking outside
@@ -50,15 +94,10 @@ $(document).ready(function () {
     const $dropdown = $row.find('.dropdown-content');
     $dropdown.empty();
 
-    // Use availability constraints if needed
     if (key === "experience") {
-      tourOptions.experience.forEach((exp, i) => {
-        const slotKey = `slot${i + 1}`;
-        const slot = currentDateAvailability[slotKey];
-        const isAvailable = !slot.reserved;
-        if (isAvailable) $dropdown.append(`<div class="dropdown-item">${exp}</div>`);
+      tourOptions.experience.forEach((exp) => {
+        $dropdown.append(`<div class="dropdown-item">${exp}</div>`);
       });
-
       const valid = $dropdown.find('.dropdown-item').toArray().map(el => el.textContent);
       if (!valid.includes(selections.experience)) {
         selections.experience = valid[0] || "";
@@ -73,9 +112,20 @@ $(document).ready(function () {
 
   function updateUI() {
     const isGourmet = selections.experience === "Gourmet Sunset Cruise";
-    const slot1 = currentDateAvailability.slot1;
-    const slot2 = currentDateAvailability.slot2;
-    const slot3 = currentDateAvailability.slot3;
+    // Get slot availability for the selected date
+    let slot1 = {}, slot2 = {}, slot3 = {};
+    if (selections.date) {
+      const [year, month, day] = selections.date.split("-");
+      const monthKey = `${year}-${month}`;
+      const dayKey = day.startsWith("0") ? day.slice(1) : day;
+      const dayAvailability = availabilityByMonth[monthKey] && availabilityByMonth[monthKey][dayKey];
+      if (dayAvailability) {
+        slot1 = dayAvailability.wild || {};
+        slot2 = dayAvailability.rainbow || {};
+        slot3 = dayAvailability.sunset || {};
+      }
+    }
+    // If no date or not found, use empty objects (all options disabled)
 
     // Group Type
     const $groupRow = $('.option-row[data-key="groupType"]');
@@ -83,7 +133,7 @@ $(document).ready(function () {
     const $groupDD = $groupRow.find('.dropdown-content').empty();
 
     if (isGourmet) {
-      if (!slot3.reserved && slot3.booked < slot3.max) {
+      if (slot3 && !slot3.reserved && slot3.booked < (slot3.max || 0)) {
         selections.groupType = "Public";
         $groupText.text("Public");
         $groupRow.addClass('locked');
@@ -108,15 +158,15 @@ $(document).ready(function () {
 
     if (!isGourmet) {
       // Lock slot dropdown if Wild Tour or Rainbow Tour is reserved
-      if (slot1.reserved || slot2.reserved) {
+      if ((slot1 && slot1.reserved) || (slot2 && slot2.reserved)) {
         selections.slot = tourOptions.slot[0];
         $slotRow.find('.option-value p').first().text(selections.slot);
         $slotRow.addClass('locked');
         $slotDD.append(`<div class="dropdown-item disabled">${tourOptions.slot[0]}</div>`);
       } else {
         const slotOptions = [];
-        const relaxAvailable = !(slot1.reserved && slot1.booked >= slot1.max);
-        const fullDayAvailable = relaxAvailable && !(slot2.reserved && slot2.booked >= slot2.max);
+        const relaxAvailable = slot1 && !(slot1.reserved && slot1.booked >= (slot1.max || 0));
+        const fullDayAvailable = relaxAvailable && slot2 && !(slot2.reserved && slot2.booked >= (slot2.max || 0));
 
         if (relaxAvailable) slotOptions.push(tourOptions.slot[0]);
         if (fullDayAvailable) slotOptions.push(tourOptions.slot[1]);
@@ -146,7 +196,7 @@ $(document).ready(function () {
       }
 
       // Condition 2: Gourmet Sunset booked by someone
-      if (slot3.booked > 0) {
+      if (slot3 && slot3.booked > 0) {
         comboDisabled = true;
       }
 
@@ -175,7 +225,7 @@ $(document).ready(function () {
 
     let maxPeople = 6;
     if (isGourmet) {
-      maxPeople = selections.groupType === "Public" ? (slot3.max - slot3.booked) : 8;
+      maxPeople = selections.groupType === "Public" && slot3 ? ((slot3.max || 0) - (slot3.booked || 0)) : 8;
       $peopleSubtitle.text(`People (Max ${maxPeople} left)`);
     } else {
       $peopleSubtitle.text("People");
@@ -204,5 +254,94 @@ $(document).ready(function () {
     }
 
     console.log("Slots used:", slotsUsed);
+
+    const required = ['experience', 'people', 'groupType'];
+    const extraRequired = [];
+
+    if (!selections.experience.includes("Gourmet")) {
+      extraRequired.push('slot', 'combo');
+    }
+
+    const allValid = [...required, ...extraRequired].every(k => selections[k]);
+    $('#continueBtn').prop('disabled', !allValid);
   }
+
+  function getAvailableDatesForSelection() {
+    const { experience, slot, combo, people, groupType } = selections;
+    if (!experience) return [];
+    const slotMap = {
+      "Wild Tour": "wild",
+      "Rainbow Tour": "rainbow",
+      "Gourmet Sunset Cruise": "sunset"
+    };
+    const slotKey = slotMap[experience];
+    let availableDates = [];
+    Object.entries(availabilityByMonth).forEach(([month, days]) => {
+      Object.entries(days).forEach(([day, slots]) => {
+        const slotData = slots[slotKey];
+        if (!slotData) return;
+        // Apply your logic: reserved, booked, groupType, people, etc.
+        if (!slotData.reserved && (slotData.max - slotData.booked) >= people) {
+          availableDates.push(`${month}-${day.padStart(2, "0")}`);
+        }
+      });
+    });
+    return availableDates;
+  }
+
+  function updateCalendar() {
+    if (!fp) return;
+    const availableDates = getAvailableDatesForSelection();
+    fp.set('enable', availableDates);
+    fp.set('disable', function(date) {
+      const d = date.toISOString().slice(0, 10);
+      return !availableDates.includes(d);
+    });
+  }
+
+  // Initial calendar update
+  updateCalendar();
+});
+
+function updateSummaryAndPrice() {
+  $('#summary-experience').text(selections.experience || "-");
+  $('#summary-slot').text(selections.slot || "-");
+  $('#summary-combo').text(selections.combo || "-");
+  $('#summary-people').text(selections.people || "-");
+  $('#summary-groupType').text(selections.groupType || "-");
+
+  // Nascondi slot e combo se Gourmet
+  const isGourmet = selections.experience === "Gourmet Sunset Cruise";
+  $('#summary-slot-container').toggle(!isGourmet);
+  $('#summary-combo-container').toggle(!isGourmet);
+
+  // Calcolo prezzo (base di esempio, poi lo cambi tu)
+  let basePrice = 100;
+  if (isGourmet) basePrice = 150;
+  const totalPrice = basePrice * selections.people;
+  $('#summary-price').text(`€ ${totalPrice.toFixed(2)}`);
+}
+
+function getPricePerPerson() {
+  // You can customize these values
+  const { experience, groupType } = selections;
+  if (experience === "Gourmet Sunset Cruise") {
+    return groupType === "Private" ? 100 : 70;
+  }
+  return 50; // Default price for non-gourmet
+}
+
+$('#bookingForm').on('submit', function (e) {
+  e.preventDefault();
+
+  const formData = {
+    ...selections,
+    name: this.name.value,
+    surname: this.surname.value,
+    phone: this.phone.value,
+    email: this.email.value,
+    notes: this.notes.value
+  };
+
+  console.log("Final booking data:", formData);
 });

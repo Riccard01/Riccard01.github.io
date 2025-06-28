@@ -19,109 +19,228 @@
 </head>
 
 <body>
-  <section class="booking-table">
-    <section class="calendar-section">
-      <div class="section-heading">
-        <p>Available dates</p>
-      </div>
-      <div id="calendar"></div>
-    </section>
+    <div id="step-1" class="booking-step">
+        <section class="booking-table">
 
-    <section class="options noselect">
-      <div class="section-heading">
-        <p>Opzioni</p>
-        <div class="influences-wrapper">
-          <img src="" alt="" />
-          <p>Influences the price</p>
+            <section class="options noselect">
+                <div class="section-heading">
+                    <p>Opzioni</p>
+                    <div class="influences-wrapper">
+                        <img src="" alt="" />
+                        <p>Influences the price</p>
+                    </div>
+                </div>
+
+                <div class="options-wrapper">
+                    <!-- Experience -->
+                    <div class="option-row experience" data-key="experience">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <p>Experience</p>
+                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                            </div>
+                            <div class="option-value">
+                                <p>The Rainbow Tour</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- Slot -->
+                    <div class="option-row" data-key="slot">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <p>Slot</p>
+                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                            </div>
+                            <div class="option-value">
+                                <p>Full Day</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- People -->
+                    <div class="option-row" data-key="people">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <p>People</p>
+                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                            </div>
+                            <div class="option-value">
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="price-influences"></div>
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- Sunset Combo -->
+                    <div class="option-row" data-key="combo">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <p>Sunset Combo</p>
+                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                            </div>
+                            <div class="option-value">
+                                <p>Oh yeah!</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- Group Type -->
+                    <div class="option-row" data-key="groupType">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <p>Group Type</p>
+                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                            </div>
+                            <div class="option-value">
+                                <img src="assets/icons/locked.svg" alt="lock" />
+                                <p>Private</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+                    <button id="continueBtn" style="margin-top: 1rem;" class="option-input">Continue</button>
+                </div>
+            </section>
+
+            <section class="calendar-section">
+                <div class="section-heading">
+                    <p>Available dates</p>
+                </div>
+                <div id="calendar"></div>
+            </section>
+        </section>
+    </div>
+
+    <div id="step-2" style="display: none;">
+        <div class="booking-table">
+            <div class="split-summary">
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Tour looks amazing!</p>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Experience</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-experience">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-slot-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Slot</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-slot">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>People</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-people">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Group Type</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-groupType">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-combo-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Combo</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-combo">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-row option-price">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Final Price</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-price">€ 0.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Info</p>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Name</p>
+                        </div>
+                        <input type="text" id="input-name" class="option-input" placeholder="Name" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Surname</p>
+                        </div>
+                        <input type="text" id="input-surname" class="option-input" placeholder="Surname" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Email</p>
+                        </div>
+                        <input type="email" id="input-email" class="option-input" placeholder="Email" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Phone</p>
+                        </div>
+                        <input type="tel" id="input-phone" class="option-input" placeholder="Phone Number" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Notes</p>
+                        </div>
+                        <textarea id="input-notes" class="option-input" placeholder="Any notes..." rows="5"
+                            maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="options-wrapper">
-        <!-- Experience -->
-        <div class="option-row experience" data-key="experience">
-          <div class="option-wrapper">
-            <div class="option-subtitle">
-              <p>Experience</p>
-              <img src="assets/icons/cheveron-down.svg" alt="" />
-            </div>
-            <div class="option-value">
-              <p>The Rainbow Tour</p>
-            </div>
-          </div>
-          <div class="dropdown-content"></div>
-        </div>
-
-        <!-- Slot -->
-        <div class="option-row" data-key="slot">
-          <div class="option-wrapper">
-            <div class="option-subtitle">
-              <p>Slot</p>
-              <img src="assets/icons/cheveron-down.svg" alt="" />
-            </div>
-            <div class="option-value">
-              <p>Full Day</p>
-            </div>
-          </div>
-          <img class="price-influences" src="assets/icons/influences.svg" alt="" />
-          <div class="dropdown-content"></div>
-        </div>
-
-        <!-- People -->
-        <div class="option-row" data-key="people">
-          <div class="option-wrapper">
-            <div class="option-subtitle">
-              <p>People</p>
-              <img src="assets/icons/cheveron-down.svg" alt="" />
-            </div>
-            <div class="option-value">
-              <p>2</p>
-            </div>
-          </div>
-          <div class="price-influences"></div>
-          <div class="dropdown-content"></div>
-        </div>
-
-        <!-- Sunset Combo -->
-        <div class="option-row" data-key="combo">
-          <div class="option-wrapper">
-            <div class="option-subtitle">
-              <p>Sunset Combo</p>
-              <img src="assets/icons/cheveron-down.svg" alt="" />
-            </div>
-            <div class="option-value">
-              <p>Oh yeah!</p>
-            </div>
-          </div>
-          <div class="price-influences"></div>
-          <div class="dropdown-content"></div>
-        </div>
-
-        <!-- Group Type -->
-        <div class="option-row" data-key="groupType">
-          <div class="option-wrapper">
-            <div class="option-subtitle">
-              <p>Group Type</p>
-              <img src="assets/icons/cheveron-down.svg" alt="" />
-            </div>
-            <div class="option-value">
-              <img src="assets/icons/locked.svg" alt="lock" />
-              <p>Private</p>
-            </div>
-          </div>
-          <div class="price-influences"></div>
-          <div class="dropdown-content"></div>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <script>
-    const fp = flatpickr("#calendar", {
-      inline: true,
-      minDate: "today",
-      disable: ["2025-07-10", "2025-07-15"],
-      dateFormat: "dd/mm/yyyy"
-    });
-  </script>
+        <section class="buttons">
+            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Back</button>
+            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book</button>
+        </section>
+    </div>
 </body>
+
 </html>
