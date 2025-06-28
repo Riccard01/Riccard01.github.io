@@ -177,7 +177,7 @@ section.heading .wrapper img {
 
 .cards-container#special-events {
 display: naone;
-padding-top: 1rem;
+padding-top: 2.5rem;
 }
 
 .the-rainbow-tour-card#barca-terapia .card{
@@ -223,6 +223,8 @@ padding-top: 1rem;
   position: relative;
   z-index: 2;
 }
+
+
 
 .gourmet-sunset-cruise-card .card {
   display: flex;
