@@ -1,91 +1,114 @@
 @media screen and (max-width: 450px) {
 
+    html,
     body {
-        margin-left: 15px;
-        margin-right: 15px;
+        margin: 0;
         padding: 0;
+        overflow-x: hidden;
     }
 
     nav {
         display: flex;
-width: 20rem;
-padding: 1.875rem 0.9375rem;
-justify-content: space-between;
-align-items: center;
+        width: 100%;
+        padding: 1.875rem 0.9375rem;
+        justify-content: space-between;
+        align-items: center;
         margin-left: 15px;
         margin-right: 15px;
     }
 
     nav .wrapper {
-display: flex;
-padding-left: 30px;
-padding-right: 30px;
-width: 100%;
-justify-content: space-between;
-align-items: center;
-flex: 1 0 0;
+        display: flex;
+        padding-left: 30px;
+        padding-right: 30px;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1 0 0;
     }
 
-nav button {
-    display: flex;
-width: 3rem;
-height: 3rem;
-min-width: 3rem;
-padding: 0.625rem 0.3125rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-border-radius: 0.4375rem;
-background: #0075FA;
-}
+    nav button {
+        display: flex;
+        width: 3rem;
+        height: 3rem;
+        min-width: 3rem;
+        padding: 0.625rem 0.3125rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.625rem;
+        border-radius: 0.4375rem;
+        background: #0075FA;
+    }
+    
+    .heading{
+        padding: 16px;
+    }
 
+    nav .wrapper button{
+        margin-right: 30px;
+    }
 
-nav button span {
-    display: none;
-}
+    nav button span {
+        display: none;
+    }
 
-.cardcontainer .copy-wrapper p {
-font-size: 1rem;
-}
+    .cards-container .copy-wrapper p {
+        font-size: 1rem;
+        text-wrap: wrap;
+    }
 
-.cardcontainer .card p {
-    font-size: 0.875rem!important;
-}
+    .cards-container .card p {
+        font-size: 0.875rem !important;
+    }
 
-section.heading .wrapper p {
-color: rgba(117, 118, 122, 0.99);
-font-family: "Plus Jakarta Sans";
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1.5rem; /* 171.429% */
-letter-spacing: 0.02625rem;
-align-self: stretch;
-}
+    section.heading .wrapper p {
+        color: rgba(117, 118, 122, 0.99);
+        font-family: "Plus Jakarta Sans";
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+        /* 171.429% */
+        letter-spacing: 0.02625rem;
+        align-self: stretch;
+    }
 
-section.heading .wrapper {
-display: flex;
-max-width: 63.75rem;
-flex-direction: column;
-align-items: flex-start;
-gap: 0.625rem;
-align-self: stretch;
-width: 100%;
-}
+    section.heading .wrapper {
+        display: flex;
+        max-width: 63.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        align-self: stretch;
+        width: 100%;
+    }
+    .cards-container .card {
+        width: 17.06263rem;
+        height: 25.60975rem;
+        flex-shrink: 0;
+    }
 
-.cardcontainer .card {
-width: 17.06263rem;
-height: 25.60975rem;
-flex-shrink: 0;
-}
+    .cards-container {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 1rem;
+        /* opzionale: spazio tra le card */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 1rem 0;
+        /* spazio sopra e sotto */
+    }
 
-.cardcontainer {
-    scroll-snap-type: mandatory;
-}
+    .cards-container>div {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+    }
 
-.card .details {
-    width: 100%;
-}
+    .card .details {
+        width: 100%;
+    }
 
 
 

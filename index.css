@@ -4,7 +4,6 @@
 }
 
 html {
-  overflow-x: hidden;
   background: #FFF;
 }
 
@@ -114,13 +113,14 @@ section.heading .wrapper img {
   top: 3.0625rem;
 }
 
-.cardcontainer {
+.cards-container {
   display: flex;
   max-width: 63.78938rem;
   padding-top: 2.5rem;
   align-items: flex-start;
   gap: 1.25rem;
   align-self: stretch;
+  margin: 16px;
 }
 
 .the-rainbow-tour-card {
@@ -128,6 +128,7 @@ section.heading .wrapper img {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
+  width: min-content;
 }
 
 .the-wild-tour-card {
@@ -135,6 +136,7 @@ section.heading .wrapper img {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
+  width: min-content;
 }
 
 .gourmet-sunset-cruise-card {
@@ -142,6 +144,7 @@ section.heading .wrapper img {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
+  width: min-content;
 }
 
 .the-rainbow-tour-card .card {
@@ -172,7 +175,7 @@ section.heading .wrapper img {
   z-index: 2;
 }
 
-.cardcontainer#special-events {
+.cards-container#special-events {
 display: naone;
 padding-top: 5rem;
 }
@@ -396,6 +399,7 @@ cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.3125rem;
+  width: max-content;
 }
 
 .the-rainbow-tour-card .copy-wrapper .wrapper .first,
@@ -404,6 +408,7 @@ cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.3125rem;
+  width: max-content;
 }
 
 .the-rainbow-tour-card .copy-wrapper .wrapper .first p,

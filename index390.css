@@ -1,6 +1,6 @@
 @media screen and (max-width: 390px) {
 
-  .cardcontainer {
+  .cards-container {
   flex-direction: row;
     display: flex;
     justify-content: flex-start;
@@ -22,7 +22,7 @@
   }
 
 
-.cardcontainer .card#first {
+.cards-container .card#first {
   z-index: 1;
   animation: none;
   order: 3;
@@ -31,7 +31,7 @@
 }
 
 
-.cardcontainer .card#second {
+.cards-container .card#second {
   z-index: 2;
   animation: none;
   scale: none;
@@ -42,7 +42,7 @@
 
 
 
-.cardcontainer .card#third {
+.cards-container .card#third {
   z-index: 1;
   animation: none;
     transform: rotate(0deg);
@@ -50,7 +50,7 @@
 
 
 
-  .cardcontainer::-webkit-scrollbar {
+  .cards-container::-webkit-scrollbar {
     display: none;
   }
 }
