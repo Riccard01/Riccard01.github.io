@@ -39,7 +39,7 @@
     }
     
     .heading{
-        padding: 16px;
+        padding: 1rem;
     }
 
     nav .wrapper button{
@@ -109,6 +109,15 @@ padding-top: 4.5rem;
     display: none;
 }
 
+.titolo-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex start;
+  gap: 0.625rem;
+  padding-left: 2rem;
+  padding-top: 2rem;
+}
+
 .titolo-cards {
   color: #04081B;
   font-family: "Plus Jakarta Sans";
@@ -116,10 +125,8 @@ padding-top: 4.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  align-self: stretch;
-  padding-left: 15px;
+  margin: 0;
+
 }
     .cards-container>div {
         flex: 0 0 auto;

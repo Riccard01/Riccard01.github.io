@@ -113,6 +113,7 @@ section.heading .wrapper img {
   top: 3.0625rem;
 }
 
+
 .cards-container {
   display: flex;
   max-width: 63.78938rem;
@@ -179,6 +180,14 @@ section.heading .wrapper img {
 padding-top: 2.5rem;
 }
 
+.titolo-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex start;
+  gap: 0.625rem;
+  padding-left: 1rem;
+  padding-top: 2rem;
+}
 
 .titolo-cards {
   color: #04081B;
@@ -190,7 +199,6 @@ padding-top: 2.5rem;
   margin-top: 0rem;
   margin-bottom: 0rem;
   align-self: stretch;
-  padding-top: 2rem;
 }
 
 .the-rainbow-tour-card#barca-terapia .card{
