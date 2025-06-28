@@ -170,7 +170,9 @@ section.heading .wrapper img {
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
   z-index: 1;
 }
-
+a {
+text-decoration: none;
+}
 .the-rainbow-tour-card .card > * {
   position: relative;
   z-index: 2;
