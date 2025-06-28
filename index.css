@@ -116,7 +116,7 @@ section.heading .wrapper img {
 .cards-container {
   display: flex;
   max-width: 63.78938rem;
-  padding-top: 2.5rem;
+  padding-top: 1.5rem;
   align-items: flex-start;
   gap: 1.25rem;
   align-self: stretch;
@@ -177,6 +177,20 @@ section.heading .wrapper img {
 
 .cards-container#special-events {
 padding-top: 2.5rem;
+}
+
+
+.titolo-cards {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  align-self: stretch;
+  padding-top: 2rem;
 }
 
 .the-rainbow-tour-card#barca-terapia .card{
