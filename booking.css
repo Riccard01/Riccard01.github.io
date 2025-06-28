@@ -49,11 +49,11 @@ body {
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
   font-weight: 700;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .influences-wrapper {
   display: flex;
-  padding-left: 0.625rem;
   justify-content: flex-end;
   align-items: center;
   gap: 0.625rem;
@@ -107,8 +107,8 @@ body {
   top: 2.5rem;
   z-index: 2;
   background: white;
-  width: 101.3%;
-  left: -0.6%;
+  width: calc(100% + 4.8px);
+  left: -2.4px;
   padding: 0 4px 4px 4px;
   border: 2.4px solid rgba(140, 149, 152, 0.24);
   border-top: none;
