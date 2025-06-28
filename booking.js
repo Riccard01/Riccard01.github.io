@@ -9,21 +9,21 @@ const tourOptions = {
 const availabilityByMonth = {
   "2025-06": {
     "28": {
-      wild:   { max: 6, booked: 0, reserved: false },
-      rainbow:{ max: 6, booked: 3, reserved: false },
+      wild: { max: 6, booked: 0, reserved: false },
+      rainbow: { max: 6, booked: 3, reserved: false },
       sunset: { max: 8, booked: 0, reserved: false }
     },
     "29": {
-      wild:   { max: 6, booked: 6, reserved: true },
-      rainbow:{ max: 6, booked: 0, reserved: false },
-      sunset: { max: 8, booked: 0, reserved: true }
+      wild: { max: 6, booked: 6, reserved: true },
+      rainbow: { max: 6, booked: 0, reserved: false },
+      sunset: { max: 8, booked: 2, reserved: false }
     }
     // ...more days
   },
   "2025-07": {
     "01": {
-      wild:   { max: 6, booked: 0, reserved: false },
-      rainbow:{ max: 6, booked: 0, reserved: false },
+      wild: { max: 6, booked: 0, reserved: false },
+      rainbow: { max: 6, booked: 0, reserved: false },
       sunset: { max: 8, booked: 0, reserved: false }
     }
     // ...more days
@@ -50,8 +50,9 @@ $(document).ready(function () {
     inline: true,
     minDate: "today",
     dateFormat: "Y-m-d",
-    onChange: function(selectedDates, dateStr) {
+    onChange: function (selectedDates, dateStr) {
       selections.date = dateStr;
+      updateUI(); // Update UI when calendar changes
     }
   });
 
@@ -112,12 +113,20 @@ $(document).ready(function () {
 
   function updateUI() {
     const isGourmet = selections.experience === "Gourmet Sunset Cruise";
+
+    // Ensure a valid date is selected for the current experience
+    const availableDates = getAvailableDatesForSelection();
+    if (!selections.date || !availableDates.includes(selections.date)) {
+      selections.date = availableDates[0] || "";
+      if (fp) fp.setDate(selections.date, true); // update calendar UI
+    }
+
     // Get slot availability for the selected date
     let slot1 = {}, slot2 = {}, slot3 = {};
     if (selections.date) {
       const [year, month, day] = selections.date.split("-");
       const monthKey = `${year}-${month}`;
-      const dayKey = day.startsWith("0") ? day.slice(1) : day;
+      const dayKey = day.padStart(2, "0");
       const dayAvailability = availabilityByMonth[monthKey] && availabilityByMonth[monthKey][dayKey];
       if (dayAvailability) {
         slot1 = dayAvailability.wild || {};
@@ -125,7 +134,6 @@ $(document).ready(function () {
         slot3 = dayAvailability.sunset || {};
       }
     }
-    // If no date or not found, use empty objects (all options disabled)
 
     // Group Type
     const $groupRow = $('.option-row[data-key="groupType"]');
@@ -138,6 +146,8 @@ $(document).ready(function () {
         $groupText.text("Public");
         $groupRow.addClass('locked');
       } else {
+        selections.groupType = "Public";
+        $groupText.text("Public");
         $groupRow.removeClass('locked');
         tourOptions.groupType.forEach(opt => {
           $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
@@ -225,8 +235,9 @@ $(document).ready(function () {
 
     let maxPeople = 6;
     if (isGourmet) {
+      console.log(slot3)
       maxPeople = selections.groupType === "Public" && slot3 ? ((slot3.max || 0) - (slot3.booked || 0)) : 8;
-      $peopleSubtitle.text(`People (Max ${maxPeople} left)`);
+      $peopleSubtitle.text(`People (Max ${maxPeople} left for this date)`);
     } else {
       $peopleSubtitle.text("People");
     }
@@ -238,6 +249,11 @@ $(document).ready(function () {
     if (selections.people > maxPeople) {
       selections.people = maxPeople;
       $peopleText.text(maxPeople);
+    } else if (selections.people < 1) {
+      selections.people = Math.min(2, maxPeople);
+      $peopleText.text(selections.people);
+    } else {
+      $peopleText.text(selections.people);
     }
 
     // Slot usage
@@ -292,11 +308,10 @@ $(document).ready(function () {
   function updateCalendar() {
     if (!fp) return;
     const availableDates = getAvailableDatesForSelection();
+    // Get all dates in the visible months, then disable those not in availableDates
+    // But for simplicity, just disable all except availableDates
     fp.set('enable', availableDates);
-    fp.set('disable', function(date) {
-      const d = date.toISOString().slice(0, 10);
-      return !availableDates.includes(d);
-    });
+    fp.set('disable', []); // Remove any previous disables
   }
 
   // Initial calendar update
@@ -314,6 +329,8 @@ function updateSummaryAndPrice() {
   const isGourmet = selections.experience === "Gourmet Sunset Cruise";
   $('#summary-slot-container').toggle(!isGourmet);
   $('#summary-combo-container').toggle(!isGourmet);
+
+  $('#summary-slot-container').toggle(!((selections.experience == "Wild Tour" && selections.slot == "Full Day") || selections.experience != "Rainbow Tour"));
 
   // Calcolo prezzo (base di esempio, poi lo cambi tu)
   let basePrice = 100;
