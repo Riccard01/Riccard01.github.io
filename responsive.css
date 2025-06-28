@@ -98,6 +98,7 @@
         /* opzionale: spazio tra le card */
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        padding-top: 1.5rem;
         padding: 1rem 0;
         /* spazio sopra e sotto */
     }
