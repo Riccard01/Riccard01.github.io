@@ -9,8 +9,8 @@
 
     nav {
         display: flex;
-        width: 100%;
-        padding: 1.875rem 0.9375rem;
+        width: 100vw;
+        padding: 1rem 1rem;
         justify-content: space-between;
         align-items: center;
 
@@ -139,6 +139,16 @@ padding-top: 4.5rem;
 
 
 
+
+footer {
+    background: #F8F9FA;
+    padding: 1.875rem 0.9375rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100vw;
+
+}
 
 
 
