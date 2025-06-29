@@ -456,7 +456,9 @@ cursor: pointer;
   padding: 0;
 }
 
-
+.element::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 
 .the-rainbow-tour-card .copy-wrapper .wrapper p,
 .the-wild-tour-card .copy-wrapper .wrapper p,
