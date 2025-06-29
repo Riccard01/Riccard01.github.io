@@ -157,29 +157,6 @@ footer {
 
 
 
-.wrapper p:first-of-type {
-color: #04081B;
-font-family: "Plus Jakarta Sans";
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-margin: 0;
-padding: 0;
-width: 100%;
-}
-
-.wrapper p:last-of-type {
-color: rgba(95, 96, 99, 0.99);
-font-family: "Plus Jakarta Sans";
-font-size: .75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1.44531rem; /* 175% */
-margin: 0;
-padding: 0;
-width: 100%;
-}
 
 
 
