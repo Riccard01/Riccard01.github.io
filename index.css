@@ -5,6 +5,7 @@
 
 html {
   background: #FFF;
+  overflow-x: hidden;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
   max-width: 63.75rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 0rem 1.875rem;
+  padding: 0rem 0rem;
 }
 
 nav {
@@ -28,7 +29,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   background: rgba(255, 255, 255, 0.90);
-border-bottom: 1px solid #DBDBDB;
+  border-bottom: 1px solid #DBDBDB;
   backdrop-filter: blur(7.800000190734863px);
   z-index: 100;
 }
@@ -38,7 +39,6 @@ nav .wrapper {
   max-width: 63.75rem;
   justify-content: space-between;
   align-items: center;
-  flex: 1 0 0;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
