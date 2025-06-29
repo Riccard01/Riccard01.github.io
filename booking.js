@@ -6,29 +6,16 @@ const tourOptions = {
 };
 
 // Example: availabilityByMonth[month][day][slot]
-const availabilityByMonth = {
-  "2025-06": {
-    "28": {
-      wild: { max: 6, booked: 0, reserved: false },
-      rainbow: { max: 6, booked: 3, reserved: false },
-      sunset: { max: 8, booked: 0, reserved: false }
-    },
-    "29": {
-      wild: { max: 6, booked: 6, reserved: true },
-      rainbow: { max: 6, booked: 0, reserved: false },
-      sunset: { max: 8, booked: 2, reserved: false }
-    }
-    // ...more days
-  },
-  "2025-07": {
-    "01": {
-      wild: { max: 6, booked: 0, reserved: false },
-      rainbow: { max: 6, booked: 0, reserved: false },
-      sunset: { max: 8, booked: 0, reserved: false }
-    }
-    // ...more days
-  }
-};
+let availabilityByMonth = {}; // Will be filled from Google Sheets
+
+function fetchAvailability() {
+  // Replace with your actual web app URL
+  const url = 'https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec';
+  return $.getJSON(url).then(data => {
+    availabilityByMonth = data;
+    console.log("Availability data loaded:", availabilityByMonth);
+  });
+}
 
 let selections = {
   experience: "",
@@ -40,10 +27,14 @@ let selections = {
 };
 
 let fp; // flatpickr instance
+let isSettingDate = false; // Add this at the top, after let fp;
 
 $(document).ready(function () {
-  populateDropdown("experience");
-  updateUI();
+  fetchAvailability().then(() => {
+    populateDropdown("experience");
+    updateUI();
+    updateCalendar();
+  });
 
   // Initialize flatpickr
   fp = flatpickr("#calendar", {
@@ -51,6 +42,7 @@ $(document).ready(function () {
     minDate: "today",
     dateFormat: "Y-m-d",
     onChange: function (selectedDates, dateStr) {
+      if (isSettingDate) return; // Prevent recursion
       selections.date = dateStr;
       updateUI(); // Update UI when calendar changes
     }
@@ -83,6 +75,12 @@ $(document).ready(function () {
     selections[key] = $item.text();
     $item.closest('.option-row').find('.option-value p').first().text(selections[key]);
     $('.option-row').removeClass('dropdown-open');
+    // If filters change, and the date is no longer available, deselect it
+    const availableDates = getAvailableDatesForSelection();
+    if (!availableDates.includes(selections.date)) {
+      selections.date = "";
+      if (fp) fp.clear();
+    }
     updateUI();
     updateCalendar();
   });
@@ -117,21 +115,26 @@ $(document).ready(function () {
     // Ensure a valid date is selected for the current experience
     const availableDates = getAvailableDatesForSelection();
     if (!selections.date || !availableDates.includes(selections.date)) {
-      selections.date = availableDates[0] || "";
-      if (fp) fp.setDate(selections.date, true); // update calendar UI
+      const newDate = availableDates[0] || "";
+      if (fp && selections.date !== newDate) {
+        isSettingDate = true;
+        selections.date = newDate;
+        fp.setDate(selections.date, true); // update calendar UI
+        isSettingDate = false;
+      }
     }
 
     // Get slot availability for the selected date
-    let slot1 = {}, slot2 = {}, slot3 = {};
+    let wild = {}, rainbow = {}, sunset = {};
     if (selections.date) {
       const [year, month, day] = selections.date.split("-");
       const monthKey = `${year}-${month}`;
       const dayKey = day.padStart(2, "0");
       const dayAvailability = availabilityByMonth[monthKey] && availabilityByMonth[monthKey][dayKey];
       if (dayAvailability) {
-        slot1 = dayAvailability.wild || {};
-        slot2 = dayAvailability.rainbow || {};
-        slot3 = dayAvailability.sunset || {};
+        wild = dayAvailability.wild || {};
+        rainbow = dayAvailability.rainbow || {};
+        sunset = dayAvailability.sunset || {};
       }
     }
 
@@ -141,17 +144,25 @@ $(document).ready(function () {
     const $groupDD = $groupRow.find('.dropdown-content').empty();
 
     if (isGourmet) {
-      if (slot3 && !slot3.reserved && slot3.booked < (slot3.max || 0)) {
-        selections.groupType = "Public";
-        $groupText.text("Public");
-        $groupRow.addClass('locked');
-      } else {
-        selections.groupType = "Public";
-        $groupText.text("Public");
+      // If sunset slot is not booked by anyone, allow both Private and Public
+      if (slot3 && (slot3.booked === 0)) {
         $groupRow.removeClass('locked');
+        $groupDD.empty();
         tourOptions.groupType.forEach(opt => {
           $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
         });
+        // Keep current selection if valid, otherwise default to Public
+        if (!tourOptions.groupType.includes(selections.groupType)) {
+          selections.groupType = "Public";
+          $groupText.text("Public");
+        } else {
+          $groupText.text(selections.groupType);
+        }
+      } else {
+        // If sunset slot is booked, only Public is allowed
+        selections.groupType = "Public";
+        $groupText.text("Public");
+        $groupRow.addClass('locked');
       }
     } else {
       selections.groupType = "Private";
@@ -200,13 +211,15 @@ $(document).ready(function () {
       const $comboDD = $comboRow.find('.dropdown-content').empty();
       let comboDisabled = false;
 
+      if (sunset && sunset.reserved) {
+        comboDisabled = true;
+      }
       // Condition 1: Wild Tour and not Full Day
       if (selections.experience === "Wild Tour" && selections.slot !== "Full Day") {
         comboDisabled = true;
       }
-
       // Condition 2: Gourmet Sunset booked by someone
-      if (slot3 && slot3.booked > 0) {
+      if (sunset && sunset.booked > 0) {
         comboDisabled = true;
       }
 
@@ -271,35 +284,50 @@ $(document).ready(function () {
 
     console.log("Slots used:", slotsUsed);
 
+    // At the end, check if continue button should be enabled
     const required = ['experience', 'people', 'groupType'];
     const extraRequired = [];
-
     if (!selections.experience.includes("Gourmet")) {
       extraRequired.push('slot', 'combo');
     }
-
     const allValid = [...required, ...extraRequired].every(k => selections[k]);
-    $('#continueBtn').prop('disabled', !allValid);
+    // Only enable continue if a date is selected and all filters are valid
+    $('#continueBtn').prop('disabled', !(allValid && selections.date));
   }
 
   function getAvailableDatesForSelection() {
     const { experience, slot, combo, people, groupType } = selections;
     if (!experience) return [];
-    const slotMap = {
-      "Wild Tour": "wild",
-      "Rainbow Tour": "rainbow",
-      "Gourmet Sunset Cruise": "sunset"
-    };
-    const slotKey = slotMap[experience];
     let availableDates = [];
     Object.entries(availabilityByMonth).forEach(([month, days]) => {
       Object.entries(days).forEach(([day, slots]) => {
-        const slotData = slots[slotKey];
-        if (!slotData) return;
-        // Apply your logic: reserved, booked, groupType, people, etc.
-        if (!slotData.reserved && (slotData.max - slotData.booked) >= people) {
-          availableDates.push(`${month}-${day.padStart(2, "0")}`);
+        // Readable slot access
+        const wild = slots.wild || {};
+        const rainbow = slots.rainbow || {};
+        const sunset = slots.sunset || {};
+        let valid = true;
+        // Experience logic
+        if (experience === "Wild Tour") {
+          // Full Day uses both wild and rainbow
+          if (slot === "Full Day") {
+            if (wild.reserved || rainbow.reserved) valid = false;
+            if ((wild.max - wild.booked) < people || (rainbow.max - rainbow.booked) < people) valid = false;
+          } else {
+            if (wild.reserved) valid = false;
+            if ((wild.max - wild.booked) < people) valid = false;
+          }
+          // Combo logic: if sunset is reserved, combo cannot be done
+          if (combo === "Oh yeah!" && sunset.reserved) valid = false;
+        } else if (experience === "Rainbow Tour") {
+          if (rainbow.reserved) valid = false;
+          if ((rainbow.max - rainbow.booked) < people) valid = false;
+          // Combo logic: if sunset is reserved, combo cannot be done
+          if (combo === "Oh yeah!" && sunset.reserved) valid = false;
+        } else if (experience === "Gourmet Sunset Cruise") {
+          if (sunset.reserved) valid = false;
+          if ((sunset.max - sunset.booked) < people) valid = false;
         }
+        if (valid) availableDates.push(`${month}-${day.padStart(2, "0")}`);
       });
     });
     return availableDates;
@@ -308,10 +336,7 @@ $(document).ready(function () {
   function updateCalendar() {
     if (!fp) return;
     const availableDates = getAvailableDatesForSelection();
-    // Get all dates in the visible months, then disable those not in availableDates
-    // But for simplicity, just disable all except availableDates
     fp.set('enable', availableDates);
-    fp.set('disable', []); // Remove any previous disables
   }
 
   // Initial calendar update
@@ -324,12 +349,12 @@ function updateSummaryAndPrice() {
   $('#summary-combo').text(selections.combo || "-");
   $('#summary-people').text(selections.people || "-");
   $('#summary-groupType').text(selections.groupType || "-");
+  $('#summary-date').text(selections.date || "-");
 
   // Nascondi slot e combo se Gourmet
   const isGourmet = selections.experience === "Gourmet Sunset Cruise";
   $('#summary-slot-container').toggle(!isGourmet);
   $('#summary-combo-container').toggle(!isGourmet);
-
   $('#summary-slot-container').toggle(!((selections.experience == "Wild Tour" && selections.slot == "Full Day") || selections.experience != "Rainbow Tour"));
 
   // Calcolo prezzo (base di esempio, poi lo cambi tu)
