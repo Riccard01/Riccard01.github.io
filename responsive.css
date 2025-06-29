@@ -48,6 +48,10 @@
         display: none;
     }
 
+    .copy-wrapper .wrapper p {
+        text-wrap: wrap;
+    }
+
     .cards-container .copy-wrapper p {
         font-size: 1rem;
         text-wrap: wrap;

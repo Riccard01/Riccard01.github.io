@@ -381,10 +381,6 @@ cursor: pointer;
   line-height: normal;
 }
 
-.the-rainbow-tour-card .card .details img {
-
-}
-
 .the-rainbow-tour-card .copy-wrapper,
 .the-wild-tour-card .copy-wrapper,
 .gourmet-sunset-cruise-card .copy-wrapper {
@@ -439,7 +435,7 @@ cursor: pointer;
   align-items: center;
   justify-content: flex-start;
   gap: 0.3125rem;
-  width: 100%;
+  width: fit-content;
 }
 
 .the-rainbow-tour-card .copy-wrapper .wrapper .first p,
@@ -455,13 +451,11 @@ cursor: pointer;
   font-weight: 600;
   line-height: normal;
   width: 100%;
+  width: fit-content;
   margin: 0;
   padding: 0;
 }
 
-.the-rainbow-tour-card .copy-wrapper .wrapper .first img {
-
-}
 
 
 .the-rainbow-tour-card .copy-wrapper .wrapper p,
@@ -474,6 +468,7 @@ cursor: pointer;
   font-weight: 600;
   line-height: normal;
   margin: 0;
+  width: fit-content;
   padding: 0;
 }
 
@@ -486,6 +481,25 @@ cursor: pointer;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.perks p:first-of-type {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.perks p:last-of-type {
+  color: rgba(95, 96, 99, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.82588rem;
+  font-weight: 400;
+  line-height: 1.44531rem;
   margin: 0;
   padding: 0;
 }
@@ -619,6 +633,23 @@ footer {
     justify-content: center;
     display: flex;
     width: 100vw;
-
 }
 
+footer .wrapper p:first-of-type {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+footer .wrapper p:last-of-type {
+  color: rgba(95, 96, 99, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.82588rem;
+  font-weight: 400;
+  line-height: 1.44531rem;
+  margin: 0;
+  padding: 0;
+}
