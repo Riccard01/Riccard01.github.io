@@ -11,7 +11,7 @@
         display: flex;
         position: sticky;
         width: 100vw;
-        padding: 1rem 1rem;
+        padding: 1rem 0rem;
         justify-content: space-between;
         align-items: center;
 
@@ -20,12 +20,10 @@
     nav .wrapper {
         display: flex;
         width: 100%;
-        max-width: 32.75rem;
         justify-content: space-between;
         align-items: center;
-          margin-left: auto;
-  margin-right: auto;
-        flex: 1 0 0;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     nav button {
@@ -45,9 +43,6 @@
         padding: 1rem;
     }
 
-    nav .wrapper button{
-        margin-right: 30px;
-    }
 
     nav button span {
         display: none;
