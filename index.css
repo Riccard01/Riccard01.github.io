@@ -1,6 +1,7 @@
 * {
   user-select: none;
   -webkit-user-select: none;
+  box-sizing: border-box;
 }
 
 html {
@@ -28,9 +29,8 @@ nav {
   display: flex;
   position: sticky;
   top: 0;
-  left: 0;
   width: 100vw;
-  padding: 1.875rem 0rem;
+  padding: 1.875rem 45%;
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.90);
@@ -41,7 +41,6 @@ nav {
 
 nav .wrapper {
   display: flex;
-  max-width: 63.75rem;
   justify-content: space-between;
   align-items: center;
   margin-left: auto;
@@ -178,6 +177,11 @@ section.heading .wrapper img {
 a {
 text-decoration: none;
 }
+
+button:focus {
+  outline: none;
+}
+
 .the-rainbow-tour-card .card > * {
   position: relative;
   z-index: 2;
