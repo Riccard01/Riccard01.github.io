@@ -30,7 +30,12 @@ let fp; // flatpickr instance
 let isSettingDate = false; // Add this at the top, after let fp;
 
 $(document).ready(function () {
+  // Show loading in calendar section
+  $('#calendar').html('<div id="calendar-loading" style="text-align:center;padding:0.6em;">Loading available dates...</div>');
+  $('#options-div').css("display", "none"); // Hide options until loaded
   fetchAvailability().then(() => {
+    $('#calendar-loading').remove();
+     $('#options-div').css("display", "block");
     populateDropdown("experience");
     updateUI();
     updateCalendar();
@@ -72,8 +77,13 @@ $(document).ready(function () {
     e.stopPropagation();
     const $item = $(this);
     const key = $item.closest('.option-row').data('key');
-    selections[key] = $item.text();
-    $item.closest('.option-row').find('.option-value p').first().text(selections[key]);
+    let value = $item.text();
+    // If slot, strip time in parentheses
+    if (key === "slot") {
+      value = value.split(' (')[0];
+    }
+    selections[key] = value;
+    $item.closest('.option-row').find('.option-value p').first().text($item.text());
     $('.option-row').removeClass('dropdown-open');
     // If filters change, and the date is no longer available, deselect it
     const availableDates = getAvailableDatesForSelection();
@@ -145,19 +155,14 @@ $(document).ready(function () {
 
     if (isGourmet) {
       // If sunset slot is not booked by anyone, allow both Private and Public
-      if (slot3 && (slot3.booked === 0)) {
+      if (sunset && (sunset.booked === 0)) {
         $groupRow.removeClass('locked');
         $groupDD.empty();
         tourOptions.groupType.forEach(opt => {
           $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
         });
-        // Keep current selection if valid, otherwise default to Public
-        if (!tourOptions.groupType.includes(selections.groupType)) {
-          selections.groupType = "Public";
-          $groupText.text("Public");
-        } else {
-          $groupText.text(selections.groupType);
-        }
+        selections.groupType = "Public";
+        $groupText.text("Public");
       } else {
         // If sunset slot is booked, only Public is allowed
         selections.groupType = "Public";
@@ -178,67 +183,96 @@ $(document).ready(function () {
     $comboRow.toggle(!isGourmet);
 
     if (!isGourmet) {
-      // Lock slot dropdown if Wild Tour or Rainbow Tour is reserved
-      if ((slot1 && slot1.reserved) || (slot2 && slot2.reserved)) {
+      // Lock slot dropdown if Rainbow Tour is selected
+      if (selections.experience === "Rainbow Tour") {
         selections.slot = tourOptions.slot[0];
-        $slotRow.find('.option-value p').first().text(selections.slot);
+        $slotRow.find('.option-value p').first().text(`${tourOptions.slot[0]} (2pm - 6pm)`);
         $slotRow.addClass('locked');
-        $slotDD.append(`<div class="dropdown-item disabled">${tourOptions.slot[0]}</div>`);
+        $slotDD.append(`<div class="dropdown-item disabled">${tourOptions.slot[0]} (2pm - 6pm)</div>`);
+      } else if ((wild && wild.reserved) || (rainbow && rainbow.reserved)) {
+        let slotText = tourOptions.slot[0];
+        let slotTime = '';
+        if (selections.experience === "Wild Tour") slotTime = '9am - 1.30pm';
+        if (selections.experience === "Rainbow Tour") slotTime = '2pm - 6pm';
+        $slotRow.find('.option-value p').first().text(`${slotText} (${slotTime})`);
+        $slotRow.addClass('locked');
+        $slotDD.append(`<div class="dropdown-item disabled">${slotText} (${slotTime})</div>`);
+        selections.slot = tourOptions.slot[0];
       } else {
-        const slotOptions = [];
-        const relaxAvailable = slot1 && !(slot1.reserved && slot1.booked >= (slot1.max || 0));
-        const fullDayAvailable = relaxAvailable && slot2 && !(slot2.reserved && slot2.booked >= (slot2.max || 0));
-
-        if (relaxAvailable) slotOptions.push(tourOptions.slot[0]);
-        if (fullDayAvailable) slotOptions.push(tourOptions.slot[1]);
-
-        slotOptions.forEach(opt => {
-          $slotDD.append(`<div class="dropdown-item${slotOptions.length === 1 ? ' disabled' : ''}">${opt}</div>`);
-        });
-
-        if (!slotOptions.includes(selections.slot)) {
-          selections.slot = slotOptions[0] || "";
-          $slotRow.find('.option-value p').first().text(selections.slot);
+        // Fix: Determine slot availability for Wild Tour
+        let slotOptions = [];
+        if (selections.experience === "Wild Tour") {
+          // Tour Slot (wild only)
+          const wildAvailable = wild && !wild.reserved && (wild.max - wild.booked) >= selections.people;
+          if (wildAvailable) slotOptions.push({ label: tourOptions.slot[0], time: '9am - 1.30pm' });
+          // Full Day (wild + rainbow)
+          const fullDayAvailable = wild && rainbow && !wild.reserved && !rainbow.reserved && (wild.max - wild.booked) >= selections.people && (rainbow.max - rainbow.booked) >= selections.people;
+          if (fullDayAvailable) slotOptions.push({ label: tourOptions.slot[1], time: '9am - 6pm' });
+        } else {
+          // For other experiences, fallback to previous logic
+          const relaxAvailable = wild && !(wild.reserved && wild.booked >= (wild.max || 0));
+          const fullDayAvailable = relaxAvailable && rainbow && !(rainbow.reserved && rainbow.booked >= (rainbow.max || 0));
+          if (relaxAvailable) slotOptions.push({ label: tourOptions.slot[0], time: '9am - 1.30pm' });
+          if (fullDayAvailable) slotOptions.push({ label: tourOptions.slot[1], time: '9am - 6pm' });
         }
 
-        if (slotOptions.length === 1) {
+        slotOptions.forEach(opt => {
+          $slotDD.append(`<div class="dropdown-item">${opt.label} (${opt.time})</div>`);
+        });
+
+        // Update visible value with time
+        let selectedOpt = slotOptions.find(opt => opt.label === selections.slot);
+        if (!selectedOpt) {
+          selectedOpt = slotOptions[0];
+          selections.slot = selectedOpt ? selectedOpt.label : "";
+        }
+        if (selectedOpt) {
+          $slotRow.find('.option-value p').first().text(`${selectedOpt.label} (${selectedOpt.time})`);
+        }
+
+        // Only lock if there is one or zero options
+        if (slotOptions.length <= 1) {
           $slotRow.addClass('locked');
         } else {
           $slotRow.removeClass('locked');
         }
       }
-
-      const $comboDD = $comboRow.find('.dropdown-content').empty();
-      let comboDisabled = false;
-
-      if (sunset && sunset.reserved) {
-        comboDisabled = true;
-      }
-      // Condition 1: Wild Tour and not Full Day
-      if (selections.experience === "Wild Tour" && selections.slot !== "Full Day") {
-        comboDisabled = true;
-      }
-      // Condition 2: Gourmet Sunset booked by someone
-      if (sunset && sunset.booked > 0) {
-        comboDisabled = true;
-      }
-
-      tourOptions.combo.forEach(opt => {
-        const disabled = comboDisabled && opt === "Oh yeah!" ? ' disabled' : '';
-        $comboDD.append(`<div class="dropdown-item${disabled}">${opt}</div>`);
-      });
-
-      // Auto-select "No combo" if combo is disabled
-      if (comboDisabled) {
-        selections.combo = "No combo";
-        $comboRow.addClass('locked');
-      } else {
-        $comboRow.removeClass('locked');
-      }
-
-      // Update visible value
-      $comboRow.find('.option-value p').first().text(selections.combo);
+    } else {
+      // Gourmet Sunset Cruise
+      $slotRow.find('.option-value p').first().text('6.30pm - 0.00am');
     }
+
+    // Combo
+    const $comboDD = $comboRow.find('.dropdown-content').empty();
+    let comboDisabled = false;
+
+    if (sunset && sunset.reserved) {
+      comboDisabled = true;
+    }
+    // Condition 1: Wild Tour and not Full Day
+    if (selections.experience === "Wild Tour" && selections.slot !== "Full Day") {
+      comboDisabled = true;
+    }
+    // Condition 2: Gourmet Sunset booked by someone
+    if (sunset && sunset.booked > 0) {
+      comboDisabled = true;
+    }
+
+    tourOptions.combo.forEach(opt => {
+      const disabled = comboDisabled && opt === "Oh yeah!" ? ' disabled' : '';
+      $comboDD.append(`<div class="dropdown-item${disabled}">${opt}</div>`);
+    });
+
+    // Auto-select "No combo" if combo is disabled
+    if (comboDisabled) {
+      selections.combo = "No combo";
+      $comboRow.addClass('locked');
+    } else {
+      $comboRow.removeClass('locked');
+    }
+
+    // Update visible value
+    $comboRow.find('.option-value p').first().text(selections.combo);
 
     // People max
     const $peopleRow = $('.option-row[data-key="people"]');
@@ -248,8 +282,7 @@ $(document).ready(function () {
 
     let maxPeople = 6;
     if (isGourmet) {
-      console.log(slot3)
-      maxPeople = selections.groupType === "Public" && slot3 ? ((slot3.max || 0) - (slot3.booked || 0)) : 8;
+      maxPeople = selections.groupType === "Public" && sunset ? ((sunset.max || 0) - (sunset.booked || 0)) : 8;
       $peopleSubtitle.text(`People (Max ${maxPeople} left for this date)`);
     } else {
       $peopleSubtitle.text("People");
@@ -271,15 +304,21 @@ $(document).ready(function () {
 
     // Slot usage
     let slotsUsed = [];
-    if (isGourmet) {
-      slotsUsed = [3];
-    } else if (selections.slot === tourOptions.slot[0]) {
+    if (selections.experience === "Wild Tour") {
       slotsUsed = [1];
-    } else if (selections.slot === tourOptions.slot[1]) {
-      slotsUsed = [1, 2];
-    }
-    if (selections.combo === tourOptions.combo[0] && !isGourmet) {
-      slotsUsed = [2, 3];
+      if (selections.slot === "Full Day") {
+      slotsUsed.push(2);
+      }
+      if (selections.combo === "Oh yeah!") {
+      slotsUsed.push(3);
+      }
+    } else if (selections.experience === "Rainbow Tour") {
+      slotsUsed = [2];
+      if (selections.combo === "Oh yeah!") {
+      slotsUsed.push(3);
+      }
+    } else if (selections.experience === "Gourmet Sunset Cruise") {
+      slotsUsed = [3];
     }
 
     console.log("Slots used:", slotsUsed);
