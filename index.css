@@ -176,6 +176,7 @@ section.heading .wrapper img {
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
   z-index: 1;
 }
+
 a {
 text-decoration: none;
 }
@@ -198,7 +199,7 @@ padding-top: 2.5rem;
   width: 100%;
   justify-content: flex start;
   gap: 0.625rem;
-  padding-left: 1rem;
+  padding-left: 0rem;
   padding-top: 2rem;
 }
 
