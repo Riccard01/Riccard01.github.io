@@ -1,0 +1,220 @@
+@media screen and (max-width: 900px) {
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    nav {
+        display: flex;
+        position: sticky;
+        width: 100vw;
+        padding: 1rem 0rem;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    nav .wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    nav button {
+        display: flex;
+        width: 3rem;
+        height: 3rem;
+        min-width: 3rem;
+        padding: 0.625rem 0.3125rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.625rem;
+        border-radius: 0.4375rem;
+        background: #0075FA;
+    }
+    
+    .heading{
+        padding: 1rem;
+    }
+
+
+    nav button span {
+        display: none;
+    }
+
+    .copy-wrapper .wrapper p {
+        text-wrap: wrap;
+    }
+
+    .cards-container .copy-wrapper p {
+        font-size: 1rem;
+        text-wrap: wrap;
+        line-height: 1.8rem;
+    }
+
+    .cards-container .card p {
+        font-size: 0.875rem !important;
+    }
+
+    section.heading .wrapper p {
+        color: rgba(117, 118, 122, 0.99);
+        font-family: "Plus Jakarta Sans";
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.8rem;
+        /* 171.429% */
+        letter-spacing: 0.02625rem;
+        align-self: stretch;
+    }
+
+    section.heading .wrapper {
+        display: flex;
+        max-width: 63.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        align-self: stretch;
+        width: 100%;
+        padding-top: 1.5rem;
+    }
+    .cards-container .card {
+        width: 17.06263rem;
+        height: 25.60975rem;
+        flex-shrink: 0;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 1rem;
+        /* opzionale: spazio tra le card */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 1.5rem;
+        padding-left: 1rem;
+        /* spazio sopra e sotto */
+    }
+
+.cards-container#special-events {
+padding-top: 4.5rem;
+}
+
+.freccia {
+    display: none;
+}
+
+.titolo-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex start;
+  gap: 0.625rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+
+.titolo-cards {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+
+}
+    .cards-container>div {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+    }
+
+    .card .details {
+        width: 100%;
+    }
+
+
+
+
+
+footer {
+    background: #F8F9FA;
+    padding: 1.875rem 0.9375rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100vw;
+
+}
+
+
+
+
+
+
+.features-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.875rem;
+  max-width: 63.5rem;
+  padding: 5rem 1.5rem;
+  margin: 0 auto;
+}
+
+.features-block .item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.features-block .text p:first-of-type {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.features-block .text p:last-of-type {
+  color: rgba(95, 96, 99, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.82588rem;
+  font-weight: 400;
+  line-height: 1.44531rem;
+  margin: 0;
+  padding: 0;
+}
+
+.perks {
+  display: none;
+}
+
+.features-block img {
+  transform: scale(.9);
+  transform-origin: left center; /* o 'center center' */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
