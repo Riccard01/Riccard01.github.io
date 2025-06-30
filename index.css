@@ -490,7 +490,7 @@ cursor: pointer;
 .perks p:first-of-type {
   color: #04081B;
   font-family: "Plus Jakarta Sans";
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -553,7 +553,7 @@ display: flex;
 align-items: center;
 gap: 1.25rem;
 flex: 1 0 0;
-justify-content: center;
+justify-content: flex-start;
 }
 
 .perks .first .wrapper-1 .wrapper,
@@ -591,7 +591,7 @@ display: flex;
 align-items: center;
 gap: 1.25rem;
 flex: 1 0 0;
-justify-content: center;
+justify-content: flex-start;
 }
 
 
@@ -600,7 +600,7 @@ justify-content: center;
 .perks .third .wrapper-3 {
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: flex-start;
 gap: 1.25rem;
 flex: 1 0 0;
 }
