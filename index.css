@@ -31,7 +31,7 @@ nav {
   left: 0;
   width: 100vw;
   padding: 1.875rem 0rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.90);
   border-bottom: 1px solid #DBDBDB;
