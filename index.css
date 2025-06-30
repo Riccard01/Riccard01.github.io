@@ -514,6 +514,7 @@ flex-direction: column;
 align-items: center;
 gap: 1.875rem;
 align-self: stretch;
+justify-content: center;
 padding-bottom: 5rem;
 }
 
