@@ -52,6 +52,7 @@ let fp; // flatpickr instance
 let isSettingDate = false; // Add this at the top, after let fp;
 
 $(document).ready(function () {
+  document.getElementById('continueBtn').disabled = true;
   // Show loading in calendar section
   $('#calendar').html(`<div id="calendar-loading" style="text-align:center;padding:0.6em;">${CONSTANTS.texts.loading}</div>`);
   $('#options-div').css("display", "none"); // Hide options until loaded
@@ -72,6 +73,8 @@ $(document).ready(function () {
       if (isSettingDate) return; // Prevent recursion
       selections.date = dateStr;
       updateUI(); // Update UI when calendar changes
+      // Ensure continue button is disabled if date is cleared
+      document.getElementById('continueBtn').disabled = !dateStr;
     }
   });
 
@@ -139,6 +142,7 @@ $(document).ready(function () {
     }
   }
 
+  let prevExperience = selections.experience;
   function updateUI() {
     const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2];
 
@@ -174,26 +178,32 @@ $(document).ready(function () {
     const $groupDD = $groupRow.find('.dropdown-content').empty();
 
     if (isGourmet) {
-      // If sunset slot is not booked by anyone, allow both Private and Public
-      if (sunset && (sunset.booked === 0)) {
+      // If sunset slot is not booked or reserved, allow both Private and Public
+      if (sunset && (sunset.booked === 0) && !sunset.reserved) {
         $groupRow.removeClass('locked');
         $groupDD.empty();
         CONSTANTS.tourOptions.groupType.forEach(opt => {
           $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
         });
-        selections.groupType = "Public";
-        $groupText.text("Public");
+        // Always default to Public when switching to Gourmet
+        if (prevExperience !== CONSTANTS.tourOptions.experience[2] || !CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
+          selections.groupType = "Public";
+        }
+        $groupText.text(selections.groupType);
       } else {
-        // If sunset slot is booked, only Public is allowed
+        // If sunset slot is booked or reserved, only Public is allowed
         selections.groupType = "Public";
         $groupText.text("Public");
         $groupRow.addClass('locked');
+        $groupDD.empty();
+        $groupDD.append('<div class="dropdown-item disabled">Public</div>');
       }
     } else {
       selections.groupType = "Private";
       $groupText.text("Private");
       $groupRow.addClass('locked');
     }
+    prevExperience = selections.experience;
 
     // Slot + Combo visibility
     const $slotRow = $('.option-row[data-key="slot"]');
@@ -361,9 +371,12 @@ $(document).ready(function () {
     if (!selections.experience.includes("Gourmet")) {
       extraRequired.push('slot', 'combo');
     }
-    const allValid = [...required, ...extraRequired].every(k => selections[k]);
-    // Only enable continue if a date is selected and all filters are valid
-    $('#continueBtn').prop('disabled', !(allValid && selections.date));
+
+    // --- Live Price Update for Step 1 ---
+    let basePrice = 100;
+    if (selections.experience === CONSTANTS.tourOptions.experience[2]) basePrice = 150;
+    const totalPrice = basePrice * selections.people;
+    $('#step1-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
   }
 
   function getAvailableDatesForSelection() {
