@@ -330,3 +330,15 @@ button:disabled{
   width: 100%;
   gap: 0.625rem;
 }
+
+.required-star {
+  color: #e53935;
+  font-weight: bold;
+  margin-left: 2px;
+}
+.input-error {
+  color: #e53935;
+  font-size: 0.8em;
+  margin-top: 2px;
+  max-height: 1.2em;
+}

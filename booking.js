@@ -425,6 +425,85 @@ $(document).ready(function () {
 
   // Initial calendar update
   updateCalendar();
+
+  // --- Validation for Book Button ---
+  function validateBookingForm() {
+    const name = $('#input-name').val().trim();
+    const surname = $('#input-surname').val().trim();
+    const email = $('#input-email').val().trim();
+    const confirmEmail = $('#input-email-confirm').val().trim();
+    const phonePrefix = $('#input-phone-prefix').val();
+    const phone = $('#input-phone').val().trim();
+    let valid = true;
+
+    // Reset error messages
+    $('#email-error').text("");
+    $('#confirm-email-error').text("");
+    $('#phone-error').text("");
+
+    // Name and surname required
+    if (!name || !surname) valid = false;
+    // Email required and valid
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      valid = false;
+      if (email) {
+        $('#email-error').text('Invalid email format');
+      } else {
+        $('#email-error').text('Email is required');
+      }
+    }
+    // Confirm email matches
+    if (email !== confirmEmail) {
+      valid = false;
+      if (confirmEmail) {
+        $('#confirm-email-error').text('Emails do not match');
+      } else {
+        $('#confirm-email-error').text('Please confirm your email');
+      }
+    }
+    // Phone required and valid (basic international format, min 6 digits)
+    if (!/^\d{6,}$/.test(phone.replace(/\D/g, ''))) {
+      valid = false;
+      if (phone) {
+        $('#phone-error').text('Invalid phone number');
+      } else {
+        $('#phone-error').text('Phone number is required');
+      }
+    }
+    if (!phonePrefix) valid = false;
+    // Booking selections required
+    if (!selections.experience || !selections.people || !selections.groupType || !selections.date) valid = false;
+    if (!selections.experience.includes("Gourmet") && (!selections.slot || !selections.combo)) valid = false;
+    // Enable/disable Book button
+    $('#bookBtn').prop('disabled', !valid);
+    return valid;
+  }
+
+  // Attach validation to all relevant fields
+  $('#input-name, #input-surname, #input-email, #input-email-confirm, #input-phone, #input-phone-prefix').on('input change', validateBookingForm);
+  $('#input-notes').on('input change', validateBookingForm);
+  $(document).on('change', validateBookingForm);
+
+  // Also validate on booking selection changes
+  $(document).on('change', '.option-row', validateBookingForm);
+
+  // Initial validation
+  setTimeout(validateBookingForm, 500);
+
+  // --- Update bookingForm submit to use prefix ---
+  $('#bookingForm').on('submit', function (e) {
+    e.preventDefault();
+    if (!validateBookingForm()) return;
+    const formData = {
+      ...selections,
+      name: this.name.value,
+      surname: this.surname.value,
+      phone: $('#input-phone-prefix').val() + $('#input-phone').val().replace(/\D/g, ''),
+      email: this.email.value,
+      notes: this.notes.value
+    };
+    console.log("Final booking data:", formData);
+  });
 });
 
 function updateSummaryAndPrice() {
@@ -456,18 +535,3 @@ function getPricePerPerson() {
   }
   return 50; // Default price for non-gourmet
 }
-
-$('#bookingForm').on('submit', function (e) {
-  e.preventDefault();
-
-  const formData = {
-    ...selections,
-    name: this.name.value,
-    surname: this.surname.value,
-    phone: this.phone.value,
-    email: this.email.value,
-    notes: this.notes.value
-  };
-
-  console.log("Final booking data:", formData);
-});
