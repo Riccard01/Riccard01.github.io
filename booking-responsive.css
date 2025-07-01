@@ -8,6 +8,7 @@ body {
   max-width: 100%;
   height: 100%;
   padding-top: 0rem;
+  padding-bottom: 0rem;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -101,7 +102,7 @@ section.calendar-section {
 }
 
 .options {
-  width: 25em;
+  width: 100%;
 }
 
 .wrapper-people-group {
@@ -109,6 +110,14 @@ section.calendar-section {
   flex-direction: row;
   width: 100%;
   gap: 0.3125rem;
+}
+
+.options.noselect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .options-wrapper {
@@ -188,7 +197,7 @@ section.calendar-section {
 }
 
 .option-subtitle p {
-  color: #666;
+color: #666;
 font-family: "Plus Jakarta Sans";
 font-size: 0.75rem;
 font-style: normal;
@@ -268,9 +277,8 @@ line-height: normal;
   align-items: center;
   flex: 1 0 0;
   border-radius: 0.4375rem;
-  border: 3px solid rgba(255, 255, 255, 0.24);
-  background: url(assets/images/rainbow.jpg) lightgray 50% / cover no-repeat;
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.27);
+  background: #FFF;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
 }
 
 .experience .option-wrapper {
@@ -299,16 +307,16 @@ line-height: normal;
 }
 
 .experience .option-subtitle p {
-  color: #FFF;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+color: #666;
+font-family: "Plus Jakarta Sans";
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
 
 .experience .option-subtitle img {
-  filter: brightness(0) invert(1);
+filter: brightness(0) saturate(100%) invert(47%) sepia(84%) saturate(2203%) hue-rotate(198deg) brightness(100%) contrast(104%);
   /* trasforma l'immagine in bianco */
 }
 
@@ -320,12 +328,12 @@ line-height: normal;
 }
 
 .experience .option-value p {
-  color: #FFF;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+ color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 
 .option-input {
@@ -349,6 +357,17 @@ line-height: normal;
 
 #bookBtn,
 #continueBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.3125rem;
+  width: 100%;
+  height: 3.375rem;
+  padding: 0.625rem;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-weight: 500;
   background: #0075FA;
   color: white;
   border: none;
