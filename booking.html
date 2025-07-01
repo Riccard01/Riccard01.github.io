@@ -9,8 +9,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="booking.js"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap"
-        rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap"
+    rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="booking.css">
@@ -20,12 +20,24 @@
 </head>
 
 <body>
+    <nav>
+        <div class="wrapper">
+            <img src="assets/images/logo.jpg" alt="logo_here"><a href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg" alt=""><span>Let's get in touch!</span></button></a>
+        </div>
+    </nav>
     <div id="step-1" class="booking-step">
         <section class="booking-table">
-
-            <section class="options noselect">
+            <section class="calendar-section">
                 <div class="section-heading">
-                    <p>Choose your trip</p>
+                    <p>Available dates</p>
+                </div>
+                <div id="calendar"></div>
+            </section>
+            
+                <div class="section-heading">
+                    <div class="wrapper-customize">
+                        <img src="assets/icons/pencil.svg" alt=""><p>Customize your tour</p><p style="font-size: 0.75rem;; color: #04081B; font-weight: 600;">Adjust filters above to check for availability</p>
+                    </div>
                     <div class="influences-wrapper">
                         <img src="assets/icons/influences.svg" alt="" />
                         <p>Influences the price</p>
@@ -37,8 +49,8 @@
                     <div class="option-row experience" data-key="experience">
                         <div class="option-wrapper">
                             <div class="option-subtitle">
+                                <img src="assets/icons/cards.svg" alt="" />
                                 <p>Experience</p>
-                                <img src="assets/icons/cheveron-down.svg" alt="" />
                             </div>
                             <div class="option-value">
                                 <p>The Rainbow Tour</p>
@@ -51,8 +63,8 @@
                     <div class="option-row" data-key="slot">
                         <div class="option-wrapper">
                             <div class="option-subtitle">
+                                <img src="assets/icons/calendar-tick.svg" alt="" />
                                 <p>Slot</p>
-                                <img src="assets/icons/cheveron-down.svg" alt="" />
                             </div>
                             <div class="option-value">
                                 <p>Full Day</p>
@@ -62,27 +74,12 @@
                         <div class="dropdown-content"></div>
                     </div>
 
-                    <!-- People -->
-                    <div class="option-row" data-key="people">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <p>People</p>
-                                <img src="assets/icons/cheveron-down.svg" alt="" />
-                            </div>
-                            <div class="option-value">
-                                <p>2</p>
-                            </div>
-                        </div>
-                        <div class="price-influences"></div>
-                        <div class="dropdown-content"></div>
-                    </div>
-
                     <!-- Sunset Combo -->
                     <div class="option-row" data-key="combo">
                         <div class="option-wrapper">
                             <div class="option-subtitle">
+                                <img src="assets/icons/cards.svg" alt="" />
                                 <p>Sunset Combo</p>
-                                <img src="assets/icons/cheveron-down.svg" alt="" />
                             </div>
                             <div class="option-value">
                                 <p>Oh yeah!</p>
@@ -92,44 +89,40 @@
                         <div class="dropdown-content"></div>
                     </div>
 
+                    <div class="wrapper-people-group">
+                    <!-- People -->
+                    <div class="option-row" data-key="people">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/people.svg" alt="" />
+                                <p>People</p>
+                            </div>
+                            <div class="option-value">
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="price-influences"></div>
+                        <div class="dropdown-content"></div>
+                    </div>
                     <!-- Group Type -->
                     <div class="option-row" data-key="groupType">
                         <div class="option-wrapper">
                             <div class="option-subtitle">
-                                <p>Group Type</p>
-                                <img src="assets/icons/cheveron-down.svg" alt="" />
+                                <img src="assets/icons/locked.svg" alt="" />
+                                <p>Group</p>
                             </div>
                             <div class="option-value">
-                                <img src="assets/icons/locked.svg" alt="lock" />
                                 <p>Private</p>
                             </div>
                         </div>
                         <img class="price-influences" src="assets/icons/influences.svg" alt="" />
                         <div class="dropdown-content"></div>
                     </div>
-
-                    <!-- Final Price Row (added for live price update) -->
-                    <div class="option-row option-price" id="step1-price-row" style="margin-top: 0.5rem; cursor: default;">
-                        <div class="option-content">
-                            <div class="option-subtitle">
-                                <p>Final Price</p>
-                            </div>
-                            <div class="option-value">
-                                <p id="step1-price">€ 0.00</p>
-                            </div>
-                        </div>
                     </div>
-
-                    <button id="continueBtn" style="margin-top: 1rem;" class="option-input">Continue</button>
+                    <button id="continueBtn" style="margin-top: 1rem;" class="option-input"><p id="step1-price">€ 0.00</p>Continue</button>
                 </div>
             </section>
 
-            <section class="calendar-section">
-                <div class="section-heading">
-                    <p>Available dates</p>
-                </div>
-                <div id="calendar"></div>
-            </section>
         </section>
     </div>
 

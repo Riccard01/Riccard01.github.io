@@ -1,14 +1,74 @@
-html,
-body {
-  background: #EAEAEA;
+html {
+  background: #FFF;
   overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  padding-top: 2rem;
+}
+
+body {
   display: flex;
   justify-content: center;
-  font-family: "Plus Jakarta Sans";
+  flex-direction: column;
+  align-items: center;
+  max-width: 63.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0rem 0rem;
+  gap: 2rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+text-decoration: none;
+}
+
+
+button:focus {
+  outline: none;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  padding: 1.875rem 45%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.90);
+  border-bottom: 1px solid #DBDBDB;
+  backdrop-filter: blur(7.800000190734863px);
+  z-index: 100;
+}
+
+nav .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+    padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10.375rem;
+  padding: 0.625rem 0.9375rem;
+  gap: 0.625rem;
+  background: #0075FA;
+  border: none;
+  border-radius: 0.4375rem;
+  color: #FFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.20244rem;
+  cursor: pointer;  
 }
 
 .noselect {
@@ -26,27 +86,49 @@ body {
   box-sizing: border-box;
 }
 
+section.calendar-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+}
+
+
+
 .booking-table {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  position: sticky;
+  max-width: 63.78938rem;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.9375rem;
   align-self: stretch;
   border-radius: 1rem;
   border: 2.4px solid rgba(140, 149, 152, 0.24);
   background: #FFF;
   width: fit-content;
-  padding: 24px;
-  height: fit-content;
+  padding: 1rem;
+  height: fit-content;  
   box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.07);
 }
 
 .section-heading {
   display: flex;
   align-items: center;
-  gap: 0.3125rem;
+  gap: 0rem;
   align-self: stretch;
-  padding-bottom: 10px;
+  padding-bottom: 0rem;
+}
+
+.wrapper-customize {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3125rem;
 }
 
 .section-heading p {
@@ -54,14 +136,14 @@ body {
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
   font-weight: 700;
-  padding: 1rem 1rem 0 1rem;
+  padding: 0rem;
 }
 
 .influences-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.3125rem;
   flex: 1 0 0;
 }
 
@@ -72,32 +154,54 @@ body {
   font-weight: 700;
 }
 
+
 .options {
-  width: 25em;
+  width: 100%;
+}
+
+.wrapper-people-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 0.3125rem;
+}
+
+.options.noselect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .options-wrapper {
-  display: flex;
-  padding: 0.9375rem;
+  display: flex !important;
+  padding: 0rem;
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
-  gap: 0.225rem;
+  gap: 0.3125rem;;
   align-self: stretch;
   border-radius: 1rem;
   background: #FFF;
 }
 
+
 .option-row {
   cursor: pointer;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 0rem;
+  padding: 0.625rem;
+  height: 3.1875rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
   width: 100%;
   border-radius: 0.4375rem;
   background: #FFF;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
   user-select: none;
+
 }
 
 .option-price {
@@ -144,21 +248,26 @@ body {
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+  gap: 0.3125rem;
 }
 
+
+
 .option-subtitle p {
-  color: #C2C2C2;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-weight: 600;
+color: #666;
+font-family: "Plus Jakarta Sans";
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
+
 
 .option-subtitle img {
   transition: transform 0.3s ease;
   width: 16px;
   height: 16px;
 }
-
 .option-value {
   display: flex;
   flex-direction: row;
@@ -167,10 +276,12 @@ body {
 }
 
 .option-value p {
-  color: #2D2F36;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-weight: 700;
+ color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 
 .option-value p.secondary {
@@ -197,8 +308,8 @@ body {
 
 .price-influences {
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  top: -0.2rem;
+  right: -0.3rem;
 }
 
 .dropdown-content {
@@ -218,22 +329,39 @@ body {
 
 .experience {
   display: flex;
-  height: 3.5rem;
+  height: fit-content;
   padding: 0.625rem;
   align-items: center;
   flex: 1 0 0;
   border-radius: 0.4375rem;
-  border: 3px solid rgba(255, 255, 255, 0.24);
-  background: url(assets/images/rainbow.jpg) lightgray 50% / cover no-repeat;
-  box-shadow: 0px 0.882px 3.518px 1.207px rgba(0, 0, 0, 0.27);
+  background: #FFF;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
 }
 
 .experience .option-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   gap: 0.3125rem;
   flex: 1 0 0;
+  justify-content: space-between;
+}
+
+.option-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  flex: 1 0 0;
+}
+
+
+.experience .option-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 }
 
 .experience .option-subtitle {
@@ -244,18 +372,19 @@ body {
 }
 
 .experience .option-subtitle p {
-  color: #FFF;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+color: #666;
+font-family: "Plus Jakarta Sans";
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
 
 .experience .option-subtitle img {
-  filter: brightness(0) invert(1);
+filter: brightness(0) saturate(100%) invert(47%) sepia(84%) saturate(2203%) hue-rotate(198deg) brightness(100%) contrast(104%);
   /* trasforma l'immagine in bianco */
 }
+
 
 .experience .option-value {
   display: flex;
@@ -264,13 +393,14 @@ body {
   gap: 0.3125rem;
 }
 
+
 .experience .option-value p {
-  color: #FFF;
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+ color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 
 .option-input {
@@ -291,9 +421,19 @@ body {
 .option-input::placeholder {
   color: #bbb;
 }
-
 #bookBtn,
 #continueBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.3125rem;
+  width: 100%;
+  height: 3.375rem;
+  padding: 0.625rem;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-weight: 500;
   background: #0075FA;
   color: white;
   border: none;
@@ -345,4 +485,13 @@ button:disabled{
   font-size: 0.8em;
   margin-top: 2px;
   max-height: 1.2em;
+}
+
+.flatpickr-calendar {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 0.4375rem;
+  background: #FFF;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
 }
