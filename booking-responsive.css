@@ -190,7 +190,7 @@ section.calendar-section {
 .option-subtitle p {
   color: #666;
 font-family: "Plus Jakarta Sans";
-font-size: 0.625rem;
+font-size: 0.75rem;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
@@ -212,7 +212,7 @@ line-height: normal;
 .option-value p {
  color: #04081B;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -301,7 +301,7 @@ line-height: normal;
 .experience .option-subtitle p {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
