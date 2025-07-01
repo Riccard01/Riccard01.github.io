@@ -311,6 +311,366 @@
             <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book your Experience</button>
         </section>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    RESPONSIVE     -->
+    <div id="step-1" class="booking-step responsive">
+        <section class="calendar-section">
+            <div class="section-heading">
+                <p>Available dates</p>
+            </div>
+            <div id="calendar"></div>
+        </section>
+        <section class="booking-table">
+
+            <section class="options noselect">
+                <div class="section-heading">
+                    <div class="wrapper-customize">
+                        <img src="assets/icons/pencil.svg" alt=""><p>Customize your tour</p>
+                    </div>
+                    <div class="influences-wrapper">
+                        <img src="" alt="" />
+                        <p>• Influences the price</p>
+                    </div>
+                </div>
+
+                <div class="options-wrapper" id="options-div">
+                    <!-- Experience -->
+                    <div class="option-row experience" data-key="experience">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/cards.svg" alt="" />
+                                <p>Experience</p>
+                            </div>
+                            <div class="option-value">
+                                <p>The Rainbow Tour</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- Slot -->
+                    <div class="option-row" data-key="slot">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/calendar-tick.svg" alt="" />
+                                <p>Slot</p>
+                            </div>
+                            <div class="option-value">
+                                <p>Full Day</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <!-- Sunset Combo -->
+                    <div class="option-row" data-key="combo">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/cards.svg" alt="" />
+                                <p>Sunset Combo</p>
+                            </div>
+                            <div class="option-value">
+                                <p>Oh yeah!</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+
+                    <div class="wrapper-people-group">
+                    <!-- People -->
+                    <div class="option-row" data-key="people">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/people.svg" alt="" />
+                                <p>People</p>
+                            </div>
+                            <div class="option-value">
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="price-influences"></div>
+                        <div class="dropdown-content"></div>
+                    </div>
+                    <!-- Group Type -->
+                    <div class="option-row" data-key="groupType">
+                        <div class="option-wrapper">
+                            <div class="option-subtitle">
+                                <img src="assets/icons/locked.svg" alt="" />
+                                <p>Group</p>
+                            </div>
+                            <div class="option-value">
+                                <p>Private</p>
+                            </div>
+                        </div>
+                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                        <div class="dropdown-content"></div>
+                    </div>
+                    </div>
+                    <!-- Final Price Row (added for live price update) -->
+                    <div class="option-row option-price" id="step1-price-row" style="margin-top: 0.5rem; cursor: default;">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Final Price</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="step1-price">€ 0.00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="continueBtn" style="margin-top: 1rem;" class="option-input">Continue</button>
+                </div>
+            </section>
+
+
+
+    </div>
+
+    <div id="step-2" style="display: none;">
+        <div class="booking-table">
+            <div class="split-summary">
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Tour looks amazing!</p>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Experience</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-experience">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Date</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-date">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-slot-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Slot</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-slot">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>People</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-people">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Group Type</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-groupType">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-combo-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Combo</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-combo">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-row option-price">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Final Price</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-price">€ 0.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Info</p>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Name <span class="required-star">*</span></p>
+                        </div>
+                        <input type="text" id="input-name" class="option-input" placeholder="Name" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Surname <span class="required-star">*</span></p>
+                        </div>
+                        <input type="text" id="input-surname" class="option-input" placeholder="Surname" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Email <span class="required-star">*</span></p>
+                        </div>
+                        <input type="email" id="input-email" class="option-input" placeholder="Email" />
+                        <div id="email-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Confirm Email <span class="required-star">*</span></p>
+                        </div>
+                        <input type="email" id="input-email-confirm" class="option-input" placeholder="Confirm Email" />
+                        <div id="confirm-email-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Phone <span class="required-star">*</span></p>
+                        </div>
+                        <div style="display: flex; gap: 0.5em; align-items: center;">
+                            <select id="input-phone-prefix" class="option-input" style="width: 8em;">
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+386">🇸🇮 +386</option>
+                                <option value="+385">🇭🇷 +385</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+36">🇭🇺 +36</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+353">🇮🇪 +353</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+7">🇷🇺 +7</option>
+                                <option value="+90">🇹🇷 +90</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+64">🇳🇿 +64</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+91">🇮🇳 +91</option>
+                            </select>
+                            <input type="tel" id="input-phone" class="option-input" placeholder="Phone Number" style="flex:1;" />
+                        </div>
+                        <div id="phone-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Notes</p>
+                        </div>
+                        <textarea id="input-notes" class="option-input" placeholder="Any notes..." rows="5"
+                            maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="buttons">
+            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Back</button>
+            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book your Experience</button>
+        </section>
+    </div>
+
+
+
+
+
+
 </body>
 
 </html>

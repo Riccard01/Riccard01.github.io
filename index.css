@@ -340,7 +340,11 @@ cursor: pointer;
 
 
 
-
+.details .wrapper img {
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: brightness(0) invert(1); /* rende bianca l'immagine */
+}
 
 
 
