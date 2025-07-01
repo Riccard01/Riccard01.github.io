@@ -28,6 +28,11 @@ body {
   display: none;
 }
 
+.booking-step.responsive {
+  display: flex;
+  flex-direction: column;
+}
+
 section.calendar-section {
   display: flex;
   align-items: center;
@@ -38,10 +43,6 @@ section.calendar-section {
   gap: 1rem;
 }
 
-.booking-step.responsive {
-  display: flex;
-  flex-direction: column;
-}
 
 .booking-table {
   display: flex;
@@ -123,6 +124,10 @@ section.calendar-section {
   cursor: pointer;
   margin-bottom: 0rem;
   padding: 0.625rem;
+  height: 3.1875rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
   width: 100%;
   border-radius: 0.4375rem;
