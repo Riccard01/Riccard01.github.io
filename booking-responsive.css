@@ -46,6 +46,8 @@ section.calendar-section {
 
 .booking-table {
   display: flex;
+  position: sticky;
+  bottom: 0;
   flex-direction: row;
   align-items: flex-start;
   gap: 0.9375rem;
