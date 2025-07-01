@@ -27,69 +27,65 @@
     </nav>
     <div id="step-1" class="booking-step">
         <section class="booking-table">
-            <section class="calendar-section">
-                <div class="section-heading">
-                    <p>Available dates</p>
-                </div>
-                <div id="calendar"></div>
-            </section>
             
-                <div class="section-heading">
-                    <div class="wrapper-customize">
-                        <img src="assets/icons/pencil.svg" alt=""><p>Customize your tour</p><p style="font-size: 0.75rem;; color: #04081B; font-weight: 600;">Adjust filters above to check for availability</p>
-                    </div>
-                    <div class="influences-wrapper">
-                        <img src="assets/icons/influences.svg" alt="" />
-                        <p>Influences the price</p>
-                    </div>
+            <div class="wrapper-main-subtitle">
+            <div class="section-heading">
+                <div class="wrapper-customize">
+                    <img src="assets/icons/pencil.svg" alt=""><p>Customize your tour</p>
                 </div>
-
-                <div class="options-wrapper" id="options-div">
-                    <!-- Experience -->
-                    <div class="option-row experience" data-key="experience">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <img src="assets/icons/cards.svg" alt="" />
-                                <p>Experience</p>
-                            </div>
-                            <div class="option-value">
-                                <p>The Rainbow Tour</p>
-                            </div>
+                <div class="influences-wrapper">
+                    <img src="assets/icons/influences.svg" alt="" />
+                    <p>Influences the price</p>
+                </div>
+            </div>
+                <p class="main-subtitle">Adjust the filters below to check for availability</p>
+            </div>
+            <div class="options-wrapper" id="options-div">
+                <!-- Experience -->
+                <div class="option-row experience" data-key="experience">
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="assets/icons/cards.svg" alt="" />
+                            <p>Experience</p>
                         </div>
-                        <div class="dropdown-content"></div>
-                    </div>
-
-                    <!-- Slot -->
-                    <div class="option-row" data-key="slot">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <img src="assets/icons/calendar-tick.svg" alt="" />
-                                <p>Slot</p>
-                            </div>
-                            <div class="option-value">
-                                <p>Full Day</p>
-                            </div>
+                        <div class="option-value">
+                            <p>The Rainbow Tour</p>
                         </div>
-                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
-                        <div class="dropdown-content"></div>
                     </div>
-
-                    <!-- Sunset Combo -->
-                    <div class="option-row" data-key="combo">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <img src="assets/icons/cards.svg" alt="" />
-                                <p>Sunset Combo</p>
-                            </div>
-                            <div class="option-value">
-                                <p>Oh yeah!</p>
-                            </div>
+                    <div class="dropdown-content"></div>
+                </div>
+                
+                <!-- Slot -->
+                <div class="option-row" data-key="slot">
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="assets/icons/calendar-tick.svg" alt="" />
+                            <p>Slot</p>
                         </div>
-                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
-                        <div class="dropdown-content"></div>
+                        <div class="option-value">
+                            <p>Full Day</p>
+                        </div>
                     </div>
-
-                    <div class="wrapper-people-group">
+                    <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                    <div class="dropdown-content"></div>
+                </div>
+                
+                <!-- Sunset Combo -->
+                <div class="option-row" data-key="combo">
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="assets/icons/cards.svg" alt="" />
+                            <p>Sunset Combo</p>
+                        </div>
+                        <div class="option-value">
+                            <p>Oh yeah!</p>
+                        </div>
+                    </div>
+                    <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                    <div class="dropdown-content"></div>
+                </div>
+                
+                <div class="wrapper-people-group">
                     <!-- People -->
                     <div class="option-row" data-key="people">
                         <div class="option-wrapper">
@@ -118,20 +114,26 @@
                         <img class="price-influences" src="assets/icons/influences.svg" alt="" />
                         <div class="dropdown-content"></div>
                     </div>
-                    </div>
-                    <button id="continueBtn" style="margin-top: 1rem;" class="option-input"><p id="step1-price">€ 0.00</p>Continue</button>
                 </div>
+            </div>
+            <section class="calendar-section">
+                <div class="section-heading">
+                    <p>Available dates</p>
+                </div>
+                <div id="calendar"></div>
+                <button id="continueBtn" style="margin-top: 1rem;" class="option-input"><p id="step1-price">€ 0.00</p>Continue</button>
             </section>
-
         </section>
-    </div>
+        
+    </section>
+</div>
 
-    <div id="step-2" style="display: none;">
-        <div class="booking-table">
-            <div class="split-summary">
-                <div class="options options-wrapper">
-                    <div class="section-heading">
-                        <p>Your Tour looks amazing!</p>
+<div id="step-2" style="display: none;">
+    <div class="booking-table">
+        <div class="split-summary">
+            <div class="options options-wrapper">
+                <div class="section-heading">
+                    <p>Your Tour looks amazing!</p>
                     </div>
 
                     <div class="option-row locked">

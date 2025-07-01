@@ -380,10 +380,6 @@ font-weight: 600;
 line-height: normal;
 }
 
-.experience .option-subtitle img {
-filter: brightness(0) saturate(100%) invert(47%) sepia(84%) saturate(2203%) hue-rotate(198deg) brightness(100%) contrast(104%);
-  /* trasforma l'immagine in bianco */
-}
 
 
 .experience .option-value {
@@ -473,6 +469,36 @@ button:disabled{
   align-items: center;
   width: 100%;
   gap: 0.625rem;
+}
+
+.section-heading .wrapper-customize p {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+section img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.main-subtitle {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0rem;
+}
+
+.wrapper-main-subtitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0rem;
 }
 
 .required-star {
