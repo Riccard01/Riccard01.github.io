@@ -48,6 +48,10 @@
         display: none;
     }
 
+    .copy-wrapper {
+        position: absolute;
+    }
+
     .copy-wrapper .wrapper p {
         text-wrap: wrap;
     }
