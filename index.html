@@ -34,6 +34,7 @@
     <div class="cards-container">
       <div class="the-rainbow-tour-card" onclick="window.location.href='booking.html'">
         <div class="card">
+          <video src="assets/videos/rainbow.mp4"></video>
           <div class="details">
             <div class="wrapper">
               <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -295,6 +296,121 @@
     </footer>
 
 
+
+
+
+<script>
+  document.querySelectorAll(".card video").forEach(video => {
+    const card = video.closest(".card");
+
+    // Salva il background originale
+    const originalBackground = card.style.backgroundImage || window.getComputedStyle(card).backgroundImage;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    card.addEventListener("mouseenter", () => {
+      video.currentTime = 0;
+      video.style.opacity = "1";
+      video.play();
+
+      // Nascondi background (immagine)
+      card.style.backgroundImage = "none";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      video.pause();
+      video.currentTime = 0;
+      video.style.opacity = "0";
+
+      // Ripristina background
+      card.style.backgroundImage = originalBackground;
+    });
+  });
+</script>
+
+
+<script>
+  let observer = null;
+
+  const setupObserver = () => {
+    const options = {
+      root: document.querySelector('.cards-container'),
+      threshold: 1.0
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+        const video = card.querySelector('video');
+
+        if (!video) return;
+
+        // Salva il background una volta
+        if (!card.dataset.bg) {
+          card.dataset.bg = getComputedStyle(card).backgroundImage;
+        }
+
+        if (entry.isIntersecting) {
+          card.style.backgroundImage = 'none';
+          video.muted = true;
+          video.playsInline = true;
+          video.style.opacity = '1';
+          video.currentTime = 0;
+
+          if (video.paused) {
+            video.play().catch(() => {});
+          }
+        } else {
+          video.pause();
+          video.currentTime = 0;
+          video.style.opacity = '0';
+          card.style.backgroundImage = card.dataset.bg;
+        }
+      });
+    }, options);
+
+    // Osserva tutte le card scrollabili
+    document.querySelectorAll('.cards-container .card').forEach(card => {
+      observer.observe(card);
+    });
+  };
+
+  const stopObserver = () => {
+    if (!observer) return;
+
+    observer.disconnect();
+
+    document.querySelectorAll('.cards-container .card').forEach(card => {
+      const video = card.querySelector('video');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+        video.style.opacity = '0';
+      }
+      if (card.dataset.bg) {
+        card.style.backgroundImage = card.dataset.bg;
+      }
+    });
+
+    observer = null;
+  };
+
+  // Iniziale: attiva solo se siamo su mobile
+  const mql = window.matchMedia("(max-width: 900px)");
+  if (mql.matches) {
+    setupObserver();
+  }
+
+  // Quando cambia dimensione (es. ridimensioni finestra)
+  mql.addEventListener("change", e => {
+    if (e.matches) {
+      setupObserver();  // entra in mobile
+    } else {
+      stopObserver();   // esce da mobile
+    }
+  });
+</script>
 
 
 
