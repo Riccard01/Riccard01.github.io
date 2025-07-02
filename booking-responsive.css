@@ -236,10 +236,6 @@ line-height: normal;
   float: right;
 }
 
-.option-row.dropdown-open .option-subtitle img {
-  transform: rotate(180deg);
-}
-
 .white p,
 .white p.secondary {
   color: #FFF;

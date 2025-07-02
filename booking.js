@@ -7,7 +7,7 @@ const CONSTANTS = {
   },
   texts: {
     people: "People",
-    peopleMax: (max) => `People (Max ${max} left for this date)`,
+    peopleMax: (max) => `People`,
     slotTimes: {
       "Tour Slot": "9am - 1.30pm",
       "Full Day": "9am - 6pm",
@@ -180,6 +180,7 @@ $(document).ready(function () {
     const $groupRow = $('.option-row[data-key="groupType"]');
     const $groupText = $groupRow.find('.option-value p').first();
     const $groupDD = $groupRow.find('.dropdown-content').empty();
+    const $groupIcon = $groupRow.find('.option-subtitle img');
 
     if (isGourmet) {
       // If sunset slot is not booked or reserved, allow both Private and Public
@@ -206,6 +207,16 @@ $(document).ready(function () {
       selections.groupType = "Private";
       $groupText.text("Private");
       $groupRow.addClass('locked');
+    }
+    // Cambia icona lock/unlock in base al tipo di gruppo
+    if ($groupIcon.length) {
+      if (selections.groupType === "Private") {
+        $groupIcon.attr('src', 'assets/icons/locked.svg');
+        $groupIcon.attr('alt', 'Locked');
+      } else {
+        $groupIcon.attr('src', 'assets/icons/unlocked.svg');
+        $groupIcon.attr('alt', 'Unlocked');
+      }
     }
     prevExperience = selections.experience;
 
