@@ -1,4 +1,4 @@
-@media screen (hover: none) and (max-width: 900px) {
+@media screen and (max-width: 900px) {
 
     html,
     body {
@@ -104,7 +104,7 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding-top: 1.5rem;
-        padding-left: 1rem;
+        padding-left: 1.5rem;
         /* spazio sopra e sotto */
     }
 
