@@ -76,6 +76,11 @@ $(document).ready(function () {
     $('#loading-overlay').fadeOut(150);
   }
 
+  function showFakeLoadingOverlay() {
+    showLoadingOverlay();
+    setTimeout(hideLoadingOverlay, 100);
+  }
+
   document.getElementById('continueBtn').disabled = true;
   // Show loading overlay
   showLoadingOverlay();
@@ -103,11 +108,11 @@ $(document).ready(function () {
         // Ensure continue button is disabled if date is cleared
         document.getElementById('continueBtn').disabled = !dateStr;
       },
-      onMonthChange: function(selectedDates, dateStr, instance) {
+      onMonthChange: function (selectedDates, dateStr, instance) {
         // Track last viewed month on month navigation
         lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
       },
-      onYearChange: function(selectedDates, dateStr, instance) {
+      onYearChange: function (selectedDates, dateStr, instance) {
         lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
       }
     });
@@ -156,6 +161,7 @@ $(document).ready(function () {
 
   // Handle dropdown selection
   $('.dropdown-content').on('click', '.dropdown-item', function (e) {
+    showFakeLoadingOverlay(); // Show fake loading on filter change
     e.stopPropagation();
     const $item = $(this);
     const key = $item.closest('.option-row').data('key');
