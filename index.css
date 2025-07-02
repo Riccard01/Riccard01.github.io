@@ -162,13 +162,14 @@ section.heading .wrapper img {
   object-fit: cover;
   z-index: 0;
   border-radius: 0.894rem;
-    opacity: 0;
+  opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none; /* evita interferenze col mouse */
 }
 
 .the-rainbow-tour-card .card {
   display: flex;
+  position: relative;
   position: relative;
   width: 20.42981rem;
   height: 30.66388rem;
@@ -236,18 +237,34 @@ padding-top: 1.5rem;
   align-self: stretch;
 }
 
-.the-rainbow-tour-card#barca-terapia .card{
-  background-image: url('assets/images/bimbi.jpg');
-  background-position: left center;
+.the-rainbow-tour-card#barca-terapia .card {
+  background-image: url('assets/images/barca-terapia.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 .the-wild-tour-card#blow-me-away .card{
   background-image: url('assets/images/fireworks.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 .gourmet-sunset-cruise-card#wicked-games .card{
   background-image: url('assets/images/romantic.jpg');
-  background-position: left center;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 
