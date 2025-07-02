@@ -389,8 +389,7 @@
 
   const setupObserver = () => {
     const options = {
-      root: document.querySelector('.cards-container'),
-      threshold: 1.0
+      threshold: 1.0 // Cambia in 0.5 o 0.25 se vuoi che parta prima
     };
 
     observer = new IntersectionObserver((entries) => {
@@ -424,8 +423,8 @@
       });
     }, options);
 
-    // Osserva tutte le card scrollabili
-    document.querySelectorAll('.cards-container .card').forEach(card => {
+    // Osserva tutte le .card della pagina
+    document.querySelectorAll('.card').forEach(card => {
       observer.observe(card);
     });
   };
@@ -435,7 +434,7 @@
 
     observer.disconnect();
 
-    document.querySelectorAll('.cards-container .card').forEach(card => {
+    document.querySelectorAll('.card').forEach(card => {
       const video = card.querySelector('video');
       if (video) {
         video.pause();
@@ -450,13 +449,13 @@
     observer = null;
   };
 
-  // Iniziale: attiva solo se siamo su mobile
+  // Attivazione iniziale solo su mobile
   const mql = window.matchMedia("(max-width: 900px)");
   if (mql.matches) {
     setupObserver();
   }
 
-  // Quando cambia dimensione (es. ridimensioni finestra)
+  // Riascolta i cambi di dimensione schermo
   mql.addEventListener("change", e => {
     if (e.matches) {
       setupObserver();  // entra in mobile
@@ -465,6 +464,7 @@
     }
   });
 </script>
+
 
 
 
