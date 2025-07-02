@@ -124,6 +124,9 @@ section.heading .wrapper img {
   display: flex;
   max-width: 63.78938rem;
   padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   align-items: flex-start;
   gap: 1.25rem;
   align-self: stretch;
@@ -162,13 +165,14 @@ section.heading .wrapper img {
   object-fit: cover;
   z-index: 0;
   border-radius: 0.894rem;
-    opacity: 0;
+  opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none; /* evita interferenze col mouse */
 }
 
 .the-rainbow-tour-card .card {
   display: flex;
+  position: relative;
   position: relative;
   width: 20.42981rem;
   height: 30.66388rem;
@@ -186,9 +190,9 @@ section.heading .wrapper img {
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
-  z-index: 1;
+border-radius: 0.894rem;
+background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  z-index: 2;
 }
 
 a {
@@ -236,18 +240,34 @@ padding-top: 1.5rem;
   align-self: stretch;
 }
 
-.the-rainbow-tour-card#barca-terapia .card{
-  background-image: url('assets/images/bimbi.jpg');
-  background-position: left center;
+.the-rainbow-tour-card#barca-terapia .card {
+  background-image: url('assets/images/barca-terapia.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 .the-wild-tour-card#blow-me-away .card{
   background-image: url('assets/images/fireworks.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 .gourmet-sunset-cruise-card#wicked-games .card{
   background-image: url('assets/images/romantic.jpg');
-  background-position: left center;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
 }
 
 
@@ -270,9 +290,9 @@ padding-top: 1.5rem;
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
-  z-index: 1;
+border-radius: 0.894rem;
+background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  z-index: 2;
 }
 
 .the-wild-tour-card .card > * {
@@ -301,9 +321,9 @@ padding-top: 1.5rem;
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
-  background: linear-gradient(180deg, rgba(4, 8, 27, 0.00) 0%, rgba(4, 8, 27, 0.00) 78.48%, rgba(4, 8, 27, 0.30) 100%);
-  z-index: 1;
+border-radius: 0.894rem;
+background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  z-index: 2;
 }
 
 .gourmet-sunset-cruise-card .card > * {
@@ -444,6 +464,7 @@ cursor: pointer;
   width: 100%;
   height: 100%;
   padding: 1.3rem;
+  z-index: 3;
 }
 
 .the-rainbow-tour-card .copy-wrapper h1,
@@ -699,6 +720,7 @@ footer .wrapper p:first-of-type {
   font-size: 1.125rem;
   font-weight: 700;
   margin: 0;
+  text-align: center;
   padding: 0;
 }
 
