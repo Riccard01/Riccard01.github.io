@@ -52,31 +52,72 @@ let fp; // flatpickr instance
 let isSettingDate = false; // Add this at the top, after let fp;
 
 $(document).ready(function () {
+  // --- Add loading overlay HTML and CSS ---
+  if ($('#loading-overlay').length === 0) {
+    $('body').append(`
+      <div id="loading-overlay" style="display:none;position:fixed;z-index:99999;top:0;left:0;width:100vw;height:100vh;background:rgba(42,93,143,0.18);backdrop-filter:blur(1.5px);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;">
+          <div class="spinner" style="margin-bottom:18px;width:48px;height:48px;border:6px solid #eaf4fb;border-top:6px solid #2a5d8f;border-radius:50%;animation:spin 1s linear infinite;"></div>
+          <div style="color:#2a5d8f;font-size:1.25em;font-weight:600;letter-spacing:0.5px;">${CONSTANTS.texts.loading}</div>
+        </div>
+      </div>
+    `);
+    // Spinner animation CSS
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
+    document.head.appendChild(style);
+  }
+
+  function showLoadingOverlay() {
+    $('#loading-overlay').fadeIn(150);
+  }
+  function hideLoadingOverlay() {
+    $('#loading-overlay').fadeOut(150);
+  }
+
   document.getElementById('continueBtn').disabled = true;
-  // Show loading in calendar section
-  $('#calendar').html(`<div id="calendar-loading" style="text-align:center;padding:0.6em;">${CONSTANTS.texts.loading}</div>`);
+  // Show loading overlay
+  showLoadingOverlay();
   $('#options-div').css("display", "none"); // Hide options until loaded
   fetchAvailability().then(() => {
-    $('#calendar-loading').remove();
     $('#options-div').css("display", "block");
     populateDropdown("experience");
+    // Ensure the visible value matches the selection from the URL
+    $(".option-row[data-key='experience'] .option-value p").first().text(selections.experience);
     updateUI();
+    // Initialize flatpickr only after data is loaded and calendar is ready
+    fp = flatpickr("#calendar-input", {
+      inline: true,
+      appendTo: document.getElementById('calendar'),
+      minDate: "today",
+      dateFormat: "Y-m-d",
+      onChange: function (selectedDates, dateStr) {
+        if (isSettingDate) return; // Prevent recursion
+        selections.date = dateStr;
+        updateUI(); // Update UI when calendar changes
+        // Ensure continue button is disabled if date is cleared
+        document.getElementById('continueBtn').disabled = !dateStr;
+      }
+    });
     updateCalendar();
+    updateUI();
+    // Hide loading overlay
+    hideLoadingOverlay();
   });
 
-  // Initialize flatpickr
-  fp = flatpickr("#calendar", {
-    inline: true,
-    minDate: "today",
-    dateFormat: "Y-m-d",
-    onChange: function (selectedDates, dateStr) {
-      if (isSettingDate) return; // Prevent recursion
-      selections.date = dateStr;
-      updateUI(); // Update UI when calendar changes
-      // Ensure continue button is disabled if date is cleared
-      document.getElementById('continueBtn').disabled = !dateStr;
+  // --- Set experience from URL if present ---
+  function getExperienceFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const exp = (params.get('experience') || '').toLowerCase();
+    if (exp === 'wild') return CONSTANTS.tourOptions.experience[0];
+    if (exp === 'rainbow') {
+      selections.combo = CONSTANTS.tourOptions.combo[1];
+      return CONSTANTS.tourOptions.experience[1];
     }
-  });
+    if (exp === 'sunset') return CONSTANTS.tourOptions.experience[2];
+    return CONSTANTS.tourOptions.experience[0]; // default
+  }
+  selections.experience = getExperienceFromURL();
 
   $('#continueBtn').on('click', function () {
     $('#step-1').hide();
@@ -129,6 +170,16 @@ $(document).ready(function () {
     updateCalendar();
   });
 
+  // Remove ?experience from URL if user changes experience manually
+  $(".option-row[data-key='experience'] .dropdown-content").on('click', '.dropdown-item', function () {
+    selections.combo = CONSTANTS.tourOptions.combo[1];
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('experience')) {
+      url.searchParams.delete('experience');
+      history.replaceState(null, '', url.pathname + url.search + url.hash);
+    }
+  });
+
   // Close dropdowns when clicking outside
   $(document).on('click', () => $('.option-row').removeClass('dropdown-open'));
 
@@ -148,19 +199,8 @@ $(document).ready(function () {
 
   let prevExperience = selections.experience;
   function updateUI() {
+    console.log(selections)
     const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2];
-
-    // Ensure a valid date is selected for the current experience
-    const availableDates = getAvailableDatesForSelection();
-    if (!selections.date || !availableDates.includes(selections.date)) {
-      const newDate = availableDates[0] || "";
-      if (fp && selections.date !== newDate) {
-        isSettingDate = true;
-        selections.date = newDate;
-        fp.setDate(selections.date, true); // update calendar UI
-        isSettingDate = false;
-      }
-    }
 
     // Get slot availability for the selected date
     let wild = {}, rainbow = {}, sunset = {};
@@ -183,26 +223,16 @@ $(document).ready(function () {
     const $groupIcon = $groupRow.find('.option-subtitle img');
 
     if (isGourmet) {
-      // If sunset slot is not booked or reserved, allow both Private and Public
-      if (sunset && (sunset.booked === 0) && !sunset.reserved) {
-        $groupRow.removeClass('locked');
-        $groupDD.empty();
-        CONSTANTS.tourOptions.groupType.forEach(opt => {
-          $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
-        });
-        // Always default to Public when switching to Gourmet
-        if (prevExperience !== CONSTANTS.tourOptions.experience[2] || !CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
-          selections.groupType = "Public";
-        }
-        $groupText.text(selections.groupType);
-      } else {
-        // If sunset slot is booked or reserved, only Public is allowed
+      $groupRow.removeClass('locked');
+      $groupDD.empty();
+      CONSTANTS.tourOptions.groupType.forEach(opt => {
+        $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
+      });
+      // Always default to Public when switching to Gourmet
+      if (prevExperience !== CONSTANTS.tourOptions.experience[2] || !CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
         selections.groupType = "Public";
-        $groupText.text("Public");
-        $groupRow.addClass('locked');
-        $groupDD.empty();
-        $groupDD.append('<div class="dropdown-item disabled">Public</div>');
       }
+      $groupText.text(selections.groupType);
     } else {
       selections.groupType = "Private";
       $groupText.text("Private");
@@ -229,36 +259,19 @@ $(document).ready(function () {
 
     if (!isGourmet) {
       // Lock slot dropdown if Rainbow Tour is selected
-      if (selections.experience === CONSTANTS.tourOptions.experience[1]) { // Rainbow Tour
+      if (selections.experience === CONSTANTS.tourOptions.experience[1] || selections.experience === CONSTANTS.tourOptions.experience[2]) { // Rainbow Tour
         selections.slot = CONSTANTS.tourOptions.slot[0];
         $slotRow.find('.option-value p').first().text(`${CONSTANTS.tourOptions.slot[0]} (${CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]]})`);
         $slotRow.addClass('locked');
         $slotDD.append(`<div class="dropdown-item disabled">${CONSTANTS.tourOptions.slot[0]} (${CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]]})</div>`);
-      } else if ((wild && wild.reserved) || (rainbow && rainbow.reserved)) {
-        let slotText = CONSTANTS.tourOptions.slot[0];
-        let slotTime = '';
-        if (selections.experience === CONSTANTS.tourOptions.experience[0]) slotTime = CONSTANTS.texts.slotTimes["Tour Slot"];
-        if (selections.experience === CONSTANTS.tourOptions.experience[1]) slotTime = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]];
-        $slotRow.find('.option-value p').first().text(`${slotText} (${slotTime})`);
-        $slotRow.addClass('locked');
-        $slotDD.append(`<div class="dropdown-item disabled">${slotText} (${slotTime})</div>`);
-        selections.slot = CONSTANTS.tourOptions.slot[0];
       } else {
         // Fix: Determine slot availability for Wild Tour
         let slotOptions = [];
         if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
-          // Tour Slot (wild only)
-          const wildAvailable = wild && !wild.reserved && (wild.max - wild.booked) >= selections.people;
-          if (wildAvailable) slotOptions.push({ label: CONSTANTS.tourOptions.slot[0], time: CONSTANTS.texts.slotTimes["Tour Slot"] });
-          // Full Day (wild + rainbow)
-          const fullDayAvailable = wild && rainbow && !wild.reserved && !rainbow.reserved && (wild.max - wild.booked) >= selections.people && (rainbow.max - rainbow.booked) >= selections.people;
-          if (fullDayAvailable) slotOptions.push({ label: CONSTANTS.tourOptions.slot[1], time: CONSTANTS.texts.slotTimes["Full Day"] });
+          slotOptions.push({ label: CONSTANTS.tourOptions.slot[0], time: CONSTANTS.texts.slotTimes["Tour Slot"] });
+          slotOptions.push({ label: CONSTANTS.tourOptions.slot[1], time: CONSTANTS.texts.slotTimes["Full Day"] });
         } else {
-          // For other experiences, fallback to previous logic
-          const relaxAvailable = wild && !(wild.reserved && wild.booked >= (wild.max || 0));
-          const fullDayAvailable = relaxAvailable && rainbow && !(rainbow.reserved && rainbow.booked >= (rainbow.max || 0));
-          if (relaxAvailable) slotOptions.push({ label: CONSTANTS.tourOptions.slot[0], time: CONSTANTS.texts.slotTimes["Tour Slot"] });
-          if (fullDayAvailable) slotOptions.push({ label: CONSTANTS.tourOptions.slot[1], time: CONSTANTS.texts.slotTimes["Full Day"] });
+          slotOptions.push({ label: CONSTANTS.tourOptions.slot[0], time: CONSTANTS.texts.slotTimes["Tour Slot"] });
         }
 
         slotOptions.forEach(opt => {
@@ -339,7 +352,7 @@ $(document).ready(function () {
 
     let maxPeople = 6;
     if (isGourmet) {
-      maxPeople = selections.groupType === CONSTANTS.tourOptions.groupType[1] && sunset ? ((sunset.max || 0) - (sunset.booked || 0)) : 8;
+      maxPeople = 8;
       $peopleSubtitle.text(CONSTANTS.texts.peopleMax(maxPeople));
     } else {
       $peopleSubtitle.text(CONSTANTS.texts.people);
@@ -433,13 +446,10 @@ $(document).ready(function () {
   }
 
   function updateCalendar() {
-    if (!fp) return;
+    if (!fp || typeof fp.set !== 'function') return;
     const availableDates = getAvailableDatesForSelection();
     fp.set('enable', availableDates);
   }
-
-  // Initial calendar update
-  updateCalendar();
 
   // --- Validation for Book Button ---
   function validateBookingForm() {
@@ -585,10 +595,21 @@ function sendBookingToSpreadsheet() {
   let noteField = notes;
   noteField += `\n\n---\nBooking summary HTML below:\n` + summaryHtml;
 
+  let tourToPass;
+  if (selections.combo === CONSTANTS.tourOptions.combo[0]) { // Oh yeah! (extended to midnight)
+    if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
+      tourToPass = "Luxury Day";
+    } else { // Rainbow Tour
+      tourToPass = "Sunset Full Day";
+    }
+  } else {
+    tourToPass = selections.experience;
+  }
+
   // Prepare booking data for spreadsheet (matching Apps Script expectations)
   const bookingData = {
     data: selections.date, // date string
-    tour: selections.experience, // tour name
+    tour: tourToPass, // tour name
     nome: name + (surname ? (" " + surname) : ""),
     email: email,
     persone: selections.people,
@@ -623,7 +644,7 @@ function showBookingSummaryModal(html) {
     '<button id="close-booking-summary" style="position:absolute;top:12px;right:18px;font-size:1.5em;background:none;border:none;cursor:pointer;">&times;</button>' +
     html + '</div>');
   $modal.fadeIn(200);
-  $('#close-booking-summary').on('click', function() {
+  $('#close-booking-summary').on('click', function () {
     $modal.fadeOut(200);
   });
 }
