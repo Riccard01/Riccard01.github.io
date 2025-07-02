@@ -89,8 +89,8 @@
         padding-top: 1.5rem;
     }
     .cards-container .card {
-        width: 17.06263rem;
-        height: 25.60975rem;
+        width: 20.4298rem;
+        height: 30.6639rem;
         flex-shrink: 0;
     }
 
@@ -141,12 +141,6 @@
     .card .details {
         width: 100%;
     }
-
-
-.card {
-  width: auto;
-  height: auto;
-}
 
 
 footer {

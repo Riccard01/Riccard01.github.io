@@ -124,6 +124,7 @@ section.heading .wrapper img {
   display: flex;
   max-width: 63.78938rem;
   padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   align-items: flex-start;
   gap: 1.25rem;
   align-self: stretch;
