@@ -50,6 +50,7 @@ let selections = {
 
 let fp; // flatpickr instance
 let isSettingDate = false; // Add this at the top, after let fp;
+let lastViewedMonth = null; // Track the last viewed month in flatpickr
 
 $(document).ready(function () {
   // --- Add loading overlay HTML and CSS ---
@@ -94,9 +95,20 @@ $(document).ready(function () {
       onChange: function (selectedDates, dateStr) {
         if (isSettingDate) return; // Prevent recursion
         selections.date = dateStr;
+        // Track last viewed month if a date is selected
+        if (selectedDates && selectedDates.length > 0) {
+          lastViewedMonth = new Date(selectedDates[0].getFullYear(), selectedDates[0].getMonth(), 1);
+        }
         updateUI(); // Update UI when calendar changes
         // Ensure continue button is disabled if date is cleared
         document.getElementById('continueBtn').disabled = !dateStr;
+      },
+      onMonthChange: function(selectedDates, dateStr, instance) {
+        // Track last viewed month on month navigation
+        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
+      },
+      onYearChange: function(selectedDates, dateStr, instance) {
+        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
       }
     });
     updateCalendar();
@@ -483,6 +495,10 @@ $(document).ready(function () {
     if (!fp || typeof fp.set !== 'function') return;
     const availableDates = getAvailableDatesForSelection();
     fp.set('enable', availableDates);
+    // If date is cleared, keep calendar on last viewed month
+    if (!selections.date && lastViewedMonth) {
+      fp.jumpToDate(lastViewedMonth, true);
+    }
   }
 
   // --- Validation for Book Button ---
