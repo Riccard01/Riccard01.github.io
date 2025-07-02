@@ -411,6 +411,40 @@ $(document).ready(function () {
     const { experience, slot, combo, people, groupType } = selections;
     if (!experience) return [];
     let availableDates = [];
+    // Special logic for Gourmet Sunset Cruise (sunset) with Public group
+    if (
+      experience === "Gourmet Sunset Cruise" &&
+      groupType === "Public"
+    ) {
+      // Month-by-month logic
+      Object.entries(availabilityByMonth).forEach(([month, days]) => {
+        let preferredDates = [];
+        let fallbackDates = [];
+        Object.entries(days).forEach(([day, slots]) => {
+          const sunset = slots.sunset || {};
+          // Preferred: already booked, not reserved, enough spots left
+          if (
+            !sunset.reserved &&
+            sunset.booked > 0 &&
+            (sunset.max - sunset.booked) >= people
+          ) {
+            preferredDates.push(`${month}-${day.padStart(2, "0")}`);
+          } else if (
+            !sunset.reserved &&
+            sunset.booked === 0
+          ) {
+            // Fallback: not reserved, not booked
+            fallbackDates.push(`${month}-${day.padStart(2, "0")}`);
+          }
+        });
+        if (preferredDates.length > 0) {
+          availableDates.push(...preferredDates);
+        } else {
+          availableDates.push(...fallbackDates);
+        }
+      });
+      return availableDates;
+    }
     Object.entries(availabilityByMonth).forEach(([month, days]) => {
       Object.entries(days).forEach(([day, slots]) => {
         // Readable slot access
