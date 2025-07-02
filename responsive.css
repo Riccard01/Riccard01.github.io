@@ -1,4 +1,4 @@
-@media screen and (max-width: 900px) {
+@media screen (hover: none) and (max-width: 900px) {
 
     html,
     body {
