@@ -705,14 +705,14 @@ function sendBookingToSpreadsheet() {
   noteField += `Booking summary HTML: ` + summaryHtml;
 
   let tourToPass;
-  if (selections.combo === CONSTANTS.tourOptions.combo[0]) { // Oh yeah! (extended to midnight)
-    if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
-      tourToPass = "Luxury Day";
-    } else { // Rainbow Tour
-      tourToPass = "Sunset Full Day";
-    }
+  if (slotsUsed.length === 3 && slotsUsed[0] === 1 && slotsUsed[1] === 2 && slotsUsed[2] === 3) {
+    tourToPass = "Luxury Day";
+  } else if (slotsUsed.length === 2 && slotsUsed[0] === 2 && slotsUsed[1] === 3) {
+    tourToPass = "Sunset Day";
+  } else if (slotsUsed.length === 2 && slotsUsed[0] === 1 && slotsUsed[1] === 2) {
+    tourToPass = "Full Day";
   } else {
-    tourToPass = selections.experience;
+    tourToPass = selections.experience; // Default to experience name
   }
 
   // Prepare booking data for spreadsheet (matching Apps Script expectations)
@@ -728,7 +728,7 @@ function sendBookingToSpreadsheet() {
 
   // Send booking data to proxy endpoint
   $.ajax({
-    url: "https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec",
+    url: "http://localhost:3001/api/proxy",
     method: "POST",
     data: bookingData,
     success: function (response) {
