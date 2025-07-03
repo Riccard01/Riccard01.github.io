@@ -40,6 +40,8 @@ function fetchAvailability() {
   });
 }
 
+let slotsUsed = [];
+
 let selections = {
   experience: "",
   slot: "",
@@ -406,7 +408,6 @@ $(document).ready(function () {
     }
 
     // Slot usage
-    let slotsUsed = [];
     if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
       slotsUsed = [1];
       if (selections.slot === CONSTANTS.tourOptions.slot[1]) { // Full Day
@@ -478,33 +479,34 @@ $(document).ready(function () {
       });
       return availableDates;
     }
+    // --- NEW LOGIC: Gourmet Sunset Cruise, Private ---
+    if (
+      experience === CONSTANTS.tourOptions.experience[2] &&
+      groupType === "Private"
+    ) {
+      Object.entries(availabilityByMonth).forEach(([month, days]) => {
+        Object.entries(days).forEach(([day, slots]) => {
+          const sunset = slots.sunset || {};
+          // Exclude if already booked (regardless of reserved)
+          if (sunset.booked > 0) return;
+          if (sunset.reserved) return;
+          if ((sunset.max - sunset.booked) < people) return;
+          availableDates.push(`${month}-${day.padStart(2, "0")}`);
+        });
+      });
+      return availableDates;
+    }
     Object.entries(availabilityByMonth).forEach(([month, days]) => {
       Object.entries(days).forEach(([day, slots]) => {
-        // Readable slot access
-        const wild = slots.wild || {};
-        const rainbow = slots.rainbow || {};
-        const sunset = slots.sunset || {};
         let valid = true;
-        // Experience logic
-        if (experience === "Wild Tour") {
-          // Full Day uses both wild and rainbow
-          if (slot === "Full Day") {
-            if (wild.reserved || rainbow.reserved) valid = false;
-            if ((wild.max - wild.booked) < people || (rainbow.max - rainbow.booked) < people) valid = false;
-          } else {
-            if (wild.reserved) valid = false;
-            if ((wild.max - wild.booked) < people) valid = false;
-          }
-          // Combo logic: if sunset is reserved, combo cannot be done
-          if (combo === "Oh yeah! (extended to midnight)" && sunset.reserved) valid = false;
-        } else if (experience === "Rainbow Tour") {
-          if (rainbow.reserved) valid = false;
-          if ((rainbow.max - rainbow.booked) < people) valid = false;
-          // Combo logic: if sunset is reserved, combo cannot be done
-          if (combo === "Oh yeah! (extended to midnight)" && sunset.reserved) valid = false;
-        } else if (experience === "Gourmet Sunset Cruise") {
-          if (sunset.reserved) valid = false;
-          if ((sunset.max - sunset.booked) < people) valid = false;
+        for (const slotNum of slotsUsed) {
+          let slotObj;
+          if (slotNum === 1) slotObj = slots.wild || {};
+          else if (slotNum === 2) slotObj = slots.rainbow || {};
+          else if (slotNum === 3) slotObj = slots.sunset || {};
+          if (slotObj.reserved) { valid = false; break; }
+          if (slotObj.booked > 0) { valid = false; break; }
+          if ((slotObj.max - slotObj.booked) < people) { valid = false; break; }
         }
         if (valid) availableDates.push(`${month}-${day.padStart(2, "0")}`);
       });
@@ -539,8 +541,8 @@ $(document).ready(function () {
             eventDates.push(...fallbackDates);
           }
         });
-      } else {
-        // Private: no icon
+      } else if (selections.groupType === "Private") {
+        // --- NEW LOGIC: Private, do not show icon for booked or reserved ---
         eventDates = [];
       }
     }
@@ -700,7 +702,7 @@ function sendBookingToSpreadsheet() {
 
   // Compose the note: user notes + HTML summary (or link)
   let noteField = notes;
-  noteField += `\n\n---\nBooking summary HTML below:\n` + summaryHtml;
+  noteField += `Booking summary HTML: ` + summaryHtml;
 
   let tourToPass;
   if (selections.combo === CONSTANTS.tourOptions.combo[0]) { // Oh yeah! (extended to midnight)
@@ -925,5 +927,5 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
     </body>
     </html>
   `;
-  return html;
+  return html.replace(/\n/g, "");
 }
