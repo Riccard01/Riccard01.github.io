@@ -29,6 +29,7 @@ const CONSTANTS = {
 
 // Example: availabilityByMonth[month][day][slot]
 let availabilityByMonth = {}; // Will be filled from Google Sheets
+let eventDates = [];
 
 function fetchAvailability() {
   // Replace with your actual web app URL
@@ -91,6 +92,8 @@ $(document).ready(function () {
     // Ensure the visible value matches the selection from the URL
     $(".option-row[data-key='experience'] .option-value p").first().text(selections.experience);
     updateUI();
+    // Set eventDates for sunset logic
+    updateEventDates();
     // Initialize flatpickr only after data is loaded and calendar is ready
     fp = flatpickr("#calendar-input", {
       inline: true,
@@ -114,6 +117,18 @@ $(document).ready(function () {
       },
       onYearChange: function (selectedDates, dateStr, instance) {
         lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
+      }, onDayCreate: function (dObj, dStr, fp, dayElem) {
+        const date = dayElem.dateObj;
+        // Subtract one day I DON'T KNOW WHY
+        const prevDate = new Date(date);
+        prevDate.setDate(prevDate.getDate() + 1);
+        const yyyyMMdd = prevDate.toISOString().split("T")[0];
+        if (eventDates.includes(yyyyMMdd)) {
+          const icon = document.createElement("span");
+          icon.classList.add("event-icon");
+          icon.innerHTML = `<img src="assets/icons/locked.svg" alt="" />`;
+          dayElem.appendChild(icon);
+        }
       }
     });
     updateCalendar();
@@ -497,8 +512,44 @@ $(document).ready(function () {
     return availableDates;
   }
 
+  function updateEventDates() {
+    eventDates = [];
+    if (selections.experience === CONSTANTS.tourOptions.experience[2]) { // Gourmet Sunset Cruise
+      if (selections.groupType === "Public") {
+        // For each month, if there are preferred dates, eventDates = fallback dates (not reserved, not booked)
+        Object.entries(availabilityByMonth).forEach(([month, days]) => {
+          let preferredDates = [];
+          let fallbackDates = [];
+          Object.entries(days).forEach(([day, slots]) => {
+            const sunset = slots.sunset || {};
+            if (
+              !sunset.reserved &&
+              sunset.booked > 0 &&
+              (sunset.max - sunset.booked) >= selections.people
+            ) {
+              preferredDates.push(`${month}-${day.padStart(2, "0")}`);
+            } else if (
+              !sunset.reserved &&
+              sunset.booked === 0
+            ) {
+              fallbackDates.push(`${month}-${day.padStart(2, "0")}`);
+            }
+          });
+          if (preferredDates.length > 0) {
+            eventDates.push(...fallbackDates);
+          }
+        });
+      } else {
+        // Private: no icon
+        eventDates = [];
+      }
+    }
+    console.log("Event dates updated:", eventDates);
+  }
+
   function updateCalendar() {
     if (!fp || typeof fp.set !== 'function') return;
+    updateEventDates();
     const availableDates = getAvailableDatesForSelection();
     fp.set('enable', availableDates);
     // If date is cleared, keep calendar on last viewed month

@@ -20,11 +20,12 @@
 .flatpickr-day {
   border-radius: 0.5rem;
   transition: background 0.2s;
+  position: relative;
 }
 
-.flatpickr-day.disabled {
+.flatpickr-disabled {
   background: #f0f0f0;
-  color: #aaa;
+  color: #adadad !important;
   cursor: not-allowed;
 }
 
@@ -43,4 +44,18 @@
 .flatpickr-day.today {
   background: #e4f1ff;
   border: none;
+}
+
+.event-icon {
+  margin: 0;
+  position: absolute;
+}
+
+.event-icon img{
+  width: 14px !important;
+  height: 14px !important;
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  filter: opacity(0.5);
 }
