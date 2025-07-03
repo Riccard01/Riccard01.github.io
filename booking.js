@@ -728,7 +728,7 @@ function sendBookingToSpreadsheet() {
 
   // Send booking data to proxy endpoint
   $.ajax({
-    url: "http://localhost:3001/api/proxy",
+    url: "https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec",
     method: "POST",
     data: bookingData,
     success: function (response) {
