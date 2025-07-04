@@ -1,4 +1,8 @@
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
+
+  #continueBtn{
+    margin-bottom: 10px;
+  }
   
   .split-summary {
     flex-direction: column;

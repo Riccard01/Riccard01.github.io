@@ -1,4 +1,4 @@
-#calendar{
+#calendar {
   margin-top: 1em;
   display: flex;
   align-items: center;
@@ -25,12 +25,14 @@
   border-radius: 0.5rem;
   transition: background 0.2s;
   position: relative;
+  font-weight: 700;
 }
 
 .flatpickr-disabled {
   background: #f0f0f0;
   color: #adadad !important;
   cursor: not-allowed;
+  font-weight: 400;
 }
 
 .flatpickr-day.selected {
@@ -56,11 +58,61 @@
   position: absolute;
 }
 
-.event-icon img{
+.event-icon img {
   width: 14px !important;
   height: 14px !important;
   position: absolute;
   top: 4px;
   left: 1px;
   filter: opacity(0.5);
+}
+
+.flatpickr-current-month {
+  font-size: 110%;
+}
+
+.custom-month-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  width: 100%;
+}
+
+.custom-month-year-label {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.custom-arrows-container {
+  display: flex;
+  gap: 4px;
+}
+
+.flatpickr-months {
+  padding: 8px 12px;
+}
+
+.flatpickr-prev-month {
+  right: 36px;
+  left: auto !important;
+  width: fit-content;
+}
+
+.flatpickr-next-month {
+  right: 12px !important;
+}
+
+.flatpickr-innerContainer {
+  justify-content: center;
+}
+
+.flatpickr-calendar.arrowTop:before{
+  opacity: 0;
+  z-index: -1;
+  bottom: 0;
+}
+
+.flatpickr-calendar.arrowTop:after {
+  opacity: 0;
 }

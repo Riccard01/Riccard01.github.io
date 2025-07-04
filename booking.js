@@ -102,26 +102,69 @@ $(document).ready(function () {
       appendTo: document.getElementById('calendar'),
       minDate: "today",
       dateFormat: "Y-m-d",
+      onReady: function (selectedDates, dateStr, instance) {
+        const calendarContainer = instance.calendarContainer;
+        const monthNav = calendarContainer.querySelector(".flatpickr-months");
+        const monthElement = $("select.flatpickr-monthDropdown-months")[0];
+        if (!monthElement) return;
+
+        // Get month name
+        const monthNames = instance.l10n.months.longhand;
+        const currentMonthName = monthNames[monthElement.selectedIndex];
+        const currentYear = instance.currentYear;
+
+        // Create left-aligned span for month and year
+        const label = document.createElement("span");
+        label.className = "flatpickr-month-name";
+        label.textContent = `${currentMonthName} ${currentYear}`;
+        instance._customMonthSpan = label;
+
+        // Create new layout container
+        const navWrapper = document.createElement("div");
+        navWrapper.className = "custom-month-nav";
+
+        const left = document.createElement("div");
+        left.className = "custom-month-year-label";
+        left.appendChild(label);
+
+        const right = document.createElement("div");
+        right.className = "custom-arrows-container";
+
+        const prevArrow = monthNav.querySelector(".flatpickr-prev-month");
+        const nextArrow = monthNav.querySelector(".flatpickr-next-month");
+        right.appendChild(prevArrow);
+        right.appendChild(nextArrow);
+
+        navWrapper.appendChild(left);
+        navWrapper.appendChild(right);
+
+        // Clear old nav and insert new
+        monthNav.innerHTML = "";
+        monthNav.appendChild(navWrapper);
+      },
+
+      onMonthChange: function (selectedDates, dateStr, instance) {
+        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
+        updateMonthYearLabel(instance);
+      },
+
+      onYearChange: function (selectedDates, dateStr, instance) {
+        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
+        updateMonthYearLabel(instance);
+      },
+
       onChange: function (selectedDates, dateStr) {
-        if (isSettingDate) return; // Prevent recursion
+        if (isSettingDate) return;
         selections.date = dateStr;
-        // Track last viewed month if a date is selected
         if (selectedDates && selectedDates.length > 0) {
           lastViewedMonth = new Date(selectedDates[0].getFullYear(), selectedDates[0].getMonth(), 1);
         }
-        updateUI(); // Update UI when calendar changes
-        // Ensure continue button is disabled if date is cleared
+        updateUI();
         document.getElementById('continueBtn').disabled = !dateStr;
       },
-      onMonthChange: function (selectedDates, dateStr, instance) {
-        // Track last viewed month on month navigation
-        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
-      },
-      onYearChange: function (selectedDates, dateStr, instance) {
-        lastViewedMonth = new Date(instance.currentYear, instance.currentMonth, 1);
-      }, onDayCreate: function (dObj, dStr, fp, dayElem) {
+
+      onDayCreate: function (dObj, dStr, fp, dayElem) {
         const date = dayElem.dateObj;
-        // Subtract one day I DON'T KNOW WHY
         const prevDate = new Date(date);
         prevDate.setDate(prevDate.getDate() + 1);
         const yyyyMMdd = prevDate.toISOString().split("T")[0];
@@ -133,6 +176,17 @@ $(document).ready(function () {
         }
       }
     });
+
+    // Helper to update month/year text
+    function updateMonthYearLabel(instance) {
+      if (instance._customMonthSpan) {
+        const monthNames = instance.l10n.months.longhand;
+        const month = monthNames[instance.currentMonth];
+        const year = instance.currentYear;
+        instance._customMonthSpan.textContent = `${month} ${year}`;
+      }
+    }
+
     updateCalendar();
     updateUI();
     // Hide loading overlay
