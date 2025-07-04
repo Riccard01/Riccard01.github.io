@@ -4,17 +4,16 @@
     body {
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
     }
 
     nav {
         display: flex;
         position: sticky;
-        width: 100vw;
+        top: 0;
+        width: 100%;
         padding: 1rem 0rem;
         justify-content: center;
         align-items: center;
-
     }
 
     nav .wrapper {
@@ -25,7 +24,7 @@
         margin-left: 1rem;
         margin-right: 1rem;
     }
-    
+
     nav button {
         display: flex;
         width: 3rem;
@@ -38,8 +37,8 @@
         border-radius: 0.4375rem;
         background: #0075FA;
     }
-    
-    .heading{
+
+    .heading {
         padding: 1rem;
     }
 
@@ -88,6 +87,7 @@
         width: 100%;
         padding-top: 1.5rem;
     }
+
     .cards-container .card {
         width: 20.4298rem;
         height: 30.6639rem;
@@ -110,29 +110,30 @@
 
 
 
-.freccia {
-    display: none;
-}
+    .freccia {
+        display: none;
+    }
 
-.titolo-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: flex start;
-  gap: 0.625rem;
-  padding-left: 1rem;
-  padding-top: 1rem;
-}
+    .titolo-wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: flex start;
+        gap: 0.625rem;
+        padding-left: 1rem;
+        padding-top: 1rem;
+    }
 
-.titolo-cards {
-  color: #04081B;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin: 0;
+    .titolo-cards {
+        color: #04081B;
+        font-family: "Plus Jakarta Sans";
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 0;
 
-}
+    }
+
     .cards-container>div {
         flex: 0 0 auto;
         scroll-snap-align: center;
@@ -143,63 +144,64 @@
     }
 
 
-footer {
-    background: #F8F9FA;
-    padding: 1.875rem 0.9375rem;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100vw;
+    footer {
+        background: #F8F9FA;
+        padding: 1.875rem 0.9375rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 100vw;
 
-}
-
-
+    }
 
 
 
 
-.features-block {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.875rem;
-  max-width: 63.5rem;
-  padding: 5rem 1.5rem;
-  margin: 0 auto;
-}
 
-.features-block .item {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
 
-.features-block .text p:first-of-type {
-  color: #04081B;
-  font-family: "Plus Jakarta Sans";
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
-}
+    .features-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.875rem;
+        max-width: 63.5rem;
+        padding: 5rem 1.5rem;
+        margin: 0 auto;
+    }
 
-.features-block .text p:last-of-type {
-  color: rgba(95, 96, 99, 0.99);
-  font-family: "Plus Jakarta Sans";
-  font-size: 0.82588rem;
-  font-weight: 400;
-  line-height: 1.44531rem;
-  margin: 0;
-  padding: 0;
-}
+    .features-block .item {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+    }
 
-.perks {
-  display: none;
-}
+    .features-block .text p:first-of-type {
+        color: #04081B;
+        font-family: "Plus Jakarta Sans";
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+    }
 
-.features-block img {
-  transform: scale(.9);
-  transform-origin: left center; /* o 'center center' */
-}
+    .features-block .text p:last-of-type {
+        color: rgba(95, 96, 99, 0.99);
+        font-family: "Plus Jakarta Sans";
+        font-size: 0.82588rem;
+        font-weight: 400;
+        line-height: 1.44531rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .perks {
+        display: none;
+    }
+
+    .features-block img {
+        transform: scale(.9);
+        transform-origin: left center;
+        /* o 'center center' */
+    }
 
 
 

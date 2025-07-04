@@ -208,19 +208,22 @@ section.calendar-section {
   cursor: default;
 }
 
+.option-row.dropdown-open .chevron-icon {
+  transform: rotate(180deg);
+}
+
 .option-row.dropdown-open .dropdown-content {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 2.5rem;
-  z-index: 2;
+  top: 2.2em;
+  z-index: 999;
   background: white;
-  width: calc(100% + 4.8px);
-  left: -2.4px;
+  width: 100%;
   padding: 0 4px 4px 4px;
-  border: 2.4px solid rgba(140, 149, 152, 0.24);
+  border: 0.4px solid rgba(140, 149, 152, 0.24);
   border-top: none;
-  border-radius: 0 0 0.4375rem 0.4375rem;
+  border-radius: 0.4375rem;
 }
 
 .dropdown-item {
@@ -516,4 +519,16 @@ section img {
   border-radius: 0.4375rem;
   background: #FFF;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+}
+
+.options-wrapper .chevron-icon {
+    width: 1.2em;
+    height: 1.2em;
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.option-row.open .chevron-icon {
+    transform: rotate(180deg);
 }
