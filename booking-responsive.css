@@ -43,14 +43,14 @@ hr {
 }
 
   .option-row.experience {
-    padding: 0.625rem;
+    padding: 1rem;
     height: 3rem !important;
     background: none;
     box-shadow: none;
   }
 
   .option-row {
-    padding: 0.625rem;
+    padding: 1rem;
     height: 3rem;
     background: none;
     box-shadow: none;
