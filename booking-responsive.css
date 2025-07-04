@@ -38,14 +38,6 @@ hr {
   width: calc(100% - 2rem); /* 👈 corregge il trasbordo */
 }
 
-
-#calendar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
   .option-row.experience {
     padding: 0.625rem;
     height: 3rem !important;
