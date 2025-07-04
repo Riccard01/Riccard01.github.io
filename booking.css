@@ -253,13 +253,15 @@ section.calendar-section {
   align-self: stretch;
   gap: 0.3125rem;
 }
-
+ hr {
+  display: none;
+ }
 
 
 .option-subtitle p {
-color: #666;
+color: #04081B;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
@@ -279,11 +281,11 @@ line-height: normal;
 }
 
 .option-value p {
- color: #04081B;
+ color: #666;
 font-family: "Plus Jakarta Sans";
-font-size: 0.875rem;
+font-size: 0.85rem;
 font-style: normal;
-font-weight: 700;
+font-weight: 500;
 line-height: normal;
 }
 
@@ -340,7 +342,7 @@ line-height: normal;
 .experience .option-wrapper {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.3125rem;
   flex: 1 0 0;
   justify-content: space-between;
@@ -350,7 +352,7 @@ line-height: normal;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.3125rem;
   flex: 1 0 0;
 }
@@ -371,9 +373,9 @@ line-height: normal;
 }
 
 .experience .option-subtitle p {
-color: #666;
+color: #04081B;
 font-family: "Plus Jakarta Sans";
-font-size: 0.75rem;
+font-size: 0.875rem;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
@@ -390,11 +392,11 @@ line-height: normal;
 
 
 .experience .option-value p {
- color: #04081B;
+color: #666;
 font-family: "Plus Jakarta Sans";
-font-size: 0.875rem;
+font-size: 0.85rem;
 font-style: normal;
-font-weight: 700;
+font-weight: 500;
 line-height: normal;
 }
 

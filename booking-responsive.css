@@ -32,7 +32,7 @@
 hr {
   display: block;
   border: none;
-  height: 2px;
+  height: 1px;
   background: #E9E9E9;
   margin: 0 1rem;
   width: calc(100% - 2rem); /* 👈 corregge il trasbordo */
@@ -46,22 +46,22 @@ hr {
   width: 100%;
 }
 
-  .experience {
+  .option-row.experience {
     padding: 0.625rem;
-    height: fit-content;
+    height: 3rem !important;
     background: none;
     box-shadow: none;
   }
 
   .option-row {
     padding: 0.625rem;
-    height: fit-content;
+    height: 3rem;
     background: none;
     box-shadow: none;
   }
 
   .price-influences {
-    top: 1rem;
+    top: 0.9rem;
     right: -.6rem;
   }
 
