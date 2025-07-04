@@ -159,12 +159,6 @@ section.calendar-section {
   width: 100%;
 }
 
-.wrapper-people-group {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 0.3125rem;
-}
 
 .options.noselect {
   display: flex;
@@ -311,6 +305,8 @@ line-height: normal;
   position: absolute;
   top: -0.2rem;
   right: -0.3rem;
+  width: 15px !important;
+  height: 15px !important;
 }
 
 .dropdown-content {
@@ -489,12 +485,13 @@ section img {
   font-size: 1rem;
   font-weight: 500;
   margin-top: 0rem;
+  text-align: left;
 }
 
 .wrapper-main-subtitle {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   flex-direction: column;
   gap: 0.3rem;
