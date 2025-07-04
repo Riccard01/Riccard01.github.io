@@ -148,6 +148,13 @@ section.heading .wrapper img {
   width: min-content;
 }
 
+    .wrapper-descrizione-freccia {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
 .gourmet-sunset-cruise-card {
   display: flex;
   flex-direction: column;
