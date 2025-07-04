@@ -496,10 +496,11 @@ section img {
 }
 
 .main-subtitle {
-  color: #04081B;
+  color: rgba(117, 118, 122, 0.99);
   font-family: "Plus Jakarta Sans";
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 0.02625rem;
   margin-top: 0rem;
   text-align: left;
 }
