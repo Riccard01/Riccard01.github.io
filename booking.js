@@ -236,8 +236,9 @@ $(document).ready(function () {
     }
   });
 
-  $('.native-overlay-select').css('pointer-events', 'none');
-
+  if(!isMobile) {
+    $('.native-overlay-select').css('pointer-events', 'none');
+  }
 
   // Handle dropdown selection
   $('.dropdown-content').on('click', '.dropdown-item', function (e) {
