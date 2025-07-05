@@ -23,8 +23,11 @@
 <body>
     <nav>
         <div class="wrapper">
-            <img src="assets/images/logo.jpg" alt="logo_here"><a class="phone-link" href="tel:+39 346 33 65 699"><button><img
-                        src="assets/icons/phone.svg" alt=""><span>Let's get in touch!</span></button></a>
+            <a href="/">
+                <img src="assets/images/logo.jpg" alt="logo_here">
+            </a>
+            <a class="phone-link" href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg"
+                        alt=""><span>Let's get in touch!</span></button></a>
         </div>
     </nav>
     <div id="step-1" class="booking-step">
@@ -93,38 +96,43 @@
                     <div class="dropdown-content"></div>
                 </div>
                 <hr>
-                
-                    <!-- People -->
-                    <div class="option-row" data-key="people">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <img src="assets/icons/people.svg" alt="" />
-                                <p>People</p>
-                            </div>
-                            <div class="option-value">
-                                <p>2</p>
-                            </div>
+
+                <!-- People -->
+                <div class="option-row" data-key="people">
+                    <select class="native-overlay-select">
+                        <option value="1">1 person</option>
+                        <option value="2">2 people</option>
+                        <option value="3">3 people</option>
+                    </select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="assets/icons/people.svg" alt="" />
+                            <p>People</p>
                         </div>
-                        <div class="price-influences"></div>
-                        <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
-                        <div class="dropdown-content"></div>
-                    </div>
-                    <hr>
-                    <!-- Group Type -->
-                    <div class="option-row" data-key="groupType">
-                        <div class="option-wrapper">
-                            <div class="option-subtitle">
-                                <img src="assets/icons/locked.svg" alt="" />
-                                <p>Group</p>
-                            </div>
-                            <div class="option-value">
-                                <p>Private</p>
-                            </div>
+                        <div class="option-value">
+                            <p>2</p>
                         </div>
-                        <img class="price-influences" src="assets/icons/influences.svg" alt="" />
-                        <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
-                        <div class="dropdown-content"></div>
                     </div>
+                    <div class="price-influences"></div>
+                    <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+                <hr>
+                <!-- Group Type -->
+                <div class="option-row" data-key="groupType">
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="assets/icons/locked.svg" alt="" />
+                            <p>Group</p>
+                        </div>
+                        <div class="option-value">
+                            <p>Private</p>
+                        </div>
+                    </div>
+                    <img class="price-influences" src="assets/icons/influences.svg" alt="" />
+                    <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
             </div>
             <section class="calendar-section">
                 <div id="calendar"></div>

@@ -1,15 +1,15 @@
 @media screen and (max-width: 600px) {
 
-  #continueBtn{
+  #continueBtn {
     margin-bottom: 10px;
   }
-  
+
   .split-summary {
     flex-direction: column;
     gap: 2em;
   }
 
-  #step-2{
+  #step-2 {
     padding-bottom: 2em;
   }
 
@@ -30,17 +30,18 @@
     border-radius: 0.4375rem;
     background: #FFF;
     box-shadow: 0px 0.882px 6.76px 1.207px rgba(0, 0, 0, 0.08);
-    gap: 0rem;  
+    gap: 0rem;
   }
 
-hr {
-  display: block;
-  border: none;
-  height: 1px;
-  background: #E9E9E9;
-  margin: 0 1rem;
-  width: calc(100% - 2rem); /* 👈 corregge il trasbordo */
-}
+  hr {
+    display: block;
+    border: none;
+    height: 1px;
+    background: #E9E9E9;
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+    /* 👈 corregge il trasbordo */
+  }
 
   .option-row.experience {
     padding: 1rem;

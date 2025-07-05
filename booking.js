@@ -3,7 +3,7 @@ const CONSTANTS = {
     experience: ["Wild Tour", "Rainbow Tour", "Gourmet Sunset Cruise"],
     slot: ["Tour Slot", "Full Day"],
     combo: ["Oh yeah! (extended to midnight)", "No combo"],
-    groupType: ["Private", "Public"]
+    groupType: ["Private", "Shared"]
   },
   texts: {
     people: "People",
@@ -56,6 +56,8 @@ let isSettingDate = false; // Add this at the top, after let fp;
 let lastViewedMonth = null; // Track the last viewed month in flatpickr
 
 $(document).ready(function () {
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
   // --- Add loading overlay HTML and CSS ---
   if ($('#loading-overlay').length === 0) {
     $('body').append(`
@@ -174,6 +176,7 @@ $(document).ready(function () {
           icon.innerHTML = `<img src="assets/icons/locked.svg" alt="" />`;
           dayElem.appendChild(icon);
         }
+        updateMonthYearLabel(fp);
       }
     });
 
@@ -224,11 +227,17 @@ $(document).ready(function () {
 
   // Toggle dropdowns
   $('.option-row').on('click', function (e) {
-    e.stopPropagation();
-    if ($(this).hasClass('locked')) return;
-    $('.option-row').not(this).removeClass('dropdown-open');
-    $(this).toggleClass('dropdown-open');
+    if (!isMobile) {
+      e.stopPropagation();
+      if ($(this).hasClass('locked')) return;
+
+      $('.option-row').not(this).removeClass('dropdown-open');
+      $(this).toggleClass('dropdown-open');
+    }
   });
+
+  $('.native-overlay-select').css('pointer-events', 'none');
+
 
   // Handle dropdown selection
   $('.dropdown-content').on('click', '.dropdown-item', function (e) {
@@ -317,9 +326,9 @@ $(document).ready(function () {
       CONSTANTS.tourOptions.groupType.forEach(opt => {
         $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
       });
-      // Always default to Public when switching to Gourmet
+      // Always default to Shared when switching to Gourmet
       if (prevExperience !== CONSTANTS.tourOptions.experience[2] || !CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
-        selections.groupType = "Public";
+        selections.groupType = "Shared";
       }
       $groupText.text(selections.groupType);
     } else {
@@ -441,7 +450,7 @@ $(document).ready(function () {
 
     let maxPeople = 6;
     if (isGourmet) {
-      maxPeople = 8;
+      maxPeople = 6;
       $peopleSubtitle.text(CONSTANTS.texts.peopleMax(maxPeople));
     } else {
       $peopleSubtitle.text(CONSTANTS.texts.people);
@@ -499,10 +508,10 @@ $(document).ready(function () {
     const { experience, slot, combo, people, groupType } = selections;
     if (!experience) return [];
     let availableDates = [];
-    // Special logic for Gourmet Sunset Cruise (sunset) with Public group
+    // Special logic for Gourmet Sunset Cruise (sunset) with Shared group
     if (
       experience === "Gourmet Sunset Cruise" &&
-      groupType === "Public"
+      groupType === "Shared"
     ) {
       // Month-by-month logic
       Object.entries(availabilityByMonth).forEach(([month, days]) => {
@@ -571,7 +580,7 @@ $(document).ready(function () {
   function updateEventDates() {
     eventDates = [];
     if (selections.experience === CONSTANTS.tourOptions.experience[2]) { // Gourmet Sunset Cruise
-      if (selections.groupType === "Public") {
+      if (selections.groupType === "Shared") {
         // For each month, if there are preferred dates, eventDates = fallback dates (not reserved, not booked)
         Object.entries(availabilityByMonth).forEach(([month, days]) => {
           let preferredDates = [];

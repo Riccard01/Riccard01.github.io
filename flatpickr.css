@@ -116,3 +116,19 @@
 .flatpickr-calendar.arrowTop:after {
   opacity: 0;
 }
+
+.flatpickr-next-month:hover svg path {
+  fill: #007bff; /* Hover color */
+  cursor: pointer;
+}
+
+.flatpickr-prev-month:hover svg path {
+  fill: #007bff; /* Hover color */
+  cursor: pointer;
+}
+
+.flatpickr-months{
+  width: 307.875px;
+  position: relative;
+  margin-left: calc((100% - 307.875px) / 2);
+}
