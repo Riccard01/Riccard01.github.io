@@ -237,6 +237,7 @@ $(document).ready(function () {
   });
 
   $('.native-overlay-select').on('focus click', function () {
+
     const $select = $(this);
     const $row = $select.closest('.option-row');
     const $dropdownItems = $row.find('.dropdown-content .dropdown-item');
@@ -247,6 +248,8 @@ $(document).ready(function () {
     $dropdownItems.each(function () {
       const text = $(this).text().trim();
       $select.append(`<option value="${text}">${text}</option>`);
+      $select.val(null); // Reset selection to nothing
+      $select[0].selectedIndex = -1; // Also clears selection in some cases
     });
   });
 
