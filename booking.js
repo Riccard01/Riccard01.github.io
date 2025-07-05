@@ -248,8 +248,14 @@ $(document).ready(function () {
     $dropdownItems.each(function () {
       const text = $(this).text().trim();
       $select.append(`<option value="${text}">${text}</option>`);
-      $select.val(null); // Reset selection to nothing
-      $select[0].selectedIndex = -1; // Also clears selection in some cases
+      const $row = $select.closest('.option-row');
+      const currentText = $row.find('.option-value p').text().trim();
+
+      const indexToSelect = $select.find('option').toArray().findIndex(opt => opt.text === currentText);
+
+      if (indexToSelect >= 0) {
+        $select[0].selectedIndex = indexToSelect;
+      };
     });
   });
 
