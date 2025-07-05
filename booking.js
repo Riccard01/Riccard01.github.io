@@ -236,28 +236,52 @@ $(document).ready(function () {
     }
   });
 
-  if(!isMobile) {
+  $('.native-overlay-select').on('focus click', function () {
+    const $select = $(this);
+    const $row = $select.closest('.option-row');
+    const $dropdownItems = $row.find('.dropdown-content .dropdown-item');
+
+    // Clear and repopulate the select
+    $select.empty();
+
+    $dropdownItems.each(function () {
+      const text = $(this).text().trim();
+      $select.append(`<option value="${text}">${text}</option>`);
+    });
+  });
+
+
+  if (!isMobile) {
     $('.native-overlay-select').css('pointer-events', 'none');
   }
 
   // Handle dropdown selection
   $('.dropdown-content').on('click', '.dropdown-item', function (e) {
-    showFakeLoadingOverlay(); // Show fake loading on filter change
     e.stopPropagation();
-    const $item = $(this);
-    const key = $item.closest('.option-row').data('key');
-    let value = $item.text();
-    // If slot, strip time in parentheses
+    handleDropdownSelection($(this).closest('.option-row'), $(this).text());
+  });
+
+  $('.native-overlay-select').on('change', function () {
+    handleDropdownSelection($(this).closest('.option-row'), $(this).val());
+  });
+
+
+  function handleDropdownSelection($row, value) {
+    const key = $row.data('key');
+
+    showFakeLoadingOverlay();
+
     if (key === "slot") {
       value = value.split(' (')[0];
     }
+
     selections[key] = value;
-    $item.closest('.option-row').find('.option-value p').first().text($item.text());
+    $row.find('.option-value p').first().text(value);
     $('.option-row').removeClass('dropdown-open');
-    // If combo is being selected and the date is not available for it, clear the date but keep combo
+
     const availableDates = getAvailableDatesForSelection();
     if (!availableDates.includes(selections.date)) {
-      if (key === 'combo' && value === CONSTANTS.tourOptions.combo[0]) { // Oh yeah! (extended to midnight)
+      if (key === 'combo' && value === CONSTANTS.tourOptions.combo[0]) {
         selections.date = "";
         if (fp) fp.clear();
       } else if (key !== 'combo') {
@@ -265,9 +289,11 @@ $(document).ready(function () {
         if (fp) fp.clear();
       }
     }
+
     updateUI();
     updateCalendar();
-  });
+  }
+
 
   // Remove ?experience from URL if user changes experience manually
   $(".option-row[data-key='experience'] .dropdown-content").on('click', '.dropdown-item', function () {
