@@ -197,7 +197,7 @@ section.heading .wrapper img {
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.894rem;
+border-radius: 0.794rem;
 background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -277,6 +277,17 @@ padding-top: 1.5rem;
   height: 30.66388rem;
 }
 
+.gourmet-sunset-cruise-card#amerigo .card{
+  background-image: url('assets/images/amerigo.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  width: 20.42981rem;
+  height: 30.66388rem;
+}
+
+
 
 .the-wild-tour-card .card {
   display: flex;
@@ -297,7 +308,7 @@ padding-top: 1.5rem;
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.894rem;
+border-radius: 0.794rem;
 background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -319,6 +330,7 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   border-radius: 0.894rem;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
   background-image: url('assets/images/gourmet.jpg');
+  background-size: cover;
   border: 2.043px solid rgba(255, 255, 255, 0.60);
   background-position: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -328,7 +340,7 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   content: "";
   position: absolute;
   inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.894rem;
+border-radius: 0.794rem;
 background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
