@@ -333,16 +333,16 @@ hr {
   margin-top: 10px;
 }
 
-.option-row.locked{
+.option-row.locked {
   pointer-events: none;
 }
 
-.option-row.locked .option-value{
+.option-row.locked .option-value {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.option-row.locked .chevron-icon{
+.option-row.locked .chevron-icon {
   pointer-events: none;
   opacity: 0.5;
 }
@@ -519,6 +519,10 @@ section img {
   text-align: left;
 }
 
+.wrapper-main-subtitle .section-heading {
+  padding-left: 0;
+}
+
 .wrapper-main-subtitle {
   display: flex;
   justify-content: flex-start;
@@ -526,7 +530,7 @@ section img {
   width: 100%;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 0rem;
+  padding: 0.3rem;
 }
 
 .required-star {
