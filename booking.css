@@ -14,6 +14,7 @@ body {
   padding: 0rem 0rem;
   gap: 2rem;
   font-family: "Plus Jakarta Sans", sans-serif;
+  position: relative;
 }
 
 a {
@@ -81,6 +82,11 @@ nav button {
 .booking-step.responsive {
   display: none;
   flex-direction: column;
+}
+
+#step-2 {
+  position: relative;
+  ;
 }
 
 * {
@@ -380,6 +386,45 @@ hr {
   flex: 1 0 0;
 }
 
+#paypal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; 
+}
+
+#paypal-container {
+  background: #ebebeb;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+#paypal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
 
 .experience .option-subtitle {
   display: flex;
@@ -495,6 +540,7 @@ button:disabled {
   align-items: center;
   width: 100%;
   gap: 0.625rem;
+  margin-bottom: 32px;
 }
 
 .section-heading .wrapper-customize p {

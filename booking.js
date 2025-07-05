@@ -1,4 +1,4 @@
-const CONSTANTS = {
+let CONSTANTS = {
   tourOptions: {
     experience: ["Wild Tour", "Rainbow Tour", "Gourmet Sunset Cruise"],
     slot: ["Tour Slot", "Full Day"],
@@ -38,7 +38,12 @@ function fetchAvailability() {
   return $.getJSON(url).then(data => {
     availabilityByMonth = data.availability;
     tourDetailsRetrived = data.tours;
-    console.log("data loaded:", data);
+    CONSTANTS.texts.slotTimes = {
+      "Tour Slot": `${tourDetailsRetrived["Wild Tour (private)"].orarioInizio} - ${tourDetailsRetrived["Wild Tour (private)"].orarioFine}`,
+      "Full Day": `${tourDetailsRetrived["Full Day (private)"].orarioInizio} - ${tourDetailsRetrived["Full Day (private)"].orarioFine}`,
+      "Rainbow Tour": `${tourDetailsRetrived["Rainbow Tour (private)"].orarioInizio} - ${tourDetailsRetrived["Rainbow Tour (private)"].orarioFine}`,
+      "Gourmet Sunset Cruise": `${tourDetailsRetrived["Gourmet Sunset Cruise (private)"].orarioInizio} - ${tourDetailsRetrived["Gourmet Sunset Cruise (private)"].orarioFine}`
+    }
   });
 }
 
@@ -58,6 +63,7 @@ let isSettingDate = false; // Add this at the top, after let fp;
 let lastViewedMonth = null; // Track the last viewed month in flatpickr
 
 $(document).ready(function () {
+
   const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   // --- Add loading overlay HTML and CSS ---
@@ -83,9 +89,9 @@ $(document).ready(function () {
     $('#loading-overlay').fadeOut(150);
   }
 
-  function showFakeLoadingOverlay() {
+  function showFakeLoadingOverlay(t = 100) {
     showLoadingOverlay();
-    setTimeout(hideLoadingOverlay, 100);
+    setTimeout(hideLoadingOverlay, t);
   }
 
   document.getElementById('continueBtn').disabled = true;
@@ -223,8 +229,67 @@ $(document).ready(function () {
     $('#step-1').show();
   });
 
+  let paypalRendered = false;
+
   $('#bookBtn').on('click', function () {
-    sendBookingToSpreadsheet();
+    $('#paypal-overlay').show();
+
+    const bookingData = {
+      mode: 'createOrder',
+      tour: selections.experience,     // e.g. "Wild Tour"
+      persone: selections.people,      // e.g. 3
+      privato: selections.privato ? "Sì" : "No",
+      data: selections.date,
+      note: selections.note || ""
+    };
+
+
+    // Prevent multiple renders
+    if (paypalRendered) return;
+
+    fetch('https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec', {
+      method: 'POST',
+      body: new URLSearchParams(bookingData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.orderId) {
+          throw new Error(`No PayPal order ID returned (${data.error})`);
+        }
+
+        paypalRendered = true;
+
+        paypal.Buttons({
+          style: {
+            layout: 'vertical'
+          },
+          createOrder: function () {
+            return data.orderId; // use server-created order ID
+          },
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              completePaymentInformation(data.orderID);
+              $('#paypal-overlay').hide();
+            });
+          },
+          onCancel: function () {
+            $('#paypal-overlay').hide();
+          },
+          onError: function (err) {
+            console.error('Payment error', err);
+            $('#paypal-overlay').hide();
+          }
+        }).render('#paypal-button-wrapper');
+      })
+      .catch(err => {
+        console.error("Failed to create PayPal order:", err);
+        $('#paypal-overlay').hide();
+      });
+  });
+
+  // Close on X click
+  $('#paypal-close').on('click', function () {
+    $('#paypal-overlay').hide();
   });
 
   // Toggle dropdowns
@@ -335,7 +400,6 @@ $(document).ready(function () {
 
   let prevExperience = selections.experience;
   function updateUI() {
-    console.log(selections)
     const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2];
 
     // Get slot availability for the selected date
@@ -526,7 +590,6 @@ $(document).ready(function () {
       slotsUsed = [3];
     }
 
-    console.log("Slots used:", slotsUsed);
 
     // At the end, check if continue button should be enabled
     const required = ['experience', 'people', 'groupType'];
@@ -661,7 +724,6 @@ $(document).ready(function () {
         eventDates = [];
       }
     }
-    console.log("Event dates updated:", eventDates);
   }
 
   function updateCalendar() {
@@ -751,7 +813,6 @@ $(document).ready(function () {
       email: this.email.value,
       notes: this.notes.value
     };
-    console.log("Final booking data:", formData);
   });
 });
 
@@ -802,12 +863,10 @@ function updateSummaryAndPrice() {
 
   const totalPrice = isPerPerson ? basePrice * selections.people : basePrice;
 
-  console.log("Total price calculated:", totalPrice);
-
   $('#summary-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
 }
 
-function sendBookingToSpreadsheet() {
+function completePaymentInformation(orderId) {
   // Buyer details
   const name = $('#input-name').val().trim();
   const surname = $('#input-surname').val().trim();
@@ -830,7 +889,7 @@ function sendBookingToSpreadsheet() {
   // HTML summary (as before)
   const summaryHtml = createSummaryHTMLString({
     name, surname, email, phone, notes, isGourmet, timeStr
-  });
+  }, orderId);
 
   // Compose the note: user notes + HTML summary (or link)
   let noteField = notes;
@@ -849,6 +908,7 @@ function sendBookingToSpreadsheet() {
 
   // Prepare booking data for spreadsheet (matching Apps Script expectations)
   const bookingData = {
+    mode: "saveBooking",
     data: selections.date, // date string
     tour: tourToPass, // tour name
     nome: name + (surname ? (" " + surname) : ""),
@@ -857,6 +917,20 @@ function sendBookingToSpreadsheet() {
     privato: selections.groupType === "Private" ? "Sì" : "No",
     note: noteField
   };
+
+  function showLoadingOverlay() {
+    $('#loading-overlay').fadeIn(150);
+  }
+  function hideLoadingOverlay() {
+    $('#loading-overlay').fadeOut(150);
+  }
+
+  function showFakeLoadingOverlay(t = 100) {
+    showLoadingOverlay();
+    setTimeout(hideLoadingOverlay, t);
+  }
+
+  showFakeLoadingOverlay(2500);
 
   // Send booking data to proxy endpoint
   $.ajax({
@@ -876,23 +950,12 @@ function sendBookingToSpreadsheet() {
 
 // Show booking summary in a modal/overlay
 function showBookingSummaryModal(html) {
-  let $modal = $('#booking-summary-modal');
-  if ($modal.length === 0) {
-    $modal = $('<div id="booking-summary-modal" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.65);overflow:auto;"></div>');
-    $('body').append($modal);
-  }
-  $modal.html('<div style="position:relative;max-width:600px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:32px 24px;">' +
-    '<button id="close-booking-summary" style="position:absolute;top:12px;right:18px;font-size:1.5em;background:none;border:none;cursor:pointer;">&times;</button>' +
-    html + '</div>');
-  $modal.fadeIn(200);
-  $('#close-booking-summary').on('click', function () {
-    $modal.fadeOut(200);
-  });
+  localStorage.setItem('bookingSummaryModalHtml', html);
+  location.href = "index.html";
 }
 
 // Helper to generate the HTML summary as a string (copied from createSummaryHTMLPage, but returns string)
-function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet, timeStr }) {
-  // Meeting point explanation (customize as needed)
+function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet, timeStr }, orderId) {
   const meetingPoint = `
     <strong>Meeting Point:</strong> <br>
     <span style="color:#2a5d8f;">Porto di Genova, Molo vecchio</span><br>
@@ -900,7 +963,21 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
     Look for the leggeroTOURS flag near the docked boats.
   `;
 
-  // Booking summary rows
+  // --- Determine tourKey just like in pricing ---
+  let tourKey = selections.experience;
+  if (selections.combo && selections.combo.includes("Oh yeah")) {
+    tourKey += " + Combo";
+  }
+  if (selections.groupType === "Public" && tourKey === "Gourmet Sunset Cruise") {
+    tourKey += " (shared, prezzo a persona)";
+  } else {
+    tourKey += " (private)";
+  }
+
+  const tour = tourDetailsRetrived?.[tourKey];
+  const orarioInizio = tour?.orarioInizio || "-";
+  const orarioFine = tour?.orarioFine || "-";
+
   const summaryRows = [
     { label: CONSTANTS.texts.summary.experience, value: selections.experience },
     !isGourmet && { label: CONSTANTS.texts.summary.slot, value: selections.slot },
@@ -908,16 +985,18 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
     { label: CONSTANTS.texts.summary.people, value: selections.people },
     { label: CONSTANTS.texts.summary.groupType, value: selections.groupType },
     { label: CONSTANTS.texts.summary.date, value: new Date(selections.date).toLocaleDateString(undefined, { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }) },
+    { label: "Start Time", value: orarioInizio },               // <--- Added
+    { label: "Finish Time", value: orarioFine },               // <--- Added
     { label: "Time", value: timeStr },
     { label: CONSTANTS.texts.summary.price, value: $('#summary-price').text() }
   ].filter(Boolean);
 
-  // Buyer details rows
   const buyerRows = [
     { label: "Name", value: name },
     { label: "Surname", value: surname },
     { label: "Email", value: email },
     { label: "Phone", value: phone },
+    { label: "Order ID", value: orderId },
     notes && { label: "Notes", value: notes }
   ].filter(Boolean);
 
@@ -935,7 +1014,6 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
     </tr>`
   ).join('');
 
-  // Contact LeggeroTOURS section
   const contactSection = `
     <div class="section-title">Contact LeggeroTOURS</div>
     <div class="contact-info">
@@ -1059,5 +1137,6 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
     </body>
     </html>
   `;
+
   return html.replace(/\n/g, "");
 }

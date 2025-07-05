@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="booking-responsive.css">
     <link rel="stylesheet" href="flatpickr.css">
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AVNrWHjJ22OQtOf3W2JGDebPXdrF9JKtJKEE33JrBgMjbbxdN75SgncNkM6Tk2B8B7jNajD5Qf6cqkXo&currency=EUR&components=buttons"></script>
     <title>Booking</title>
 </head>
 
@@ -324,6 +326,14 @@
             <button id="backBtn" style="margin-top: 1rem;" class="option-input">Back</button>
             <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book your Experience</button>
         </section>
+        <!-- Overlay to blur background and contain PayPal modal -->
+        <div id="paypal-overlay" style="display: none;">
+            <div id="paypal-container">
+                <button id="paypal-close">✖</button>
+                <div id="paypal-button-wrapper"></div>
+            </div>
+        </div>
+
     </div>
 
 </body>
