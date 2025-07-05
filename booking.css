@@ -124,7 +124,7 @@ section.calendar-section {
   align-items: center;
   gap: 0rem;
   align-self: stretch;
-  padding-bottom: 0rem;
+  padding: 1rem 0.5rem;
 }
 
 .wrapper-customize {
@@ -480,6 +480,7 @@ button:disabled {
 .split-summary {
   display: flex;
   flex-direction: row;
+  gap: 2em;
 }
 
 .booking-table-summary {
