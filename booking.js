@@ -30,13 +30,15 @@ const CONSTANTS = {
 // Example: availabilityByMonth[month][day][slot]
 let availabilityByMonth = {}; // Will be filled from Google Sheets
 let eventDates = [];
+let tourDetailsRetrived = {};
 
 function fetchAvailability() {
   // Replace with your actual web app URL
   const url = 'https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec';
   return $.getJSON(url).then(data => {
-    availabilityByMonth = data;
-    console.log("Availability data loaded:", availabilityByMonth);
+    availabilityByMonth = data.availability;
+    tourDetailsRetrived = data.tours;
+    console.log("data loaded:", data);
   });
 }
 
@@ -534,9 +536,23 @@ $(document).ready(function () {
     }
 
     // --- Live Price Update for Step 1 ---
-    let basePrice = 100;
-    if (selections.experience === CONSTANTS.tourOptions.experience[2]) basePrice = 150;
-    const totalPrice = basePrice * selections.people;
+    let tourKey = selections.experience;
+
+    if (selections.combo && selections.combo.includes("Oh yeah")) {
+      tourKey += " + Combo";
+    }
+    if (selections.groupType === "Shared" && tourKey === "Gourmet Sunset Cruise") {
+      tourKey += " (shared, prezzo a persona)";
+    } else {
+      tourKey += " (private)";
+    }
+
+    const tour = tourDetailsRetrived?.[tourKey];
+    let basePrice = tour?.prezzo || 0;
+    const isPerPerson = selections.groupType === "Shared" && tourKey.includes("shared");
+
+    const totalPrice = isPerPerson ? basePrice * selections.people : basePrice;
+
     $('#step1-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
   }
 
@@ -740,38 +756,55 @@ $(document).ready(function () {
 });
 
 function updateSummaryAndPrice() {
+  // Update the summary UI
   $('#summary-experience').text(selections.experience || "-");
   $('#summary-slot').text(selections.slot || "-");
   $('#summary-combo').text(selections.combo || "-");
   $('#summary-people').text(selections.people || "-");
   $('#summary-groupType').text(selections.groupType || "-");
-  $('#summary-date').text(new Date(selections.date).toLocaleDateString(undefined, {
-    weekday: 'long',
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  }) || "-");
+  $('#summary-date').text(
+    selections.date
+      ? new Date(selections.date).toLocaleDateString(undefined, {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      })
+      : "-"
+  );
 
-  // Nascondi slot e combo se Gourmet
-  const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2];
-  $('#summary-slot-container').toggle(!isGourmet);
+  // Determine if current selection is for a Gourmet tour
+  const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2]; // "Gourmet Sunset Cruise"
+
+  // Hide slot and combo containers accordingly
+  $('#summary-slot-container').toggle(
+    !(isGourmet || (
+      selections.experience === CONSTANTS.tourOptions.experience[0] && // "Wild Tour"
+      selections.slot === CONSTANTS.tourOptions.slot[1] // "Full Day"
+    ) || selections.experience !== CONSTANTS.tourOptions.experience[1]) // not "Rainbow Tour"
+  );
   $('#summary-combo-container').toggle(!isGourmet);
-  $('#summary-slot-container').toggle(!((selections.experience == CONSTANTS.tourOptions.experience[0] && selections.slot == CONSTANTS.tourOptions.slot[1]) || selections.experience != CONSTANTS.tourOptions.experience[1]));
 
-  // Calcolo prezzo (base di esempio, poi lo cambi tu)
-  let basePrice = 100;
-  if (isGourmet) basePrice = 150;
-  const totalPrice = basePrice * selections.people;
-  $('#summary-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
-}
-
-function getPricePerPerson() {
-  // You can customize these values
-  const { experience, groupType } = selections;
-  if (experience === "Gourmet Sunset Cruise") {
-    return groupType === "Private" ? 100 : 70;
+  // Calculate price based on selected tour name and number of people
+  let tourKey = selections.experience;
+  if (selections.combo && selections.combo.includes("Oh yeah")) {
+    tourKey += " + Combo";
   }
-  return 50; // Default price for non-gourmet
+  if (selections.groupType === "Shared" && tourKey === "Gourmet Sunset Cruise") {
+    tourKey += " (shared, prezzo a persona)";
+  } else {
+    tourKey += " (private)";
+  }
+
+  const tour = tourDetailsRetrived?.[tourKey];
+  let basePrice = tour?.prezzo || 0;
+  const isPerPerson = selections.groupType === "Shared" && tourKey.includes("shared");
+
+  const totalPrice = isPerPerson ? basePrice * selections.people : basePrice;
+
+  console.log("Total price calculated:", totalPrice);
+
+  $('#summary-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
 }
 
 function sendBookingToSpreadsheet() {
