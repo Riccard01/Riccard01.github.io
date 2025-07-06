@@ -124,7 +124,7 @@
         justify-content: flex start;
         gap: 0.625rem;
         padding-left: 1rem;
-        padding-top: 1rem;
+        padding-top: 0rem;
     }
 
     .titolo-cards {

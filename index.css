@@ -382,7 +382,33 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   opacity: 1;
 }
 
+.wrapper-experiences {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 0.625rem;
+  padding-left: 0rem;
+  padding-top: 2rem;
+  flex-direction: column;
+}
 
+.wrapper-experiences#special {
+  padding-top: 1rem;
+}
+
+.sottotitolo {
+  color: rgba(117, 118, 122, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.02625rem;
+  line-height: normal;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
 .wrapper-bottom {
   display: flex;
