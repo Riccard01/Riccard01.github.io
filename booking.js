@@ -422,15 +422,41 @@ $(document).ready(function () {
     const $groupDD = $groupRow.find('.dropdown-content').empty();
     const $groupIcon = $groupRow.find('.option-subtitle img');
 
+    // Determine if group type should be locked to Private
+    let lockGroupType = false;
+    let allowShared = false;
     if (isGourmet) {
+      allowShared = true;
+    } else if (
+      (selections.experience === CONSTANTS.tourOptions.experience[0] || // Wild Tour
+        selections.experience === CONSTANTS.tourOptions.experience[1])   // Rainbow Tour
+    ) {
+      // If Full Day or Combo is selected, lock to Private
+      if (
+        selections.slot === CONSTANTS.tourOptions.slot[1] || // Full Day
+        selections.combo === CONSTANTS.tourOptions.combo[0]   // Oh yeah! (extended to midnight)
+      ) {
+        lockGroupType = true;
+      } else {
+        allowShared = true;
+      }
+    }
+
+    if (allowShared) {
       $groupRow.removeClass('locked');
       $groupDD.empty();
       CONSTANTS.tourOptions.groupType.forEach(opt => {
         $groupDD.append(`<div class="dropdown-item">${opt}</div>`);
       });
-      // Always default to Shared when switching to Gourmet
-      if (prevExperience !== CONSTANTS.tourOptions.experience[2] || !CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
-        selections.groupType = "Shared";
+      // Default groupType based on experience change
+      if (prevExperience !== selections.experience) {
+        if (selections.experience === CONSTANTS.tourOptions.experience[2]) { // Gourmet Sunset Cruise
+          selections.groupType = "Shared";
+        } else {
+          selections.groupType = "Private";
+        }
+      } else if (!CONSTANTS.tourOptions.groupType.includes(selections.groupType)) {
+        selections.groupType = "Private";
       }
       $groupText.text(selections.groupType);
     } else {
@@ -534,7 +560,7 @@ $(document).ready(function () {
     });
 
     // Only auto-select No combo if combo is actually disabled and Oh yeah! (extended to midnight) is not selected
-    if (comboDisabled && selections.combo !== CONSTANTS.tourOptions.combo[0]) {
+    if ((comboDisabled && selections.combo !== CONSTANTS.tourOptions.combo[0]) || selections.experience === CONSTANTS.tourOptions.experience[0] && selections.slot === CONSTANTS.tourOptions.slot[0]) {
       selections.combo = CONSTANTS.tourOptions.combo[1];
       $comboRow.addClass('locked');
     } else {
@@ -600,11 +626,31 @@ $(document).ready(function () {
 
     // --- Live Price Update for Step 1 ---
     let tourKey = selections.experience;
-
-    if (selections.combo && selections.combo.includes("Oh yeah")) {
-      tourKey += " + Combo";
+    // Handle Combo for Rainbow Tour (private only)
+    if (
+      selections.experience === CONSTANTS.tourOptions.experience[1] && // Rainbow Tour
+      selections.combo === CONSTANTS.tourOptions.combo[0] && // Oh yeah! (extended)
+      selections.groupType === "Private"
+    ) {
+      tourKey = "Rainbow + Combo";
     }
-    if (selections.groupType === "Shared" && tourKey === "Gourmet Sunset Cruise") {
+    // Handle Luxury Day (Wild Tour + Full Day + Combo, always private)
+    if (
+      selections.experience === CONSTANTS.tourOptions.experience[0] && // Wild Tour
+      selections.slot === CONSTANTS.tourOptions.slot[1] && // Full Day
+      selections.combo === CONSTANTS.tourOptions.combo[0]
+    ) {
+      tourKey = "Luxury Day";
+    }
+    if (
+      selections.experience === CONSTANTS.tourOptions.experience[0] && // Wild Tour
+      selections.slot === CONSTANTS.tourOptions.slot[1] && // Full Day
+      selections.combo === CONSTANTS.tourOptions.combo[1]
+    ) {
+      tourKey = "Full Day";
+    }
+    // Add group type suffix
+    if (selections.groupType === "Shared") {
       tourKey += " (shared, prezzo a persona)";
     } else {
       tourKey += " (private)";
@@ -613,46 +659,57 @@ $(document).ready(function () {
     const tour = tourDetailsRetrived?.[tourKey];
     let basePrice = tour?.prezzo || 0;
     const isPerPerson = selections.groupType === "Shared" && tourKey.includes("shared");
-
     const totalPrice = isPerPerson ? basePrice * selections.people : basePrice;
 
     $('#step1-price').text(`${CONSTANTS.texts.summary.price} ${totalPrice.toFixed(2)}`);
+  }
+
+  // Helper: get ISO week string (YYYY-Www)
+  function getISOWeek(dateStr) {
+    const date = new Date(dateStr);
+    const dayNum = date.getDay() || 7;
+    date.setDate(date.getDate() + 4 - dayNum);
+    const yearStart = new Date(date.getFullYear(), 0, 1);
+    const weekNum = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+    return `${date.getFullYear()}-W${String(weekNum).padStart(2, "0")}`;
   }
 
   function getAvailableDatesForSelection() {
     const { experience, slot, combo, people, groupType } = selections;
     if (!experience) return [];
     let availableDates = [];
-    // Special logic for Gourmet Sunset Cruise (sunset) with Shared group
-    if (
-      experience === "Gourmet Sunset Cruise" &&
-      groupType === "Shared"
-    ) {
-      // Month-by-month logic
+    // Shared logic for all experiences, now per week
+    if (groupType === "Shared") {
+      const weeks = {};
       Object.entries(availabilityByMonth).forEach(([month, days]) => {
-        let preferredDates = [];
-        let fallbackDates = [];
         Object.entries(days).forEach(([day, slots]) => {
-          const sunset = slots.sunset || {};
-          // Preferred: already booked, not reserved, enough spots left
+          let slotObj;
+          if (experience === CONSTANTS.tourOptions.experience[0]) slotObj = slots.wild || {};
+          else if (experience === CONSTANTS.tourOptions.experience[1]) slotObj = slots.rainbow || {};
+          else if (experience === CONSTANTS.tourOptions.experience[2]) slotObj = slots.sunset || {};
+          else slotObj = {};
+          const dateStr = `${month}-${day.padStart(2, "0")}`;
+          const weekKey = getISOWeek(dateStr);
+          if (!weeks[weekKey]) weeks[weekKey] = { preferred: [], fallback: [] };
           if (
-            !sunset.reserved &&
-            sunset.booked > 0 &&
-            (sunset.max - sunset.booked) >= people
+            !slotObj.reserved &&
+            slotObj.booked > 0 &&
+            (slotObj.max - slotObj.booked) >= people
           ) {
-            preferredDates.push(`${month}-${day.padStart(2, "0")}`);
+            weeks[weekKey].preferred.push(dateStr);
           } else if (
-            !sunset.reserved &&
-            sunset.booked === 0
+            !slotObj.reserved &&
+            slotObj.booked === 0
           ) {
-            // Fallback: not reserved, not booked
-            fallbackDates.push(`${month}-${day.padStart(2, "0")}`);
+            weeks[weekKey].fallback.push(dateStr);
           }
         });
-        if (preferredDates.length > 0) {
-          availableDates.push(...preferredDates);
+      });
+      Object.values(weeks).forEach(({ preferred, fallback }) => {
+        if (preferred.length > 0) {
+          availableDates.push(...preferred);
         } else {
-          availableDates.push(...fallbackDates);
+          availableDates.push(...fallback);
         }
       });
       return availableDates;
@@ -694,35 +751,40 @@ $(document).ready(function () {
 
   function updateEventDates() {
     eventDates = [];
-    if (selections.experience === CONSTANTS.tourOptions.experience[2]) { // Gourmet Sunset Cruise
-      if (selections.groupType === "Shared") {
-        // For each month, if there are preferred dates, eventDates = fallback dates (not reserved, not booked)
-        Object.entries(availabilityByMonth).forEach(([month, days]) => {
-          let preferredDates = [];
-          let fallbackDates = [];
-          Object.entries(days).forEach(([day, slots]) => {
-            const sunset = slots.sunset || {};
-            if (
-              !sunset.reserved &&
-              sunset.booked > 0 &&
-              (sunset.max - sunset.booked) >= selections.people
-            ) {
-              preferredDates.push(`${month}-${day.padStart(2, "0")}`);
-            } else if (
-              !sunset.reserved &&
-              sunset.booked === 0
-            ) {
-              fallbackDates.push(`${month}-${day.padStart(2, "0")}`);
-            }
-          });
-          if (preferredDates.length > 0) {
-            eventDates.push(...fallbackDates);
+    if (selections.groupType === "Shared") {
+      const weeks = {};
+      Object.entries(availabilityByMonth).forEach(([month, days]) => {
+        Object.entries(days).forEach(([day, slots]) => {
+          let slotObj;
+          if (selections.experience === CONSTANTS.tourOptions.experience[0]) slotObj = slots.wild || {};
+          else if (selections.experience === CONSTANTS.tourOptions.experience[1]) slotObj = slots.rainbow || {};
+          else if (selections.experience === CONSTANTS.tourOptions.experience[2]) slotObj = slots.sunset || {};
+          else slotObj = {};
+          const dateStr = `${month}-${day.padStart(2, "0")}`;
+          const weekKey = getISOWeek(dateStr);
+          if (!weeks[weekKey]) weeks[weekKey] = { preferred: [], fallback: [] };
+          if (
+            !slotObj.reserved &&
+            slotObj.booked > 0 &&
+            (slotObj.max - slotObj.booked) >= selections.people
+          ) {
+            weeks[weekKey].preferred.push(dateStr);
+          } else if (
+            !slotObj.reserved &&
+            slotObj.booked === 0
+          ) {
+            weeks[weekKey].fallback.push(dateStr);
           }
         });
-      } else if (selections.groupType === "Private") {
-        // --- NEW LOGIC: Private, do not show icon for booked or reserved ---
-        eventDates = [];
-      }
+      });
+      Object.values(weeks).forEach(({ preferred, fallback }) => {
+        if (preferred.length > 0) {
+          eventDates.push(...fallback);
+        }
+      });
+    } else if (selections.experience === CONSTANTS.tourOptions.experience[2] && selections.groupType === "Private") {
+      // --- NEW LOGIC: Private, do not show icon for booked or reserved ---
+      eventDates = [];
     }
   }
 
@@ -851,7 +913,8 @@ function updateSummaryAndPrice() {
   if (selections.combo && selections.combo.includes("Oh yeah")) {
     tourKey += " + Combo";
   }
-  if (selections.groupType === "Shared" && tourKey === "Gourmet Sunset Cruise") {
+  // Always add group type suffix for Shared
+  if (selections.groupType === "Shared") {
     tourKey += " (shared, prezzo a persona)";
   } else {
     tourKey += " (private)";
