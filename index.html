@@ -33,7 +33,7 @@
         <img src="assets/icons/cards.svg" alt="">
         <h2 class="titolo-cards">The Experiences</h2>
       </div>
-      <p class="sottotitolo">Private and shared tours departing from Porto Antico di Genova</p>
+      <p class="sottotitolo">Private and shared tours departing from <a href="#" onclick="startNavigation(44.410355, 8.927602); return false;">Porto Antico di Genova</a></p>
     </div>
     <div class="cards-container">
 
@@ -526,6 +526,24 @@
 </script>
 
 
+<script>
+function startNavigation(destLat, destLng) {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  const destination = `${destLat},${destLng}`;
+
+  if (isIOS) {
+    // Apple Maps - modalità navigazione
+    window.location.href = `maps://?daddr=${destination}&dirflg=d`;
+  } else if (isAndroid) {
+    // Google Maps App - modalità navigazione
+    window.location.href = `google.navigation:q=${destination}`;
+  } else {
+    // Fallback per desktop o browser sconosciuti
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}`, '_blank', 'noopener');
+  }
+}
+</script>
 
 
 
