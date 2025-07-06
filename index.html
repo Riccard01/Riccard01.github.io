@@ -403,6 +403,35 @@
   });
 </script>
 
+<script>
+  document.querySelectorAll(".card video").forEach(video => {
+    const card = video.closest(".card");
+
+    // Salva il background originale
+    const originalBackground = card.style.backgroundImage || window.getComputedStyle(card).backgroundImage;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    card.addEventListener("mouseenter", () => {
+      video.currentTime = 0;
+      video.style.opacity = "1";
+      video.play();
+
+      // Nascondi background (immagine)
+      card.style.backgroundImage = "none";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      video.pause();
+      video.currentTime = 0;
+      video.style.opacity = "0";
+
+      // Ripristina background
+      card.style.backgroundImage = originalBackground;
+    });
+  });
+</script>
 
 <script>
   let observer = null;
@@ -434,11 +463,16 @@
           if (video.paused) {
             video.play().catch(() => {});
           }
+
+          // Simula il comportamento hover anche su mobile
+          card.classList.add('hovered');
         } else {
           video.pause();
           video.currentTime = 0;
           video.style.opacity = '0';
           card.style.backgroundImage = card.dataset.bg;
+
+          card.classList.remove('hovered');
         }
       });
     }, options);
@@ -464,6 +498,8 @@
       if (card.dataset.bg) {
         card.style.backgroundImage = card.dataset.bg;
       }
+
+      card.classList.remove('hovered');
     });
 
     observer = null;
@@ -484,6 +520,7 @@
     }
   });
 </script>
+
 
 
 
