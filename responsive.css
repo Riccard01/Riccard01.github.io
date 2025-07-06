@@ -112,6 +112,7 @@
 .sottotitolo {
     max-width: 16.875rem;
     text-align: center;
+    line-height: 1.8rem;
 }
 
 .wrapper-experiences {
