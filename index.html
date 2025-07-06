@@ -37,8 +37,8 @@
     </div>
 
     <div class="wrapper-filter">
-      <div class="wrapper-1"><p>Main Experiences</p></div>
-      <div class="wrapper-2"><p>Special Events</p></div>
+      <div class="wrapper-1" id="btn-main" onclick="showMain()"><p>Main Experiences</p></div>
+      <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p>Special Events</p></div>
     </div>
 
     <div class="cards-container">
@@ -131,14 +131,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="wrapper-experiences" id="special">
-      <div class="titolo-wrapper">
-        <img src="assets/icons/sparkles.svg" alt="">
-        <h2 class="titolo-cards">Special ones</h2>
-      </div>
-      <p class="sottotitolo">One of a kind events you cannot miss!</p>
     </div>
 
     <!-- Special Events Section -->
@@ -551,6 +543,35 @@ function startNavigation(destLat, destLng) {
 }
 </script>
 
+
+<script>
+  function showMain() {
+    // Mostra il primo cards-container (quello senza id)
+    document.querySelectorAll('.cards-container')[0].style.display = 'flex';
+
+    // Nascondi special-events
+    document.getElementById('special-events').style.display = 'none';
+
+    // Aggiorna stile dei bottoni
+    document.getElementById('btn-main').classList.add('active');
+    document.getElementById('btn-special').classList.remove('active');
+  }
+
+  function showSpecial() {
+    // Nascondi il primo cards-container
+    document.querySelectorAll('.cards-container')[0].style.display = 'none';
+
+    // Mostra special-events
+    document.getElementById('special-events').style.display = 'flex';
+
+    // Aggiorna stile dei bottoni
+    document.getElementById('btn-main').classList.remove('active');
+    document.getElementById('btn-special').classList.add('active');
+  }
+
+  // Opzionale: imposta Main come default all’avvio
+  document.addEventListener("DOMContentLoaded", showMain);
+</script>
 
 
 
