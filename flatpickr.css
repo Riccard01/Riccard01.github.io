@@ -8,7 +8,7 @@
 
 .flatpickr-calendar {
   font-family: 'Plus Jakarta Sans';
-  border-radius: 16px;
+  border-radius: 0.4375rem;
   padding: 6px;
   width: 100%;
 }
