@@ -1,5 +1,9 @@
 @media screen and (max-width: 600px) {
 
+body {
+  gap: .5rem;
+}
+
   #continueBtn {
     margin-bottom: 10px;
   }
@@ -35,7 +39,7 @@
   }
 
   .section-heading {
-    padding: 1rem 1.625rem 1rem 1.625rem;
+    padding: 0rem 1.625rem 0rem 1.625rem;
   }
 
   hr {
