@@ -77,6 +77,13 @@
         align-self: stretch;
     }
 
+.card.focused {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+
     section.heading .wrapper {
         display: flex;
         max-width: 63.75rem;
@@ -88,6 +95,68 @@
         padding-top: 1.5rem;
     }
 
+
+
+
+
+.wrapper-filter {
+        display: flex;
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        background: #F8F9FA;
+        box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.07);
+        border-radius: 0.6875rem;
+        border: 1px solid rgba(183, 200, 219, 0.60);
+        background: #FFF;
+        padding: 0.3rem .3rem;
+        margin-top: 1.5rem;
+    }
+
+    .wrapper-filter .wrapper-1 {
+        display: flex;
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: #F8F9FA;
+        border-radius: 0.625rem;
+    }
+
+    .wrapper-filter .wrapper-2 {
+        display: flex;
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: #F8F9FA;
+        border-radius: 0.625rem;
+    }
+
+    .wrapper-filter .wrapper-1 p {
+        color: #04081B;
+        font-family: "Plus Jakarta Sans";
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper-filter .wrapper-2 p {
+        color: #878995;
+        font-family: "Plus Jakarta Sans";
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    
     .cards-container .card {
         width: 20.4298rem;
         height: 30.6639rem;
@@ -110,9 +179,14 @@
     }
 
 .sottotitolo {
-    max-width: 16.875rem;
+    max-width: 21.875rem;
     text-align: center;
     line-height: 1.8rem;
+}
+.wrapper-experiences img {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: 0rem;
 }
 
 .wrapper-experiences {
@@ -134,14 +208,14 @@
         justify-content: center;
         flex-direction: column;
         gap: 0.625rem;
-        padding-left: 1rem;
+        padding-left: 0rem;
         padding-top: 0rem;
     }
 
     .titolo-cards {
         color: #04081B;
         font-family: "Plus Jakarta Sans";
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
