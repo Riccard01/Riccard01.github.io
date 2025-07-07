@@ -38,6 +38,14 @@
         background: #0075FA;
     }
 
+    .con-scritta {
+      display: none;
+    }
+
+    .senza-scritta {
+        display: block;
+    }
+
     .heading {
         padding: 1rem;
     }
