@@ -34,7 +34,7 @@ let tourDetailsRetrived = {};
 
 function fetchAvailability() {
   // Replace with your actual web app URL
-  const url = 'https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxpmQJL8PSFWv1YlRhQFT7DoF5GMmzUJZ4wvSiUnswkDzkRJglVf0UYs6mC7nB1zT-1cA/exec';
   return $.getJSON(url).then(data => {
     availabilityByMonth = data.availability;
     tourDetailsRetrived = data.tours;
@@ -247,12 +247,16 @@ $(document).ready(function () {
     // Prevent multiple renders
     if (paypalRendered) return;
 
-    fetch('https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxpmQJL8PSFWv1YlRhQFT7DoF5GMmzUJZ4wvSiUnswkDzkRJglVf0UYs6mC7nB1zT-1cA/exec', {
       method: 'POST',
-      body: new URLSearchParams(bookingData)
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      body: JSON.stringify(bookingData)
     })
       .then(res => res.json())
       .then(data => {
+        console.log("PayPal order data:", data);
         if (!data.orderId) {
           throw new Error(`No PayPal order ID returned (${data.error})`);
         }
@@ -997,7 +1001,7 @@ function completePaymentInformation(orderId) {
 
   // Send booking data to proxy endpoint
   $.ajax({
-    url: "https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec",
+    url: "https://script.google.com/macros/s/AKfycbxpmQJL8PSFWv1YlRhQFT7DoF5GMmzUJZ4wvSiUnswkDzkRJglVf0UYs6mC7nB1zT-1cA/exec",
     method: "POST",
     data: bookingData,
     success: function (response) {
