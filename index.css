@@ -49,6 +49,80 @@ nav .wrapper {
   padding-right: env(safe-area-inset-right);
 }
 
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  padding: 1rem 1rem;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.dropdown-toggle img {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+}
+
+
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: -61px;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 146px;
+  border-radius: 7px;
+  padding: 16px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+
 nav button {
   display: flex;
   align-items: center;
