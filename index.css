@@ -381,6 +381,19 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   opacity: 1;
 }
 
+
+.telefono-special {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  animation: none; /* <--- questo è il fix fondamentale */
+}
+
+.card:hover .telefono-special,
+.card.hovered .telefono-special {
+  animation: phoneRing 0.6s ease-in-out infinite;
+  opacity: 1;
+}
+
 @keyframes phoneRing {
   0%   { transform: rotate(0deg); }
   15%  { transform: rotate(20deg); }
@@ -391,17 +404,6 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   100% { transform: rotate(0deg); }
 }
 
-
-.telefono-special {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover .telefono-special,
-.card.hovered .telefono-special {
-  animation: phoneRing 0.6s ease-in-out infinite;
-  opacity: 1;
-}
 
 .wrapper-experiences {
   display: flex;
