@@ -238,7 +238,7 @@ $(document).ready(function () {
       mode: 'createOrder',
       tour: selections.experience,     // e.g. "Wild Tour"
       persone: selections.people,      // e.g. 3
-      privato: selections.privato ? "Sì" : "No",
+      privato: selections.gourpType == "Private" ? "Sì" : "No",
       data: selections.date,
       note: selections.note || ""
     };
