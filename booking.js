@@ -249,9 +249,6 @@ $(document).ready(function () {
 
     fetch('https://script.google.com/macros/s/AKfycbxpmQJL8PSFWv1YlRhQFT7DoF5GMmzUJZ4wvSiUnswkDzkRJglVf0UYs6mC7nB1zT-1cA/exec', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
       body: new URLSearchParams(bookingData)
     })
       .then(res => res.json())
