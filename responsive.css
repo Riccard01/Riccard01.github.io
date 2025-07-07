@@ -222,6 +222,7 @@
         overflow-x: auto;
         justify-content: center;
         overflow-y: hidden;
+        width: 100%;
         gap: 1rem;
         /* opzionale: spazio tra le card */
         scroll-snap-type: x mandatory;
@@ -231,6 +232,9 @@
         /* spazio sopra e sotto */
     }
 
+    .cards-container-container {
+      width: 100%;
+    }
     .cards-container>div {
         flex: 0 0 auto;
         scroll-snap-align: center; 
