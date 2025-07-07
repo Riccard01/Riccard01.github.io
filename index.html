@@ -543,35 +543,42 @@ function startNavigation(destLat, destLng) {
 }
 </script>
 
-
 <script>
-  function showMain() {
-    // Mostra il primo cards-container (quello senza id)
-    document.querySelectorAll('.cards-container')[0].style.display = 'flex';
+function showMain() {
+  const main = document.querySelectorAll('.cards-container')[0];
+  const special = document.getElementById('special-events');
 
-    // Nascondi special-events
-    document.getElementById('special-events').style.display = 'none';
+  main.style.display = 'flex';
+  special.style.display = 'none';
 
-    // Aggiorna stile dei bottoni
-    document.getElementById('btn-main').classList.add('active');
-    document.getElementById('btn-special').classList.remove('active');
-  }
+  main.classList.remove('animate');
+  void main.offsetWidth;
+  main.classList.add('animate');
 
-  function showSpecial() {
-    // Nascondi il primo cards-container
-    document.querySelectorAll('.cards-container')[0].style.display = 'none';
+  document.getElementById('btn-main').classList.add('active');
+  document.getElementById('btn-special').classList.remove('active');
+}
 
-    // Mostra special-events
-    document.getElementById('special-events').style.display = 'flex';
+function showSpecial() {
+  const main = document.querySelectorAll('.cards-container')[0];
+  const special = document.getElementById('special-events');
 
-    // Aggiorna stile dei bottoni
-    document.getElementById('btn-main').classList.remove('active');
-    document.getElementById('btn-special').classList.add('active');
-  }
+  main.style.display = 'none';
+  special.style.display = 'flex';
 
-  // Opzionale: imposta Main come default all’avvio
-  document.addEventListener("DOMContentLoaded", showMain);
+  special.classList.remove('animate');
+  void special.offsetWidth;
+  special.classList.add('animate');
+
+  document.getElementById('btn-main').classList.remove('active');
+  document.getElementById('btn-special').classList.add('active');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showMain();
+});
 </script>
+
 
 
 
