@@ -442,7 +442,7 @@
 
   const setupObserver = () => {
     const options = {
-      threshold: 1.0 // Cambia in 0.5 o 0.25 se vuoi che parta prima
+      threshold: 1.0 // La card deve essere completamente visibile
     };
 
     observer = new IntersectionObserver((entries) => {
@@ -450,38 +450,46 @@
         const card = entry.target;
         const video = card.querySelector('video');
 
-        if (!video) return;
-
         // Salva il background una volta
         if (!card.dataset.bg) {
           card.dataset.bg = getComputedStyle(card).backgroundImage;
         }
 
         if (entry.isIntersecting) {
-          card.style.backgroundImage = 'none';
-          video.muted = true;
-          video.playsInline = true;
-          video.style.opacity = '1';
-          video.currentTime = 0;
+          // CARD VISIBILE
+          card.classList.add('hovered');
 
-          if (video.paused) {
+          if (video) {
+            card.style.backgroundImage = 'none';
+            video.muted = true;
+            video.playsInline = true;
+            video.style.opacity = '1';
+            video.currentTime = 0;
             video.play().catch(() => {});
           }
 
-          // Simula il comportamento hover anche su mobile
-          card.classList.add('hovered');
         } else {
-          video.pause();
-          video.currentTime = 0;
-          video.style.opacity = '0';
-          card.style.backgroundImage = card.dataset.bg;
-
+          // CARD NON PIÙ COMPLETAMENTE VISIBILE
           card.classList.remove('hovered');
+
+          if (video) {
+            video.pause();
+            video.currentTime = 0;
+            video.style.opacity = '0';
+            card.style.backgroundImage = card.dataset.bg;
+          }
+
+          // 🔁 Reset animazione telefono-special e freccia
+          const animatedIcons = card.querySelectorAll('.freccia, .telefono-special');
+          animatedIcons.forEach(icon => {
+            icon.style.animation = 'none';
+            icon.offsetHeight; // forza reflow
+            icon.style.animation = '';
+          });
         }
       });
     }, options);
 
-    // Osserva tutte le .card della pagina
     document.querySelectorAll('.card').forEach(card => {
       observer.observe(card);
     });
@@ -504,18 +512,23 @@
       }
 
       card.classList.remove('hovered');
+
+      const animatedIcons = card.querySelectorAll('.freccia, .telefono-special');
+      animatedIcons.forEach(icon => {
+        icon.style.animation = 'none';
+        icon.offsetHeight;
+        icon.style.animation = '';
+      });
     });
 
     observer = null;
   };
 
-  // Attivazione iniziale solo su mobile
   const mql = window.matchMedia("(max-width: 900px)");
   if (mql.matches) {
     setupObserver();
   }
 
-  // Riascolta i cambi di dimensione schermo
   mql.addEventListener("change", e => {
     if (e.matches) {
       setupObserver();  // entra in mobile
@@ -524,6 +537,7 @@
     }
   });
 </script>
+
 
 
 <script>
