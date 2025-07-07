@@ -34,7 +34,7 @@ let tourDetailsRetrived = {};
 
 function fetchAvailability() {
   // Replace with your actual web app URL
-  const url = 'https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec';
   return $.getJSON(url).then(data => {
     availabilityByMonth = data.availability;
     tourDetailsRetrived = data.tours;
@@ -247,7 +247,7 @@ $(document).ready(function () {
     // Prevent multiple renders
     if (paypalRendered) return;
 
-    fetch('https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec', {
       method: 'POST',
       body: new URLSearchParams(bookingData)
     })
@@ -997,7 +997,7 @@ function completePaymentInformation(orderId) {
 
   // Send booking data to proxy endpoint
   $.ajax({
-    url: "https://script.google.com/macros/s/AKfycbxqflPM2CFlCqX3NifNslG5Bp-8aEVq2WmPQpsQ33JkA9elgg3N0pJ2k1RCGQeCsBYY/exec",
+    url: "https://script.google.com/macros/s/AKfycbxnWmrEKx9ucGm1aWr_u73W7iJQmaaqbyJNkIe-w0H9ICkrsp4B_wTL0IbrCqViu-jaQw/exec",
     method: "POST",
     data: bookingData,
     success: function (response) {
