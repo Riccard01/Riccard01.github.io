@@ -215,22 +215,16 @@
         flex-shrink: 0;
     }
 
-    .the-rainbow-tour-card {
-      margin-left: 1rem;
-    }
-
-    .gourmet-sunset-cruise-card {
-      margin-right: 1rem;
-    }
-
     .cards-container {
         display: flex;
         flex-direction: row;
         overflow-x: auto;
         justify-content: center;
         overflow-y: hidden;
-        width: fit-content;
+        width: 100%;
         gap: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         /* opzionale: spazio tra le card */
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
