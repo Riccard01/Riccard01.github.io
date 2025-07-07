@@ -236,6 +236,9 @@
 
     .cards-container-container {
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .cards-container>div {
         flex: 0 0 auto;
