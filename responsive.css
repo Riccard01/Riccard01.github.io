@@ -233,7 +233,7 @@
 
     .cards-container>div {
         flex: 0 0 auto;
-        scroll-snap-align: center;
+        scroll-snap-align: center; 
     }
 
 .cards-container .card:hover,
