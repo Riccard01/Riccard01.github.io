@@ -252,11 +252,10 @@ $(document).ready(function () {
       headers: {
         'Content-Type': 'text/plain;charset=utf-8',
       },
-      body: JSON.stringify(bookingData)
+      body: new URLSearchParams(bookingData)
     })
       .then(res => res.json())
       .then(data => {
-        console.log("PayPal order data:", data);
         if (!data.orderId) {
           throw new Error(`No PayPal order ID returned (${data.error})`);
         }
