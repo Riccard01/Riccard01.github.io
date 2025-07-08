@@ -613,3 +613,12 @@ section img {
 .option-row.open .chevron-icon {
   transform: rotate(180deg);
 }
+
+
+.con-scritta {
+  padding-right: 60px;
+}
+
+.senza-scritta {
+  display: none;
+}

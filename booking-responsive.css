@@ -72,7 +72,13 @@ body {
 
 
 
+    .con-scritta {
+      display: none;
+    }
 
+    .senza-scritta {
+        display: block;
+    }
 
 
 
