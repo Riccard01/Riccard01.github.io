@@ -902,7 +902,7 @@ flex: 1 0 0;
 
 .wrapper-filter .wrapper-2 {
   display: flex;
-  width: 184.97px;
+  width: fit-content;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
