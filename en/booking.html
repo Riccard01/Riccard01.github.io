@@ -334,6 +334,19 @@
 
     </div>
 
+<script>
+  const toggle = document.querySelector('.dropdown-toggle');
+  const menu = document.querySelector('.dropdown-menu');
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', () => {
+    menu.style.display = 'none';
+  });
+</script>
 
 
 </body>
