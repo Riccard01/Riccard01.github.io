@@ -38,6 +38,15 @@
         background: #0075FA;
     }
 
+
+    section.heading .wrapper h1 {
+      text-align: center;
+    }
+
+    section.heading .wrapper p {
+      text-align: center;
+    }
+
     .con-scritta {
       display: none;
     }
@@ -111,7 +120,8 @@
         display: flex;
         max-width: 63.75rem;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
         gap: 0.625rem;
         align-self: stretch;
         width: 100%;
@@ -270,6 +280,7 @@
     max-width: 21.875rem;
     text-align: center;
     line-height: 1.8rem;
+    font-size: 1rem;
 }
 .wrapper-experiences img {
     width: 1.7rem;
