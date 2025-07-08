@@ -33,9 +33,8 @@ nav {
   padding: 1.875rem;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 1);
   border-bottom: 1px solid #DBDBDB;
-  backdrop-filter: blur(7.800000190734863px);
   z-index: 100;
 }
 
