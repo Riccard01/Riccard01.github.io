@@ -7,6 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "A-DBG3NyHcWQMkDY5",
+            });
+        })();
+    </script>
     <script src="booking.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap"
@@ -24,11 +33,12 @@
 
 <body>
     <nav>
-      <div class="wrapper">
-        <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
-        <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
-<a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Contact us!</span></button></a>
-      </div>
+        <div class="wrapper">
+            <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
+            <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+            <a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Contact
+                        us!</span></button></a>
+        </div>
     </nav>
     <div id="step-1" class="booking-step">
         <section class="booking-table">

@@ -242,8 +242,7 @@ $(document).ready(function () {
       data: selections.date,
       note: selections.note || ""
     };
-
-
+    
     // Prevent multiple renders
     if (paypalRendered) return;
 
@@ -1001,14 +1000,50 @@ function completePaymentInformation(orderId) {
     method: "POST",
     data: bookingData,
     success: function (response) {
-      alert("Prenotazione inviata!\n\nRiceverai una mail di conferma a breve.");
-      // Show the summary in a modal/overlay in the same page
-      showBookingSummaryModal(summaryHtml);
+      sendConfirmationEmailWithEmailJS(summaryHtml, email);
     },
     error: function (xhr, status, error) {
       alert("Errore nell'invio della prenotazione: " + error);
     }
   });
+}
+
+// Send confirmation email using EmailJS
+function sendConfirmationEmailWithEmailJS(htmlContent, recipientEmail) {
+  // Replace these with your EmailJS credentials
+  const serviceID = 'service_nuyv4ei';
+  const templateID = 'template_zsc2c0t';
+
+  // Sanitize HTML for EmailJS: remove problematic template delimiters and invisible chars
+  let safeHtmlContent = htmlContent
+    .replace(/\u2028|\u2029/g, '') // Remove line/paragraph separators
+    .replace(/\u200B/g, '') // Remove zero-width space
+    .replace(/\{\{/g, '{ {') // Avoid EmailJS template parsing
+    .replace(/\}\}/g, '} }')
+    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '') // Remove any script tags for safety
+    .replace(/<iframe[\s\S]*?>[\s\S]*?<\/iframe>/gi, ''); // Remove iframes for safety
+
+  // You can pass variables to your template as needed
+  const templateParams = {
+    to_email: recipientEmail,
+    message_html: safeHtmlContent,
+    subject: 'Conferma Prenotazione leggeroTOURS',
+    from_name: 'leggeroTOURS',
+    reply_to: 'leggerotours@gmail.com'
+  };
+
+  if (typeof emailjs === 'undefined') {
+    console.log("gay")
+    return;
+  }
+
+  emailjs.send(serviceID, templateID, templateParams)
+    .then(function(response) {
+      alert("Prenotazione inviata!\n\nRiceverai una mail di conferma a breve.");
+      showBookingSummaryModal(htmlContent);
+    }, function(error) {
+      console.error('Errore invio email:', error);
+    });
 }
 
 // Show booking summary in a modal/overlay
