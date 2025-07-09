@@ -242,7 +242,7 @@ $(document).ready(function () {
       data: selections.date,
       note: selections.note || ""
     };
-    
+
     // Prevent multiple renders
     if (paypalRendered) return;
 
@@ -343,17 +343,16 @@ $(document).ready(function () {
 
   function handleDropdownSelection($row, value) {
     const key = $row.data('key');
-
     showFakeLoadingOverlay();
-
     if (key === "slot") {
-      value = value.split(' (')[0];
+      // Now value is the time string, store it directly
+      selections[key] = value;
+      $row.find('.option-value p').first().text(value);
+    } else {
+      selections[key] = value;
+      $row.find('.option-value p').first().text(value);
     }
-
-    selections[key] = value;
-    $row.find('.option-value p').first().text(value);
     $('.option-row').removeClass('dropdown-open');
-
     const availableDates = getAvailableDatesForSelection();
     if (!availableDates.includes(selections.date)) {
       if (key === 'combo' && value === CONSTANTS.tourOptions.combo[0]) {
@@ -364,7 +363,6 @@ $(document).ready(function () {
         if (fp) fp.clear();
       }
     }
-
     updateUI();
     updateCalendar();
   }
@@ -432,7 +430,7 @@ $(document).ready(function () {
     ) {
       // If Full Day or Combo is selected, lock to Private
       if (
-        selections.slot === CONSTANTS.tourOptions.slot[1] || // Full Day
+        selections.slot === CONSTANTS.texts.slotTimes["Full Day"] || // Full Day
         selections.combo === CONSTANTS.tourOptions.combo[0]   // Oh yeah! (extended to midnight)
       ) {
         lockGroupType = true;
@@ -485,12 +483,13 @@ $(document).ready(function () {
     if (!isGourmet) {
       // Lock slot dropdown if Rainbow Tour is selected
       if (selections.experience === CONSTANTS.tourOptions.experience[1] || selections.experience === CONSTANTS.tourOptions.experience[2]) { // Rainbow Tour
-        selections.slot = CONSTANTS.tourOptions.slot[0];
-        $slotRow.find('.option-value p').first().text(`${CONSTANTS.tourOptions.slot[0]} (${CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]]})`);
+        selections.slot = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]];
+        const slotTime = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]];
+        $slotRow.find('.option-value p').first().text(slotTime);
         $slotRow.addClass('locked');
-        $slotDD.append(`<div class="dropdown-item disabled">${CONSTANTS.tourOptions.slot[0]} (${CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]]})</div>`);
+        $slotDD.append(`<div class="dropdown-item disabled">${slotTime}</div>`);
       } else {
-        // Fix: Determine slot availability for Wild Tour
+        // Show only time strings for Wild Tour
         let slotOptions = [];
         if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
           slotOptions.push({ label: CONSTANTS.tourOptions.slot[0], time: CONSTANTS.texts.slotTimes["Tour Slot"] });
@@ -500,17 +499,17 @@ $(document).ready(function () {
         }
 
         slotOptions.forEach(opt => {
-          $slotDD.append(`<div class="dropdown-item">${opt.label} (${opt.time})</div>`);
+          $slotDD.append(`<div class="dropdown-item">${opt.time}</div>`);
         });
 
-        // Update visible value with time
-        let selectedOpt = slotOptions.find(opt => opt.label === selections.slot);
+        // Update visible value with only the time
+        let selectedOpt = slotOptions.find(opt => opt.time === selections.slot);
         if (!selectedOpt) {
           selectedOpt = slotOptions[0];
-          selections.slot = selectedOpt ? selectedOpt.label : "";
+          selections.slot = selectedOpt ? selectedOpt.time : "";
         }
         if (selectedOpt) {
-          $slotRow.find('.option-value p').first().text(`${selectedOpt.label} (${selectedOpt.time})`);
+          $slotRow.find('.option-value p').first().text(selectedOpt.time);
         }
 
         // Only lock if there is one or zero options
@@ -523,10 +522,12 @@ $(document).ready(function () {
     } else {
       // Gourmet Sunset Cruise
       $slotRow.show(); // Always show slot row for Gourmet
-      $slotRow.find('.option-value p').first().text(CONSTANTS.tourOptions.slot[0] + ' (' + CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[2]] + ')');
+      const slotTime = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[2]];
+      selections.slot = slotTime;
+      $slotRow.find('.option-value p').first().text(slotTime);
       $slotRow.addClass('locked');
       $slotDD.empty();
-      $slotDD.append(`<div class="dropdown-item disabled">${CONSTANTS.tourOptions.slot[0]} (${CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[2]]})</div>`);
+      $slotDD.append(`<div class="dropdown-item disabled">${slotTime}</div>`);
     }
 
     // Combo
@@ -535,8 +536,10 @@ $(document).ready(function () {
 
     // Combo should only be disabled if not slot 2 (Full Day), not Oh yeah! (extended to midnight) selected, and not Rainbow Tour
     // Otherwise, always allow clicking Oh yeah! (extended to midnight) to clear the date
+    // Compare slot using the actual slot time string, not the label
+    const fullDayTime = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.slot[1]];
     if (
-      !(selections.slot === CONSTANTS.tourOptions.slot[1]) && // Not Full Day
+      !(selections.slot === fullDayTime) && // Not Full Day (by time string)
       !(selections.combo === CONSTANTS.tourOptions.combo[0]) && // Not Oh yeah! (extended to midnight)
       !(selections.experience === CONSTANTS.tourOptions.experience[1]) // Not Rainbow Tour
     ) {
@@ -547,7 +550,7 @@ $(document).ready(function () {
       // Also disable for Wild Tour and not Full Day
       if (
         selections.experience === CONSTANTS.tourOptions.experience[0] &&
-        selections.slot !== CONSTANTS.tourOptions.slot[1]
+        selections.slot !== fullDayTime
       ) {
         comboDisabled = true;
       }
@@ -559,7 +562,7 @@ $(document).ready(function () {
     });
 
     // Only auto-select No combo if combo is actually disabled and Oh yeah! (extended to midnight) is not selected
-    if ((comboDisabled && selections.combo !== CONSTANTS.tourOptions.combo[0]) || selections.experience === CONSTANTS.tourOptions.experience[0] && selections.slot === CONSTANTS.tourOptions.slot[0]) {
+    if ((comboDisabled && selections.combo !== CONSTANTS.tourOptions.combo[0]) || selections.experience === CONSTANTS.tourOptions.experience[0] && selections.slot === CONSTANTS.texts.slotTimes["Tour Slot"]) {
       selections.combo = CONSTANTS.tourOptions.combo[1];
       $comboRow.addClass('locked');
     } else {
@@ -600,7 +603,7 @@ $(document).ready(function () {
     // Slot usage
     if (selections.experience === CONSTANTS.tourOptions.experience[0]) { // Wild Tour
       slotsUsed = [1];
-      if (selections.slot === CONSTANTS.tourOptions.slot[1]) { // Full Day
+      if (selections.slot === CONSTANTS.texts.slotTimes["Full Day"]) { // Full Day
         slotsUsed.push(2);
       }
       if (selections.combo === CONSTANTS.tourOptions.combo[0]) { // Oh yeah! (extended to midnight)
@@ -636,14 +639,14 @@ $(document).ready(function () {
     // Handle Luxury Day (Wild Tour + Full Day + Combo, always private)
     if (
       selections.experience === CONSTANTS.tourOptions.experience[0] && // Wild Tour
-      selections.slot === CONSTANTS.tourOptions.slot[1] && // Full Day
+      selections.slot === CONSTANTS.texts.slotTimes["Full Day"] && // Full Day
       selections.combo === CONSTANTS.tourOptions.combo[0]
     ) {
       tourKey = "Luxury Day";
     }
     if (
       selections.experience === CONSTANTS.tourOptions.experience[0] && // Wild Tour
-      selections.slot === CONSTANTS.tourOptions.slot[1] && // Full Day
+      selections.slot === CONSTANTS.texts.slotTimes["Full Day"] && // Full Day
       selections.combo === CONSTANTS.tourOptions.combo[1]
     ) {
       tourKey = "Full Day";
@@ -913,7 +916,31 @@ $(document).ready(function () {
 function updateSummaryAndPrice() {
   // Update the summary UI
   $('#summary-experience').text(selections.experience || "-");
-  $('#summary-slot').text(selections.slot || "-");
+  // Show slot time instead of label
+  let slotSummary = "-";
+  // Determine slot summary based on experience, slot, and combo
+  if (selections.experience === CONSTANTS.tourOptions.experience[2]) {
+    // Gourmet Sunset Cruise
+    slotSummary = CONSTANTS.texts.slotTimes["Gourmet Sunset Cruise"] || "-";
+  } else if (selections.experience === CONSTANTS.tourOptions.experience[1]) {
+    // Rainbow Tour
+    slotSummary = CONSTANTS.texts.slotTimes["Rainbow Tour"] || "-";
+  } else if (selections.experience === CONSTANTS.tourOptions.experience[0]) {
+    // Wild Tour
+    if (selections.slot === CONSTANTS.texts.slotTimes["Full Day"]) {
+      // Full Day
+      slotSummary = CONSTANTS.texts.slotTimes["Full Day"] || "-";
+    } else {
+      // Tour Slot
+      slotSummary = CONSTANTS.texts.slotTimes["Tour Slot"] || "-";
+    }
+  } else if (selections.slot) {
+    slotSummary = selections.slot;
+  }
+  if (selections.combo === CONSTANTS.tourOptions.combo[0]) {
+    slotSummary += " + combo";
+  }
+  $('#summary-slot').text(slotSummary);
   $('#summary-combo').text(selections.combo || "-");
   $('#summary-people').text(selections.people || "-");
   $('#summary-groupType').text(selections.groupType || "-");
@@ -927,18 +954,6 @@ function updateSummaryAndPrice() {
       })
       : "-"
   );
-
-  // Determine if current selection is for a Gourmet tour
-  const isGourmet = selections.experience === CONSTANTS.tourOptions.experience[2]; // "Gourmet Sunset Cruise"
-
-  // Hide slot and combo containers accordingly
-  $('#summary-slot-container').toggle(
-    !(isGourmet || (
-      selections.experience === CONSTANTS.tourOptions.experience[0] && // "Wild Tour"
-      selections.slot === CONSTANTS.tourOptions.slot[1] // "Full Day"
-    ) || selections.experience !== CONSTANTS.tourOptions.experience[1]) // not "Rainbow Tour"
-  );
-  $('#summary-combo-container').toggle(!isGourmet);
 
   // Calculate price based on selected tour name and number of people
   let tourKey = selections.experience;
@@ -1071,10 +1086,10 @@ function sendConfirmationEmailWithEmailJS(htmlContent, recipientEmail) {
   }
 
   emailjs.send(serviceID, templateID, templateParams)
-    .then(function(response) {
+    .then(function (response) {
       alert("Prenotazione inviata!\n\nRiceverai una mail di conferma a breve.");
       showBookingSummaryModal(htmlContent);
-    }, function(error) {
+    }, function (error) {
       console.error('Errore invio email:', error);
     });
 }
