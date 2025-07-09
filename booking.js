@@ -790,7 +790,40 @@ $(document).ready(function () {
   function updateCalendar() {
     if (!fp || typeof fp.set !== 'function') return;
     updateEventDates();
-    const availableDates = getAvailableDatesForSelection();
+    let availableDates = getAvailableDatesForSelection();
+
+    // Prevent selecting today if slot start time already passed
+    if (availableDates.includes(flatpickr.formatDate(new Date(), 'Y-m-d'))) {
+      // Get slot start time string
+      let slotTimeStr = '';
+      if (selections.experience && selections.experience.includes('Gourmet')) {
+        slotTimeStr = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[2]];
+      } else if (selections.experience === CONSTANTS.tourOptions.experience[1]) {
+        slotTimeStr = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]];
+      } else if (selections.slot && CONSTANTS.texts.slotTimes[selections.slot]) {
+        slotTimeStr = CONSTANTS.texts.slotTimes[selections.slot];
+      }
+      // Parse start time (assume format like '9am - 1.30pm' or '14:00 - 18:00')
+      let startTime = null;
+      if (slotTimeStr) {
+        let match = slotTimeStr.match(/(\d{1,2})([:\.]\d{2})?\s*(am|pm)?/i);
+        if (match) {
+          let hour = parseInt(match[1], 10);
+          let min = match[2] ? parseInt(match[2].replace(/[:\.]/, ''), 10) : 0;
+          let ampm = match[3] ? match[3].toLowerCase() : '';
+          if (ampm === 'pm' && hour < 12) hour += 12;
+          if (ampm === 'am' && hour === 12) hour = 0;
+          startTime = new Date();
+          startTime.setHours(hour, min, 0, 0);
+        }
+      }
+      if (startTime && new Date() > startTime) {
+        // Remove today from availableDates
+        const todayStr = flatpickr.formatDate(new Date(), 'Y-m-d');
+        availableDates = availableDates.filter(d => d !== todayStr);
+      }
+    }
+
     fp.set('enable', availableDates);
     // If date is cleared, keep calendar on last viewed month
     if (!selections.date && lastViewedMonth) {
