@@ -137,7 +137,7 @@
 
 .cards-container#special-events {
     display: none;
-padding-top: 1.5rem;
+padding-top: 0rem !important;
 }
 
   .video-wrapper {
@@ -163,17 +163,23 @@ padding-top: 1.5rem;
   justify-content: center;
   align-items: center;
   gap: 0rem;
-  background: #F8F9FA;
+  background: #FFF;
   border-radius: 0.6875rem;
   padding: 0rem;
   bottom: -1.3rem;
-  left: 2%;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid white;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.07) !important;
 }
 
 /* Transizione fluida */
 .wrapper-filter .wrapper-1,
 .wrapper-filter .wrapper-2 {
   transition: none !important;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 
@@ -182,11 +188,13 @@ padding-top: 1.5rem;
 .wrapper-filter .wrapper-2:not(.active) {
   border: 1px solid transparent;
   box-shadow: none;
+  white-space: nowrap;
 }
 
 /* Stato ATTIVO */
 .wrapper-filter .active {
   background: white !important;
+  white-space: nowrap;
   border: 1px solid rgba(183, 200, 219, 0.60) !important;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.07) !important;
 }
@@ -194,12 +202,14 @@ padding-top: 1.5rem;
 /* Testo attivo */
 .wrapper-filter .active p {
   color: #04081B !important;
+  white-space: nowrap;
 }
 
 /* Testo inattivo */
 .wrapper-filter .wrapper-1:not(.active) p,
 .wrapper-filter .wrapper-2:not(.active) p {
   color: #878995;
+  white-space: nowrap;
 }
 
 /* Struttura e stile base (senza colore attivo) */
@@ -209,18 +219,19 @@ padding-top: 1.5rem;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #F8F9FA;
+  background: #FFF;
   border-radius: 0.625rem;
+  white-space: nowrap;
 }
 
 .wrapper-filter .wrapper-2 {
   display: flex;
-  width: 184.97px;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #F8F9FA;
+  background: #FFF;
   border-radius: 0.625rem;
+  white-space: nowrap;
 }
 
 /* Colori testo */
@@ -233,6 +244,7 @@ padding-top: 1.5rem;
   line-height: normal;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
 }
 
 .wrapper-filter .wrapper-2 p {
@@ -244,6 +256,7 @@ padding-top: 1.5rem;
   line-height: normal;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
 }
 
 
