@@ -964,7 +964,9 @@ flex: 1 0 0;
     justify-content: center;
 }
 
-
+footer img {
+    filter: brightness(0) invert(1);
+}
 
     .titolo-wrapper {
         display: flex;
@@ -1023,7 +1025,7 @@ footer .wrapper {
 }
 
 footer .wrapper p:first-of-type {
-  color: #04081B;
+  color: #ffffff;
   font-family: "Plus Jakarta Sans";
   font-size: 1.125rem;
   font-weight: 700;
@@ -1033,7 +1035,7 @@ footer .wrapper p:first-of-type {
 }
 
 footer .wrapper p:last-of-type {
-  color: rgba(95, 96, 99, 0.99);
+  color: rgba(255, 255, 255, 0.99);
   font-family: "Plus Jakarta Sans";
   font-size: 0.82588rem;
   font-weight: 400;

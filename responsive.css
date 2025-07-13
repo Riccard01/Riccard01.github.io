@@ -201,7 +201,7 @@ padding-top: 0rem !important;
 
 /* Testo attivo */
 .wrapper-filter .active p {
-  color: #04081B !important;
+  color: #0075FA !important;
   white-space: nowrap;
 }
 
@@ -236,7 +236,7 @@ padding-top: 0rem !important;
 
 /* Colori testo */
 .wrapper-filter .wrapper-1 p {
-  color: #04081B;
+  color: #0075FA;
   font-family: "Plus Jakarta Sans";
   font-size: 1rem;
   font-style: normal;
@@ -248,7 +248,7 @@ padding-top: 0rem !important;
 }
 
 .wrapper-filter .wrapper-2 p {
-  color: #878995;
+  color: #0075FA;
   font-family: "Plus Jakarta Sans";
   font-size: 1rem;
   font-style: normal;
@@ -369,7 +369,7 @@ padding-top: 0rem !important;
 
 
     footer {
-        background: #F8F9FA;
+        background: #0075FA;
         padding: 1.875rem 0.9375rem;
         align-items: center;
         justify-content: center;
