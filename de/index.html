@@ -23,44 +23,42 @@
   <body>
     <nav>
       <div class="wrapper">
-        <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
-        <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+        <img class="con-scritta" src="assets/images/logo.jpg" alt="Logo Leggero Tours">
+        <img class="senza-scritta" src="assets/images/logo.svg" alt="Logo Leggero Tours">
           <div class="language-dropdown">
             <button class="dropdown-toggle">
-              <img src="/assets/icons/flags/de.svg" alt="Deutsch" />
+              <img src="assets/icons/flags/de.svg" alt="Deutsch" />
             </button>
             <ul class="dropdown-menu">
-              <li onclick="/window.location.href='en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
-              <li onclick="/window.location.href='de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
-              <li onclick="/window.location.href='fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
-              <li onclick="/window.location.href='es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
-              <li onclick="/window.location.href='ja/index.html'"><a href="/ja/index.html"><img src="/assets/icons/flags/ja.svg" alt="">日本語</a></li>
-              <li onclick="/window.location.href='zh-cn/index.html'"><a href="/zh-cn/index.html"><img src="/assets/icons/flags/zh-cn.svg" alt="">简体中文</a></li>
-              <li onclick="/window.location.href='zh-tw/index.html'"><a href="/zh-tw/index.html"><img src="/assets/icons/flags/zh-tw.svg" alt="">繁體中文</a></li>
+              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italienisch</a></li>
+              <li onclick="window.location.href='en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">Englisch</a></li>
+              <li onclick="window.location.href='de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li onclick="window.location.href='fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Französisch</a></li>
+              <li onclick="window.location.href='es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Spanisch</a></li>
+              <li onclick="window.location.href='ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">Russisch</a></li>
             </ul>
           </div>
-<a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Kontaktiere uns!</span></button></a>
+<a href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg" alt=""><span>Kontaktieren Sie uns!</span></button></a>
       </div>
     </nav>
+
+    <div class="video-wrapper">
+      <video class="video-heading" id="video-progress" src="assets/videos/intro.mp4" autoplay muted loop playsinline style="display: none; object-fit: cover;"></video>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
     <section class="heading">
       <div class="wrapper">
         <h1>Erleben Sie den Golf von Ligurien!</h1>
-        <p>Es geht nicht nur um Wellen oder Sonnenuntergänge, sondern darum, wie Sie sich fühlen. An Bord von Leggero werden Sie sich gehört, willkommen und leichter fühlen. Denn hier wird jede Reise zu einer gemeinsamen Geschichte, die bleibt.</p>
-
+        <p>Genießen Sie die Ruhe einer privaten Tour oder teilen Sie das Erlebnis mit Menschen aus aller Welt: Die Reise beginnt am Alten Hafen von Genua, aber die Erinnerung bleibt bei Ihnen.</p>
       </div>
     </section>
-    <div class="wrapper-experiences">
-      <div class="titolo-wrapper">
-        <img src="/assets/icons/cards.svg" alt="">
-        <h2 class="titolo-cards">Die Erlebnisse</h2>
+      <div class="wrapper-filter">
+        <div class="wrapper-1" id="btn-main" onclick="showMain()"><p>Hauptangebote (3)</p></div>
+        <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p>Spezialangebote (4)</p></div>
       </div>
-      <p class="sottotitolo">Private und gemeinsame Touren ab <a href="#" onclick="startNavigation(44.410355, 8.927602); return false;">Alter Hafen von Genua</a></p>
     </div>
-
-    <div class="wrapper-filter">
-      <div class="wrapper-1" id="btn-main" onclick="showMain()"><p style="@media screen and (max-width: 900px) { font-size: 0.75rem;}">Haupterlebnisse (3)</p></div>
-      <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p style="@media screen and (max-width: 900px) { font-size: 0.75rem;}">Spezielle Events (4)</p></div>
-    </div>
+    
 
     <div class="cards-container-container">
     <div class="cards-container">
@@ -68,25 +66,28 @@
 
 
       <div class="the-rainbow-tour-card" onclick="window.location.href='booking.html?experience=rainbow'">
+        
         <div class="card">
-          <video src="/assets/videos/rainbow.mp4"></video>
+          
+          <video src="assets/videos/rainbow.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
-                <h1>Die Rainbow Tour</h1>
+                <h1>The Rainbow Tour</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Ein entspannter Nachmittag entlang der Küste, mit Musik, Gesprächen und sanften Wellen. Perfekt für alle, die abschalten und das Meer in aller Ruhe genießen möchten.</p>
+              <p>Ein entspannter Nachmittag entlang der Küste, mit Musik, Gesprächen und sanften Wellen. Perfekt für alle, die abschalten und das Meer ohne Eile genießen möchten.</p>
               <div class="wrapper-descrizione-freccia">
-                <h3>Ab 72 € pro Person</h3>
-                <img class="freccia" src="/assets/icons/arrow-right.svg" alt="Pfeil">
+                <h3>Ab €72 pro Person</h3>
+                <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
               </div>
             </div>
           </div>
@@ -97,25 +98,26 @@
 
       <div class="the-wild-tour-card" onclick="window.location.href='booking.html?experience=wild'">
         <div class="card">
-          <video src="/assets/videos/wildtour.mp4"></video>
+                    
+          <video src="assets/videos/wildtour.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
-                <h1>Die Wild Tour</h1>
-
+                <h1>The Wild Tour</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
               <p>Entdecken Sie den ganzen Tag wilde Orte und geheime Buchten. Von Punta Chiappa bis Portofino, vorbei an Paraggi und San Fruttuoso. Natur, Sprünge ins Wasser und Freiheit.</p>
                 <div class="wrapper-descrizione-freccia">
-                  <h3>Ab 80 € pro Person</h3>
-                  <img class="freccia" src="/assets/icons/arrow-right.svg" alt="Pfeil">
+                  <h3>Ab €80 pro Person</h3>
+                  <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
               </div>
             </div>
           </div>
@@ -126,25 +128,26 @@
       
       <div class="gourmet-sunset-cruise-card" onclick="window.location.href='booking.html?experience=sunset'">
         <div class="card">
-          <video src="/assets/videos/gourmet.mp4"></video>
+                    
+          <video src="assets/videos/gourmet.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
-                <h1>Gourmet-Sonnenuntergangs-Cruise</h1>
-
+                <h1>Gourmet Sunset Cruise</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Genießen Sie einen reichhaltigen ligurischen Aperitif vor Anker in Bocca D’Asse bei Sonnenuntergang. Musik, Wein, Focaccia und – mit etwas Glück – springen ein paar Delfine durch die Wellen.</p>
+              <p>Genießen Sie einen reichhaltigen ligurischen Aperitif vor Anker in Bocca D’Asse bei Sonnenuntergang. Musik, Wein, Focaccia und – mit etwas Glück – springen Delfine durch die Wellen.</p>
                 <div class="wrapper-descrizione-freccia">
-                  <h3>65 € pro Person</h3>
-                  <img class="freccia" src="/assets/icons/arrow-right.svg" alt="Pfeil">
+                  <h3>€65 pro Person</h3>
+                  <img class="freccia" src="assets/icons/arrow-right.svg" alt="arrow">
                 </div>
             </div>
           </div>
@@ -153,31 +156,32 @@
     </div>
     </div>
 
-    <!-- Spezial-Events Sektion -->
+    <!-- Special Events Section -->
 
 
     <div class="cards-container" id="special-events">
       <div class="the-rainbow-tour-card" id="barca-terapia" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="/assets/videos/rainbow.mp4"></video>
+                    
+          <!-- <video src="assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
-                <h1>Boots-Therapie</h1>
-
+                <h1>Barca Terapia</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Ein Erlebnis, das Kindern mit Behinderungen oder schweren Krankheiten und ihren Familien Leichtigkeit und ein Lächeln schenken soll. Das Meer als Umarmung.</p>
+              <p>Ein Erlebnis, das Leichtigkeit und Lächeln für Kinder mit Behinderungen oder schweren Krankheiten und ihre Familien schenken soll. Das Meer als Umarmung.</p>
                 <div class="wrapper-descrizione-freccia">
                   <h3>Kostenlos</h3>
-                  <img class="telefono-special" src="/assets/icons/phone.svg" alt="Telefon">
+                  <img class="telefono-special" src="assets/icons/phone.svg" alt="arrow">
                 </div>
             </div>
           </div>
@@ -186,24 +190,26 @@
       
       <div class="the-wild-tour-card" id="blow-me-away" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="/assets/videos/1c8d55d69d924af6b868c5f2202f4225.mov"></video>
+          <video src="assets/videos/1c8d55d69d924af6b868c5f2202f4225.mov"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Blow me away</h1>
               </div>
+              <div class="circle-progress"></div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Erleben Sie einzigartige Events wie das Feuerwerk von Rapallo vom Meer aus, zwischen Lichtern, Reflexionen und Stille. Ein exklusiver Abend, fernab der Menge.</p>
+              <p>Erleben Sie einzigartige Events wie das "Castello in Fiamme" von Rapallo vom Meer aus, zwischen Lichtern, Reflexionen und Stille. Ein exklusiver Abend, fernab der Menge.</p>
               <div class="wrapper-descrizione-freccia">
-                <h3>1300 € pro Gruppe</h3>
-                <img class="telefono-special" src="/assets/icons/phone.svg" alt="Telefon">
+                <h3>€1300 pro Gruppe</h3>
+                <img class="telefono-special" src="assets/icons/phone.svg" alt="arrow">
               </div>
             </div>
           </div>
@@ -212,25 +218,26 @@
 
       <div class="gourmet-sunset-cruise-card" id="wicked-games" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="/assets/videos/rainbow.mp4"></video>
+                    
+          <!-- <video src="assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Wicked Games</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Privates Boot bei Sonnenuntergang, Wein, Livemusik mit Gitarre (von mir gespielt) und die ganze Intimität eines Moments nur für euch.</p>
+              <p>Privates Boot bei Sonnenuntergang, Wein, Live-Musik mit Gitarre (von mir gespielt) und die ganze Intimität eines ganz persönlichen Moments.</p>
             <div class="wrapper-descrizione-freccia">
-              <h3>350 € pro Gruppe</h3>
-              <img class="telefono-special" src="/assets/icons/phone.svg" alt="Telefon">
+              <h3>€350 pro Gruppe</h3>
+              <img class="telefono-special" src="assets/icons/phone.svg" alt="arrow">
             </div>
             </div>
           </div>
@@ -239,25 +246,26 @@
 
       <div class="gourmet-sunset-cruise-card" id="amerigo" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="/assets/videos/amerigo.mp4"></video>
+                    
+          <video src="assets/videos/amerigo.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
-                <h1>Entern Sie das Schiff! (Beendet)</h1>
-
+                <h1>Jack that ship! (Ended)</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
-                  <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>6</p></div>
+                  <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-2"><img src="assets/icons/people.svg" alt=""><p>6</p></div>
                 </div>
               </div>
             </div>
             <div class="wrapper-bottom">
-              <p>Entdecken Sie die Amerigo Vespucci vom Meer aus, mit Geschichten, Lichtern und Wellen. Ein Toast unter den Sternen vor dem schönsten Segelschiff der Welt.</p>
+              <p>Entdecken Sie die Amerigo Vespucci vom Meer aus, zwischen Geschichten, Lichtern und Wellen. Ein Toast unter den Sternen vor dem schönsten Segelschiff der Welt.</p>
             <div class="wrapper-descrizione-freccia">
-              <h3>350 € pro Gruppe</h3>
-              <img class="telefono-special" src="/assets/icons/phone.svg" alt="Telefon">
+              <h3>€350 pro Gruppe</h3>
+              <img class="telefono-special" src="assets/icons/phone.svg" alt="arrow">
             </div>
             </div>
           </div>
@@ -271,23 +279,23 @@
 
 <div class="perks">
   <div class="first">
-    <div class="wrapper-1"><img src="/assets/icons/fuel.png" alt=""><div class="wrapper"><p>Kraftstoff inklusive</p><p>Keine Überraschungen</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/foto.png" alt=""><div class="wrapper"><p>Fotosouvenir</p><p>Cheese!</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/sport.png" alt=""><div class="wrapper"><p>Wassersport</p><p>Los geht's!</p></div></div>
-    <div class="wrapper-4"><img src="/assets/icons/pet.png" alt=""><div class="wrapper"><p>Haustiere erlaubt</p><p>Bringen Sie sie mit!</p></div></div>
+    <div class="wrapper-1"><img src="assets/icons/fuel.png" alt=""><div class="wrapper"><p>Kraftstoff inklusive</p><p>Keine bösen Überraschungen</p></div></div>
+    <div class="wrapper-2"><img src="assets/icons/foto.png" alt=""><div class="wrapper"><p>Erinnerungsfoto</p><p>Cheese!</p></div></div>
+    <div class="wrapper-3"><img src="assets/icons/sport.png" alt=""><div class="wrapper"><p>Wassersport</p><p>Los geht's!</p></div></div>
+    <div class="wrapper-4"><img src="assets/icons/pet.png" alt=""><div class="wrapper"><p>Haustiere erlaubt</p><p>Nimm sie mit!</p></div></div>
   </div>
 
   <div class="second">
-    <div class="wrapper-1"><img src="/assets/icons/disability.png" alt=""><div class="wrapper"><p>Barrierefrei</p><p>Niemand bleibt zurück</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/towels.png" alt=""><div class="wrapper"><p>Ausstattung</p><p>Alles Notwendige + Extra!</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/snack.png" alt=""><div class="wrapper"><p>Snacks & Getränke</p><p>Wir mögen volle Bäuche</p></div></div>
-    <div class="wrapper-4"><img src="/assets/icons/easy.png" alt=""><div class="wrapper"><p>Flexibel</p><p>Pläne einfach ändern</p></div></div>
+    <div class="wrapper-1"><img src="assets/icons/disability.png" alt=""><div class="wrapper"><p>Barrierefrei</p><p>Niemand bleibt zurück</p></div></div>
+    <div class="wrapper-2"><img src="assets/icons/towels.png" alt=""><div class="wrapper"><p>Ausstattung</p><p>Alles Notwendige + Extra!</p></div></div>
+    <div class="wrapper-3"><img src="assets/icons/snack.png" alt=""><div class="wrapper"><p>Snacks & Getränke</p><p>Wir mögen volle Bäuche</p></div></div>
+    <div class="wrapper-4"><img src="assets/icons/easy.png" alt=""><div class="wrapper"><p>Flexibel</p><p>Pläne einfach ändern</p></div></div>
   </div>
 
   <div class="third">
-    <div class="wrapper-1"><img src="/assets/icons/music.png" alt=""><div class="wrapper"><p>Musik</p><p>Natürlich</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/mask.png" alt=""><div class="wrapper"><p>Schnorchelausrüstung</p><p>Vollgesichtsmasken (L)</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/safety.png" alt=""><div class="wrapper"><p>Sicherheit</p><p>An erster Stelle</p></div></div>
+    <div class="wrapper-1"><img src="assets/icons/music.png" alt=""><div class="wrapper"><p>Musik</p><p>Klar</p></div></div>
+    <div class="wrapper-2"><img src="assets/icons/mask.png" alt=""><div class="wrapper"><p>Schnorchelausrüstung</p><p>Full Face Masken (L)</p></div></div>
+    <div class="wrapper-3"><img src="assets/icons/safety.png" alt=""><div class="wrapper"><p>Sicherheit</p><p>Das Wichtigste</p></div></div>
   </div>
 </div>
 
@@ -295,93 +303,101 @@
 
 <div class="features-block">
   <div class="item">
-    <img src="/assets/icons/fuel.png" alt="">
+    <img src="assets/icons/fuel.png" alt="">
     <div class="text">
-      <p>Kraftstoff inklusive</p>
-      <p>Keine Überraschungen</p>
+      <p>Fuel Included</p>
+      <p>No extra surprises</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/foto.png" alt="">
+    <img src="assets/icons/foto.png" alt="">
     <div class="text">
-      <p>Fotosouvenir</p>
+      <p>Photo Souvenir</p>
       <p>Cheese!</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/sport.png" alt="">
+    <img src="assets/icons/sport.png" alt="">
     <div class="text">
-      <p>Wassersport</p>
-      <p>Los geht's!</p>
+      <p>Watersports</p>
+      <p>Let's go!</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/pet.png" alt="">
+    <img src="assets/icons/pet.png" alt="">
     <div class="text">
-      <p>Haustiere erlaubt</p>
-      <p>Bringen Sie sie mit!</p>
+      <p>Pet Friendly</p>
+      <p>C'mon, bring them too!</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/music.png" alt="">
+    <img src="assets/icons/music.png" alt="">
     <div class="text">
-      <p>Musik</p>
-      <p>Natürlich</p>
+      <p>Music</p>
+      <p>Of course</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/mask.png" alt="">
+    <img src="assets/icons/mask.png" alt="">
     <div class="text">
-      <p>Schnorchelausrüstung</p>
-      <p>Vollgesichtsmasken (L)</p>
+      <p>Snorkeling Gear</p>
+      <p>Full face masks (L)</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/disability.png" alt="">
+    <img src="assets/icons/disability.png" alt="">
     <div class="text">
-      <p>Barrierefrei</p>
-      <p>Niemand bleibt zurück</p>
+      <p>Disability Accessible</p>
+      <p>No one is left behind</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/towels.png" alt="">
+    <img src="assets/icons/towels.png" alt="">
     <div class="text">
-      <p>Ausstattung</p>
-      <p>Alles Notwendige + Extra!</p>
+      <p>Amenities</p>
+      <p>All the essentials + extra!</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/snack.png" alt="">
+    <img src="assets/icons/snack.png" alt="">
     <div class="text">
-      <p>Snacks & Getränke</p>
-      <p>Wir mögen volle Bäuche</p>
+      <p>Snacks & Drinks</p>
+      <p>We like the full tummy here</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/easy.png" alt="">
+    <img src="assets/icons/easy.png" alt="">
     <div class="text">
-      <p>Flexibel</p>
-      <p>Pläne einfach ändern</p>
+      <p>Flexible</p>
+      <p>Change plans easily</p>
     </div>
   </div>
   <div class="item">
-    <img src="/assets/icons/safety.png" alt="">
+    <img src="assets/icons/safety.png" alt="">
     <div class="text">
-      <p>Sicherheit</p>
-      <p>An erster Stelle</p>
+      <p>Safety</p>
+      <p>Number one</p>
     </div>
   </div>
 </div>
 
+    <!-- <div class="leggera-section">
+      <div class="wrapper">
+        <h2>Meet Leggera!</h2>
+        <p>150HP</p>
+      </div>
+    </div>
+    <div class="leggera"></div> -->
 
     <footer>
       <div class="wrapper">
         <p>© 2025 Leggero Tours</p>
-        <p>Mit Sorgfalt erstellt von Riccardo & entwickelt von <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
+        <p>Mit Sorgfalt erstellt von Riccardo und entwickelt von <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
+        <a class="cancellation" href="">Stornierungsbedingungen</a>
         <div class="social-icons-wrapper" style="display: flex; gap: 1rem; flex: row; align-items: center; justify-content: center; margin-top: 1rem;">
-        <a href=""><img src="/assets/icons/facebook.svg" alt=""></a>
-        <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="/assets/icons/instagram.svg" alt=""></a>
-        <a href=""><img src="/assets/icons/tiktok.svg" alt=""></a>
+          <a href=""><img src="assets/icons/facebook.svg" alt=""></a>
+          <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="assets/icons/instagram.svg" alt=""></a>
+          <a href=""><img src="assets/icons/tiktok.svg" alt=""></a>
       </div>
       </div>
 
@@ -463,41 +479,56 @@
       entries.forEach(entry => {
         const card = entry.target;
         const video = card.querySelector('video');
+        const circle = card.querySelector('.circle-progress');
+
+        if (!video) return;
 
         // Salva il background una volta
         if (!card.dataset.bg) {
           card.dataset.bg = getComputedStyle(card).backgroundImage;
         }
 
-        if (entry.isIntersecting) {
-          // CARD VISIBILE
+        // Blocca il primo trigger automatico subito dopo il load
+        if (entry.isIntersecting && entry.intersectionRatio === 1 && entry.time > 300) {
           card.classList.add('hovered');
 
-          if (video) {
+          // Mostra barra circolare
+          if (circle) {
+            circle.style.display = 'block';
+            circle.style.animation = 'spinProgress 0.5s linear forwards';
+          }
+
+          // Avvia video dopo 0.5s
+          setTimeout(() => {
+            if (circle) circle.style.display = 'none';
+
             card.style.backgroundImage = 'none';
             video.muted = true;
             video.playsInline = true;
             video.style.opacity = '1';
             video.currentTime = 0;
             video.play().catch(() => {});
-          }
+          }, 500);
+        }
 
-        } else {
-          // CARD NON PIÙ COMPLETAMENTE VISIBILE
+        // Esce dal viewport
+        if (!entry.isIntersecting) {
           card.classList.remove('hovered');
 
-          if (video) {
-            video.pause();
-            video.currentTime = 0;
-            video.style.opacity = '0';
-            card.style.backgroundImage = card.dataset.bg;
+          video.pause();
+          video.currentTime = 0;
+          video.style.opacity = '0';
+          card.style.backgroundImage = card.dataset.bg;
+
+          if (circle) {
+            circle.style.display = 'none';
+            circle.style.animation = 'none';
           }
 
-          // 🔁 Reset animazione telefono-special e freccia
           const animatedIcons = card.querySelectorAll('.freccia, .telefono-special');
           animatedIcons.forEach(icon => {
             icon.style.animation = 'none';
-            icon.offsetHeight; // forza reflow
+            icon.offsetHeight;
             icon.style.animation = '';
           });
         }
@@ -516,10 +547,16 @@
 
     document.querySelectorAll('.card').forEach(card => {
       const video = card.querySelector('video');
+      const circle = card.querySelector('.circle-progress');
+
       if (video) {
         video.pause();
         video.currentTime = 0;
         video.style.opacity = '0';
+      }
+      if (circle) {
+        circle.style.display = 'none';
+        circle.style.animation = 'none';
       }
       if (card.dataset.bg) {
         card.style.backgroundImage = card.dataset.bg;
@@ -551,6 +588,8 @@
     }
   });
 </script>
+
+
 
 
 
@@ -625,9 +664,97 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 </script>
 
-<script src="../visual-utils.js"></script>
+<script src="visual-utils.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".video-wrapper");
+    const video = document.getElementById("video-progress");
+    const progress = document.querySelector(".progress");
+
+    if (!wrapper || !video || !progress) return;
+
+    let rafId = null;
+
+    function updateProgress() {
+      if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        progress.style.width = percent + "%";
+      }
+      rafId = requestAnimationFrame(updateProgress);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio >= 0.3) {
+            video.play().catch(() => {});
+            progress.style.animationPlayState = "running";
+            rafId = requestAnimationFrame(updateProgress);
+            console.log("🎥 Visibile: PLAY");
+          } else {
+            video.pause();
+            cancelAnimationFrame(rafId);
+            console.log("⏸️ Non visibile: PAUSE");
+          }
+        });
+      },
+      { threshold: [0.3] }
+    );
+
+    observer.observe(wrapper);
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>
+
+
 
 
 <!--

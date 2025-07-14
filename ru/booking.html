@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/booking.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="/booking.css">
+    <link rel="stylesheet" href="/responsive.css">
+    <link rel="stylesheet" href="/booking-responsive.css">
+    <link rel="stylesheet" href="/flatpickr.css">
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=ASN4pkPq5xe_8nQXAMM661iuch7tsycCTK6fsw26GhuV8e10z2mco_BcJn32T_55Fjq0sw7y3vKoZkwl&currency=EUR&components=buttons"></script>
+    <title>Booking</title>
+</head>
+
+<body>
+    <nav>
+      <div class="wrapper">
+        <a href="/en/index.html">
+          <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
+          <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+        </a>
+          <div class="language-dropdown">
+            <button class="dropdown-toggle">
+              <img src="/assets/icons/flags/gb.svg" alt="English" />
+            </button>
+            <ul class="dropdown-menu">
+              <li onclick="window.location.href='en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
+              <li onclick="window.location.href='de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li onclick="window.location.href='fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
+              <li onclick="window.location.href='es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
+              <li onclick="window.location.href='ja/index.html'"><a href="/ja/index.html"><img src="/assets/icons/flags/ja.svg" alt="">日本語</a></li>
+              <li onclick="window.location.href='zh-cn/index.html'"><a href="/zh-cn/index.html"><img src="/assets/icons/flags/zh-cn.svg" alt="">简体中文</a></li>
+              <li onclick="window.location.href='zh-tw/index.html'"><a href="/zh-tw/index.html"><img src="/assets/icons/flags/zh-tw.svg" alt="">繁體中文</a></li>
+            </ul>
+          </div>
+<a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Contattaci!</span></button></a>
+      </div>
+    </nav>
+    <div id="step-1" class="booking-step">
+        <section class="booking-table">
+
+            <div class="wrapper-main-subtitle">
+                <div class="section-heading">
+                    <div class="wrapper-customize">
+                        <p>Customize your tour</p>
+                    </div>
+                    <div class="influences-wrapper">
+                        <img src="/assets/icons/influences.svg" alt="" />
+                        <p>Influences the price</p>
+                    </div>
+                </div>
+                <p class="main-subtitle">Adjust the filters to check for availability</p>
+            </div>
+            <div class="options-wrapper" id="options-div">
+                <!-- Experience -->
+                <div class="option-row experience" data-key="experience">
+                    <select name="experience-dropdown" class="native-overlay-select"></select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="/assets/icons/cards.svg" alt="" />
+                            <p>Experience</p>
+                        </div>
+                        <div class="option-value">
+                            <p>The Rainbow Tour</p>
+                        </div>
+                    </div>
+                    <img src="/assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+                <hr>
+
+
+                <!-- Slot -->
+                <div class="option-row" data-key="slot">
+                    <select name="slot-dropdown" class="native-overlay-select"></select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="/assets/icons/calendar-tick.svg" alt="" />
+                            <p>Slot</p>
+                        </div>
+                        <div class="option-value">
+                            <p>Full Day</p>
+                        </div>
+                    </div>
+                    <img class="price-influences" src="/assets/icons/influences.svg" alt="" />
+                    <img src="/assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+                <hr>
+
+                <!-- Sunset Combo -->
+                <div class="option-row" data-key="combo">
+                    <select name="combo-dropdown" class="native-overlay-select"></select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="/assets/icons/cards.svg" alt="" />
+                            <p>Sunset Combo</p>
+                        </div>
+                        <div class="option-value">
+                            <p>Oh yeah!</p>
+                        </div>
+                    </div>
+                    <img class="price-influences" src="/assets/icons/influences.svg" alt="" />
+                    <img src="/assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+                <hr>
+
+                <!-- People -->
+                <div class="option-row" data-key="people">
+                    <select name="people-dropdown" class="native-overlay-select"></select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="/assets/icons/people.svg" alt="" />
+                            <p>People</p>
+                        </div>
+                        <div class="option-value">
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="price-influences"></div>
+                    <img src="/assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+                <hr>
+                <!-- Group Type -->
+                <div class="option-row" data-key="groupType">
+                    <select name="groupType-dropdown" class="native-overlay-select"></select>
+                    <div class="option-wrapper">
+                        <div class="option-subtitle">
+                            <img src="/assets/icons/locked.svg" alt="" />
+                            <p>Group</p>
+                        </div>
+                        <div class="option-value">
+                            <p>Private</p>
+                        </div>
+                    </div>
+                    <img class="price-influences" src="/assets/icons/influences.svg" alt="" />
+                    <img src="/assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
+                    <div class="dropdown-content"></div>
+                </div>
+            </div>
+            <section class="calendar-section">
+                <div id="calendar"></div>
+                <input id="calendar-input" type="text" style="display:none;" />
+                <button id="continueBtn" style="margin-top: 1rem;" class="option-input" position="sticky" bottom="0">
+                    <p id="step1-price">€ 0.00</p>Continue
+                </button>
+            </section>
+        </section>
+
+        </section>
+    </div>
+
+    <div id="step-2" style="display: none;">
+        <div class="booking-table">
+            <div class="split-summary">
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Tour looks amazing!</p>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Experience</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-experience">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Date</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-date">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-slot-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Slot</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-slot">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>People</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-people">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Group Type</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-groupType">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-row locked" id="summary-combo-container">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Combo</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-combo">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-row option-price">
+                        <div class="option-content">
+                            <div class="option-subtitle">
+                                <p>Final Price</p>
+                            </div>
+                            <div class="option-value">
+                                <p id="summary-price">€ 0.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="options options-wrapper">
+                    <div class="section-heading">
+                        <p>Your Info</p>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Name <span class="required-star">*</span></p>
+                        </div>
+                        <input type="text" id="input-name" class="option-input" placeholder="Name" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Surname <span class="required-star">*</span></p>
+                        </div>
+                        <input type="text" id="input-surname" class="option-input" placeholder="Surname" />
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Email <span class="required-star">*</span></p>
+                        </div>
+                        <input type="email" id="input-email" class="option-input" placeholder="Email" />
+                        <div id="email-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Confirm Email <span class="required-star">*</span></p>
+                        </div>
+                        <input type="email" id="input-email-confirm" class="option-input" placeholder="Confirm Email" />
+                        <div id="confirm-email-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Phone <span class="required-star">*</span></p>
+                        </div>
+                        <div style="display: flex; gap: 0.5em; align-items: center;">
+                            <select id="input-phone-prefix" class="option-input" style="width: 8em;">
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+41">🇨🇭 +41</option>
+                                <option value="+43">🇦🇹 +43</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+386">🇸🇮 +386</option>
+                                <option value="+385">🇭🇷 +385</option>
+                                <option value="+48">🇵🇱 +48</option>
+                                <option value="+36">🇭🇺 +36</option>
+                                <option value="+32">🇧🇪 +32</option>
+                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+30">🇬🇷 +30</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+353">🇮🇪 +353</option>
+                                <option value="+47">🇳🇴 +47</option>
+                                <option value="+46">🇸🇪 +46</option>
+                                <option value="+45">🇩🇰 +45</option>
+                                <option value="+358">🇫🇮 +358</option>
+                                <option value="+7">🇷🇺 +7</option>
+                                <option value="+90">🇹🇷 +90</option>
+                                <option value="+420">🇨🇿 +420</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+64">🇳🇿 +64</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+91">🇮🇳 +91</option>
+                            </select>
+                            <input type="tel" id="input-phone" class="option-input" placeholder="Phone Number"
+                                style="flex:1;" />
+                        </div>
+                        <div id="phone-error" class="input-error"></div>
+                    </div>
+
+                    <div class="option-content">
+                        <div class="option-subtitle">
+                            <p>Notes</p>
+                        </div>
+                        <textarea id="input-notes" class="option-input" placeholder="Any notes..." rows="5"
+                            maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="buttons">
+            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Back</button>
+            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book your Experience</button>
+        </section>
+        <!-- Overlay to blur background and contain PayPal modal -->
+        <div id="paypal-overlay" style="display: none;">
+            <div id="paypal-container">
+                <button id="paypal-close">✖</button>
+                <div id="paypal-button-wrapper"></div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+  const toggle = document.querySelector('.dropdown-toggle');
+  const menu = document.querySelector('.dropdown-menu');
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', () => {
+    menu.style.display = 'none';
+  });
+</script>
+
+
+</body>
+
+</html>
