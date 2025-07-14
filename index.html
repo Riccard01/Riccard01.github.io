@@ -43,9 +43,10 @@
     </nav>
 
     <div class="video-wrapper">
-      <video class="video-heading" src="assets/videos/intro.mp4" autoplay muted loop playsinline style="display: none; object-fit: cover;">
-        Your browser does not support the video tag.
-      </video>
+      <video class="video-heading" id="video-progress" src="assets/videos/intro.mp4" autoplay muted loop playsinline style="display: none; object-fit: cover;"></video>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
     <section class="heading">
       <div class="wrapper">
         <h1>Vivi il golfo Ligure!</h1>
@@ -632,8 +633,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script src="visual-utils.js"></script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".video-wrapper");
+    const video = document.getElementById("video-progress");
+    const progress = document.querySelector(".progress");
+
+    if (!wrapper || !video || !progress) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio >= 0.3) {
+            video.play().catch(() => {});
+            progress.style.animationPlayState = "running";
+            console.log("🎥 Visibile: PLAY");
+          } else {
+            video.pause();
+            progress.style.animationPlayState = "paused";
+            console.log("⏸️ Non visibile: PAUSE");
+          }
+        });
+      },
+      {
+        threshold: [0, 0.3, 0.5, 1] // soglia a 30%
+      }
+    );
+
+    observer.observe(wrapper);
+  });
+</script>
+
+
+
+
+
   </body>
 </html>
+
+
 
 
 <!--
