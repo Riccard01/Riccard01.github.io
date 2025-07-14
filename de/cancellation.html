@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Bootstouren bei Sonnenuntergang, ligurische Aperitifs und geheime Buchten im Golf von Genua. Private oder geteilte Erlebnisse, kleine Gruppen und entspannte Atmosphäre.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Stornierungsbedingungen | Leggero Tours</title>
+    <link rel="alternate" hreflang="en" href="https://leggerotours.com/en/" />
+    <link rel="alternate" hreflang="it" href="https://leggerotours.com/" />
+    <link rel="alternate" hreflang="it" href="https://leggerotours.com/" />
+  </head>
+  <body>
+    <nav>
+      <div class="wrapper">
+        <img class="con-scritta" src="assets/images/logo.jpg" alt="Logo Leggero Tours">
+        <img class="senza-scritta" src="assets/images/logo.svg" alt="Logo Leggero Tours">
+          <div class="language-dropdown">
+            <button class="dropdown-toggle">
+              <img src="assets/icons/flags/de.svg" alt="Deutsch" />
+            </button>
+            <ul class="dropdown-menu">
+              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italienisch</a></li>
+              <li onclick="window.location.href='/en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">Englisch</a></li>
+              <li onclick="window.location.href='/de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li onclick="window.location.href='/fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Französisch</a></li>
+              <li onclick="window.location.href='/es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Spanisch</a></li>
+              <li onclick="window.location.href='/ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">Russisch</a></li>
+            </ul>
+          </div>
+<a href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg" alt=""><span>Kontaktieren Sie uns!</span></button></a>
+      </div>
+    </nav>
+
+
+
+       <main class="policy-wrapper">
+      <section class="heading-cancellation">
+        <div class="wrapper">
+          <h1>Stornierungsbedingungen</h1>
+          <p>Hier finden Sie die Bedingungen im Falle einer Stornierung oder bei schlechtem Wetter.</p>
+        </div>
+      </section>
+
+      <section class="policy-text">
+        <div class="wrapper">
+          <h2>Im Falle einer Stornierung</h2>
+          <ul>
+            <li><strong>Bis zu 15 Tage vorher:</strong> volle Rückerstattung der Anzahlung.</li>
+            <li><strong>Bis zu 7 Tage vorher:</strong> 50% Rückerstattung der Anzahlung.</li>
+            <li><strong>In den letzten 7 Tagen:</strong> keine Rückerstattung der Anzahlung.</li>
+          </ul>
+
+          <p>Wir sind immer bereit, das Datum zu verschieben, sofern verfügbar.</p>
+
+          <h2>Im Falle von schlechtem Wetter</h2>
+          <p>
+            Wenn das Meer Wellen von <strong>1,5 Metern oder mehr</strong> hat, ist eine Bootsfahrt nicht möglich. In diesem Fall:
+          </p>
+          <ul>
+            <li>Wir versuchen gemeinsam, ein neues verfügbares Datum zu finden.</li>
+            <li>Falls das nicht möglich ist, erhalten Sie den gesamten Betrag zurück.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+
+    <footer>
+      <div class="wrapper">
+        <p>© 2025 Leggero Tours</p>
+        <p>Mit Sorgfalt erstellt von Riccardo und entwickelt von <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
+        <a class="cancellation" href="">Stornierungsbedingungen</a>
+        <div class="social-icons-wrapper" style="display: flex; gap: 1rem; flex: row; align-items: center; justify-content: center; margin-top: 1rem;">
+          <a href=""><img src="assets/icons/facebook.svg" alt=""></a>
+          <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="assets/icons/instagram.svg" alt=""></a>
+          <a href=""><img src="assets/icons/tiktok.svg" alt=""></a>
+      </div>
+      </div>
+
+    </footer>
+
+
+
+
+
+<script>
+function startNavigation(destLat, destLng) {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  const destination = `${destLat},${destLng}`;
+
+  if (isIOS) {
+    // Apple Maps - modalità navigazione
+    window.location.href = `maps://?daddr=${destination}&dirflg=d`;
+  } else if (isAndroid) {
+    // Google Maps App - modalità navigazione
+    window.location.href = `google.navigation:q=${destination}`;
+  } else {
+    // Fallback per desktop o browser sconosciuti
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}`, '_blank', 'noopener');
+  }
+}
+</script>
+
+
+<script>
+  const toggle = document.querySelector('.dropdown-toggle');
+  const menu = document.querySelector('.dropdown-menu');
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', () => {
+    menu.style.display = 'none';
+  });
+</script>
+
+<script src="visual-utils.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".video-wrapper");
+    const video = document.getElementById("video-progress");
+    const progress = document.querySelector(".progress");
+
+    if (!wrapper || !video || !progress) return;
+
+    let rafId = null;
+
+    function updateProgress() {
+      if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        progress.style.width = percent + "%";
+      }
+      rafId = requestAnimationFrame(updateProgress);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio >= 0.3) {
+            video.play().catch(() => {});
+            progress.style.animationPlayState = "running";
+            rafId = requestAnimationFrame(updateProgress);
+            console.log("🎥 Visibile: PLAY");
+          } else {
+            video.pause();
+            cancelAnimationFrame(rafId);
+            console.log("⏸️ Non visibile: PAUSE");
+          }
+        });
+      },
+      { threshold: [0.3] }
+    );
+
+    observer.observe(wrapper);
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
+
+
+
+<!--
+
+
+
+
+
+
+
+-->
