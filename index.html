@@ -66,13 +66,16 @@
 
 
       <div class="the-rainbow-tour-card" onclick="window.location.href='booking.html?experience=rainbow'">
+        
         <div class="card">
+          
           <video src="assets/videos/rainbow.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>The Rainbow Tour</h1>
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -95,13 +98,14 @@
 
       <div class="the-wild-tour-card" onclick="window.location.href='booking.html?experience=wild'">
         <div class="card">
+                    
           <video src="assets/videos/wildtour.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>The Wild Tour</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
@@ -124,13 +128,14 @@
       
       <div class="gourmet-sunset-cruise-card" onclick="window.location.href='booking.html?experience=sunset'">
         <div class="card">
+                    
           <video src="assets/videos/gourmet.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Gourmet Sunset Cruise</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -157,13 +162,14 @@
     <div class="cards-container" id="special-events">
       <div class="the-rainbow-tour-card" id="barca-terapia" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="assets/videos/rainbow.mp4"></video>
+                    
+          <!-- <video src="assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Barca Terapia</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -190,6 +196,8 @@
               <div class="wrapper-top">
                 <h1>Blow me away</h1>
               </div>
+              <div class="circle-progress"></div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -210,13 +218,14 @@
 
       <div class="gourmet-sunset-cruise-card" id="wicked-games" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
-          <video src="assets/videos/rainbow.mp4"></video>
+                    
+          <!-- <video src="assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Wicked Games</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -237,13 +246,14 @@
 
       <div class="gourmet-sunset-cruise-card" id="amerigo" onclick="window.location.href='tel:+393463365699'">
         <div class="card">
+                    
           <video src="assets/videos/amerigo.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
               <div class="wrapper-top">
                 <h1>Jack that ship! (Ended)</h1>
-
               </div>
+              <div class="circle-progress"></div>
               <div class="details">
                 <div class="wrapper">
                   <div class="wrapper-1"><img src="assets/icons/clock.svg" alt=""><p>4.5</p></div>
@@ -469,41 +479,56 @@
       entries.forEach(entry => {
         const card = entry.target;
         const video = card.querySelector('video');
+        const circle = card.querySelector('.circle-progress');
+
+        if (!video) return;
 
         // Salva il background una volta
         if (!card.dataset.bg) {
           card.dataset.bg = getComputedStyle(card).backgroundImage;
         }
 
-        if (entry.isIntersecting) {
-          // CARD VISIBILE
+        // Blocca il primo trigger automatico subito dopo il load
+        if (entry.isIntersecting && entry.intersectionRatio === 1 && entry.time > 300) {
           card.classList.add('hovered');
 
-          if (video) {
+          // Mostra barra circolare
+          if (circle) {
+            circle.style.display = 'block';
+            circle.style.animation = 'spinProgress 0.5s linear forwards';
+          }
+
+          // Avvia video dopo 0.5s
+          setTimeout(() => {
+            if (circle) circle.style.display = 'none';
+
             card.style.backgroundImage = 'none';
             video.muted = true;
             video.playsInline = true;
             video.style.opacity = '1';
             video.currentTime = 0;
             video.play().catch(() => {});
-          }
+          }, 500);
+        }
 
-        } else {
-          // CARD NON PIÙ COMPLETAMENTE VISIBILE
+        // Esce dal viewport
+        if (!entry.isIntersecting) {
           card.classList.remove('hovered');
 
-          if (video) {
-            video.pause();
-            video.currentTime = 0;
-            video.style.opacity = '0';
-            card.style.backgroundImage = card.dataset.bg;
+          video.pause();
+          video.currentTime = 0;
+          video.style.opacity = '0';
+          card.style.backgroundImage = card.dataset.bg;
+
+          if (circle) {
+            circle.style.display = 'none';
+            circle.style.animation = 'none';
           }
 
-          // 🔁 Reset animazione telefono-special e freccia
           const animatedIcons = card.querySelectorAll('.freccia, .telefono-special');
           animatedIcons.forEach(icon => {
             icon.style.animation = 'none';
-            icon.offsetHeight; // forza reflow
+            icon.offsetHeight;
             icon.style.animation = '';
           });
         }
@@ -522,10 +547,16 @@
 
     document.querySelectorAll('.card').forEach(card => {
       const video = card.querySelector('video');
+      const circle = card.querySelector('.circle-progress');
+
       if (video) {
         video.pause();
         video.currentTime = 0;
         video.style.opacity = '0';
+      }
+      if (circle) {
+        circle.style.display = 'none';
+        circle.style.animation = 'none';
       }
       if (card.dataset.bg) {
         card.style.backgroundImage = card.dataset.bg;
@@ -557,6 +588,8 @@
     }
   });
 </script>
+
+
 
 
 
@@ -633,6 +666,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script src="visual-utils.js"></script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const wrapper = document.querySelector(".video-wrapper");
@@ -641,28 +708,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!wrapper || !video || !progress) return;
 
+    let rafId = null;
+
+    function updateProgress() {
+      if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        progress.style.width = percent + "%";
+      }
+      rafId = requestAnimationFrame(updateProgress);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.intersectionRatio >= 0.3) {
             video.play().catch(() => {});
             progress.style.animationPlayState = "running";
+            rafId = requestAnimationFrame(updateProgress);
             console.log("🎥 Visibile: PLAY");
           } else {
             video.pause();
-            progress.style.animationPlayState = "paused";
+            cancelAnimationFrame(rafId);
             console.log("⏸️ Non visibile: PAUSE");
           }
         });
       },
-      {
-        threshold: [0, 0.3, 0.5, 1] // soglia a 30%
-      }
+      { threshold: [0.3] }
     );
 
     observer.observe(wrapper);
   });
 </script>
+
+
+
+
+
+
+
 
 
 

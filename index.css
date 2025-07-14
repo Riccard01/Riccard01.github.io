@@ -1111,11 +1111,31 @@ footer .wrapper p:last-of-type {
   width: 0%;
   background: white;
   border-radius: 5px;
-  animation: progressFill 34s linear infinite;
   animation-play-state: paused; /* inizialmente fermo */
 }
 
-@keyframes progressFill {
-  0% { width: 0%; }
-  100% { width: 100%; }
+
+.circle-progress {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  animation: none;
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  transform: translate(-80%, -80%);
+  z-index: 3;
+  background: transparent;
+}
+
+
+@keyframes spinProgress {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.card {
+  position: relative;
 }
