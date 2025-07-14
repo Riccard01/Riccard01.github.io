@@ -995,9 +995,55 @@ footer img {
 
 
 
+.leggera {
+  display: block;
+  background-image: url(assets/images/Leggera.jpg);
+  width: 20.42981rem;
+  height: 30.66388rem;
+  border: 3px solid white;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
+.leggera-section .wrapper {
+  display: flex;
+  width: 63.75rem;
+  max-width: 63.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+}
 
+.leggera-section .wrapper h2 {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.6875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
+.leggera-section .wrapper p {
+  align-self: stretch;
+  color: rgba(117, 118, 122, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75rem; /* 155.556% */
+  letter-spacing: 0.03375rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
 footer {
     background: #F8F9FA;
