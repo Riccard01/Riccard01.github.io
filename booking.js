@@ -798,14 +798,7 @@ $(document).ready(function () {
     // Prevent selecting today if slot start time already passed
     if (availableDates.includes(flatpickr.formatDate(new Date(), 'Y-m-d'))) {
       // Get slot start time string
-      let slotTimeStr = '';
-      if (selections.experience && selections.experience.includes('Gourmet')) {
-        slotTimeStr = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[2]];
-      } else if (selections.experience === CONSTANTS.tourOptions.experience[1]) {
-        slotTimeStr = CONSTANTS.texts.slotTimes[CONSTANTS.tourOptions.experience[1]];
-      } else if (selections.slot && CONSTANTS.texts.slotTimes[selections.slot]) {
-        slotTimeStr = CONSTANTS.texts.slotTimes[selections.slot];
-      }
+      slotTimeStr = selections.slot;
       // Parse start time (assume format like '9am - 1.30pm' or '14:00 - 18:00')
       let startTime = null;
       if (slotTimeStr) {
@@ -820,6 +813,7 @@ $(document).ready(function () {
           startTime.setHours(hour, min, 0, 0);
         }
       }
+      console.log(slotTimeStr)
       if (startTime && new Date() > startTime) {
         // Remove today from availableDates
         const todayStr = flatpickr.formatDate(new Date(), 'Y-m-d');
