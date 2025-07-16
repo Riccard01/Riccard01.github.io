@@ -1231,3 +1231,8 @@ section.heading-cancellation .wrapper {
   flex-direction: column;
   align-items: center;
 }
+
+.blank-space {
+  display: block;
+  padding-top: 3rem;
+}
