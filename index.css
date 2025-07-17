@@ -83,7 +83,7 @@ nav .wrapper {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 14px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   min-width: 180px;
 }
@@ -187,7 +187,8 @@ section.heading .wrapper p {
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.75rem; /* 155.556% */
+  line-height: 1.75rem;
+  /* 155.556% */
   letter-spacing: 0.03375rem;
   margin: 0;
   padding: 0;
@@ -228,12 +229,12 @@ section.heading .wrapper img {
   width: min-content;
 }
 
-    .wrapper-descrizione-freccia {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
+.wrapper-descrizione-freccia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
 .gourmet-sunset-cruise-card {
   display: flex;
@@ -254,7 +255,8 @@ section.heading .wrapper img {
   border-radius: 0.894rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  pointer-events: none; /* evita interferenze col mouse */
+  pointer-events: none;
+  /* evita interferenze col mouse */
 }
 
 .the-rainbow-tour-card .card {
@@ -276,21 +278,22 @@ section.heading .wrapper img {
 .the-rainbow-tour-card .card::after {
   content: "";
   position: absolute;
-  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.794rem;
-background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  inset: 0;
+  /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.794rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
 
 a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 button:focus {
   outline: none;
 }
 
-.the-rainbow-tour-card .card > * {
+.the-rainbow-tour-card .card>* {
   position: relative;
   z-index: 2;
 }
@@ -328,37 +331,41 @@ button:focus {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  aspect-ratio: 9 / 16;
+  /* opzionale, se vuoi forzare proporzione */
   width: 20.42981rem;
   height: 30.66388rem;
 }
 
-.the-wild-tour-card#blow-me-away .card{
+.the-wild-tour-card#blow-me-away .card {
   background-image: url('assets/images/fireworks.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  aspect-ratio: 9 / 16;
+  /* opzionale, se vuoi forzare proporzione */
   width: 20.42981rem;
   height: 30.66388rem;
 }
 
-.gourmet-sunset-cruise-card#wicked-games .card{
+.gourmet-sunset-cruise-card#wicked-games .card {
   background-image: url('assets/images/romantic.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  aspect-ratio: 9 / 16;
+  /* opzionale, se vuoi forzare proporzione */
   width: 20.42981rem;
   height: 30.66388rem;
 }
 
-.gourmet-sunset-cruise-card#amerigo .card{
+.gourmet-sunset-cruise-card#amerigo .card {
   background-image: url('assets/images/amerigo.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  aspect-ratio: 9 / 16; /* opzionale, se vuoi forzare proporzione */
+  aspect-ratio: 9 / 16;
+  /* opzionale, se vuoi forzare proporzione */
   width: 20.42981rem;
   height: 30.66388rem;
 }
@@ -383,13 +390,14 @@ button:focus {
 .the-wild-tour-card .card::after {
   content: "";
   position: absolute;
-  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.794rem;
-background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  inset: 0;
+  /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.794rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
 
-.the-wild-tour-card .card > * {
+.the-wild-tour-card .card>* {
   position: relative;
   z-index: 2;
 }
@@ -415,13 +423,14 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 .gourmet-sunset-cruise-card .card::after {
   content: "";
   position: absolute;
-  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
-border-radius: 0.794rem;
-background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
+  inset: 0;
+  /* top: 0; right: 0; bottom: 0; left: 0 */
+  border-radius: 0.794rem;
+  background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
 
-.gourmet-sunset-cruise-card .card > * {
+.gourmet-sunset-cruise-card .card>* {
   position: relative;
   z-index: 2;
 }
@@ -438,18 +447,23 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   0% {
     transform: translateX(0);
   }
+
   50% {
-    transform: translateX(10px); /* distanza verso destra */
+    transform: translateX(10px);
+    /* distanza verso destra */
   }
+
   100% {
     transform: translateX(0);
   }
 }
+
 .the-rainbow-tour-card .freccia,
 .the-wild-tour-card .freccia,
 .gourmet-sunset-cruise-card .freccia {
   opacity: 0.5;
-  transition: opacity 0.3s ease; /* transizione fluida */
+  transition: opacity 0.3s ease;
+  /* transizione fluida */
 }
 
 .the-rainbow-tour-card .card:hover .freccia,
@@ -463,7 +477,8 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 .telefono-special {
   opacity: 0.5;
   transition: opacity 0.3s ease;
-  animation: none; /* <--- questo è il fix fondamentale */
+  animation: none;
+  /* <--- questo è il fix fondamentale */
 }
 
 .card:hover .telefono-special,
@@ -473,13 +488,33 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 }
 
 @keyframes phoneRing {
-  0%   { transform: rotate(0deg); }
-  15%  { transform: rotate(20deg); }
-  30%  { transform: rotate(-20deg); }
-  45%  { transform: rotate(20deg); }
-  60%  { transform: rotate(-20deg); }
-  75%  { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(20deg);
+  }
+
+  30% {
+    transform: rotate(-20deg);
+  }
+
+  45% {
+    transform: rotate(20deg);
+  }
+
+  60% {
+    transform: rotate(-20deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 
@@ -536,7 +571,8 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 .details .wrapper img {
   width: 1.25rem;
   height: 1.25rem;
-  filter: brightness(0) invert(1); /* rende bianca l'immagine */
+  filter: brightness(0) invert(1);
+  /* rende bianca l'immagine */
 }
 
 
@@ -637,7 +673,8 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.5rem; /* 165.177% */
+  line-height: 1.5rem;
+  /* 165.177% */
   margin: 0;
   padding: 0;
 }
@@ -681,7 +718,8 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 }
 
 .element::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
+  /* Safari and Chrome */
 }
 
 .the-rainbow-tour-card .copy-wrapper .wrapper p,
@@ -731,103 +769,103 @@ background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18
 }
 
 .perks {
-display: flex;
-max-width: 63.5rem;
-padding-top: 10rem;
-flex-direction: column;
-align-items: center;
-gap: 1.875rem;
-align-self: stretch;
-justify-content: center;
-padding-bottom: 5rem;
+  display: flex;
+  max-width: 63.5rem;
+  padding-top: 10rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.875rem;
+  align-self: stretch;
+  justify-content: center;
+  padding-bottom: 5rem;
 }
 
 .perks .wrapper {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .perks .first {
-display: flex;
-align-items: center;
-gap: 1.875rem;
-align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 1.875rem;
+  align-self: stretch;
 }
 
 .perks .second {
-display: flex;
-align-items: center;
-gap: 1.875rem;
-align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 1.875rem;
+  align-self: stretch;
 }
 
 .perks .third {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 1.875rem;
-align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.875rem;
+  align-self: stretch;
 }
 
 .perks .first .wrapper-1,
 .perks .first .wrapper-2,
 .perks .first .wrapper-3,
 .perks .first .wrapper-4 {
-display: flex;
-align-items: center;
-gap: 1.25rem;
-flex: 1 0 0;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1 0 0;
+  justify-content: center;
 }
 
 .perks .first .wrapper-1 .wrapper,
 .perks .first .wrapper-2 .wrapper,
 .perks .first .wrapper-3 .wrapper,
 .perks .first .wrapper-4 .wrapper {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .perks .second .wrapper-1 .wrapper,
 .perks .second .wrapper-2 .wrapper,
 .perks .second .wrapper-3 .wrapper,
 .perks .second .wrapper-4 .wrapper {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .perks .third .wrapper-1 .wrapper,
 .perks .third .wrapper-2 .wrapper,
 .perks .third .wrapper-3 .wrapper,
 .perks .third .wrapper-4 .wrapper {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .perks .second .wrapper-1,
 .perks .second .wrapper-2,
 .perks .second .wrapper-3,
 .perks .second .wrapper-4 {
-display: flex;
-align-items: center;
-gap: 1.25rem;
-flex: 1 0 0;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1 0 0;
+  justify-content: center;
 }
 
 
 .perks .third .wrapper-1,
 .perks .third .wrapper-2,
 .perks .third .wrapper-3 {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 1.25rem;
-flex: 1 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex: 1 0 0;
 }
 
 
@@ -937,6 +975,7 @@ flex: 1 0 0;
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -949,49 +988,50 @@ flex: 1 0 0;
 }
 
 .sottotitolo {
-    max-width: 21.875rem;
-    text-align: center;
-    line-height: 1.8rem;
+  max-width: 21.875rem;
+  text-align: center;
+  line-height: 1.8rem;
 }
+
 .wrapper-experiences img {
-    width: 1.7rem;
-    height: 1.7rem;
-    margin-right: 0rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 0rem;
 }
 
 .wrapper-experiences {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 footer img {
-    filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);
 }
 
-    .titolo-wrapper {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 0.625rem;
-        padding-left: 0rem;
-        padding-top: 0rem;
-    }
+.titolo-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding-left: 0rem;
+  padding-top: 0rem;
+}
 
-    .titolo-cards {
-        color: #04081B;
-        font-family: "Plus Jakarta Sans";
-        font-size: 1.5rem;
-        font-size: 1.6875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        margin: 0;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+.titolo-cards {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.5rem;
+  font-size: 1.6875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 
 
@@ -1002,7 +1042,7 @@ footer img {
   height: 30.66388rem;
   border: 3px solid white;
   border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1038,7 +1078,8 @@ footer img {
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.75rem; /* 155.556% */
+  line-height: 1.75rem;
+  /* 155.556% */
   letter-spacing: 0.03375rem;
   margin: 0;
   padding: 0;
@@ -1046,12 +1087,12 @@ footer img {
 }
 
 footer {
-    background: #0075FA;
-    padding: 1.875rem 0.9375rem;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100vw;
+  background: #0075FA;
+  padding: 1.875rem 0.9375rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100vw;
 }
 
 footer .wrapper {
@@ -1097,7 +1138,8 @@ footer .wrapper p:last-of-type {
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 90%; /* o 100% se vuoi */
+  width: 90%;
+  /* o 100% se vuoi */
   height: 3px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
@@ -1111,7 +1153,8 @@ footer .wrapper p:last-of-type {
   width: 0%;
   background: white;
   border-radius: 5px;
-  animation-play-state: paused; /* inizialmente fermo */
+  animation-play-state: paused;
+  /* inizialmente fermo */
 }
 
 
@@ -1133,9 +1176,15 @@ footer .wrapper p:last-of-type {
 
 
 @keyframes spinProgress {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
 .card {
   position: relative;
 }
@@ -1155,7 +1204,12 @@ footer .wrapper p:last-of-type {
 
 
 
-
+.TA_cdswritereviewlg img {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 
 
 .policy-wrapper {
@@ -1212,7 +1266,8 @@ footer .wrapper p:last-of-type {
 }
 
 section.heading-cancellation .wrapper h1 {
-  font-size: 1.75rem; /* oppure 2rem se vuoi un po' più grande */
+  font-size: 1.75rem;
+  /* oppure 2rem se vuoi un po' più grande */
   text-align: center;
   color: #04081B;
   font-weight: 700;
