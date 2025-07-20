@@ -264,10 +264,14 @@ section.heading .wrapper img {
   align-items: center;
   border-radius: 0.894rem;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
-  background-image: url('assets/images/rainbow.jpg');
+  background-image: url('assets/images/fireworks.jpg');
   border: 2.043px solid rgba(255, 255, 255, 0.60);
-  background-position: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+
+    background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .the-rainbow-tour-card .card::after {
@@ -410,10 +414,12 @@ button:focus {
   border-radius: 0.894rem;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
   background-image: url('assets/images/gourmet.jpg');
-  background-size: cover;
   border: 2.043px solid rgba(255, 255, 255, 0.60);
-  background-position: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .gourmet-sunset-cruise-card .card::after {
@@ -1182,9 +1188,6 @@ footer .wrapper p:last-of-type {
   }
 }
 
-.card {
-  position: relative;
-}
 
 
 
@@ -1296,7 +1299,7 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 11rem;
+  height: 11.5rem;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
@@ -1316,7 +1319,7 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 11rem;
+  height: 11.5rem;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
@@ -1336,7 +1339,7 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 11rem;
+  height: 11.5rem;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
@@ -1412,3 +1415,7 @@ section.heading-cancellation .wrapper {
   padding: 0;
   text-align: center;
 }
+
+
+
+
