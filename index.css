@@ -377,6 +377,7 @@ button:focus {
   border-radius: 0.894rem;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
   background-image: url('assets/images/wild.jpg');
+  background-size: cover;
   border: 2.043px solid rgba(255, 255, 255, 0.60);
   background-position: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1294,29 +1295,9 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 10.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
-
-  /* 👇 Feather ONLY the top edge */
-  -webkit-mask-image: linear-gradient(to top, black 90%, transparent 100%);
-  mask-image: linear-gradient(to top, black 90%, transparent 100%);
-
-  z-index: -1;
-  pointer-events: none;
-  border-radius: 0 0 0.894rem 0.894rem;
-}
-
-.the-wild-tour-card .copy-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  height: 12rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
@@ -1334,9 +1315,9 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 10.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  height: 12rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
@@ -1354,9 +1335,9 @@ section.heading-cancellation .wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 10.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  height: 12rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
@@ -1373,7 +1354,7 @@ section.heading-cancellation .wrapper {
   align-items: center;
   justify-content: space-between;
 
-  background: rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.07);
   border-bottom-left-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
   backdrop-filter: blur(2px);
