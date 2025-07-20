@@ -1373,7 +1373,7 @@ section.heading-cancellation .wrapper {
   align-items: center;
   justify-content: space-between;
 
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.10);
   border-bottom-left-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
   backdrop-filter: blur(2px);
