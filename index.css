@@ -229,12 +229,7 @@ section.heading .wrapper img {
   width: min-content;
 }
 
-.wrapper-descrizione-freccia {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
+
 
 .gourmet-sunset-cruise-card {
   display: flex;
@@ -1371,4 +1366,27 @@ section.heading-cancellation .wrapper {
   z-index: -1;
   pointer-events: none;
   border-radius: 0 0 0.894rem 0.894rem;
+}
+
+.wrapper-descrizione-freccia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  margin-left: -1.3rem;
+  margin-right: -1.3rem;
+  margin-bottom: -1.3rem; /* pulls it flush to the bottom edge */
+  padding: 1rem;
+  width: calc(100% + 2.6rem); /* stretches across full container width */
+  z-index: 1;
+}
+
+.copy-wrapper .wrapper-bottom {
+  z-index: 3;
 }
