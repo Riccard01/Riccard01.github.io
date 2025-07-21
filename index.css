@@ -899,7 +899,7 @@ button:focus {
   background: #F8F9FA;
   border-radius: 0.6875rem;
   padding: 0rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 /* Transizione fluida */
@@ -1142,63 +1142,6 @@ footer .wrapper p:last-of-type {
   margin: 0;
   padding: 0;
 }
-
-.progress-bar {
-  position: absolute;
-  top: 1rem;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 90%;
-  /* o 100% se vuoi */
-  height: 3px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  overflow: hidden;
-  z-index: 10;
-}
-
-
-.progress {
-  height: 100%;
-  width: 0%;
-  background: white;
-  border-radius: 5px;
-  animation-play-state: paused;
-  /* inizialmente fermo */
-}
-
-
-.circle-progress {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  animation: none;
-  display: none;
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  transform: translate(-80%, -80%);
-  z-index: 3;
-  background: transparent;
-}
-
-
-@keyframes spinProgress {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-
 
 
 
@@ -1457,3 +1400,62 @@ section.heading-cancellation .wrapper {
 nav a button img {
 filter: invert(1) grayscale(1) brightness(200%);
 }
+
+
+
+.progress-bar {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+  /* o 100% se vuoi */
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: white;
+  border-radius: 5px;
+  animation-play-state: paused;
+  /* inizialmente fermo */
+}
+
+
+.circle-progress {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  animation: none;
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  transform: translate(-80%, -80%);
+  z-index: 3;
+  background: transparent;
+}
+
+
+@keyframes spinProgress {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+

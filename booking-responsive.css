@@ -30,7 +30,9 @@ body {
 .dropdown-toggle {
   margin: 0px 0px;
 }
-
+nav a button img {
+filter: invert(1) grayscale(1) brightness(200%);
+}
   .booking-step {
     width: 100%;
     padding: 0rem 1rem;

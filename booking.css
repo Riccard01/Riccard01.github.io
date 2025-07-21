@@ -31,7 +31,9 @@ a {
 button:focus {
   outline: none;
 }
-
+nav a button img {
+filter: invert(1) grayscale(1) brightness(200%);
+}
 nav {
   display: flex;
   position: sticky;
