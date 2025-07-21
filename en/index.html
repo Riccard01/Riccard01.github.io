@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Sunset boat tours, gourmet aperitifs, and relaxing sea experiences from Genoa's Old Harbor. Private or shared, small group vibes.">
+    <meta name="description" content="Sunset boat tours, gourmet aperitifs, and relaxing sea experiences from Genoa's Old Harbour. Private or shared, small group atmosphere.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="/responsive.css">
@@ -23,19 +23,20 @@
   <body>
     <nav>
       <div class="wrapper">
-        <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
-        <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+        <img class="con-scritta" src="/assets/images/logo.jpg" alt="Leggero Tours Logo">
+        <img class="senza-scritta" src="/assets/images/logo.svg" alt="Leggero Tours Logo">
           <div class="language-dropdown">
             <button class="dropdown-toggle">
               <img src="/assets/icons/flags/gb.svg" alt="English" />
             </button>
             <ul class="dropdown-menu">
-              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italian</a></li>
+              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
               <li onclick="window.location.href='/en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
-              <li onclick="window.location.href='/de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">German</a></li>
-              <li onclick="window.location.href='/fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">French</a></li>
-              <li onclick="window.location.href='/es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Spanish</a></li>
-              <li onclick="window.location.href='/ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">Russian</a></li>
+              <li onclick="window.location.href='/de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li onclick="window.location.href='/fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
+              <li onclick="window.location.href='/es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
+              <li onclick="window.location.href='/ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
+              <li onclick="window.location.href='/zh/index.html'"><a href="/zh/index.html"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
             </ul>
           </div>
 <a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Contact us!</span></button></a>
@@ -50,15 +51,19 @@
     <section class="heading">
       <div class="wrapper">
         <h1>Experience the Ligurian Gulf!</h1>
-        <p>Enjoy the peace of a private tour or share the experience with people from all over the world: the journey starts from Genoa's Old Harbor, but the memory stays with you.</p>
+        <p>Enjoy the peace of a private tour or share the experience with people from all over the world: the journey starts from Genoa's Old Harbour, but the memory stays with you.</p>
       </div>
     </section>
-      <div class="wrapper-filter">
-        <div class="wrapper-1" id="btn-main" onclick="showMain()"><p>Main (3)</p></div>
-        <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p>Special (4)</p></div>
-      </div>
-    </div>
-    
+  </div>
+  
+  <div class="experiences-wrapper">
+    <h2>The Experiences</h2>
+    <p>Customise your experience to suit your needs!<br>Or contact us for an exclusive tour!</p>
+  </div>
+  <div class="wrapper-filter">
+    <div class="wrapper-1" id="btn-main" onclick="showMain()"><p>Main</p></div>
+    <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p>Special</p></div>
+  </div>
 
     <div class="cards-container-container">
     <div class="cards-container">
@@ -72,55 +77,61 @@
           <video src="/assets/videos/rainbow.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>The Rainbow Tour</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>A slow afternoon along the coast, with music, conversation, and gentle waves. Enjoy the sea at your own pace.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>2:30PM - 6:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>A relaxing afternoon along the coast, with music, chats and gentle waves. Perfect for those who want to unwind and enjoy the sea at their own pace.</p>
-              <div class="wrapper-descrizione-freccia">
-                <h3>From €72 per person</h3>
-                <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
-              </div>
-            </div>
           </div>
+        </div>
+        <div class="price-section">
+          <p>From €72 per person</p>
+          <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
         </div>
       </div>
 
 
 
       <div class="the-wild-tour-card" onclick="window.location.href='booking.html?experience=wild'">
+
         <div class="card">
-                    
           <video src="/assets/videos/wildtour.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>The Wild Tour</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>Explore wild places and secret coves. From Punta Chiappa to Portofino, passing through Paraggi and San Fruttuoso.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5 - 9</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>7:00AM - 2:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>Explore wild places and secret bays all day long. From Punta Chiappa to Portofino, passing through Paraggi and San Fruttuoso. Nature, dives and freedom.</p>
-                <div class="wrapper-descrizione-freccia">
-                  <h3>From €95 per person</h3>
-                  <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
-              </div>
-            </div>
           </div>
+        </div>
+        <div class="price-section">
+          <p>From €95 per person</p>
+          <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
         </div>
       </div>
 
@@ -132,25 +143,27 @@
           <video src="/assets/videos/gourmet.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>Gourmet Sunset Cruise</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>Enjoy a rich Ligurian aperitif at anchor in Bocca D’Asse at sunset. Good food, starry skies, and dancing dolphins!</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>6:30PM - 11:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>Enjoy a rich Ligurian aperitif at anchor in Bocca D’Asse at sunset. Music, wine, focaccia and – if you’re lucky – some dolphins jumping among the waves.</p>
-                <div class="wrapper-descrizione-freccia">
-                  <h3>€65 per person</h3>
-                  <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
-                </div>
-            </div>
           </div>
+        </div>
+        <div class="price-section">
+          <p>From €65 per person</p>
+          <img class="freccia" src="/assets/icons/arrow-right.svg" alt="arrow">
         </div>
       </div>
     </div>
@@ -166,25 +179,27 @@
           <!-- <video src="/assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>Barca Terapia</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>An experience designed to bring lightness and smiles to children with disabilities or serious illnesses, together with their families. The sea as an embrace.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>6:30PM - 11:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>An experience designed to bring lightness and smiles to children with disabilities or serious illnesses, together with their families. The sea as an embrace.</p>
-                <div class="wrapper-descrizione-freccia">
-                  <h3>Free</h3>
-                  <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
-                </div>
-            </div>
           </div>
+          </div>
+          <div class="price-section">
+            <p>Free</p>
+            <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
       
@@ -193,26 +208,27 @@
           <video src="/assets/videos/1c8d55d69d924af6b868c5f2202f4225.mov"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>Blow me away</h1>
               </div>
-              <div class="circle-progress"></div>
-              <div class="circle-progress"></div>
+              <p>Experience unique events like Rapallo's Burning Castle from the sea, among lights, reflections, and silence. An exclusive evening, away from the crowds.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>Full Day</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>Experience unique events like the "Castello in Fiamme" of Rapallo from the sea, among lights, reflections and silence. An exclusive evening, far from the crowd.</p>
-              <div class="wrapper-descrizione-freccia">
-                <h3>€1300 per group</h3>
-                <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
-              </div>
-            </div>
           </div>
+        </div>
+        <div class="price-section">
+          <p>€1300 per group</p>
+          <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
 
@@ -222,25 +238,27 @@
           <!-- <video src="/assets/videos/rainbow.mp4"></video> -->
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>Wicked Games</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>Private boat at sunset, wine, live guitar music (played by me), and all the intimacy of a moment just for you.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>6:30PM - 11:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>Private boat at sunset, wine, live music with guitar (played by me) and all the intimacy of a moment just for you.</p>
-            <div class="wrapper-descrizione-freccia">
-              <h3>€350 per group</h3>
-              <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
-            </div>
-            </div>
           </div>
+      </div>
+      <div class="price-section">
+        <p>€350 per group</p>
+        <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
 
@@ -250,25 +268,27 @@
           <video src="/assets/videos/amerigo.mp4"></video>
           <div class="copy-wrapper">
             <div class="wrapper-top-top">
+              <div class="circle-progress"></div>
+            </div>
+            <div class="wrapper-bottom">
               <div class="wrapper-top">
                 <h1>Jack that ship! (Ended)</h1>
               </div>
-              <div class="circle-progress"></div>
+              <p>Discover the Amerigo Vespucci from the sea, among stories, lights, and waves. A toast under the stars in front of the most beautiful sailing ship in the world.</p>
+            </div>
+            <div class="wrapper-descrizione-freccia">
               <div class="details">
                 <div class="wrapper">
-                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>4.5</p></div>
+                  <div class="wrapper-1"><img src="/assets/icons/clock.svg" alt=""><p>6:30PM - 11:00PM</p></div>
                   <div class="wrapper-2"><img src="/assets/icons/people.svg" alt=""><p>7</p></div>
                 </div>
               </div>
             </div>
-            <div class="wrapper-bottom">
-              <p>Discover the Amerigo Vespucci from the sea, among stories, lights and waves. A toast under the stars in front of the most beautiful sailing ship in the world.</p>
-            <div class="wrapper-descrizione-freccia">
-              <h3>€350 per group</h3>
-              <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
-            </div>
-            </div>
           </div>
+      </div>
+      <div class="price-section">
+        <p>€350 per group</p>
+        <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
 
@@ -279,22 +299,22 @@
 
 <div class="perks">
   <div class="first">
-    <div class="wrapper-1"><img src="/assets/icons/fuel.png" alt=""><div class="wrapper"><p>Fuel included</p><p>No extra surprises</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/foto.png" alt=""><div class="wrapper"><p>Photo souvenir</p><p>Cheese!</p></div></div>
+    <div class="wrapper-1"><img src="/assets/icons/fuel.png" alt=""><div class="wrapper"><p>Fuel Included</p><p>No extra surprises</p></div></div>
+    <div class="wrapper-2"><img src="/assets/icons/foto.png" alt=""><div class="wrapper"><p>Photo Souvenir</p><p>Cheese!</p></div></div>
     <div class="wrapper-3"><img src="/assets/icons/sport.png" alt=""><div class="wrapper"><p>Watersports</p><p>Let's go!</p></div></div>
-    <div class="wrapper-4"><img src="/assets/icons/pet.png" alt=""><div class="wrapper"><p>Pet friendly</p><p>Bring them with you!</p></div></div>
+    <div class="wrapper-4"><img src="/assets/icons/pet.png" alt=""><div class="wrapper"><p>Pet Friendly</p><p>Bring them with you!</p></div></div>
   </div>
 
   <div class="second">
-    <div class="wrapper-1"><img src="/assets/icons/disability.png" alt=""><div class="wrapper"><p>Disability accessible</p><p>No one is left behind</p></div></div>
+    <div class="wrapper-1"><img src="/assets/icons/disability.png" alt=""><div class="wrapper"><p>Disability Accessible</p><p>No one is left behind</p></div></div>
     <div class="wrapper-2"><img src="/assets/icons/towels.png" alt=""><div class="wrapper"><p>Amenities</p><p>All the essentials + extra!</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/snack.png" alt=""><div class="wrapper"><p>Snacks & drinks</p><p>We like a full tummy</p></div></div>
+    <div class="wrapper-3"><img src="/assets/icons/snack.png" alt=""><div class="wrapper"><p>Snacks & Drinks</p><p>We like a full tummy</p></div></div>
     <div class="wrapper-4"><img src="/assets/icons/easy.png" alt=""><div class="wrapper"><p>Flexible</p><p>Change plans easily</p></div></div>
   </div>
 
   <div class="third">
     <div class="wrapper-1"><img src="/assets/icons/music.png" alt=""><div class="wrapper"><p>Music</p><p>Of course</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/mask.png" alt=""><div class="wrapper"><p>Snorkeling gear</p><p>Full face masks (L)</p></div></div>
+    <div class="wrapper-2"><img src="/assets/icons/mask.png" alt=""><div class="wrapper"><p>Snorkelling Gear</p><p>Full face masks (L)</p></div></div>
     <div class="wrapper-3"><img src="/assets/icons/safety.png" alt=""><div class="wrapper"><p>Safety</p><p>First of all</p></div></div>
   </div>
 </div>
@@ -388,15 +408,19 @@
       </div>
     </div>
     <div class="leggera"></div> -->
-<div id="TA_cdswritereviewlg44" class="TA_cdswritereviewlg"><ul id="IsHuArGzSk8" class="TA_links 7PJFb5"><li id="P0KVkP" class="LzzUuNTiW22Y"><a target="_blank" href="https://www.tripadvisor.co.uk/Attraction_Review-g187823-d33317432-Reviews-Leggero_Tours-Genoa_Italian_Riviera_Liguria.html"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=44&amp;locationId=33317432&amp;lang=en_UK&amp;lang=en_UK&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+
+    <div id="TA_cdswritereviewlg370" class="TA_cdswritereviewlg">
+      <ul id="OtJoz7aS3g0K" class="TA_links HuD9kXuQK">
+        <li id="RdGWC2Q" class="HpW6Slo7ksWc"><a target="_blank" href="https://www.tripadvisor.it/Attraction_Review-g187823-d33317432-Reviews-Leggero_Tours-Genoa_Italian_Riviera_Liguria.html"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=370&amp;locationId=33317432&amp;lang=it&amp;lang=it&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
     <div class="blank-space">
       
     </div>
+
     <footer>
       <div class="wrapper">
         <p>© 2025 Leggero Tours</p>
-        <p>Created with care by Riccardo and developed by <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
-        <a class="cancellation" href="/en/cancellation.html">Cancellation Policy</a>
+        <p>Lovingly created by Riccardo and developed by <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
+        <a class="cancellation" href="/cancellation.html">Cancellation Policy</a>
         <div class="social-icons-wrapper" style="display: flex; gap: 1rem; flex: row; align-items: center; justify-content: center; margin-top: 1rem;">
           <a href=""><img src="/assets/icons/facebook.svg" alt=""></a>
           <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="/assets/icons/instagram.svg" alt=""></a>
@@ -742,7 +766,6 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(wrapper);
   });
 </script>
-
 
 
 
