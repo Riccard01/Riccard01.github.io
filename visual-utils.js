@@ -15,6 +15,28 @@ function centerCardsContainer() {
 
 document.addEventListener('DOMContentLoaded', centerCardsContainer);
 
+// Center cards only the first time a .cards-container becomes visible
+document.querySelectorAll('.cards-container').forEach(container => {
+  let wasHidden = getComputedStyle(container).display === 'none';
+  if (wasHidden) {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'style' &&
+          getComputedStyle(container).display !== 'none' &&
+          wasHidden
+        ) {
+          centerCardsContainer();
+          wasHidden = false;
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+  }
+});
+
 // Debounce resize and only re-center if width changes
 let lastWidth = window.innerWidth;
 let resizeTimeout;
