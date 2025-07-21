@@ -14,4 +14,16 @@ function centerCardsContainer() {
 }
 
 document.addEventListener('DOMContentLoaded', centerCardsContainer);
-window.addEventListener('resize', centerCardsContainer);
+
+// Debounce resize and only re-center if width changes
+let lastWidth = window.innerWidth;
+let resizeTimeout;
+window.addEventListener('resize', function() {
+  if (resizeTimeout) clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (window.innerWidth !== lastWidth) {
+      lastWidth = window.innerWidth;
+      centerCardsContainer();
+    }
+  }, 150);
+});
