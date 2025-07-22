@@ -436,6 +436,7 @@
 <script>
   document.querySelectorAll(".card video").forEach(video => {
     const card = video.closest(".card");
+    const genoveseImg = card.querySelector('img[src*="genovese.png"]');
 
     // Salva il background originale
     const originalBackground = card.style.backgroundImage || window.getComputedStyle(card).backgroundImage;
@@ -450,6 +451,9 @@
 
       // Nascondi background (immagine)
       card.style.backgroundImage = "none";
+
+      // Nascondi genovese.png
+      if (genoveseImg) genoveseImg.style.display = "none";
     });
 
     card.addEventListener("mouseleave", () => {
@@ -459,9 +463,13 @@
 
       // Ripristina background
       card.style.backgroundImage = originalBackground;
+
+      // Mostra genovese.png
+      if (genoveseImg) genoveseImg.style.display = "block";
     });
   });
 </script>
+
 
 <script>
   document.querySelectorAll(".card video").forEach(video => {
