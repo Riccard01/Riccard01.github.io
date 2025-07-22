@@ -674,6 +674,7 @@ button:focus {
   margin: 0;
   width: 100%;
   padding: 0;
+  letter-spacing: .03rem;
 }
 
 .the-rainbow-tour-card .copy-wrapper p,
