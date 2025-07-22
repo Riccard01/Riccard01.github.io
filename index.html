@@ -506,7 +506,7 @@
 
   const setupObserver = () => {
     const options = {
-      threshold: 1.0 // La card deve essere completamente visibile
+      threshold: 1.0
     };
 
     observer = new IntersectionObserver((entries) => {
@@ -514,26 +514,25 @@
         const card = entry.target;
         const video = card.querySelector('video');
         const circle = card.querySelector('.circle-progress');
+        const genoveseImg = card.querySelector('img[src*="genovese.png"]');
 
         if (!video) return;
 
-        // Salva il background una volta
         if (!card.dataset.bg) {
           card.dataset.bg = getComputedStyle(card).backgroundImage;
         }
 
-        // Blocca il primo trigger automatico subito dopo il load
+        // Se la card entra completamente nel viewport
         if (entry.isIntersecting && entry.intersectionRatio === 1 && entry.time > 300) {
           card.classList.add('hovered');
 
-          // Mostra barra circolare
           if (circle) {
             circle.style.display = 'block';
             circle.style.animation = 'spinProgress 0.5s linear forwards';
           }
 
-          // Avvia video dopo 0.5s
-          setTimeout(() => {
+          // Salva timeout su proprietà del card
+          card._videoTimeout = setTimeout(() => {
             if (circle) circle.style.display = 'none';
 
             card.style.backgroundImage = 'none';
@@ -543,22 +542,25 @@
             video.currentTime = 0;
             video.play().catch(() => {});
 
-            // Nascondi immagine genovese.png
-            const genoveseImg = card.querySelector('img[src*="genovese.png"]');
             if (genoveseImg) genoveseImg.style.display = 'none';
           }, 500);
         }
 
-        // Esce dal viewport
+        // Se la card esce dal viewport
         if (!entry.isIntersecting) {
           card.classList.remove('hovered');
+
+          // Cancella timeout se presente
+          if (card._videoTimeout) {
+            clearTimeout(card._videoTimeout);
+            card._videoTimeout = null;
+          }
 
           video.pause();
           video.currentTime = 0;
           video.style.opacity = '0';
           card.style.backgroundImage = card.dataset.bg;
 
-          const genoveseImg = card.querySelector('img[src*="genovese.png"]');
           if (genoveseImg) genoveseImg.style.display = 'block';
 
           if (circle) {
@@ -589,6 +591,12 @@
     document.querySelectorAll('.card').forEach(card => {
       const video = card.querySelector('video');
       const circle = card.querySelector('.circle-progress');
+      const genoveseImg = card.querySelector('img[src*="genovese.png"]');
+
+      if (card._videoTimeout) {
+        clearTimeout(card._videoTimeout);
+        card._videoTimeout = null;
+      }
 
       if (video) {
         video.pause();
@@ -602,8 +610,6 @@
       if (card.dataset.bg) {
         card.style.backgroundImage = card.dataset.bg;
       }
-
-      const genoveseImg = card.querySelector('img[src*="genovese.png"]');
       if (genoveseImg) genoveseImg.style.display = 'block';
 
       card.classList.remove('hovered');
@@ -626,12 +632,13 @@
 
   mql.addEventListener("change", e => {
     if (e.matches) {
-      setupObserver();  // entra in mobile
+      setupObserver();
     } else {
-      stopObserver();   // esce da mobile
+      stopObserver();
     }
   });
 </script>
+
 
 
 
