@@ -4,6 +4,7 @@
     body {
         margin: 0;
         padding: 0;
+        position: relative;
     }
 
     nav {
@@ -425,14 +426,11 @@ padding-top: 0rem !important;
     }
 
 
-
-
-
-
-
-
-
-
+.decoration {
+  position: absolute;
+  top: 53rem;
+  z-index: -10;
+}
 
 
 
