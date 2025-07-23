@@ -1096,12 +1096,19 @@ function showBookingSummaryModal(html) {
 
 // Helper to generate the HTML summary as a string (copied from createSummaryHTMLPage, but returns string)
 function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet, timeStr }, orderId) {
-  const meetingPoint = `
-    <strong>Meeting Point:</strong> <br>
-    <span style="color:#2a5d8f;">Porto di Genova, Molo vecchio</span><br>
-    Please arrive at least 10 minutes before departure.<br>
-    Look for the leggeroTOURS flag near the docked boats.
-  `;
+  // Load template from summary_template.html synchronously (assume it's already loaded or available)
+  let template = '';
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'summary_template.html', false); // Synchronous request
+    xhr.send(null);
+    if (xhr.status === 200) {
+      template = xhr.responseText;
+    }
+  } catch (e) {
+    console.error('Could not load summary_template.html:', e);
+    return '';
+  }
 
   // --- Determine tourKey just like in pricing ---
   let tourKey = selections.experience;
@@ -1113,170 +1120,30 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
   } else {
     tourKey += " (private)";
   }
-
   const tour = tourDetailsRetrived?.[tourKey];
   const orarioInizio = tour?.orarioInizio || "-";
   const orarioFine = tour?.orarioFine || "-";
 
-  const summaryRows = [
-    { label: CONSTANTS.texts.summary.experience, value: selections.experience },
-    !isGourmet && { label: CONSTANTS.texts.summary.slot, value: selections.slot },
-    !isGourmet && { label: CONSTANTS.texts.summary.combo, value: selections.combo },
-    { label: CONSTANTS.texts.summary.people, value: selections.people },
-    { label: CONSTANTS.texts.summary.groupType, value: selections.groupType },
-    { label: CONSTANTS.texts.summary.date, value: new Date(selections.date).toLocaleDateString(undefined, { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }) },
-    { label: "Start Time", value: orarioInizio },               // <--- Added
-    { label: "Finish Time", value: orarioFine },               // <--- Added
-    { label: "Time", value: timeStr },
-    { label: CONSTANTS.texts.summary.price, value: $('#summary-price').text() }
-  ].filter(Boolean);
-
-  const buyerRows = [
-    { label: "Name", value: name },
-    { label: "Surname", value: surname },
-    { label: "Email", value: email },
-    { label: "Phone", value: phone },
-    { label: "Order ID", value: orderId },
-    notes && { label: "Notes", value: notes }
-  ].filter(Boolean);
-
-  const summaryTable = summaryRows.map(row =>
-    `<tr>
-      <td style="padding:8px 16px;font-weight:bold;color:#333;">${row.label}</td>
-      <td style="padding:8px 16px;color:#444;">${row.value}</td>
-    </tr>`
-  ).join('');
-
-  const buyerTable = buyerRows.map(row =>
-    `<tr>
-      <td style="padding:8px 16px;font-weight:bold;color:#333;">${row.label}</td>
-      <td style="padding:8px 16px;color:#444;">${row.value}</td>
-    </tr>`
-  ).join('');
-
-  const contactSection = `
-    <div class="section-title">Contact LeggeroTOURS</div>
-    <div class="contact-info">
-      <div style="margin-bottom:6px;">
-        <strong>Email:</strong>
-        <a href="mailto:info@leggerotours.com" style="color:#2a5d8f;text-decoration:none;">info@leggerotours.com</a>
-      </div>
-      <div style="margin-bottom:6px;">
-        <strong>Phone/WhatsApp:</strong>
-        <a href="tel:+393331234567" style="color:#2a5d8f;text-decoration:none;">+39 333 1234567</a>
-      </div>
-      <div>
-        <strong>Website:</strong>
-        <a href="https://leggerotours.com" target="_blank" style="color:#2a5d8f;text-decoration:none;">leggerotours.com</a>
-      </div>
-    </div>
-  `;
-
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Your Booking Summary</title>
-      <style>
-        body {
-          font-family: 'Segoe UI', Arial, sans-serif;
-          background: #f7f7f7;
-          margin: 0;
-          padding: 0;
-        }
-        .container {
-          max-width: 520px;
-          margin: 40px auto;
-          background: #fff;
-          border-radius: 12px;
-          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-          padding: 32px 24px;
-        }
-        h2 {
-          text-align: center;
-          color: #2a5d8f;
-          margin-bottom: 24px;
-        }
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-bottom: 24px;
-        }
-        tr:nth-child(even) {
-          background: #f2f6fa;
-        }
-        td {
-          font-size: 1.05em;
-        }
-        .footer {
-          text-align: center;
-          color: #888;
-          font-size: 0.95em;
-          margin-top: 18px;
-        }
-        .paid-badge {
-          display: inline-block;
-          background: #4caf50;
-          color: #fff;
-          font-weight: bold;
-          padding: 6px 18px;
-          border-radius: 18px;
-          font-size: 1.1em;
-          margin-bottom: 18px;
-          letter-spacing: 1px;
-        }
-        .meeting-point {
-          background: #eaf4fb;
-          border-left: 4px solid #2a5d8f;
-          padding: 12px 18px;
-          margin-bottom: 20px;
-          font-size: 1.04em;
-        }
-        .section-title {
-          color: #2a5d8f;
-          font-size: 1.08em;
-          margin: 18px 0 8px 0;
-          font-weight: bold;
-        }
-        .contact-info {
-          background: #f8fafc;
-          border-left: 4px solid #2a5d8f;
-          padding: 12px 18px;
-          margin-bottom: 20px;
-          font-size: 1.04em;
-        }
-        .contact-info a {
-          color: #2a5d8f;
-          text-decoration: none;
-        }
-        .contact-info a:hover {
-          text-decoration: underline;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="paid-badge">PAID</div>
-        <h2>Booking Summary</h2>
-        <div class="meeting-point">${meetingPoint}</div>
-        ${contactSection}
-        <div class="section-title">Tour Details</div>
-        <table>
-          ${summaryTable}
-        </table>
-        <div class="section-title">Your Details</div>
-        <table>
-          ${buyerTable}
-        </table>
-        <div class="footer">
-          Thank you for booking with leggeroTOURS!<br>
-          We look forward to welcoming you on board.
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
-
+  // Substitute placeholders in template with individual values
+  let html = template
+    .replace(/{{CONTACT_EMAIL}}/g, 'info@leggerotours.com')
+    .replace(/{{CONTACT_PHONE}}/g, '+39 333 1234567')
+    .replace(/{{CONTACT_WEBSITE}}/g, 'https://leggerotours.com')
+    .replace(/{{EXPERIENCE}}/g, selections.experience)
+    .replace(/{{SLOT}}/g, isGourmet ? '' : selections.slot)
+    .replace(/{{COMBO}}/g, isGourmet ? '' : selections.combo)
+    .replace(/{{PEOPLE}}/g, selections.people)
+    .replace(/{{GROUP_TYPE}}/g, selections.groupType)
+    .replace(/{{DATE}}/g, new Date(selections.date).toLocaleDateString(undefined, { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }))
+    .replace(/{{START_TIME}}/g, orarioInizio)
+    .replace(/{{FINISH_TIME}}/g, orarioFine)
+    .replace(/{{TIME}}/g, timeStr)
+    .replace(/{{PRICE}}/g, $('#summary-price').text())
+    .replace(/{{NAME}}/g, name)
+    .replace(/{{SURNAME}}/g, surname)
+    .replace(/{{EMAIL}}/g, email)
+    .replace(/{{PHONE}}/g, phone)
+    .replace(/{{ORDER_ID}}/g, orderId)
+    .replace(/{{NOTES}}/g, notes || '');
   return html.replace(/\n/g, "");
 }
