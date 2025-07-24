@@ -3,6 +3,11 @@ html {
   overflow-x: hidden;
 }
 
+/* Make the people icon blue like the phone button */
+.option-subtitle img[src*="people.svg"] {
+  filter: invert(36%) sepia(99%) saturate(7492%) hue-rotate(199deg) brightness(99%) contrast(101%);
+}
+
 body {
   display: flex;
   justify-content: center;
