@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Booking Summary FRENCH</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            padding: 32px 24px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2a5d8f;
+            margin-bottom: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f6fa;
+        }
+
+        td {
+            font-size: 1.05em;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 0.95em;
+            margin-top: 18px;
+        }
+
+        .paid-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: #fff;
+            font-weight: bold;
+            padding: 6px 18px;
+            border-radius: 18px;
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+
+        .meeting-point {
+            background: #eaf4fb;
+            border-left: 4px solid #2a5d8f;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            font-size: 1.04em;
+        }
+
+        .section-title {
+            color: #2a5d8f;
+            font-size: 1.08em;
+            margin: 18px 0 8px 0;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            background: #f8fafc;
+            border-left: 4px solid #2a5d8f;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            font-size: 1.04em;
+        }
+
+        .contact-info a {
+            color: #2a5d8f;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="paid-badge">PAID</div>
+        <h2>Booking Summary FRENCH</h2>
+        <div class="meeting-point"><strong>Meeting Point:</strong> <br><span style="color:#2a5d8f;">Porto di Genova,
+                        Molo vecchio</span><br>Please arrive at least 10 minutes before departure.<br>Look for the leggeroTOURS
+                    flag near the docked boats.</div>
+        <div class="section-title">Contact LeggeroTOURS</div>
+        <div class="contact-info">
+            <div style="margin-bottom:6px;">
+                <strong>Email:</strong>
+                <a href="mailto:{{CONTACT_EMAIL}}" style="color:#2a5d8f;text-decoration:none;">{{CONTACT_EMAIL}}</a>
+            </div>
+            <div style="margin-bottom:6px;">
+                <strong>Phone/WhatsApp:</strong>
+                <a href="tel:{{CONTACT_PHONE}}" style="color:#2a5d8f;text-decoration:none;">{{CONTACT_PHONE}}</a>
+            </div>
+            <div>
+                <strong>Website:</strong>
+                <a href="{{CONTACT_WEBSITE}}" target="_blank"
+                    style="color:#2a5d8f;text-decoration:none;">leggerotours.com</a>
+            </div>
+        </div>
+        <div class="section-title">Tour Details</div>
+        <table>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Experience</td>
+                <td style="padding:8px 16px;color:#444;">{{EXPERIENCE}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Slot</td>
+                <td style="padding:8px 16px;color:#444;">{{SLOT}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Combo</td>
+                <td style="padding:8px 16px;color:#444;">{{COMBO}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">People</td>
+                <td style="padding:8px 16px;color:#444;">{{PEOPLE}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Group Type</td>
+                <td style="padding:8px 16px;color:#444;">{{GROUP_TYPE}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Date</td>
+                <td style="padding:8px 16px;color:#444;">{{DATE}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Start Time</td>
+                <td style="padding:8px 16px;color:#444;">{{START_TIME}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Finish Time</td>
+                <td style="padding:8px 16px;color:#444;">{{FINISH_TIME}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Time</td>
+                <td style="padding:8px 16px;color:#444;">{{TIME}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Price</td>
+                <td style="padding:8px 16px;color:#444;">{{PRICE}}</td>
+            </tr>
+        </table>
+        <div class="section-title">Your Details</div>
+        <table>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Name</td>
+                <td style="padding:8px 16px;color:#444;">{{NAME}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Surname</td>
+                <td style="padding:8px 16px;color:#444;">{{SURNAME}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Email</td>
+                <td style="padding:8px 16px;color:#444;">{{EMAIL}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Phone</td>
+                <td style="padding:8px 16px;color:#444;">{{PHONE}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Order ID</td>
+                <td style="padding:8px 16px;color:#444;">{{ORDER_ID}}</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 16px;font-weight:bold;color:#333;">Notes</td>
+                <td style="padding:8px 16px;color:#444;">{{NOTES}}</td>
+            </tr>
+        </table>
+        <div class="footer">
+            Thank you for booking with leggeroTOURS!<br>
+            We look forward to welcoming you on board.
+        </div>
+    </div>
+</body>
+
+</html>

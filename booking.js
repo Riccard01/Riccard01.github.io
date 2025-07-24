@@ -181,7 +181,7 @@ $(document).ready(function () {
         if (eventDates.includes(yyyyMMdd)) {
           const icon = document.createElement("span");
           icon.classList.add("event-icon");
-          icon.innerHTML = `<img src="assets/icons/locked.svg" alt="" />`;
+          icon.innerHTML = `<img src="/assets/icons/locked.svg" alt="" />`;
           dayElem.appendChild(icon);
         }
         updateMonthYearLabel(fp);
@@ -464,10 +464,10 @@ $(document).ready(function () {
     // Cambia icona lock/unlock in base al tipo di gruppo
     if ($groupIcon.length) {
       if (selections.groupType === "Private") {
-        $groupIcon.attr('src', 'assets/icons/locked.svg');
+        $groupIcon.attr('src', '/assets/icons/locked.svg');
         $groupIcon.attr('alt', 'Locked');
       } else {
-        $groupIcon.attr('src', 'assets/icons/unlocked.svg');
+        $groupIcon.attr('src', '/assets/icons/unlocked.svg');
         $groupIcon.attr('alt', 'Unlocked');
       }
     }
@@ -1100,10 +1100,33 @@ function createSummaryHTMLString({ name, surname, email, phone, notes, isGourmet
   let template = '';
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'summary_template.html', false); // Synchronous request
+    // Detect language from URL (e.g., ?lang=en or /en/ in path)
+    let lang = '';
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('lang')) {
+      lang = urlParams.get('lang').toLowerCase();
+    } else {
+      // Try to detect from path, e.g. /en/ or /it/
+      const match = window.location.pathname.match(/\/([a-z]{2})(?:\/|$)/i);
+      if (match) lang = match[1].toLowerCase();
+    }
+    let templateFile = 'summary_template.html';
+    if (lang && lang !== 'it') {
+      templateFile = `summary_template_${lang}.html`;
+    }
+    // Try to load the template for the detected language
+    xhr.open('GET', '/templates/' + templateFile, false); // Synchronous request
     xhr.send(null);
     if (xhr.status === 200) {
       template = xhr.responseText;
+    } else if (xhr.status === 404 && templateFile !== 'summary_template_en.html') {
+      // Try fallback to English with a new XMLHttpRequest
+      const xhr2 = new XMLHttpRequest();
+      xhr2.open('GET', '/templates/summary_template_en.html', false);
+      xhr2.send(null);
+      if (xhr2.status === 200) {
+        template = xhr2.responseText;
+      }
     }
   } catch (e) {
     console.error('Could not load summary_template.html:', e);
