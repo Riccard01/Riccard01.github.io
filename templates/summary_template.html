@@ -23,7 +23,7 @@
 
         h2 {
             text-align: center;
-            color: #2a5d8f;
+            color: #04081B;
             margin-bottom: 24px;
         }
 
@@ -91,17 +91,30 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+.decoration-mask {
+  position: absolute;
+  bottom: -1rem;
+  z-index: 10;
+}
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="paid-badge">PAID</div>
+        <div class="wrapper"><img src="assets/email/logo.svg" alt=""></div>
         <h2>Booking Summary</h2>
-        <div class="meeting-point"><strong>Meeting Point:</strong> <br><span style="color:#2a5d8f;">Porto di Genova,
-                        Molo vecchio</span><br>Please arrive at least 10 minutes before departure.<br>Look for the leggeroTOURS
-                    flag near the docked boats.</div>
-        <div class="section-title">Contact LeggeroTOURS</div>
+        <div class="meeting-point"><strong>Meeting Point: </strong><a href="https://www.google.com/maps/search/?api=1&query=44.4048,8.9296" 
+   style="color:#0075FA; cursor:pointer;" target="_blank">
+  Porto di Genova, Molo vecchio
+</a></div>
+        <div class="section-title">Contact Leggero Tours</div>
         <div class="contact-info">
             <div style="margin-bottom:6px;">
                 <strong>Email:</strong>
@@ -187,11 +200,30 @@
                 <td style="padding:8px 16px;color:#444;">{{NOTES}}</td>
             </tr>
         </table>
+        <img class="decoration-mask" src="/assets/decoration/trace.svg" alt="">
         <div class="footer">
-            Thank you for booking with leggeroTOURS!<br>
+            Thank you for booking with Leggero Tours!<br>
             We look forward to welcoming you on board.
         </div>
     </div>
+    <script>
+function startNavigation(destLat, destLng) {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  const destination = `${destLat},${destLng}`;
+
+  if (isIOS) {
+    // Apple Maps - modalità navigazione
+    window.location.href = `maps://?daddr=${destination}&dirflg=d`;
+  } else if (isAndroid) {
+    // Google Maps App - modalità navigazione
+    window.location.href = `google.navigation:q=${destination}`;
+  } else {
+    // Fallback per desktop o browser sconosciuti
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}`, '_blank', 'noopener');
+  }
+}
+</script>
 </body>
 
 </html>
