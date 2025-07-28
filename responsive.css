@@ -46,6 +46,7 @@
       text-align: center;
       padding-top: 3rem;
       color: #FFF;
+      font-size: 1.6875rem;
     }
 
     section.heading .wrapper p {
@@ -434,10 +435,16 @@ padding-top: 0rem !important;
 
 
 .decoration-mask {
+  display: block !important;
   position: absolute !important;
   bottom: -1rem !important;
   z-index: 10 !important;
   display: block !important;
+}
+
+
+.decoration-mask-big {
+  display: none !important;
 }
 
 .combo {

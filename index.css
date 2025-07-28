@@ -180,12 +180,15 @@ section.heading .wrapper h1 {
   font-weight: 700;
   line-height: normal;
 }
-.decoration-mask {
+.decoration-mask-big {
   position: absolute;
   bottom: -1rem;
   z-index: 111;
 }
 
+.decoration-mask {
+  display: none;
+}
 
 section.heading .wrapper p {
   font-size: 1.525rem;
