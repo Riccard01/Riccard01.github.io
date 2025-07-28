@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="flatpickr.css">
     <script
         src="https://www.paypal.com/sdk/js?client-id=ASN4pkPq5xe_8nQXAMM661iuch7tsycCTK6fsw26GhuV8e10z2mco_BcJn32T_55Fjq0sw7y3vKoZkwl&currency=EUR&components=buttons"></script>
-    <title>Booking</title>
+    <title>Prenotazione</title>
 </head>
 
 <body>
@@ -62,13 +62,16 @@
                 <div class="section-heading">
                     <div class="wrapper-customize">
                         <p>Customize your tour</p>
+                        <p>Personalizza il tuo tour</p>
                     </div>
                     <div class="influences-wrapper">
                         <img src="assets/icons/influences.svg" alt="" />
                         <p>Influences the price</p>
+                        <p>Influenza il prezzo</p>
                     </div>
                 </div>
                 <p class="main-subtitle">Adjust the filters to check for availability</p>
+                <p class="main-subtitle">Regola i filtri per verificare la disponibilità</p>
             </div>
             <div class="options-wrapper" id="options-div">
                 <!-- Experience -->
@@ -78,9 +81,10 @@
                         <div class="option-subtitle">
                             <img src="assets/icons/cards.svg" alt="" />
                             <p>Experience</p>
+                            <p>Esperienza</p>
                         </div>
                         <div class="option-value">
-                            <p>The Rainbow Tour</p>
+                            <p>Rainbow Tour</p>
                         </div>
                     </div>
                     <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
@@ -95,10 +99,10 @@
                     <div class="option-wrapper">
                         <div class="option-subtitle">
                             <img src="assets/icons/calendar-tick.svg" alt="" />
-                            <p>Slot</p>
+                            <p>Fascia oraria</p>
                         </div>
                         <div class="option-value">
-                            <p>Full Day</p>
+                            <p>Giornata intera</p>
                         </div>
                     </div>
                     <img class="price-influences" src="assets/icons/influences.svg" alt="" />
@@ -113,10 +117,10 @@
                     <div class="option-wrapper">
                         <div class="option-subtitle">
                             <img src="assets/icons/cards.svg" alt="" />
-                            <p>Sunset Combo</p>
+                            <p>Combo Tramonto</p>
                         </div>
                         <div class="option-value">
-                            <p>Oh yeah!</p>
+                            <p>Oh sì!</p>
                         </div>
                     </div>
                     <img class="price-influences" src="assets/icons/influences.svg" alt="" />
@@ -131,7 +135,7 @@
                     <div class="option-wrapper">
                         <div class="option-subtitle">
                             <img src="assets/icons/people.svg" alt="" />
-                            <p>People</p>
+                            <p>Persone</p>
                         </div>
                         <div class="option-value">
                             <p>2</p>
@@ -148,10 +152,10 @@
                     <div class="option-wrapper">
                         <div class="option-subtitle">
                             <img src="assets/icons/locked.svg" alt="" />
-                            <p>Group</p>
+                            <p>Gruppo</p>
                         </div>
                         <div class="option-value">
-                            <p>Private</p>
+                            <p>Privato</p>
                         </div>
                     </div>
                     <img class="price-influences" src="assets/icons/influences.svg" alt="" />
@@ -163,7 +167,7 @@
                 <div id="calendar"></div>
                 <input id="calendar-input" type="text" style="display:none;" />
                 <button id="continueBtn" style="margin-top: 1rem;" class="option-input" position="sticky" bottom="0">
-                    <p id="step1-price">€ 0.00</p>Continue
+                    <p id="step1-price">€ 0.00</p>Continua
                 </button>
             </section>
         </section>
@@ -257,21 +261,21 @@
                 </div>
                 <div class="options options-wrapper">
                     <div class="section-heading">
-                        <p>Your Info</p>
+                        <p>I tuoi dati</p>
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Name <span class="required-star">*</span></p>
+                            <p>Nome <span class="required-star">*</span></p>
                         </div>
-                        <input type="text" id="input-name" class="option-input" placeholder="Name" />
+                        <input type="text" id="input-name" class="option-input" placeholder="Nome" />
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Surname <span class="required-star">*</span></p>
+                            <p>Cognome <span class="required-star">*</span></p>
                         </div>
-                        <input type="text" id="input-surname" class="option-input" placeholder="Surname" />
+                        <input type="text" id="input-surname" class="option-input" placeholder="Cognome" />
                     </div>
 
                     <div class="option-content">
@@ -284,15 +288,15 @@
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Confirm Email <span class="required-star">*</span></p>
+                            <p>Conferma Email <span class="required-star">*</span></p>
                         </div>
-                        <input type="email" id="input-email-confirm" class="option-input" placeholder="Confirm Email" />
+                        <input type="email" id="input-email-confirm" class="option-input" placeholder="Conferma Email" />
                         <div id="confirm-email-error" class="input-error"></div>
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Phone <span class="required-star">*</span></p>
+                            <p>Telefono <span class="required-star">*</span></p>
                         </div>
                         <div style="display: flex; gap: 0.5em; align-items: center;">
                             <select id="input-phone-prefix" class="option-input" style="width: 8em;">
@@ -311,7 +315,7 @@
                                 <option value="+48">🇵🇱 +48</option>
                                 <option value="+36">🇭🇺 +36</option>
                                 <option value="+32">🇧🇪 +32</option>
-                                <option value="+31">🇳🇱 +31</option>
+                                <option value="+31">🇳l +31</option>
                                 <option value="+30">🇬🇷 +30</option>
                                 <option value="+420">🇨🇿 +420</option>
                                 <option value="+353">🇮🇪 +353</option>
@@ -328,26 +332,24 @@
                                 <option value="+86">🇨🇳 +86</option>
                                 <option value="+91">🇮🇳 +91</option>
                             </select>
-                            <input type="tel" id="input-phone" class="option-input" placeholder="Phone Number"
-                                style="flex:1;" />
+                        <input type="tel" id="input-phone" class="option-input" placeholder="Numero di telefono" style="flex:1;" />
                         </div>
                         <div id="phone-error" class="input-error"></div>
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Notes</p>
+                            <p>Note</p>
                         </div>
-                        <textarea id="input-notes" class="option-input" placeholder="Any notes..." rows="5"
-                            maxlength="200"></textarea>
+                        <textarea id="input-notes" class="option-input" placeholder="Eventuali note..." rows="5" maxlength="200"></textarea>
                     </div>
                 </div>
             </div>
         </div>
 
         <section class="buttons">
-            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Back</button>
-            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Book your Experience</button>
+            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Indietro</button>
+            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Prenota la tua esperienza</button>
         </section>
         <!-- Overlay to blur background and contain PayPal modal -->
         <div id="paypal-overlay" style="display: none;">

@@ -434,9 +434,9 @@ padding-top: 0rem !important;
 
 
 .decoration-mask {
-  position: absolute;
-  bottom: -1rem;
-  z-index: 10;
+  position: absolute !important;
+  bottom: -1rem !important;
+  z-index: 10 !important;
   display: block !important;
 }
 
