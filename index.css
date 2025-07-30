@@ -1060,10 +1060,6 @@ button:focus {
   justify-content: center;
 }
 
-footer img {
-  filter: brightness(0) invert(1);
-}
-
 .titolo-wrapper {
   display: flex;
   width: 100%;
@@ -1149,6 +1145,18 @@ footer {
   justify-content: center;
   display: flex;
   width: 100vw;
+  position: relative;
+  margin-top: 15rem;
+}
+
+.decoration-mask-footer-big {
+  position: absolute !important;
+  top: -14.5rem !important;
+  z-index: 11 !important;
+}
+
+.decoration-mask-footer {
+  display: none;
 }
 
 footer .wrapper {

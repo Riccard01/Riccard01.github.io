@@ -375,7 +375,12 @@ padding-top: 0rem !important;
         justify-content: center;
         display: flex;
         width: 100vw;
+        overflow: visible;
 
+    }
+
+    footer .wrapper {
+      overflow: visible;
     }
 
 
@@ -439,9 +444,18 @@ padding-top: 0rem !important;
   position: absolute !important;
   bottom: -1rem !important;
   z-index: 10 !important;
-  display: block !important;
 }
 
+.decoration-mask-footer {
+  display: block !important;
+  position: absolute !important;
+  top: -14.5rem !important;
+  z-index: 11 !important;
+}
+
+.decoration-mask-footer-big {
+  display: none !important;;
+}
 
 .decoration-mask-big {
   display: none !important;
