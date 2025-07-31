@@ -35,7 +35,7 @@ nav {
   align-items: center;
   background: rgba(255, 255, 255, 1);
   border-bottom: 1px solid #DBDBDB;
-  z-index: 100;
+  z-index: 1000;
 }
 
 nav .wrapper {
