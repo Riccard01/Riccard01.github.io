@@ -1,110 +1,750 @@
 @media screen and (max-width: 700px) {
 
-body {
-  gap: .5rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  max-width: none;
-  padding: 1rem;
+html {
+  background: #F7FBFF;
+  overflow-x: hidden;
 }
 
-  #continueBtn {
-    margin-bottom: 10px;
-  }
+/* Make the people icon blue like the phone button */
+.option-subtitle img[src*="people.svg"] {
+  filter: invert(36%) sepia(99%) saturate(7492%) hue-rotate(199deg) brightness(99%) contrast(101%);
+}
 
-  .split-summary {
-    flex-direction: column;
-    gap: 2em;
-    width: 100%;
-  }
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  max-width: 63.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0rem 0rem;
+  gap: 2rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  position: relative;
+}
 
-  #step-2 {
-    padding-bottom: 2em;
-    width: 100%;
-  }
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
 
-.dropdown-toggle {
-  margin: 0px 0px;
+.phone-link button {
+  width: max-content;
+}
+
+
+button:focus {
+  outline: none;
 }
 nav a button img {
 filter: invert(1) grayscale(1) brightness(200%);
 }
-  .booking-step {
-    width: 100%;
-    padding: 0rem 1rem;
-  }
+nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  padding: 1.875rem;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.90);
+  border-bottom: 1px solid #DBDBDB;
+  backdrop-filter: blur(7.800000190734863px);
+  z-index: 100;
+}
 
-  .booking-table {
-    background: none;
-    border: none;
-    box-shadow: none;
-    padding: 0rem;
-    width: 100%;
-  }
+nav .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  gap: 10%;
+}
 
-  .options-wrapper {
-    border-radius: 0.4375rem;
-    background: #FFF;
-    box-shadow: 0px 0.882px 6.76px 1.207px rgba(0, 0, 0, 0.08);
-    gap: 0rem;
-    width: 100%;
-  }
+nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10.375rem;
+  padding: 0.625rem 0.9375rem;
+  gap: 0.625rem;
+  background: #0075FA;
+  border: none;
+  border-radius: 0.4375rem;
+  color: #FFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.20244rem;
+  cursor: pointer;
+}
 
-  .section-heading {
-    padding: 1rem 1.625rem 1rem 1.625rem;
-  }
+.noselect {
+  user-select: none;
+}
 
-  hr {
-    display: block;
-    border: none;
-    height: 1px;
-    background: #E9E9E9;
-    margin: 0 1rem;
-    width: calc(100% - 2rem);
-    /* 👈 corregge il trasbordo */
-  }
+.booking-step.responsive {
+  display: none;
+  flex-direction: column;
+}
 
-  .option-row.experience {
-    padding: 1rem;
-    height: 3rem !important;
-    background: none;
-    box-shadow: none;
-  }
+#step-2 {
+  position: relative;
+  ;
+}
 
-  .option-row {
-    padding: 1rem;
-    height: 3rem;
-    background: none;
-    box-shadow: none;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .price-influences {
-    top: 1.1rem;
-    right: -.45rem;
-  }
-
-
-
-    .con-scritta {
-      display: none;
-    }
-
-    .senza-scritta {
-        display: block;
-    }
-
-
-.option-row[data-key="people"] img{
-filter: invert(36%) sepia(100%) saturate(7470%) hue-rotate(210deg) brightness(96%) contrast(101%);
-
-
+section.calendar-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
 }
 
 
+
+.booking-table {
+  display: flex;
+  position: sticky;
+  max-width: 63.78938rem;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9375rem;
+  align-self: stretch;
+  border-radius: 1rem;
+  background: none;
+  width: fit-content;
+  height: fit-content;
+
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+  align-self: stretch;
+  padding: 1rem 0.5rem;
+}
+
+.wrapper-customize {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.section-heading p {
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0rem;
+}
+
+.influences-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.3125rem;
+  flex: 1 0 0;
+}
+
+.influences-wrapper p {
+  color: #0075FA;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+
+.options {
+  width: 100%;
+}
+
+
+.options.noselect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.options-wrapper {
+  display: flex !important;
+  padding: 0rem;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  ;
+  align-self: stretch;
+  border-radius: 1rem;
+  background: #FFF;
+}
+
+
+.option-row {
+  cursor: pointer;
+  margin-bottom: 0rem;
+  padding: 0.625rem;
+  height: 3.1875rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  border-radius: 0.4375rem;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+  user-select: none;
+}
+
+.people-wrapper {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+border-radius: 0.46875rem;
+background: #04081B;
+}
+
+
+.native-overlay-select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 999;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.option-price {
+  cursor: default;
+}
+
+.option-row.dropdown-open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.option-row.dropdown-open .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 2.2em;
+  z-index: 99;
+  background: white;
+  width: 100%;
+  padding: 0 4px 4px 4px;
+  border: 0.4px solid rgba(140, 149, 152, 0.24);
+  border-top: none;
+  border-radius: 0.4375rem;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 4px 14px;
+}
+
+.dropdown-item:hover {
+  background: #e9e9e9;
+}
+
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+
+.option-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  gap: 0.3125rem;
+}
+
+hr {
+  display: none;
+}
+
+
+.option-subtitle p {
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+
+.option-subtitle img {
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.option-value {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.option-value p {
+  color: #666;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.option-value p.secondary {
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+.option-subtitle img {
+  float: right;
+}
+
+.white p,
+.white p.secondary {
+  color: #FFF;
+}
+
+.white img {
+  filter: brightness(0) invert(1);
+}
+
+.price-influences {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.3rem;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.option-row.locked {
+  pointer-events: none;
+}
+
+.option-row.locked .option-value {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.option-row.locked .chevron-icon {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dropdown-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.experience {
+  display: flex;
+  height: fit-content;
+  padding: 0rem;
+  align-items: center;
+  border-radius: 0.4375rem;
+  background: none;
+  box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+}
+
+.experience .option-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  flex: 1 0 0;
+}
+
+
+.experience-wrapper {
+display: flex;
+padding: 0.625rem 1.25rem;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+border-radius: 0.46875rem;
+background: #04081B;
+}
+
+.option-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3125rem;
+  flex: 1 0 0;
+}
+
+.wrapper-experiences-people {
+  display: flex;
+align-items: center;
+justify-content: center;
+gap: 0.3125rem;
+align-self: stretch;
+}
+
+#paypal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; 
+}
+
+#paypal-container {
+  background: #ebebeb;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+#paypal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+.experience .option-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.experience .option-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.experience .option-subtitle p {
+color: #FFF;
+font-family: "Plus Jakarta Sans";
+font-size: 1rem;
+font-style: normal;
+font-weight: 800;
+line-height: 1.44531rem; /* 165.177% */
+}
+
+.people-wrapper .option-wrapper {
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding: 0rem;
+align-items: flex-start;
+}
+
+.experience .option-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+
+.experience .option-value p {
+color: #FFF;
+font-family: "Plus Jakarta Sans";
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: 1.44531rem; /* 192.707% */
+}
+
+.option-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2D2F36;
+  border-radius: 0.4375rem;
+  border: 2.4px solid rgba(140, 149, 152, 0.24);
+  background: #FFF;
+  outline: none;
+  resize: none;
+  box-shadow: none;
+}
+
+.option-input::placeholder {
+  color: #bbb;
+}
+
+#bookBtn,
+#continueBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.3125rem;
+  width: 100%;
+  height: 3.375rem;
+  padding: 0.625rem;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #0075FA;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#bookBtn:hover,
+#continueBtn:hover {
+  background: #005fcb;
+}
+
+button:disabled {
+  background: #ccc !important;
+  cursor: not-allowed !important;
+}
+
+#backBtn:hover {
+  background: #e9e9e9;
+  cursor: pointer
+}
+
+.split-summary {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+
+.booking-table-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 0.625rem;
+  margin-bottom: 32px;
+}
+
+.section-heading .wrapper-customize p {
+color: #04081B;
+font-family: "Plus Jakarta Sans";
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+
+section img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.main-subtitle {
+  color: rgba(117, 118, 122, 0.99);
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.02625rem;
+  margin-top: 0rem;
+  text-align: left;
+}
+
+.wrapper-main-subtitle .section-heading {
+  padding-left: 0;
+}
+
+.wrapper-main-subtitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.3rem;
+}
+
+.required-star {
+  color: #e53935;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  padding: 1rem 1rem;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin: 0px 55px;
+}
+
+.dropdown-toggle img {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+}
+
+
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: -9px;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 146px;
+  border-radius: 7px;
+  padding: 16px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #04081B;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f5f5f5;
+}
+
+
+.input-error {
+  color: #e53935;
+  font-size: 0.8em;
+  margin-top: 2px;
+  max-height: 1.2em;
+}
+
+.flatpickr-calendar {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 0.4375rem;
+  background: #FFF;
+  box-shadow: 0px 0.882px 6.76px 1.207px rgba(0, 0, 0, 0.08);
+}
+
+.options-wrapper .chevron-icon {
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 0.5em;
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.wrapper-top {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 1.25rem;
+align-self: stretch;
+}
+
+.option-row.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+
+.con-scritta {
+  padding-right: 60px;
+}
+
+.senza-scritta {
+  display: none;
+}
 
 
 }

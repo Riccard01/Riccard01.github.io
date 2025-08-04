@@ -301,8 +301,7 @@ section.heading .wrapper img {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background-image: url('assets/images/rainbow.jpg');
   border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
@@ -320,8 +319,7 @@ section.heading .wrapper img {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -420,8 +418,7 @@ button:focus {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background-image: url('assets/images/wild.jpg');
   background-size: cover;
   border: 2.043px solid rgba(255, 255, 255, 0.60);
@@ -435,8 +432,7 @@ button:focus {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -455,8 +451,7 @@ button:focus {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background-image: url('assets/images/gourmet.jpg');
   border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
@@ -472,8 +467,7 @@ button:focus {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -608,7 +602,6 @@ button:focus {
   width: 100%;
   flex-direction: column;
   gap: 0.3rem;
-  margin-bottom: 0.75rem;
 }
 
 
@@ -653,12 +646,18 @@ button:focus {
   gap: 0.425rem;
 }
 
-.the-rainbow-tour-card .card .details .wrapper .wrapper-1,
-.the-rainbow-tour-card .card .details .wrapper .wrapper-2,
-.the-rainbow-tour-card .card .details .wrapper .wrapper-3,
 .the-wild-tour-card .card .details .wrapper .wrapper-1,
 .the-wild-tour-card .card .details .wrapper .wrapper-2,
-.the-wild-tour-card .card .details .wrapper .wrapper-3,
+.the-wild-tour-card .card .details .wrapper .wrapper-3 {
+  display: flex;
+  align-items: center;
+  padding: 0.1875rem 0.3125rem;
+  border-radius: 0.4375rem;
+  background: rgba(94, 255, 201, 0.30);
+  gap: 0.3125rem;
+}
+
+
 .gourmet-sunset-cruise-card .card .details .wrapper .wrapper-1,
 .gourmet-sunset-cruise-card .card .details .wrapper .wrapper-2,
 .gourmet-sunset-cruise-card .card .details .wrapper .wrapper-3 {
@@ -666,9 +665,34 @@ button:focus {
   align-items: center;
   padding: 0.1875rem 0.3125rem;
   border-radius: 0.4375rem;
-  background: rgba(94, 255, 247, 0.30);
+  background: rgba(255, 231, 94, 0.30);
   gap: 0.3125rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .card {
   position: relative;
@@ -681,15 +705,15 @@ button:focus {
   width: 100%;
 }
 
-.the-rainbow-tour-card .card .details .wrapper p,
-.the-wild-tour-card .card .details .wrapper p,
-.gourmet-sunset-cruise-card .card .details .wrapper p {
-  color: #5EFFF7;
+.the-wild-tour-card .card .details .wrapper p {
+  color: #5EFFC9;
   font-family: "Plus Jakarta Sans";
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+}
+
+
+.gourmet-sunset-cruise-card .card .details .wrapper p {
+  color: #FFE75E;
+  font-family: "Plus Jakarta Sans";
 }
 
 .the-rainbow-tour-card .copy-wrapper,
@@ -1314,8 +1338,7 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
 }
 
 .the-rainbow-tour-card .copy-wrapper::before {
@@ -1335,8 +1358,7 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
 }
 
 .gourmet-sunset-cruise-card .copy-wrapper::before {
@@ -1356,27 +1378,11 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 0.894rem;
 }
 
 .wrapper-descrizione-freccia {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: rgba(0, 0, 0, 0.07);
-  border-bottom-left-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-
-  margin-left: -1.3rem;
-  margin-right: -1.3rem;
-  margin-bottom: -1.3rem; /* pulls it flush to the bottom edge */
-  padding: 1rem;
-  width: calc(100% + 2.6rem); /* stretches across full container width */
-  z-index: 1;
+  margin-bottom: 0.35rem;
 }
 
 .copy-wrapper .wrapper-bottom {
