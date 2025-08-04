@@ -1,0 +1,220 @@
+[33m0a36c4d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Adjusted border radius for videos
+[33m859e433[m Changes to booking
+[33m2e18d80[m Change
+[33m2e4b343[m sdf
+[33meeb2f53[m asd
+[33mbd2f56d[m Changed colors of footer social icons
+[33m89f9b0e[m Added footer decoration
+[33m5b18394[m uyhjgvb
+[33mf508250[m Gourmet
+[33m948b48f[m asdfgahbafhgarhgaqhbrfhbge
+[33m72b9c81[m asdfasdfasdf
+[33m653c041[m asd
+[33m9fc62ba[m Added perks ru
+[33m09e005a[m Added video to landing page
+[33md186833[m Language fix
+[33m5ac622b[m asd
+[33m587c98e[m asd
+[33mf96d760[m icon color
+[33m89a633f[m multi language support for summary
+[33mc95f54a[m asd
+[33m5e84428[m asdasd
+[33m1b2a46a[m summary template html
+[33m100ac06[m Body overflow-x hidden
+[33m0c15913[m asdasdasad
+[33mb9294a7[m asd
+[33m826bc28[m Fighissimo!
+[33mb953a93[m trace
+[33m7844c1c[m Fixed progress bug
+[33m6fa2202[m asd
+[33md3d37df[m aswda
+[33m7dd4510[m asdasdds
+[33m85d5782[m sdfsdaf
+[33mbfc0c5d[m Added trip advisor in Chinese
+[33m293feb2[m Added chinese flag
+[33m621ad5f[m Flash language change
+[33m4774967[m /assets
+[33md5fdd92[m Change booking icon color blue
+[33m1d13c68[m Updated times
+[33m9549708[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m207ba90[m Mega card update!
+[33m0a5ee4f[m fix mobile glitch
+[33m36d7192[m fix mobile glitch test
+[33m79937eb[m as
+[33m882a9b4[m asd
+[33m9c60869[m ASD
+[33m234d7fd[m sdf
+[33mc8e543a[m asd
+[33m48d353b[m asd
+[33m733a68a[m asd
+[33m43e283f[m Black box
+[33m8d5c7c1[m asdaas
+[33m8bb3df5[m fixed leggera path
+[33mc698815[m better video loading
+[33m1d65986[m trying video fix
+[33m5127e8f[m fixed tripadvisor logo size
+[33ma31ac27[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m47ae240[m time fix
+[33m1b037c7[m Added trip advisore and reduced video quality
+[33m9e51015[m asdfawfasdf
+[33m0dd25df[m asd
+[33m044b967[m Cancellation
+[33md2f08c6[m asdasd
+[33m8d873f6[m sadfasdfasdf
+[33mbc2017e[m asd
+[33m0a0bb74[m Lingue
+[33m8c15b2f[m Progress video solved
+[33m85be510[m video con progress bar
+[33m6fdfd5c[m Let's fucking GO!!!
+[33m68005ff[m asd
+[33m23e35d5[m asd
+[33md6a941c[m Video
+[33m5b9f7b2[m Footer
+[33m62c6b9b[m fixed tour slot only show time and summary
+[33md015bbd[m Prevent selecting today if slot start time already passed
+[33m90ac421[m fixed home cards
+[33m3658c73[m click logo on nav to go home
+[33m22182f4[m fixed nav mobile
+[33m75df962[m fixed nav
+[33m198a328[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33mec5b9bc[m che fatica
+[33m5d53c65[m asd
+[33md422248[m asd
+[33mbfd9e98[m Tradotto il contattaci!
+[33m80799ad[m Added toggle script to booking.html
+[33m4e80eb6[m Added correct links
+[33m0a5871e[m Fixed navbar responsive
+[33m5860619[m Added images
+[33m61bbb1a[m Added back nav in booking
+[33mfd5a384[m Connected images booking
+[33mf3056b9[m Solved style call
+[33m108ed75[m Added back navbar
+[33mf705a3c[m Tradotte lingue
+[33m532fbfa[m Booking.html
+[33mb1f2384[m Rimosso language toggle in booking
+[33m2a851e2[m Styled booking language
+[33ma7a5f80[m Centered the dropdown
+[33m6386c80[m Added script booking
+[33m172d42c[m Fit booking summary
+[33mee94f6e[m Fixata navbar booking
+[33m508e6cb[m Removed the splash
+[33mb5758ef[m Centrato heading desktop
+[33ma758610[m Centered the perks!!!
+[33m1bef72c[m asd
+[33m2c55502[m Rimosso blur dalla nav
+[33m56ada7a[m Fixato bottone contattaci
+[33m2f6284f[m Fixed fit content filters
+[33m76fdc89[m Fixed padding
+[33mb762c59[m Boh
+[33md92e17f[m Fixed filters Desktop
+[33mfe86d89[m Added link on list
+[33mdb38a2a[m Removed useless padding on special events
+[33m15641dd[m Oh yeah!
+[33m7825232[m Impostato path assoluto
+[33m7cf135a[m Fixed video path
+[33m5200289[m Push
+[33mce4b61d[m Push
+[33m5337cfe[m Prova en window
+[33mc0afb20[m Lingue
+[33m0ed0c89[m boh
+[33mf882b17[m Card hovered phone
+[33ma5bbe7e[m Push again
+[33m27cf591[m fitcontent
+[33me126084[m Prova fix margin
+[33m38d9fe3[m Centered cards.container container
+[33mc652f3b[m Added padding cards
+[33mdf9e18b[m Corretta animazione phone
+[33mb30c8cc[m mega push finale
+[33m546cc45[m Forse risolto scroll
+[33m2c4acc6[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m2445600[m Centrato card container!
+[33m4f00545[m non so scrivere
+[33m7d2745c[m letsgosky
+[33m826765f[m sdsds
+[33mfebe7bb[m push3
+[33mba1a170[m push
+[33m95c0bd3[m clientid
+[33me860370[m Push
+[33ma97e873[m Push
+[33mc344029[m Pushi O NO?
+[33m33d2187[m Push
+[33m3435328[m Force push
+[33ma4abc05[m Filter finished
+[33md35d8ca[m Prototipo design filters
+[33md7cc9d9[m as
+[33m4fbbbef[m Base filters system
+[33mf2ca147[m Update responsive.css
+[33md5f7c97[m asd
+[33m7e18e3e[m Prova centro
+[33mee59811[m Added navigation link!
+[33m859986e[m Added titles
+[33m5da2750[m Adjusted flatpickr calendar border radius
+[33mdb1b90b[m Force push
+[33m769cb7f[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m4953183[m Aggiunta animazione mobile freccia
+[33m7121c7f[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33md35b7be[m new shared logic
+[33mfb3648b[m Changes to cards, fixed navbar and adjusted gap in booking
+[33m1c68338[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m504bad9[m LA VACCA SATURNO SATURNITA
+[33m54f5fc3[m Fireworks
+[33m5418f71[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m0db19ec[m Images
+[33mbc0b8bc[m fixed nav
+[33me8be5fc[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33mc9862ec[m PRICE UPDATE YOO ci siamo
+[33mcc9697e[m Prices
+[33m177ec0d[m ui fix
+[33mafe7ed1[m better ui
+[33m8705b55[m fixed dropdown bug
+[33m622a2e4[m final dropdown mobile
+[33m8956964[m mobile test dropdown complete
+[33m037a2ac[m retrying dropdowns on mobile
+[33med00b75[m link
+[33mbb12f5b[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33me9f3475[m trying dropdown
+[33m5c2dda0[m Fixed booking description
+[33m14f95b6[m Aggiunte CTA cards
+[33mcaa23a9[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33me368529[m better design
+[33m89562e3[m cambio padding options
+[33mbd04761[m Cambio ombra
+[33m4bcf6f4[m background color changed
+[33m56be8e9[m Modifiche basi calendario
+[33m62f3d68[m Some minor fixes
+[33md995877[m Fixed experience height
+[33m348f241[m Booking restyle filters
+[33mb3a7857[m Modifhce responsive filters
+[33m11cfebe[m Gourmet price updated
+[33m4d24197[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m8d4c8ad[m asd
+[33m59f2f92[m Update index.html
+[33ma68a3ba[m Addes fireworks video
+[33m75429fd[m fixed backend names
+[33m9828c47[m fixed mobile
+[33m77ad6c0[m tried changing url
+[33m37a5822[m mobile test
+[33ma02cf95[m complete booking
+[33mcb0d4ec[m locked icon for available private tours
+[33m3ac97c8[m fictictous reloading for ux
+[33m1d3282c[m stay in the same month after modifying filters
+[33md969414[m sunset logic fetch if available
+[33m8682288[m Merge branch 'main' of https://github.com/Riccard01/Riccard01.github.io
+[33m8397a75[m calendar the way we want for logic
+[33mb559aff[m Update index.html
+[33m6777678[m Update index.html
+[33mcb22b7e[m Fixed linear disappearing and tweaked
+[33m75be172[m Added padding right to cards-container
+[33m93df034[m hover none
+[33mf5be7d5[m Added observer autoplay for special events too
+[33m1563071[m Fixed inconsistent card width and height
+[33m0344aac[m Prova cards auto
+[33md93aaaf[m Prova 4a card
+[33me270c8f[m Added bold fra
+[33mc80ccd6[m Added Francesco Limosani <3
+[33m57bf17b[m Modified video gourmet
+[33mc3e5118[m Copy updated & videos uploaded
+[33m0eadf19[m Resolved HTML MESS
+[33m982be57[m icons
+[33m6954657[m HTML MESS
+[33mc818176[m Added vid
