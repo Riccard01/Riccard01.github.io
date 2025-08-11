@@ -229,7 +229,7 @@ section.heading .wrapper img {
   gap: 1.25rem;
 }
 
-.the-rainbow-tour-card {
+.event-tour-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -239,7 +239,7 @@ section.heading .wrapper img {
   border-radius: 1rem;
 }
 
-.the-wild-tour-card {
+.the-rainbow-tour-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -297,7 +297,7 @@ section.heading .wrapper img {
   border-bottom: none;
 }
 
-.the-rainbow-tour-card .card {
+.event-tour-card .card {
   display: flex;
   position: relative;
   position: relative;
@@ -318,7 +318,7 @@ section.heading .wrapper img {
   
 }
 
-.the-rainbow-tour-card .card::after {
+.event-tour-card .card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -336,7 +336,7 @@ button:focus {
   outline: none;
 }
 
-.the-rainbow-tour-card .card>* {
+.event-tour-card .card>* {
   position: relative;
   z-index: 2;
 }
@@ -369,7 +369,7 @@ button:focus {
   align-self: stretch;
 }
 
-.the-rainbow-tour-card#barca-terapia .card {
+.event-tour-card#barca-terapia .card {
   background-image: url('assets/images/barca-terapia.jpg');
   background-position: center center;
   background-size: cover;
@@ -380,7 +380,7 @@ button:focus {
   height: 30.66388rem;
 }
 
-.the-wild-tour-card#blow-me-away .card {
+.the-rainbow-tour-card#blow-me-away .card {
   background-image: url('assets/images/fireworks.jpg');
   background-position: center center;
   background-size: cover;
@@ -415,7 +415,7 @@ button:focus {
 
 
 
-.the-wild-tour-card .card {
+.the-rainbow-tour-card .card {
   display: flex;
   position: relative;
   width: 20.42981rem;
@@ -431,7 +431,7 @@ button:focus {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.the-wild-tour-card .card::after {
+.the-rainbow-tour-card .card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -441,7 +441,7 @@ button:focus {
   z-index: 2;
 }
 
-.the-wild-tour-card .card>* {
+.the-rainbow-tour-card .card>* {
   position: relative;
   z-index: 2;
 }
@@ -481,8 +481,8 @@ button:focus {
   z-index: 2;
 }
 
+.event-tour-card .card:hover,
 .the-rainbow-tour-card .card:hover,
-.the-wild-tour-card .card:hover,
 .gourmet-sunset-cruise-card .card:hover {
   cursor: pointer;
   transform: scale(1.03);
@@ -519,8 +519,8 @@ button:focus {
 }
 
 
+.event-tour-card .card:hover .freccia,
 .the-rainbow-tour-card .card:hover .freccia,
-.the-wild-tour-card .card:hover .freccia,
 .gourmet-sunset-cruise-card .card:hover .freccia {
   animation: slideRightLoop 1s ease-in-out infinite;
   opacity: 1;
@@ -632,8 +632,8 @@ button:focus {
 
 
 
+.event-tour-card .card .details,
 .the-rainbow-tour-card .card .details,
-.the-wild-tour-card .card .details,
 .gourmet-sunset-cruise-card .card .details {
   display: flex;
   width: 17.875rem;
@@ -642,17 +642,17 @@ button:focus {
   align-items: center;
 }
 
+.event-tour-card .card .details .wrapper,
 .the-rainbow-tour-card .card .details .wrapper,
-.the-wild-tour-card .card .details .wrapper,
 .gourmet-sunset-cruise-card .card .details .wrapper {
   display: flex;
   align-items: center;
   gap: 0.425rem;
 }
 
-.the-wild-tour-card .card .details .wrapper .wrapper-1,
-.the-wild-tour-card .card .details .wrapper .wrapper-2,
-.the-wild-tour-card .card .details .wrapper .wrapper-3 {
+.the-rainbow-tour-card .card .details .wrapper .wrapper-1,
+.the-rainbow-tour-card .card .details .wrapper .wrapper-2,
+.the-rainbow-tour-card .card .details .wrapper .wrapper-3 {
   display: flex;
   align-items: center;
   padding: 0.1875rem 0.3125rem;
@@ -709,7 +709,7 @@ button:focus {
   width: 100%;
 }
 
-.the-wild-tour-card .card .details .wrapper p {
+.the-rainbow-tour-card .card .details .wrapper p {
   color: #5EFFC9;
   font-family: "Plus Jakarta Sans";
 }
@@ -720,8 +720,8 @@ button:focus {
   font-family: "Plus Jakarta Sans";
 }
 
+.event-tour-card .copy-wrapper,
 .the-rainbow-tour-card .copy-wrapper,
-.the-wild-tour-card .copy-wrapper,
 .gourmet-sunset-cruise-card .copy-wrapper {
   position: absolute;
   display: flex;
@@ -734,8 +734,8 @@ button:focus {
   z-index: 3;
 }
 
+.event-tour-card .copy-wrapper h1,
 .the-rainbow-tour-card .copy-wrapper h1,
-.the-wild-tour-card .copy-wrapper h1,
 .gourmet-sunset-cruise-card .copy-wrapper h1 {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
@@ -749,8 +749,8 @@ button:focus {
   letter-spacing: .03rem;
 }
 
+.event-tour-card .copy-wrapper p,
 .the-rainbow-tour-card .copy-wrapper p,
-.the-wild-tour-card .copy-wrapper p,
 .gourmet-sunset-cruise-card .copy-wrapper p {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
@@ -763,8 +763,8 @@ button:focus {
   padding: 0;
 }
 
+.event-tour-card .copy-wrapper .wrapper,
 .the-rainbow-tour-card .copy-wrapper .wrapper,
-.the-wild-tour-card .copy-wrapper .wrapper,
 .gourmet-sunset-cruise-card .copy-wrapper .wrapper {
   display: flex;
   align-items: center;
@@ -773,8 +773,8 @@ button:focus {
   width: fit-content;
 }
 
+.event-tour-card .copy-wrapper .wrapper .first,
 .the-rainbow-tour-card .copy-wrapper .wrapper .first,
-.the-wild-tour-card .copy-wrapper .wrapper .first,
 .gourmet-sunset-cruise-card .copy-wrapper .wrapper .first {
   display: flex;
   align-items: center;
@@ -783,8 +783,8 @@ button:focus {
   width: fit-content;
 }
 
+.event-tour-card .copy-wrapper .wrapper .first p,
 .the-rainbow-tour-card .copy-wrapper .wrapper .first p,
-.the-wild-tour-card .copy-wrapper .wrapper .first p,
 .gourmet-sunset-cruise-card .copy-wrapper .wrapper .first p {
   color: #AAAEB2;
   display: flex;
@@ -806,8 +806,8 @@ button:focus {
   /* Safari and Chrome */
 }
 
+.event-tour-card .copy-wrapper .wrapper p,
 .the-rainbow-tour-card .copy-wrapper .wrapper p,
-.the-wild-tour-card .copy-wrapper .wrapper p,
 .gourmet-sunset-cruise-card .copy-wrapper .wrapper p {
   color: #AAAEB2;
   font-family: "Plus Jakarta Sans";
@@ -820,8 +820,8 @@ button:focus {
   padding: 0;
 }
 
+.event-tour-card .copy-wrapper h3,
 .the-rainbow-tour-card .copy-wrapper h3,
-.the-wild-tour-card .copy-wrapper h3,
 .gourmet-sunset-cruise-card .copy-wrapper h3 {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
@@ -1325,7 +1325,7 @@ section.heading-cancellation .wrapper {
 }
 
 
-.the-wild-tour-card .copy-wrapper::before {
+.the-rainbow-tour-card .copy-wrapper::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1345,7 +1345,7 @@ section.heading-cancellation .wrapper {
   border-radius: 0.894rem;
 }
 
-.the-rainbow-tour-card .copy-wrapper::before {
+.event-tour-card .copy-wrapper::before {
   content: "";
   position: absolute;
   left: 0;

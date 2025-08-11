@@ -82,7 +82,7 @@
                                 <p data-i18n="experience">Esperienza</p>
                             </div>
                             <div class="option-value">
-                                <p data-i18n="rainbow_tour">Rainbow Tour</p>
+                                <p>Rainbow Tour</p>
                             </div>
                         </div>
                         <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
@@ -113,22 +113,22 @@
 
         <!-- Slots -->
         <div class="slot-wrapper">
-            <div class="halfday-morning">
+            <div class="slot-option-time">
                 <div class="wrapper-1">
                     <h3 data-i18n="halfday_morning">Half Day (Morning)</h3>
-                    <p data-i18n="halfday_morning_time">7:00AM - 2:00 PM</p>
+                    <p data-time="halfday_morning_time">7:00AM - 2:00 PM</p>
                 </div>
             </div>
-            <div class="halfday-afternoon">
+            <div class="slot-option-time">
                 <div class="wrapper-1">
                     <h3 data-i18n="halfday_afternoon">Half Day (Afternoon)</h3>
-                    <p data-i18n="halfday_afternoon_time">2:30PM - 6:00 PM</p>
+                    <p data-time="halfday_afternoon_time">2:30PM - 6:00 PM</p>
                 </div>
             </div>
-            <div class="fullday">
+            <div class="slot-option-time">
                 <div class="wrapper-1">
                     <h3 data-i18n="fullday">Full Day</h3>
-                    <p data-i18n="fullday_time">7:00AM - 11:00 PM</p>
+                    <p data-time="fullday_time">7:00AM - 11:00 PM</p>
                 </div>
                 <div class="wrapper-2">
                     <p data-i18n="fullday_desc">Enjoy a full day of relaxation, ending with a breathtaking sunset and a
@@ -254,21 +254,21 @@
                         <p data-i18n="your_data">I tuoi dati</p>
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="name">Nome <span class="required-star">*</span></p>
                         </div>
                         <input type="text" id="input-name" class="option-input" placeholder="Nome" />
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="surname">Cognome <span class="required-star">*</span></p>
                         </div>
                         <input type="text" id="input-surname" class="option-input" placeholder="Cognome" />
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="email">Email <span class="required-star">*</span></p>
                         </div>
@@ -276,7 +276,7 @@
                         <div id="email-error" class="input-error"></div>
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="confirm_email">Conferma Email <span class="required-star">*</span></p>
                         </div>
@@ -285,7 +285,7 @@
                         <div id="confirm-email-error" class="input-error"></div>
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="phone">Telefono <span class="required-star">*</span></p>
                         </div>
@@ -329,7 +329,7 @@
                         <div id="phone-error" class="input-error"></div>
                     </div>
 
-                    <div class="option-content">
+                    <div class="option-content summary">
                         <div class="option-subtitle">
                             <p data-i18n="notes">Note</p>
                         </div>

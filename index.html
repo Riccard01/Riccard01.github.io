@@ -83,13 +83,7 @@
   <div class="cards-container">
 
     <!-- 1) Rainbow -->
-    <div class="the-rainbow-tour-card" onclick="(function(){
-      const params = new URLSearchParams(window.location.search);
-      const lang = params.get('lang');
-      let url = 'booking.html?experience=rainbow';
-      if(lang) url += '&lang=' + encodeURIComponent(lang);
-      window.location.href = url;
-    })()">
+    <div class="event-tour-card">
       <div class="card">
         <video src="/assets/videos/stellamaris.mp4"></video>
         
@@ -128,7 +122,7 @@
     </div>
 
     <!-- 2) Wild -->
-    <div class="the-wild-tour-card" data-href="booking.html?experience=wild">
+    <div class="the-rainbow-tour-card" data-href="booking.html?experience=rainbow">
       <div class="card">
         <video src="/assets/videos/wildtour.mp4"></video>
 

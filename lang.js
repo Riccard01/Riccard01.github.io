@@ -3,6 +3,7 @@
 const TRANSLATIONS = {
   it: {
     // Booking
+    gourmet_desc: "Una magica crociera serale con cena gourmet, vini pregiati e il miglior tramonto sul lago.",
     choose_option: "Scegli un opzione per scoprire la disponibilità",
     experience: "Esperienza",
     rainbow_tour: "Rainbow Tour",
@@ -81,6 +82,7 @@ const TRANSLATIONS = {
   },
   en: {
     // Booking
+    gourmet_desc: "A magical evening cruise with gourmet dinner, fine wines, and the best sunset on the lake.",
     choose_option: "Choose an option to check availability",
     experience: "Experience",
     rainbow_tour: "Rainbow Tour",
@@ -159,6 +161,7 @@ const TRANSLATIONS = {
   },
   de: {
     // Booking
+    gourmet_desc: "Eine magische Abendkreuzfahrt mit Gourmet-Dinner, erlesenen Weinen und dem schönsten Sonnenuntergang am See.",
     choose_option: "Wähle eine Option, um die Verfügbarkeit zu prüfen",
     experience: "Erlebnis",
     rainbow_tour: "Rainbow Tour",
@@ -236,6 +239,7 @@ const TRANSLATIONS = {
     refund: "Falls nicht möglich, erhalten Sie den vollen Betrag zurück."
   },
   fr: {
+    gourmet_desc: "Une croisière du soir magique avec dîner gastronomique, vins fins et le plus beau coucher de soleil sur le lac.",
     choose_option: "Choisissez une option pour vérifier la disponibilité",
     experience: "Expérience",
     rainbow_tour: "Rainbow Tour",
@@ -311,6 +315,7 @@ const TRANSLATIONS = {
     refund: "Si ce n'est pas possible, vous serez remboursé intégralement."
   },
   es: {
+    gourmet_desc: "Un crucero nocturno mágico con cena gourmet, vinos selectos y la mejor puesta de sol del lago.",
     choose_option: "Elige una opción para comprobar la disponibilidad",
     experience: "Experiencia",
     rainbow_tour: "Rainbow Tour",
@@ -386,6 +391,7 @@ const TRANSLATIONS = {
     refund: "Si no es posible, se te devolverá el importe total."
   },
   pl: {
+    gourmet_desc: "Magiczny wieczorny rejs z kolacją gourmet, wybornymi winami i najpiękniejszym zachodem słońca nad jeziorem.",
     choose_option: "Wybierz opcję, aby sprawdzić dostępność",
     experience: "Doświadczenie",
     rainbow_tour: "Rainbow Tour",
@@ -461,6 +467,7 @@ const TRANSLATIONS = {
     refund: "Jeśli to niemożliwe, otrzymasz pełny zwrot."
   },
   ru: {
+    gourmet_desc: "Волшебный вечерний круиз с изысканным ужином, отличными винами и лучшим закатом на озере.",
     choose_option: "Выберите вариант, чтобы проверить доступность",
     experience: "Экскурсия",
     rainbow_tour: "Rainbow Tour",
@@ -536,6 +543,7 @@ const TRANSLATIONS = {
     refund: "Если невозможно — вернем всю сумму."
   },
   zh: {
+    gourmet_desc: "魔幻的夜晚游船，享用美食晚餐、精选美酒和湖上最美的日落。",
     choose_option: "选择一个选项以查看可用性",
     experience: "体验",
     rainbow_tour: "彩虹之旅",

@@ -234,9 +234,18 @@ section.calendar-section {
 .option-row.summary .option-value p {
   color: #04081B;
 }
+.option-content.summary .option-subtitle p,
+.option-content.summary .option-subtitle p {
+  color: #04081B;
+}
 .option-row.summary .option-subtitle img,
 .option-row.summary .option-value img {
   filter: none;
+}
+
+/* Ensure subtitle area in summary rows has white background for readability */
+.option-row.summary .option-subtitle {
+  background: #fff;
 }
 
 .people-wrapper {
@@ -792,39 +801,7 @@ section img {
   padding: 0rem 1.5rem;
 }
 
-.halfday-morning {
-  display: flex;
-  padding: 0.9375rem 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  align-self: stretch;
-  border-radius: 0.46875rem;
-  border: 1.5px solid rgba(169, 169, 169, 0.50);
-  background: #FFF;
-
-  /* Shadow stronger */
-  box-shadow: 0 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
-}
-
-.halfday-afternoon {
-  display: flex;
-  padding: 0.9375rem 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  align-self: stretch;
-  border-radius: 0.46875rem;
-  border: 1.5px solid rgba(169, 169, 169, 0.50);
-  background: #FFF;
-
-  /* Shadow stronger */
-  box-shadow: 0 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
-}
-
-.fullday {
+.slot-option-time {
   display: flex;
   padding: 0.9375rem 1.25rem;
   flex-direction: column;
