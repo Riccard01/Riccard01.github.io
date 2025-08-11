@@ -22,23 +22,25 @@
   <body>
     <nav>
       <div class="wrapper">
-        <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
-        <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
-          <div class="language-dropdown">
-            <button class="dropdown-toggle">
-              <img src="/assets/icons/flags/it.svg" alt="Italiano" />
-            </button>
-            <ul class="dropdown-menu">
-              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
-              <li onclick="window.location.href='/en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
-              <li onclick="window.location.href='/de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
-              <li onclick="window.location.href='/fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
-              <li onclick="window.location.href='/es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
-              <li onclick="window.location.href='/pl/index.html'"><a href="/pl/index.html"><img src="/assets/icons/flags/pl.svg" alt="">Polski</a></li>
-              <li onclick="window.location.href='/ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
-              <li onclick="window.location.href='/zh/index.html'"><a href="/zh/index.html"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
-            </ul>
-          </div>
+        <a href="/index.html">
+          <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
+          <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+        </a>
+        <div class="language-dropdown">
+          <button class="dropdown-toggle" id="lang-toggle">
+            <img id="lang-flag" src="/assets/icons/flags/it.svg" alt="Italiano" />
+          </button>
+          <ul class="dropdown-menu" id="lang-menu">
+            <li data-lang="it"><a href="#"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
+            <li data-lang="en"><a href="#"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
+            <li data-lang="de"><a href="#"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+            <li data-lang="fr"><a href="#"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
+            <li data-lang="es"><a href="#"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
+            <li data-lang="pl"><a href="#"><img src="/assets/icons/flags/pl.svg" alt="">Polski</a></li>
+            <li data-lang="ru"><a href="#"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
+            <li data-lang="zh"><a href="#"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
+          </ul>
+        </div>
 <a href="tel:+39 346 33 65 699"><button><img src="/assets/icons/phone.svg" alt=""><span>Contattaci!</span></button></a>
       </div>
     </nav>
@@ -63,25 +65,31 @@
         </div>
     <section class="heading">
       <div class="wrapper">
-        <h1>Vivi il golfo Ligure!</h1>
-        <p>Goditi la pace di un tour privato o condividi l’esperienza con persone da tutto il mondo: il viaggio parte dal Porto Antico di Genova, ma il ricordo resta con te.</p>
+<h1 data-i18n="live_gulf">Vivi il golfo Ligure!</h1>
+<p data-i18n="enjoy_peace">Goditi la pace di un tour privato o condividi l’esperienza con persone da tutto il mondo: il viaggio parte dal Porto Antico di Genova, ma il ricordo resta con te.</p>
       </div>
     </section>
   </div>
   
   <div class="experiences-wrapper">
-    <h2>Le esperienze</h2>
-    <p>Personalizza la tua esperienza secondo le tue esigenze!<br>Oppure contattaci per un tour esclusivo!</p>
+<h2 data-i18n="the_experiences">Le esperienze</h2>
+<p data-i18n="customize_experience">Personalizza la tua esperienza secondo le tue esigenze!<br>Oppure contattaci per un tour esclusivo!</p>
   </div>
   <div class="wrapper-filter">
-    <div class="wrapper-1" id="btn-main" onclick="showMain()"><p>Principali</p></div>
-    <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p>Speciali</p></div>
+    <div class="wrapper-1" id="btn-main" onclick="showMain()"><p data-i18n="main">Principali</p></div>
+    <div class="wrapper-2" id="btn-special" onclick="showSpecial()"><p data-i18n="special">Speciali</p></div>
   </div>
 <div class="cards-container-container">
   <div class="cards-container">
 
     <!-- 1) Rainbow -->
-    <div class="the-rainbow-tour-card" onclick="window.location.href='booking.html?experience=rainbow'">
+    <div class="the-rainbow-tour-card" onclick="(function(){
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get('lang');
+      let url = 'booking.html?experience=rainbow';
+      if(lang) url += '&lang=' + encodeURIComponent(lang);
+      window.location.href = url;
+    })()">
       <div class="card">
         <video src="/assets/videos/stellamaris.mp4"></video>
         
@@ -257,7 +265,7 @@
           </div>
         </div>
         <div class="price-section">
-          <p>1300 € a gruppo</p>
+          <p data-i18n="price_1300">1300 € a gruppo</p>
           <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
@@ -287,7 +295,7 @@
           </div>
       </div>
       <div class="price-section">
-        <p>350 € a gruppo</p>
+        <p data-i18n="price_350">350 € a gruppo</p>
         <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
@@ -317,7 +325,7 @@
           </div>
       </div>
       <div class="price-section">
-        <p>€350 a gruppo</p>
+        <p data-i18n="price_350">€350 a gruppo</p>
         <img class="telefono-special" src="/assets/icons/phone.svg" alt="arrow">
         </div>
       </div>
@@ -329,23 +337,23 @@
 
 <div class="perks">
   <div class="first">
-    <div class="wrapper-1"><img src="/assets/icons/fuel.png" alt=""><div class="wrapper"><p>Carburante Incluso</p><p>Nessuna sorpresa extra</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/foto.png" alt=""><div class="wrapper"><p>Foto Ricordo</p><p>Cheese!</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/sport.png" alt=""><div class="wrapper"><p>Sport Acquatici</p><p>Andiamo!</p></div></div>
-    <div class="wrapper-4"><img src="/assets/icons/pet.png" alt=""><div class="wrapper"><p>Pet Friendly</p><p>Portali con te!</p></div></div>
+    <div class="wrapper-1"><img src="/assets/icons/fuel.png" alt=""><div class="wrapper"><p data-i18n="fuel_included">Carburante Incluso</p><p data-i18n="no_surprise">Nessuna sorpresa extra</p></div></div>
+    <div class="wrapper-2"><img src="/assets/icons/foto.png" alt=""><div class="wrapper"><p data-i18n="photo">Foto Ricordo</p><p data-i18n="cheese">Cheese!</p></div></div>
+    <div class="wrapper-3"><img src="/assets/icons/sport.png" alt=""><div class="wrapper"><p data-i18n="water_sports">Sport Acquatici</p><p data-i18n="lets_go">Andiamo!</p></div></div>
+    <div class="wrapper-4"><img src="/assets/icons/pet.png" alt=""><div class="wrapper"><p data-i18n="pet_friendly">Pet Friendly</p><p data-i18n="bring_them">Portali con te!</p></div></div>
   </div>
 
   <div class="second">
-    <div class="wrapper-1"><img src="/assets/icons/disability.png" alt=""><div class="wrapper"><p>Accessibile Disabili</p><p>Nessuno resta indietro</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/towels.png" alt=""><div class="wrapper"><p>Dotazioni</p><p>Tutto l’essenziale + extra!</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/snack.png" alt=""><div class="wrapper"><p>Snack & Bevande</p><p>Ci piace la pancia piena</p></div></div>
-    <div class="wrapper-4"><img src="/assets/icons/easy.png" alt=""><div class="wrapper"><p>Flessibile</p><p>Cambia piani facilmente</p></div></div>
+    <div class="wrapper-1"><img src="/assets/icons/disability.png" alt=""><div class="wrapper"><p data-i18n="accessible">Accessibile Disabili</p><p data-i18n="no_one_left">Nessuno resta indietro</p></div></div>
+    <div class="wrapper-2"><img src="/assets/icons/towels.png" alt=""><div class="wrapper"><p data-i18n="equipment">Dotazioni</p><p data-i18n="all_essentials">Tutto l’essenziale + extra!</p></div></div>
+    <div class="wrapper-3"><img src="/assets/icons/snack.png" alt=""><div class="wrapper"><p data-i18n="snacks">Snack & Bevande</p><p data-i18n="we_like_full">Ci piace la pancia piena</p></div></div>
+    <div class="wrapper-4"><img src="/assets/icons/easy.png" alt=""><div class="wrapper"><p data-i18n="flexible">Flessibile</p><p data-i18n="change_plans">Cambia piani facilmente</p></div></div>
   </div>
 
   <div class="third">
-    <div class="wrapper-1"><img src="/assets/icons/music.png" alt=""><div class="wrapper"><p>Musica</p><p>Certo</p></div></div>
-    <div class="wrapper-2"><img src="/assets/icons/mask.png" alt=""><div class="wrapper"><p>Attrezzatura Snorkeling</p><p>Maschere full face (L)</p></div></div>
-    <div class="wrapper-3"><img src="/assets/icons/safety.png" alt=""><div class="wrapper"><p>Sicurezza</p><p>Prima di tutto</p></div></div>
+    <div class="wrapper-1"><img src="/assets/icons/music.png" alt=""><div class="wrapper"><p data-i18n="music">Musica</p><p data-i18n="sure">Certo</p></div></div>
+    <div class="wrapper-2"><img src="/assets/icons/mask.png" alt=""><div class="wrapper"><p data-i18n="snorkeling">Attrezzatura Snorkeling</p><p data-i18n="full_face">Maschere full face (L)</p></div></div>
+    <div class="wrapper-3"><img src="/assets/icons/safety.png" alt=""><div class="wrapper"><p data-i18n="safety">Sicurezza</p><p data-i18n="first_of_all">Prima di tutto</p></div></div>
   </div>
 </div>
 
@@ -452,7 +460,7 @@
       <img class="decoration-mask-footer" src="/assets/decoration/trace-blue.svg" alt="">
         <p>© 2025 Leggero Tours</p>
         <p>Creato con cura da Riccardo e sviluppato da <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
-        <a class="cancellation" href="/cancellation.html">Cancellation Policy</a>
+        <a class="cancellation" href="/cancellation.html" data-i18n="cancellation_policy_link">Cancellation Policy</a>
         <div class="social-icons-wrapper" style="display: flex; gap: 1rem; flex: row; align-items: center; justify-content: center; margin-top: 1rem;">
           <a href=""><img src="/assets/icons/facebook.svg" alt=""></a>
           <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="/assets/icons/instagram.svg" alt=""></a>
@@ -738,18 +746,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+<script src="/lang.js"></script>
 <script>
-  const toggle = document.querySelector('.dropdown-toggle');
-  const menu = document.querySelector('.dropdown-menu');
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+// Mantieni il parametro lang tra le pagine
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+  if (!lang) return;
+  document.querySelectorAll('a[href$=".html"]').forEach(a => {
+    const url = new URL(a.href, window.location.origin);
+    if (!url.searchParams.get('lang')) {
+      url.searchParams.set('lang', lang);
+      a.href = url.pathname + url.search + url.hash;
+    }
   });
-
-  document.addEventListener('click', () => {
-    menu.style.display = 'none';
-  });
+});
 </script>
 
 <script src="visual-utils.js"></script>
@@ -824,7 +835,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const root = btn.closest('[data-href]');
     if (root && root.dataset.href) {
-      window.location.href = root.dataset.href;
+      let url = root.dataset.href;
+      // Se la destinazione è booking.html, aggiungi lang se presente
+      if (url.startsWith('booking.html')) {
+        const params = new URLSearchParams(window.location.search);
+        const lang = params.get('lang');
+        if (lang && !url.includes('lang=')) {
+          url += (url.includes('?') ? '&' : '?') + 'lang=' + encodeURIComponent(lang);
+        }
+      }
+      window.location.href = url;
     }
   });
 </script>

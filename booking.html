@@ -39,18 +39,18 @@
           <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
         </a>
           <div class="language-dropdown">
-            <button class="dropdown-toggle">
-              <img src="/assets/icons/flags/it.svg" alt="Italiano" />
+            <button class="dropdown-toggle" id="lang-toggle">
+              <img id="lang-flag" src="/assets/icons/flags/it.svg" alt="Italiano" />
             </button>
-            <ul class="dropdown-menu">
-              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
-              <li onclick="window.location.href='/en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
-              <li onclick="window.location.href='/de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
-              <li onclick="window.location.href='/fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
-              <li onclick="window.location.href='/es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
-              <li onclick="window.location.href='/pl/index.html'"><a href="/pl/index.html"><img src="/assets/icons/flags/pl.svg" alt="">Polski</a></li>
-              <li onclick="window.location.href='/ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
-              <li onclick="window.location.href='/zh/index.html'"><a href="/zh/index.html"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
+            <ul class="dropdown-menu" id="lang-menu">
+              <li data-lang="it"><a href="#"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
+              <li data-lang="en"><a href="#"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
+              <li data-lang="de"><a href="#"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li data-lang="fr"><a href="#"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
+              <li data-lang="es"><a href="#"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
+              <li data-lang="pl"><a href="#"><img src="/assets/icons/flags/pl.svg" alt="">Polski</a></li>
+              <li data-lang="ru"><a href="#"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
+              <li data-lang="zh"><a href="#"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
             </ul>
           </div>
 <a href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg" alt=""><span>Contattaci!</span></button></a>
@@ -63,7 +63,7 @@
                 <div class="wrapper-main-subtitle">
                     <div class="section-heading">
                         <div class="wrapper-customize">
-                            <p>Scegli un opzione per scoprire la disponibilità</p>
+                            <p data-i18n="choose_option">Scegli un opzione per scoprire la disponibilità</p>
                         </div>
                     </div>
                 </div>
@@ -78,10 +78,10 @@
                         <select name="experience-dropdown" class="native-overlay-select"></select>
                         <div class="option-wrapper">
                             <div class="option-subtitle">
-                                <p>Esperienza</p>
+                                <p data-i18n="experience">Esperienza</p>
                             </div>
                             <div class="option-value">
-                                <p>Rainbow Tour</p>
+                                <p data-i18n="rainbow_tour">Rainbow Tour</p>
                             </div>
                         </div>
                         <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
@@ -96,10 +96,10 @@
                     <select name="people-dropdown" class="native-overlay-select"></select>
                     <div class="option-wrapper">
                         <div class="option-subtitle">
-                            <p>Persone</p>
+                            <p data-i18n="people">Persone</p>
                         </div>
                         <div class="option-value">
-                            <p>6</p>
+                            <p data-i18n="people_count">6</p>
                         </div>
                     </div>
                     <img src="assets/icons/cheveron-down.svg" class="chevron-icon" alt="dropdown" />
@@ -113,14 +113,14 @@
                 <!-- Slots -->
                  <div class="slot-wrapper">
                     <div class="halfday-morning">
-                        <div class="wrapper-1"><h3>Half Day (Morning)</h3><p>7:00AM - 2:00 PM</p></div>
+                        <div class="wrapper-1"><h3 data-i18n="halfday_morning">Half Day (Morning)</h3><p data-i18n="halfday_morning_time">7:00AM - 2:00 PM</p></div>
                     </div>
                     <div class="halfday-afternoon">
-                        <div class="wrapper-1"><h3>Half Day (Afternoon)</h3><p>2:30PM - 6:00 PM</p></div>
+                        <div class="wrapper-1"><h3 data-i18n="halfday_afternoon">Half Day (Afternoon)</h3><p data-i18n="halfday_afternoon_time">2:30PM - 6:00 PM</p></div>
                     </div>
                     <div class="fullday">
-                        <div class="wrapper-1"><h3>Full Day</h3><p>7:00AM - 11:00 PM</p></div>
-                        <div class="wrapper-2"><p>Enjoy a full day of relaxation, ending with a breathtaking sunset and a rich Italian aperitivo.</p><div class="discount"><p>40% OFF</p></div></div>
+                        <div class="wrapper-1"><h3 data-i18n="fullday">Full Day</h3><p data-i18n="fullday_time">7:00AM - 11:00 PM</p></div>
+                        <div class="wrapper-2"><p data-i18n="fullday_desc">Enjoy a full day of relaxation, ending with a breathtaking sunset and a rich Italian aperitivo.</p><div class="discount"><p data-i18n="discount">40% OFF</p></div></div>
                     </div>
                  </div>
 
@@ -142,7 +142,7 @@
                 <div id="calendar"></div>
                 <input id="calendar-input" type="text" style="display:none;" />
                 <button id="continueBtn" style="margin-top: 1rem;" class="option-input" position="sticky" bottom="0">
-                    <p id="step1-price">€ 0.00</p>Continua
+                    <p id="step1-price">€ 0.00</p><span data-i18n="continue">Continua</span>
                 </button>
             </section>
 
@@ -152,13 +152,13 @@
             <div class="split-summary">
                 <div class="options options-wrapper">
                     <div class="section-heading">
-                        <p>Your Tour looks amazing!</p>
+                        <p data-i18n="tour_amazing">Your Tour looks amazing!</p>
                     </div>
 
                     <div class="option-row locked">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Experience</p>
+                                <p data-i18n="experience">Esperienza</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-experience">-</p>
@@ -169,7 +169,7 @@
                     <div class="option-row locked">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Date</p>
+                                <p data-i18n="date">Data</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-date">-</p>
@@ -180,7 +180,7 @@
                     <div class="option-row locked" id="summary-slot-container">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Slot</p>
+                                <p data-i18n="slot">Slot</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-slot">-</p>
@@ -191,7 +191,7 @@
                     <div class="option-row locked">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>People</p>
+                                <p data-i18n="people">Persone</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-people">-</p>
@@ -202,7 +202,7 @@
                     <div class="option-row locked">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Group Type</p>
+                                <p data-i18n="group_type">Group Type</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-groupType">-</p>
@@ -213,7 +213,7 @@
                     <div class="option-row locked" id="summary-combo-container">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Combo</p>
+                                <p data-i18n="combo">Combo</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-combo">-</p>
@@ -223,7 +223,7 @@
                     <div class="option-row option-price">
                         <div class="option-content">
                             <div class="option-subtitle">
-                                <p>Final Price</p>
+                                <p data-i18n="final_price">Final Price</p>
                             </div>
                             <div class="option-value">
                                 <p id="summary-price">€ 0.00</p>
@@ -233,26 +233,26 @@
                 </div>
                 <div class="options options-wrapper">
                     <div class="section-heading">
-                        <p>I tuoi dati</p>
+                        <p data-i18n="your_data">I tuoi dati</p>
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Nome <span class="required-star">*</span></p>
+                            <p data-i18n="name">Nome <span class="required-star">*</span></p>
                         </div>
                         <input type="text" id="input-name" class="option-input" placeholder="Nome" />
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Cognome <span class="required-star">*</span></p>
+                            <p data-i18n="surname">Cognome <span class="required-star">*</span></p>
                         </div>
                         <input type="text" id="input-surname" class="option-input" placeholder="Cognome" />
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Email <span class="required-star">*</span></p>
+                            <p data-i18n="email">Email <span class="required-star">*</span></p>
                         </div>
                         <input type="email" id="input-email" class="option-input" placeholder="Email" />
                         <div id="email-error" class="input-error"></div>
@@ -260,7 +260,7 @@
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Conferma Email <span class="required-star">*</span></p>
+                            <p data-i18n="confirm_email">Conferma Email <span class="required-star">*</span></p>
                         </div>
                         <input type="email" id="input-email-confirm" class="option-input" placeholder="Conferma Email" />
                         <div id="confirm-email-error" class="input-error"></div>
@@ -268,7 +268,7 @@
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Telefono <span class="required-star">*</span></p>
+                            <p data-i18n="phone">Telefono <span class="required-star">*</span></p>
                         </div>
                         <div style="display: flex; gap: 0.5em; align-items: center;">
                             <select id="input-phone-prefix" class="option-input" style="width: 8em;">
@@ -304,24 +304,24 @@
                                 <option value="+86">🇨🇳 +86</option>
                                 <option value="+91">🇮🇳 +91</option>
                             </select>
-                        <input type="tel" id="input-phone" class="option-input" placeholder="Numero di telefono" style="flex:1;" />
+                        <input type="tel" id="input-phone" class="option-input" placeholder="Numero di telefono" style="flex:1;" data-i18n-placeholder="phone_placeholder" />
                         </div>
                         <div id="phone-error" class="input-error"></div>
                     </div>
 
                     <div class="option-content">
                         <div class="option-subtitle">
-                            <p>Note</p>
+                            <p data-i18n="notes">Note</p>
                         </div>
-                        <textarea id="input-notes" class="option-input" placeholder="Eventuali note..." rows="5" maxlength="200"></textarea>
+                        <textarea id="input-notes" class="option-input" placeholder="Eventuali note..." rows="5" maxlength="200" data-i18n-placeholder="notes_placeholder"></textarea>
                     </div>
                 </div>
             </div>
         </div>
 
         <section class="buttons">
-            <button id="backBtn" style="margin-top: 1rem;" class="option-input">Indietro</button>
-            <button id="bookBtn" style="margin-top: 1rem;" class="option-input">Prenota la tua esperienza</button>
+            <button id="backBtn" style="margin-top: 1rem;" class="option-input"><span data-i18n="back">Indietro</span></button>
+            <button id="bookBtn" style="margin-top: 1rem;" class="option-input"><span data-i18n="book">Prenota la tua esperienza</span></button>
         </section>
         <!-- Overlay to blur background and contain PayPal modal -->
         <div id="paypal-overlay" style="display: none;">
@@ -332,18 +332,21 @@
         </div>
 
     </div>
+<script src="/lang.js"></script>
 <script>
-  const toggle = document.querySelector('.dropdown-toggle');
-  const menu = document.querySelector('.dropdown-menu');
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+// Mantieni il parametro lang tra le pagine
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+  if (!lang) return;
+  document.querySelectorAll('a[href$=".html"]').forEach(a => {
+    const url = new URL(a.href, window.location.origin);
+    if (!url.searchParams.get('lang')) {
+      url.searchParams.set('lang', lang);
+      a.href = url.pathname + url.search + url.hash;
+    }
   });
-
-  document.addEventListener('click', () => {
-    menu.style.display = 'none';
-  });
+});
 </script>
 
 

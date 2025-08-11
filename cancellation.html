@@ -22,19 +22,23 @@
   <body>
     <nav>
       <div class="wrapper">
-        <img class="con-scritta" src="assets/images/logo.jpg" alt="Logo Leggero Tours">
-        <img class="senza-scritta" src="assets/images/logo.svg" alt="Logo Leggero Tours">
+        <a href="/index.html">
+          <img class="con-scritta" src="/assets/images/logo.jpg" alt="Logo Leggero Tours">
+          <img class="senza-scritta" src="/assets/images/logo.svg" alt="Logo Leggero Tours">
+        </a>
           <div class="language-dropdown">
-            <button class="dropdown-toggle">
-              <img src="assets/icons/flags/it.svg" alt="Italiano" />
+            <button class="dropdown-toggle" id="lang-toggle">
+              <img id="lang-flag" src="/assets/icons/flags/it.svg" alt="Italiano" />
             </button>
-            <ul class="dropdown-menu">
-              <li onclick="window.location.href='/index.html'"><a href="/index.html"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
-              <li onclick="window.location.href='en/index.html'"><a href="/en/index.html"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
-              <li onclick="window.location.href='de/index.html'"><a href="/de/index.html"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
-              <li onclick="window.location.href='fr/index.html'"><a href="/fr/index.html"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
-              <li onclick="window.location.href='es/index.html'"><a href="/es/index.html"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
-              <li onclick="window.location.href='ru/index.html'"><a href="/ru/index.html"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
+            <ul class="dropdown-menu" id="lang-menu">
+              <li data-lang="it"><a href="#"><img src="/assets/icons/flags/it.svg" alt="">Italiano</a></li>
+              <li data-lang="en"><a href="#"><img src="/assets/icons/flags/gb.svg" alt="">English</a></li>
+              <li data-lang="de"><a href="#"><img src="/assets/icons/flags/de.svg" alt="">Deutsch</a></li>
+              <li data-lang="fr"><a href="#"><img src="/assets/icons/flags/fr.svg" alt="">Français</a></li>
+              <li data-lang="es"><a href="#"><img src="/assets/icons/flags/es.svg" alt="">Español</a></li>
+              <li data-lang="pl"><a href="#"><img src="/assets/icons/flags/pl.svg" alt="">Polski</a></li>
+              <li data-lang="ru"><a href="#"><img src="/assets/icons/flags/ru.svg" alt="">русский</a></li>
+              <li data-lang="zh"><a href="#"><img src="/assets/icons/flags/zh.svg" alt="">中文</a></li>
             </ul>
           </div>
 <a href="tel:+39 346 33 65 699"><button><img src="assets/icons/phone.svg" alt=""><span>Contattaci!</span></button></a>
@@ -46,29 +50,29 @@
        <main class="policy-wrapper">
       <section class="heading-cancellation">
         <div class="wrapper">
-          <h1>Politica di Cancellazione</h1>
-          <p>Qui trovi le condizioni in caso di rinuncia alla prenotazione o maltempo.</p>
+          <h1 data-i18n="cancellation_policy_title">Politica di Cancellazione</h1>
+          <p data-i18n="cancellation_policy_desc">Qui trovi le condizioni in caso di rinuncia alla prenotazione o maltempo.</p>
         </div>
       </section>
 
       <section class="policy-text">
         <div class="wrapper">
-          <h2>In caso di cancellazione</h2>
+          <h2 data-i18n="in_case_of_cancellation">In caso di cancellazione</h2>
           <ul>
-            <li><strong>Fino a 15 giorni prima:</strong> rimborso completo del deposito.</li>
-            <li><strong>Fino a 7 giorni prima:</strong> rimborso del 50% del deposito.</li>
-            <li><strong>Negli ultimi 7 giorni:</strong> nessun rimborso del deposito.</li>
+            <li data-i18n="cancel_15"> <strong>Fino a 15 giorni prima:</strong> rimborso completo del deposito.</li>
+            <li data-i18n="cancel_7"> <strong>Fino a 7 giorni prima:</strong> rimborso del 50% del deposito.</li>
+            <li data-i18n="cancel_0"> <strong>Negli ultimi 7 giorni:</strong> nessun rimborso del deposito.</li>
           </ul>
 
-          <p>Siamo sempre disponibili a spostare la data, compatibilmente con la disponibilità.</p>
+          <p data-i18n="change_date">Siamo sempre disponibili a spostare la data, compatibilmente con la disponibilità.</p>
 
-          <h2>In caso di maltempo</h2>
-          <p>
+          <h2 data-i18n="in_case_of_bad_weather">In caso di maltempo</h2>
+          <p data-i18n="bad_weather_desc">
             Se il mare presenta onde di <strong>1.5 metri o più</strong>, non sarà possibile uscire in barca. In questo caso:
           </p>
           <ul>
-            <li>Proveremo a trovare insieme una nuova data disponibile.</li>
-            <li>Se non fosse possibile, ti verrà restituito l’intero importo.</li>
+            <li data-i18n="try_new_date">Proveremo a trovare insieme una nuova data disponibile.</li>
+            <li data-i18n="refund">Se non fosse possibile, ti verrà restituito l’intero importo.</li>
           </ul>
         </div>
       </section>
@@ -79,7 +83,7 @@
       <div class="wrapper">
         <p>© 2025 Leggero Tours</p>
         <p>Creato con cura da Riccardo e sviluppato da <a href="https://www.linkedin.com/in/francescolimosani/" style="font-weight: 600;">Francesco Limosani</a></p>
-        <a class="cancellation" href="">Cancellation Policy</a>
+        <a class="cancellation" href="" data-i18n="cancellation_policy_link">Cancellation Policy</a>
         <div class="social-icons-wrapper" style="display: flex; gap: 1rem; flex: row; align-items: center; justify-content: center; margin-top: 1rem;">
           <a href=""><img src="assets/icons/facebook.svg" alt=""></a>
           <a href="https://www.instagram.com/leggerotours?igsh=MWd1OGY4ZGkyb2VkdA%3D%3D&utm_source=qr" target="_blank"><img src="assets/icons/instagram.svg" alt=""></a>
@@ -113,18 +117,22 @@ function startNavigation(destLat, destLng) {
 </script>
 
 
+
+<script src="/lang.js"></script>
 <script>
-  const toggle = document.querySelector('.dropdown-toggle');
-  const menu = document.querySelector('.dropdown-menu');
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+// Mantieni il parametro lang tra le pagine
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+  if (!lang) return;
+  document.querySelectorAll('a[href$=".html"]').forEach(a => {
+    const url = new URL(a.href, window.location.origin);
+    if (!url.searchParams.get('lang')) {
+      url.searchParams.set('lang', lang);
+      a.href = url.pathname + url.search + url.hash;
+    }
   });
-
-  document.addEventListener('click', () => {
-    menu.style.display = 'none';
-  });
+});
 </script>
 
 <script src="/visual-utils.js"></script>
