@@ -89,9 +89,14 @@ nav button {
   flex-direction: column;
 }
 
+#step-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 #step-2 {
   position: relative;
-  ;
 }
 
 * {
@@ -219,6 +224,19 @@ section.calendar-section {
   border-radius: 0.4375rem;
   box-shadow: 0px 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
   user-select: none;
+}
+
+/* Summary (step 2) option row: white background, dark text for readability */
+.option-row.summary {
+  background: #fff;
+}
+.option-row.summary .option-subtitle p,
+.option-row.summary .option-value p {
+  color: #04081B;
+}
+.option-row.summary .option-subtitle img,
+.option-row.summary .option-value img {
+  filter: none;
 }
 
 .people-wrapper {

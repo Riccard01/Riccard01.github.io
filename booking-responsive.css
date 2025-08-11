@@ -1,25 +1,30 @@
 @media screen and (max-width: 700px) {
 
-html {
-  background: #F7FBFF;
-  overflow-x: hidden;
-}
+  html {
+    background: #F7FBFF;
+    overflow-x: hidden;
+  }
 
 
-body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  max-width: 63.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0rem 0rem;
-  gap: 2rem;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  position: relative;
-}
+  body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 63.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0rem 0rem;
+    gap: 2rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    position: relative;
+  }
 
+  .split-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
 
 
 }
