@@ -444,6 +444,9 @@ padding-top: 0rem !important;
   position: absolute !important;
   bottom: -1rem !important;
   z-index: 10 !important;
+  fill: #FFF;
+stroke-width: 10px !important;
+stroke: rgba(255, 255, 255, 0.50) !important;
 }
 
 .decoration-mask-footer {
