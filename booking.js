@@ -648,7 +648,7 @@ $(document).ready(function () {
       } else if (selections.slot === CONSTANTS.texts.slotTimes["Rainbow Afternoon"]) {
         slotsUsed = [2];
       } else if (selections.slot === CONSTANTS.texts.slotTimes["Full Day"]) {
-        slotsUsed = [1,2,3]; // Full Day = Rainbow + Combo (all slots)
+        slotsUsed = [2,3]; // Full Day = Rainbow + Combo (all slots)
       } else {
         slotsUsed = [];
       }
@@ -1058,6 +1058,7 @@ function completePaymentInformation(orderId) {
   } else {
     tourToPass = selections.experience; // Default to experience name
   }
+
 
   // Prepare booking data for spreadsheet (matching Apps Script expectations)
   const bookingData = {

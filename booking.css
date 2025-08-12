@@ -848,6 +848,7 @@ section img {
   justify-content: space-between;
   align-items: start;
   align-self: stretch;
+  gap: 10px;
 }
 
 .slot-wrapper .wrapper-2 p {
