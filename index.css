@@ -282,18 +282,15 @@ section.heading .wrapper img {
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 0.894rem;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  border-top-left-radius: 0.894rem;
-  border-top-right-radius: 0.894rem;
+  border-radius: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
   /* evita interferenze col mouse */
-  border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
 }
 
@@ -305,9 +302,8 @@ section.heading .wrapper img {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background-image: url('assets/images/stellamaris.jpg');
-  border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
@@ -323,10 +319,21 @@ section.heading .wrapper img {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2.5px solid rgba(255, 255, 255, 0.80); /* vero bordo */
+  pointer-events: none;
+  z-index: 6;                  /* sopra gradiente/video, sotto storybar */
+}
+
 
 a {
   text-decoration: none;
@@ -422,10 +429,9 @@ button:focus {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background-image: url('assets/images/wild.jpg');
   background-size: cover;
-  border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
   background-position: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -436,7 +442,7 @@ button:focus {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -455,9 +461,8 @@ button:focus {
   height: 30.66388rem;
   justify-content: center;
   align-items: center;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background-image: url('assets/images/gourmet.jpg');
-  border: 2.043px solid rgba(255, 255, 255, 0.60);
   border-bottom: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
@@ -471,7 +476,7 @@ button:focus {
   position: absolute;
   inset: 0;
   /* top: 0; right: 0; bottom: 0; left: 0 */
-  border-radius: 0.894rem;
+  border-radius: 1rem;
   background: linear-gradient(180deg, rgba(4, 8, 27, 0.60) 0%, rgba(4, 8, 27, 0.18) 11.22%, rgba(4, 8, 27, 0.00) 17.3%, rgba(4, 8, 27, 0.00) 72.34%, rgba(4, 8, 27, 0.18) 79.31%, rgba(4, 8, 27, 0.60) 100%);
   z-index: 2;
 }
@@ -1342,7 +1347,7 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
 }
 
 .event-tour-card .copy-wrapper::before {
@@ -1362,7 +1367,7 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
 }
 
 .gourmet-sunset-cruise-card .copy-wrapper::before {
@@ -1382,7 +1387,7 @@ section.heading-cancellation .wrapper {
 
   z-index: -1;
   pointer-events: none;
-  border-radius: 0.894rem;
+  border-radius: 1rem;
 }
 
 .wrapper-descrizione-freccia {
