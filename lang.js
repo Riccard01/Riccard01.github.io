@@ -39,7 +39,7 @@ const TRANSLATIONS = {
     live_gulf: "Vivi il golfo Ligure!",
     enjoy_peace: "Goditi la pace di un tour privato o condividi l’esperienza con persone da tutto il mondo: il viaggio parte dal Porto Antico di Genova, ma il ricordo resta con te.",
     the_experiences: "Le esperienze",
-    customize_experience: "Personalizza la tua esperienza secondo le tue esigenze!<br>Oppure contattaci per un tour esclusivo!",
+    customize_experience: "Personalizza la tua esperienza secondo le tue esigenze!",
     main: "Principali",
     special: "Speciali",
     price_1300: "1300 € a gruppo",
