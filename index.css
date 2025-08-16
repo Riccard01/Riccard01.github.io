@@ -1342,8 +1342,8 @@ section.heading-cancellation .wrapper {
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
-  -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
-  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  mask-image: linear-gradient(to top, black 50%, transparent 100%);
 
   z-index: -1;
   pointer-events: none;
@@ -1362,8 +1362,8 @@ section.heading-cancellation .wrapper {
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
-  -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
-  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  mask-image: linear-gradient(to top, black 50%, transparent 100%);
 
   z-index: -1;
   pointer-events: none;
@@ -1382,8 +1382,8 @@ section.heading-cancellation .wrapper {
   background-color: rgba(255, 255, 255, 0.01); /* Safari requires this */
 
   /* 👇 Feather ONLY the top edge */
-  -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
-  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  mask-image: linear-gradient(to top, black 50%, transparent 100%);
 
   z-index: -1;
   pointer-events: none;
