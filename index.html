@@ -210,14 +210,10 @@
     <div class="pic-3"></div>
   </div>
   <div class="wrapper-services">
-    <div class="wrapper-1">
       <div class="wrapper"><p data-i18n="fuel_included">Carburante Incluso</p><p data-i18n="no_surprise">Nessuna sorpresa extra</p></div>
       <div class="wrapper"><p data-i18n="fuel_included">Photo Souvenir</p><p data-i18n="no_surprise">Cheese!</p></div>
-    </div>
-    <div class="wrapper-2">
       <div class="wrapper"><p data-i18n="fuel_included">Amenities</p><p data-i18n="no_surprise">Towels and fresh snacks</p></div>
       <div class="wrapper"><p data-i18n="fuel_included">Snorkeling gear</p><p data-i18n="no_surprise">Full face masks (L)a</p></div>
-    </div>
   </div>
 </section>
 
@@ -735,7 +731,7 @@ const reviewsObserver = new IntersectionObserver((entries) => {
       entry.target.classList.remove('in-view'); // reset per ri-trigger
     }
   });
-}, { threshold: 0.1, rootMargin: "0px 0px -10% 0px" });
+}, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
 
 reviews.forEach(review => reviewsObserver.observe(review));
 

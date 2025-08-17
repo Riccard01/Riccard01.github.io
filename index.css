@@ -1959,6 +1959,7 @@ section.services .wrapper-services {
   justify-content: center;
   align-items: flex-start;
   gap: 0.9375rem;
+  margin-top: 2rem;
 
   border-radius: 1rem;
   background: #EDEDED;
