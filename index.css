@@ -1434,7 +1434,7 @@ section.heading-cancellation .wrapper {
   /* 155.556% */
   letter-spacing: 0.03375rem;
   margin: 0;
-  padding: 0;
+  padding: 0rem 2.2rem;
   text-align: center;
 }
 
@@ -1820,7 +1820,7 @@ z-index: 5;
     line-height: 1.75rem;
     letter-spacing: 0.03375rem;
     margin: 0;
-    padding: 0;
+    padding: 0rem 2.2rem;
     text-align: center;
 }
 
@@ -1854,6 +1854,7 @@ z-index: 5;
   justify-content: center;
   width: 100%;
   padding: 1.5rem;
+  padding-top: 3rem;
 }
 
 .services .wrapper-pic .pic-1 {
@@ -1937,7 +1938,7 @@ z-index: 5;
     line-height: 1.75rem;
     letter-spacing: 0.03375rem;
     margin: 0;
-    padding: 0;
+    padding: 0rem 2.2rem;
     text-align: center;
 }
 
