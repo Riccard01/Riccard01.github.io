@@ -1671,8 +1671,6 @@ filter: invert(1) grayscale(1) brightness(200%);
   background-repeat: no-repeat;
   aspect-ratio: 9 / 16;
   /* opzionale, se vuoi forzare proporzione */
-  width: 20.42981rem;
-  height: 30.66388rem;
 }
 
 .reviews .card-2 {
@@ -1682,8 +1680,7 @@ filter: invert(1) grayscale(1) brightness(200%);
   background-repeat: no-repeat;
   aspect-ratio: 9 / 16;
   /* opzionale, se vuoi forzare proporzione */
-  width: 20.42981rem;
-  height: 30.66388rem;
+
 }
 
 .reviews .card-3 {
@@ -1693,8 +1690,7 @@ filter: invert(1) grayscale(1) brightness(200%);
   background-repeat: no-repeat;
   aspect-ratio: 9 / 16;
   /* opzionale, se vuoi forzare proporzione */
-  width: 20.42981rem;
-  height: 30.66388rem;
+
 }
 
 .reviews .card-1::after,
@@ -1717,13 +1713,14 @@ filter: invert(1) grayscale(1) brightness(200%);
   height: 100%;
   padding: 1.3rem;
   z-index: 3;
+  gap: .3rem;
 }
 
 
 .reviews .copy-wrapper h1 {
   color: #FFF;
   font-family: "Plus Jakarta Sans";
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -1784,8 +1781,7 @@ z-index: 5;
 .reviews .card-1,
 .reviews .card-2,
 .reviews .card-3 {
-  flex: 0 0 20.42981rem;           /* larghezza identica alle card (≈ 327px) */
-  height: 30.66388rem;             /* già definita: ribadisco per sicurezza */
+  flex: 0 0 20.42981rem;           /* larghezza identica alle card (≈ 327px) */           /* già definita: ribadisco per sicurezza */
   scroll-snap-align: start;        /* aggancia l’inizio card in snap */
 }
 
@@ -1825,4 +1821,24 @@ z-index: 5;
     margin: 0;
     padding: 0;
     text-align: center;
+}
+
+.review-title .wrapper button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.4375rem;
+  border: 1px solid #DDEDFF;
+  background: #04081B;
+  box-shadow: 0 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
+  color: #FFF;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: .8rem;
 }

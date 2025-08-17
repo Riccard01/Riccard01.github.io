@@ -227,6 +227,9 @@
 <div class="review-title">
   <h2>Recensioni</h2>
   <p>Sei stato con leggero? Puoi lasciare una recensione cliccando al link qui sotto! Grazie!</p>
+  <div class="wrapper">
+  <button>Lascia una review!</button>
+            </div>
 </div>
 <div class="reviews">
       <div class="card-2">
@@ -342,10 +345,10 @@
     </div>
     <div class="leggera"></div> -->
 
-    <div id="TA_cdswritereviewlg370" class="TA_cdswritereviewlg">
+    <!-- <div id="TA_cdswritereviewlg370" class="TA_cdswritereviewlg">
       <ul id="OtJoz7aS3g0K" class="TA_links HuD9kXuQK">
         <li id="RdGWC2Q" class="HpW6Slo7ksWc"><a target="_blank" href="https://www.tripadvisor.it/Attraction_Review-g187823-d33317432-Reviews-Leggero_Tours-Genoa_Italian_Riviera_Liguria.html"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=370&amp;locationId=33317432&amp;lang=it&amp;lang=it&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
-    <div class="blank-space">
+    <div class="blank-space"> -->
       
     </div>
 
@@ -370,50 +373,94 @@
 
 
 <script>
-  document.querySelectorAll(".card video").forEach(video => {
-    const card = video.closest(".card");
-    const genoveseImg = card.querySelector('img[src*="genovese.png"]');
-
-    // Salva il background originale
-    const originalBackground = card.style.backgroundImage || window.getComputedStyle(card).backgroundImage;
-
-    video.muted = true;
-    video.playsInline = true;
-
-    card.addEventListener("mouseenter", () => {
-      video.currentTime = 0;
-      video.style.opacity = "1";
-      video.play();
-
-      // Nascondi background (immagine)
-      card.style.backgroundImage = "none";
-
-      // Nascondi genovese.png
-      if (genoveseImg) genoveseImg.style.display = "none";
-    });
-
-    card.addEventListener("mouseleave", () => {
-      video.pause();
-      video.currentTime = 0;
-      video.style.opacity = "0";
-
-      // Ripristina background
-      card.style.backgroundImage = originalBackground;
-
-      // Mostra genovese.png
-      if (genoveseImg) genoveseImg.style.display = "block";
-    });
-  });
-</script>
-
-
-<script>
 let observer = null;
 let activeStorybar = null; // storybar attiva visibile
 
 // ✅ Configurazione: quanti giri e quanto dura un giro della "rotella"
 const DEFAULT_SPINS = 2;     // giri prima di avviare il video
 const DEFAULT_SPIN_MS = 600; // durata di UN giro (ms)
+
+/* ===== Helper: ripristina una card allo stato "ferma" ===== */
+function resetCardUI(c) {
+  const v = c.querySelector('video');
+  const sb = c.querySelector('.storybar');
+  const inst = sb?._stories || null;
+  const gImg = c.querySelector('img[src*="genovese.png"]');
+  const circ = c.querySelector('.circle-progress');
+
+  // salva bg una volta e ripristina sempre
+  if (!c.dataset.bg) {
+    c.dataset.bg = getComputedStyle(c).backgroundImage;
+  }
+  c.style.backgroundImage = c.dataset.bg;
+
+  // cancella eventuale timeout pendente della card
+  if (c._videoTimeout) {
+    clearTimeout(c._videoTimeout);
+    c._videoTimeout = null;
+  }
+
+  if (v) {
+    // ferma e nascondi il video
+    try { v.pause(); } catch(e) {}
+    try { v.currentTime = 0; } catch(e) {}
+    v.style.opacity = '0';
+  }
+
+  if (gImg) gImg.style.display = 'block';
+
+  if (circ) {
+    circ.style.display = 'none';
+    circ.style.animation = 'none';
+  }
+
+  if (sb) {
+    sb.style.display = 'none';
+    if (inst) inst.pause();
+  }
+
+  c.classList.remove('hovered');
+}
+
+/* ===== Helper: ferma tutte le altre card ===== */
+function stopOthers(exceptCard) {
+  document.querySelectorAll('.card').forEach(c => {
+    if (c !== exceptCard) resetCardUI(c);
+  });
+}
+
+/* ===== Helper: play video in modo robusto (iOS/Safari safe) ===== */
+function playFromStart(video) {
+  return new Promise((resolve) => {
+    const start = () => {
+      // azzera a 0 solo quando i metadati sono disponibili
+      try { video.currentTime = 0; } catch(e) {}
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        p.then(resolve).catch(() => {
+          // piccolo retry (Safari può rifiutare al primo frame)
+          setTimeout(() => {
+            video.play().then(resolve).catch(resolve);
+          }, 60);
+        });
+      } else {
+        resolve();
+      }
+    };
+
+    // se non è pronto, carica e attendi
+    if (video.readyState < 2) { // HAVE_CURRENT_DATA
+      try { video.load(); } catch(e) {}
+      const onReady = () => { video.removeEventListener('canplay', onReady); start(); };
+      video.addEventListener('canplay', onReady, { once: true });
+      // fallback: se canplay non arriva ma i metadati sì
+      const onMeta = () => { video.removeEventListener('loadedmetadata', onMeta); start(); };
+      video.addEventListener('loadedmetadata', onMeta, { once: true });
+    } else {
+      start();
+    }
+  });
+}
 
 const setupObserver = () => {
   const options = { threshold: 0.5 };
@@ -438,10 +485,15 @@ const setupObserver = () => {
       if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
         card.classList.add('hovered');
 
-        // Calcola i parametri della rotella (override via data-attributes)
+        // cancella eventuale timeout precedente di questa card
+        if (card._videoTimeout) {
+          clearTimeout(card._videoTimeout);
+          card._videoTimeout = null;
+        }
+
+        // parametri "rotella" (override via data-attributes)
         let spins = DEFAULT_SPINS;
         let spinMs = DEFAULT_SPIN_MS;
-
         if (circle) {
           const dsSpins = parseInt(circle.dataset.spins, 10);
           const dsSpinMs = parseInt(circle.dataset.spinMs, 10);
@@ -449,45 +501,18 @@ const setupObserver = () => {
           if (!Number.isNaN(dsSpinMs) && dsSpinMs > 0) spinMs = dsSpinMs;
 
           circle.style.display = 'block';
-          // Avvia l'animazione per N giri
           circle.style.animation = `spinProgress ${spinMs}ms linear ${spins}`;
         }
-
-        // Delay totale = numero di giri * durata di un giro
         const startDelay = (circle ? spins * spinMs : 0);
 
         // Avvia DOPO il delay della rotella
-        card._videoTimeout = setTimeout(() => {
+        card._videoTimeout = setTimeout(async () => {
           if (circle) circle.style.display = 'none';
 
-          // 👉 Blocca tutte le altre card prima di avviare questa
-          document.querySelectorAll('.card').forEach(c => {
-            if (c !== card) {
-              const v = c.querySelector('video');
-              const sb = c.querySelector('.storybar');
-              const inst2 = sb?._stories || null;
-              const gImg = c.querySelector('img[src*="genovese.png"]');
-              const circ = c.querySelector('.circle-progress');
+          // stoppa tutte le altre
+          stopOthers(card);
 
-              if (v) {
-                v.pause();
-                v.currentTime = 0;
-                v.style.opacity = '0';
-              }
-              if (gImg) gImg.style.display = 'block';
-              if (circ) {
-                circ.style.display = 'none';
-                circ.style.animation = 'none';
-              }
-              if (sb) {
-                sb.style.display = 'none';
-                if (inst2) inst2.pause();
-              }
-              c.classList.remove('hovered');
-            }
-          });
-
-          // Mostra SOLO questa storybar
+          // storybar: solo questa
           if (activeStorybar && activeStorybar !== storybar) {
             activeStorybar.style.display = 'none';
             const prevInst = activeStorybar._stories;
@@ -495,7 +520,6 @@ const setupObserver = () => {
           }
           if (storybar) {
             storybar.style.display = 'grid';
-            // riparti sempre da 0 quando rientra
             if (inst) {
               inst.goTo(0);
               inst.resume();
@@ -503,15 +527,15 @@ const setupObserver = () => {
             activeStorybar = storybar;
           }
 
-          // Avvia video
+          // prepara e avvia il video in modo robusto
           card.style.backgroundImage = 'none';
-          video.muted = true;
-          video.playsInline = true;
-          video.style.opacity = '1';
-          video.currentTime = 0;
-          video.play().catch(() => {});
-
           if (genoveseImg) genoveseImg.style.display = 'none';
+
+          video.muted = true;       // autoplay-safe
+          video.playsInline = true; // iOS-safe
+          video.style.opacity = '1';
+
+          await playFromStart(video);
         }, startDelay);
 
         return;
@@ -519,40 +543,16 @@ const setupObserver = () => {
 
       // USCITA
       if (!entry.isIntersecting || entry.intersectionRatio < 0.5) {
-        card.classList.remove('hovered');
-
-        // cancella delay pendente
+        // interrompi eventuale avvio programmato
         if (card._videoTimeout) {
           clearTimeout(card._videoTimeout);
           card._videoTimeout = null;
         }
-
-        // stop video + UI
-        video.pause();
-        video.currentTime = 0;
-        video.style.opacity = '0';
-
-        if (card.dataset.bg) card.style.backgroundImage = card.dataset.bg;
-        if (genoveseImg) genoveseImg.style.display = 'block';
-
-        if (circle) {
-          circle.style.display = 'none';
-          circle.style.animation = 'none'; // reset pulito
+        // ripristina completamente la card uscente
+        resetCardUI(card);
+        if (activeStorybar && storybar && activeStorybar === storybar) {
+          activeStorybar = null;
         }
-
-        // nascondi storybar e metti in pausa
-        if (storybar) {
-          storybar.style.display = 'none';
-          if (inst) inst.pause();
-          if (activeStorybar === storybar) activeStorybar = null;
-        }
-
-        const animatedIcons = card.querySelectorAll('.freccia, .telefono-special');
-        animatedIcons.forEach(icon => {
-          icon.style.animation = 'none';
-          void icon.offsetHeight;
-          icon.style.animation = '';
-        });
       }
     });
   }, options);
@@ -561,6 +561,10 @@ const setupObserver = () => {
   document.querySelectorAll('.card').forEach(card => {
     const sb = card.querySelector('.storybar');
     if (sb) sb.style.display = 'none';
+    // salva bg subito
+    if (!card.dataset.bg) {
+      card.dataset.bg = getComputedStyle(card).backgroundImage;
+    }
     observer.observe(card);
   });
 };
@@ -569,42 +573,15 @@ const stopObserver = () => {
   if (!observer) return;
 
   observer.disconnect();
-
   document.querySelectorAll('.card').forEach(card => {
-    const video = card.querySelector('video');
-    const circle = card.querySelector('.circle-progress');
-    const genoveseImg = card.querySelector('img[src*="genovese.png"]');
-    const storybar = card.querySelector('.storybar');
-
-    if (card._videoTimeout) {
-      clearTimeout(card._videoTimeout);
-      card._videoTimeout = null;
-    }
-
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-      video.style.opacity = '0';
-    }
-    if (circle) {
-      circle.style.display = 'none';
-      circle.style.animation = 'none';
-    }
-    if (card.dataset.bg) card.style.backgroundImage = card.dataset.bg;
-    if (genoveseImg) genoveseImg.style.display = 'block';
-    if (storybar) {
-      storybar.style.display = 'none';
-      if (storybar._stories) storybar._stories.pause();
-    }
-
-    card.classList.remove('hovered');
+    resetCardUI(card);
   });
 
   observer = null;
   activeStorybar = null;
 };
 
-// solo mobile / small screens
+// solo mobile / small screens (come nel tuo codice originale)
 const mql = window.matchMedia("(max-width: 900px)");
 const handleMql = (e) => {
   if (e.matches) {
@@ -617,6 +594,10 @@ const handleMql = (e) => {
 handleMql(mql);
 mql.addEventListener("change", handleMql);
 </script>
+
+
+
+
 
 
 
