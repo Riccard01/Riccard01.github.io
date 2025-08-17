@@ -838,16 +838,16 @@ button:focus {
   padding: 0;
 }
 
-.perks p:first-of-type {
+.services .wrapper-services p:first-of-type {
   color: #04081B;
   font-family: "Plus Jakarta Sans";
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
   padding: 0;
 }
 
-.perks p:last-of-type {
+.services .wrapper-services p:last-of-type {
   color: rgba(95, 96, 99, 0.99);
   font-family: "Plus Jakarta Sans";
   font-size: 0.82588rem;
@@ -1408,7 +1408,7 @@ section.heading-cancellation .wrapper {
   justify-content: center;
   gap: 0.625rem;
   align-self: stretch;
-  padding-top: 2.5rem;
+  padding-top: 4.5rem;
 }
 
 .experiences-wrapper h2 {
@@ -1794,7 +1794,7 @@ z-index: 5;
   justify-content: center;
   gap: 0.625rem;
   align-self: stretch;
-  padding-top: 2.5rem;
+  padding-top: 4.5rem;
 }
 
 .review-title h2{
@@ -1845,4 +1845,176 @@ z-index: 5;
 
 .cards-container-container .card {
   height: 35rem !important;
+}
+
+.services .wrapper-pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.services .wrapper-pic .pic-1 {
+  background-image: url('assets/images/melone.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 7.875rem;
+  height: 7.875rem;
+  transform: rotate(-7.54deg);
+  flex-shrink: 0;
+  margin-right: -2rem;
+
+  border-radius: 1.57869rem;
+  box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
+}
+
+.services .wrapper-pic .pic-2 {
+  background-image: url('assets/images/towels.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 8.84081rem;
+  height: 8.84081rem;
+  flex-shrink: 0;
+  margin-top: -.3rem;
+
+  border-radius: 1.57869rem;
+  box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
+  z-index: 10;
+}
+
+.services .wrapper-pic .pic-3 {
+  background-image: url('assets/images/grape.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 7.875rem;
+  height: 7.875rem;
+  transform: rotate(7.54deg);
+  flex-shrink: 0;
+  border-radius: 1.57869rem;
+  box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
+  margin-left: -2rem;
+}
+
+.services .wrapper {
+  display: flex;
+  position: relative;
+  max-width: 63.75rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  align-self: stretch;
+}
+
+.services #titolo {
+  margin-top: 4.5rem;
+}
+
+.services .wrapper h2{
+    color: #04081B;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.6875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.services .wrapper p {
+    align-self: stretch;
+    color: rgba(117, 118, 122, 0.99);
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75rem;
+    letter-spacing: 0.03375rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+section.services .wrapper-services {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  width: 100%;
+}
+
+section.services .wrapper-services .wrapper-1 .wrapper,
+section.services .wrapper-services .wrapper-2 .wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: fit-content;
+}
+
+
+/* Stato iniziale + animazioni */
+.services .wrapper-pic .pic-1,
+.services .wrapper-pic .pic-2,
+.services .wrapper-pic .pic-3 {
+  opacity: 0;
+  filter: blur(24px);
+  will-change: transform, filter, opacity;
+  animation-duration: 0.9s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards; /* resta allo stato finale */
+}
+
+/* sinistra: da sinistra verso centro */
+.services .wrapper-pic .pic-1 {
+  transform: translateX(-40px) rotate(-7.54deg);
+  animation-name: picInLeft;
+  animation-delay: 0.05s;
+}
+
+/* centro: dal basso verso l'alto */
+.services .wrapper-pic .pic-2 {
+  transform: translateY(40px);  /* nessuna rotazione */
+  animation-name: picInUp;
+  animation-delay: 0.2s;
+}
+
+/* destra: da destra verso centro */
+.services .wrapper-pic .pic-3 {
+  transform: translateX(40px) rotate(7.54deg);
+  animation-name: picInRight;
+  animation-delay: 0.35s;
+}
+
+/* KEYFRAMES */
+@keyframes picInUp {
+  from { opacity: 0; filter: blur(24px); transform: translateY(40px); }
+  to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+}
+@keyframes picInLeft {
+  from { opacity: 0; filter: blur(24px); transform: translateX(-40px) rotate(-7.54deg); }
+  to   { opacity: 1; filter: blur(0);    transform: translateX(0)      rotate(-7.54deg); }
+}
+@keyframes picInRight {
+  from { opacity: 0; filter: blur(24px); transform: translateX(40px) rotate(7.54deg); }
+  to   { opacity: 1; filter: blur(0);    transform: translateX(0)    rotate(7.54deg); }
+}
+
+/* Accessibilità: se l’utente preferisce meno motion, salta le animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .services .wrapper-pic .pic-1,
+  .services .wrapper-pic .pic-2,
+  .services .wrapper-pic .pic-3 {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
 }
