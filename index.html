@@ -224,6 +224,35 @@
 </div>
 
 
+<div class="review-title">
+  <h2>Recensioni</h2>
+  <p>Sei stato con leggero? Puoi lasciare una recensione cliccando al link qui sotto! Grazie!</p>
+</div>
+<div class="reviews">
+      <div class="card-2">
+        <img class="fumetto" src="assets/decoration/fumetto.svg" alt="">
+        <div class="copy-wrapper">
+            <h1>Giulia</h1>
+            <p>Un’esperienza che resta nel cuore! Riccardo ha reso tutto semplice e piacevole, con professionalità e attenzione ai dettagli. La giornata è volata tra panorami mozzafiato, momenti autentici e un’atmosfera davvero speciale. Da non perdere per chi cerca un’avventura indimenticabile!</p>
+        </div>
+      </div>
+
+      <div class="card-1">
+        <img class="fumetto" src="assets/decoration/fumetto.svg" alt="">
+        <div class="copy-wrapper">
+            <h1>Simone</h1>
+            <p>Riccardo’s expertise and attention to detail ensured us a very safe, seamless experience that felt both authentic and truly charming. Highly recommended for anyone seeking a memorable day at sea!</p>
+        </div>
+      </div>
+
+      <div class="card-3">
+        <img class="fumetto" src="assets/decoration/fumetto.svg" alt="">
+        <div class="copy-wrapper">
+            <h1>Florence Kollie</h1>
+            <p>Riccardo is an experienced water guide , unimposing, discreet but warm and familiar like an old friend you are reuniting with. He will make you feel like a local for the day living the Italian dream.</p>
+        </div>
+      </div>
+</div>
 
 <div class="features-block">
   <div class="item">
@@ -382,6 +411,10 @@
 let observer = null;
 let activeStorybar = null; // storybar attiva visibile
 
+// ✅ Configurazione: quanti giri e quanto dura un giro della "rotella"
+const DEFAULT_SPINS = 2;     // giri prima di avviare il video
+const DEFAULT_SPIN_MS = 600; // durata di UN giro (ms)
+
 const setupObserver = () => {
   const options = { threshold: 0.5 };
 
@@ -405,14 +438,54 @@ const setupObserver = () => {
       if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
         card.classList.add('hovered');
 
+        // Calcola i parametri della rotella (override via data-attributes)
+        let spins = DEFAULT_SPINS;
+        let spinMs = DEFAULT_SPIN_MS;
+
         if (circle) {
+          const dsSpins = parseInt(circle.dataset.spins, 10);
+          const dsSpinMs = parseInt(circle.dataset.spinMs, 10);
+          if (!Number.isNaN(dsSpins) && dsSpins > 0) spins = dsSpins;
+          if (!Number.isNaN(dsSpinMs) && dsSpinMs > 0) spinMs = dsSpinMs;
+
           circle.style.display = 'block';
-          circle.style.animation = 'spinProgress 0.5s linear forwards';
+          // Avvia l'animazione per N giri
+          circle.style.animation = `spinProgress ${spinMs}ms linear ${spins}`;
         }
 
-        // Avvia DOPO il delay (stesso del video)
+        // Delay totale = numero di giri * durata di un giro
+        const startDelay = (circle ? spins * spinMs : 0);
+
+        // Avvia DOPO il delay della rotella
         card._videoTimeout = setTimeout(() => {
           if (circle) circle.style.display = 'none';
+
+          // 👉 Blocca tutte le altre card prima di avviare questa
+          document.querySelectorAll('.card').forEach(c => {
+            if (c !== card) {
+              const v = c.querySelector('video');
+              const sb = c.querySelector('.storybar');
+              const inst2 = sb?._stories || null;
+              const gImg = c.querySelector('img[src*="genovese.png"]');
+              const circ = c.querySelector('.circle-progress');
+
+              if (v) {
+                v.pause();
+                v.currentTime = 0;
+                v.style.opacity = '0';
+              }
+              if (gImg) gImg.style.display = 'block';
+              if (circ) {
+                circ.style.display = 'none';
+                circ.style.animation = 'none';
+              }
+              if (sb) {
+                sb.style.display = 'none';
+                if (inst2) inst2.pause();
+              }
+              c.classList.remove('hovered');
+            }
+          });
 
           // Mostra SOLO questa storybar
           if (activeStorybar && activeStorybar !== storybar) {
@@ -439,7 +512,7 @@ const setupObserver = () => {
           video.play().catch(() => {});
 
           if (genoveseImg) genoveseImg.style.display = 'none';
-        }, 500);
+        }, startDelay);
 
         return;
       }
@@ -464,7 +537,7 @@ const setupObserver = () => {
 
         if (circle) {
           circle.style.display = 'none';
-          circle.style.animation = 'none';
+          circle.style.animation = 'none'; // reset pulito
         }
 
         // nascondi storybar e metti in pausa
@@ -544,6 +617,7 @@ const handleMql = (e) => {
 handleMql(mql);
 mql.addEventListener("change", handleMql);
 </script>
+
 
 
 
