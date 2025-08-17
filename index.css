@@ -1762,7 +1762,6 @@ z-index: 5;
   padding: 1.5rem;                 /* come .cards-container */
   max-width: 66.789rem;            /* stessa larghezza del blocco cards */
   margin: 0 auto;
-
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -1781,8 +1780,9 @@ z-index: 5;
 .reviews .card-1,
 .reviews .card-2,
 .reviews .card-3 {
-  flex: 0 0 20.42981rem;           /* larghezza identica alle card (≈ 327px) */           /* già definita: ribadisco per sicurezza */
+  flex: 0 0 20.42981rem;       /* larghezza identica alle card (≈ 327px) */           /* già definita: ribadisco per sicurezza */
   scroll-snap-align: start;        /* aggancia l’inizio card in snap */
+  height: 27rem;
 }
 
 .review-title {
@@ -1841,4 +1841,8 @@ z-index: 5;
   font-size: 1rem;
   font-weight: 700;
   margin-top: .8rem;
+}
+
+.cards-container-container .card {
+  height: 35rem !important;
 }
