@@ -1762,6 +1762,7 @@ z-index: 5;
   padding: 1.5rem;                 /* come .cards-container */
   max-width: 66.789rem;            /* stessa larghezza del blocco cards */
   margin: 0 auto;
+    margin-bottom: 5.5rem !important; /* margine inferiore per distanziare dal footer */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -1959,62 +1960,70 @@ section.services .wrapper-services .wrapper-2 .wrapper{
   width: fit-content;
 }
 
-
-/* Stato iniziale + animazioni */
+/* Stato iniziale */
 .services .wrapper-pic .pic-1,
 .services .wrapper-pic .pic-2,
 .services .wrapper-pic .pic-3 {
   opacity: 0;
   filter: blur(24px);
   will-change: transform, filter, opacity;
-  animation-duration: 0.9s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards; /* resta allo stato finale */
 }
 
-/* sinistra: da sinistra verso centro */
-.services .wrapper-pic .pic-1 {
-  transform: translateX(-40px) rotate(-7.54deg);
-  animation-name: picInLeft;
-  animation-delay: 0.05s;
+/* Posizione di partenza */
+.services .wrapper-pic .pic-1 { transform: translateX(-40px) rotate(-7.54deg); }
+.services .wrapper-pic .pic-2 { transform: translateY(40px); }
+.services .wrapper-pic .pic-3 { transform: translateX(40px)  rotate(7.54deg); }
+
+/* Animazioni SOLO quando sono in viewport */
+.services .wrapper-pic .pic-1.in-view {
+  animation: picInLeft 0.3s ease-out forwards;
+}
+.services .wrapper-pic .pic-2.in-view {
+  animation: picInUp 0.3s ease-out forwards;
+}
+.services .wrapper-pic .pic-3.in-view {
+  animation: picInRight 0.3s ease-out forwards;
 }
 
-/* centro: dal basso verso l'alto */
-.services .wrapper-pic .pic-2 {
-  transform: translateY(40px);  /* nessuna rotazione */
-  animation-name: picInUp;
-  animation-delay: 0.2s;
-}
-
-/* destra: da destra verso centro */
-.services .wrapper-pic .pic-3 {
-  transform: translateX(40px) rotate(7.54deg);
-  animation-name: picInRight;
-  animation-delay: 0.35s;
-}
-
-/* KEYFRAMES */
+/* Keyframes */
 @keyframes picInUp {
   from { opacity: 0; filter: blur(24px); transform: translateY(40px); }
   to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
 }
 @keyframes picInLeft {
   from { opacity: 0; filter: blur(24px); transform: translateX(-40px) rotate(-7.54deg); }
-  to   { opacity: 1; filter: blur(0);    transform: translateX(0)      rotate(-7.54deg); }
+  to   { opacity: 1; filter: blur(0);    transform: translateX(0)     rotate(-7.54deg); }
 }
 @keyframes picInRight {
   from { opacity: 0; filter: blur(24px); transform: translateX(40px) rotate(7.54deg); }
   to   { opacity: 1; filter: blur(0);    transform: translateX(0)    rotate(7.54deg); }
 }
 
-/* Accessibilità: se l’utente preferisce meno motion, salta le animazioni */
+/* Accessibilità */
 @media (prefers-reduced-motion: reduce) {
   .services .wrapper-pic .pic-1,
   .services .wrapper-pic .pic-2,
   .services .wrapper-pic .pic-3 {
     animation: none !important;
-    opacity: 1;
-    filter: none;
-    transform: none;
+    opacity: 1; filter: none; transform: none;
   }
+}
+
+
+
+
+.reviews > div {
+  opacity: 0;
+  filter: blur(24px);
+  transform: translateY(40px);
+  will-change: transform, opacity, filter;
+}
+
+.reviews > div.in-view {
+  animation: reviewInUp 0.5s ease-out forwards;
+}
+
+@keyframes reviewInUp {
+  from { opacity: 0; filter: blur(24px); transform: translateY(40px); }
+  to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
 }

@@ -708,21 +708,38 @@ document.addEventListener("DOMContentLoaded", ()=> initStories());
 </script>
 
 <script>
-  const pics = document.querySelectorAll('.services .wrapper-pic div');
+  // osserva SOLO le tre immagini
+  const pics = document.querySelectorAll('.services .wrapper-pic > div');
 
-const observer = new IntersectionObserver((entries) => {
+  const picsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');   // entra → anima
+      } else {
+        entry.target.classList.remove('in-view'); // esce → reset, così si ri-triggera al rientro
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+
+  pics.forEach(pic => picsObserver.observe(pic));
+</script>
+
+<script>
+  const reviews = document.querySelectorAll('.reviews > div');
+
+const reviewsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('in-view');
-      observer.unobserve(entry.target); // smette di osservarlo → non si resetta più
+    } else {
+      entry.target.classList.remove('in-view'); // reset per ri-trigger
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.1, rootMargin: "0px 0px -10% 0px" });
 
-pics.forEach(pic => observer.observe(pic));
+reviews.forEach(review => reviewsObserver.observe(review));
 
 </script>
-
 
 
   </body>
