@@ -1536,11 +1536,12 @@ filter: invert(1) grayscale(1) brightness(200%);
   background: #FFF;
   box-shadow: 0 0.882px 13.52px 1.207px rgba(0, 0, 0, 0.17);
 
-        color: #04081B;
-        font-family: "Plus Jakarta Sans";
-        font-size: 1rem;
-        font-weight: 700;
-        margin-top: .8rem;
+    color: #04081B;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: .8rem;
+    height: 48px;
 }
 
 .card {
@@ -1842,6 +1843,7 @@ z-index: 5;
   font-size: 1rem;
   font-weight: 700;
   margin-top: .8rem;
+  height: 48px;
 }
 
 .cards-container-container .card {
