@@ -1942,24 +1942,28 @@ z-index: 5;
     text-align: center;
 }
 
-section.services .wrapper-services {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1.875rem;
-  width: 100%;
-}
-
-section.services .wrapper-services .wrapper-1 .wrapper,
-section.services .wrapper-services .wrapper-2 .wrapper{
+section.services {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
-  width: fit-content;
+  width: 100%;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 }
+
+section.services .wrapper-services {
+  display: inline-flex;
+  padding: 1.875rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.9375rem;
+
+  border-radius: 1rem;
+  background: #EDEDED;
+}
+
 
 /* Stato iniziale */
 .services .wrapper-pic .pic-1,
