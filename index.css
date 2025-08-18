@@ -662,7 +662,7 @@ button:focus {
   align-items: center;
   padding: 0.1875rem 0.3125rem;
   border-radius: 0.4375rem;
-  background: rgba(94, 255, 201, 0.30);
+  background: #FFF;
   gap: 0.3125rem;
 }
 
@@ -674,7 +674,7 @@ button:focus {
   align-items: center;
   padding: 0.1875rem 0.3125rem;
   border-radius: 0.4375rem;
-  background: rgba(255, 231, 94, 0.30);
+  background: #FFF;
   gap: 0.3125rem;
 }
 
@@ -715,13 +715,13 @@ button:focus {
 }
 
 .the-rainbow-tour-card .card .details .wrapper p {
-  color: #5EFFC9;
+  color: #0075FA;
   font-family: "Plus Jakarta Sans";
 }
 
 
 .gourmet-sunset-cruise-card .card .details .wrapper p {
-  color: #FFE75E;
+  color: #0075FA;
   font-family: "Plus Jakarta Sans";
 }
 
