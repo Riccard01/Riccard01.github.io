@@ -1852,11 +1852,12 @@ z-index: 5;
 
 .services .wrapper-pic {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 1.5rem;
-  padding-top: 3rem;
+  padding-top: 9rem;
 }
 
 .services .wrapper-pic .pic-1 {
@@ -1872,6 +1873,7 @@ z-index: 5;
 
   border-radius: 1.57869rem;
   box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
+  z-index: 5;
 }
 
 .services .wrapper-pic .pic-2 {
@@ -1901,6 +1903,22 @@ z-index: 5;
   border-radius: 1.57869rem;
   box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
   margin-left: -2rem;
+  z-index: 5;
+}
+
+.services .wrapper-pic .pic-4 {
+  background-image: url('assets/images/leggera.jpg');
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 14.875rem;
+  height: 14.875rem;
+  flex-shrink: 0;
+  border-radius: 1.57869rem;
+  box-shadow: 0 0.991px 15.178px 1.356px rgba(0, 0, 0, 0.17);
+  position: absolute;
+  z-index: 1;
+  top: -4rem;
 }
 
 .services .wrapper {
@@ -1942,6 +1960,7 @@ z-index: 5;
     margin: 0;
     padding: 0rem 2.2rem;
     text-align: center;
+    margin-bottom: 5.5rem;
 }
 
 section.services {
