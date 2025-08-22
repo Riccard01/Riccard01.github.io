@@ -1861,7 +1861,7 @@ z-index: 5;
 }
 
 .services .wrapper-pic .pic-1 {
-  background-image: url('assets/images/melone.jpg');
+  background-image: url('/assets/images/melone.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1877,7 +1877,7 @@ z-index: 5;
 }
 
 .services .wrapper-pic .pic-2 {
-  background-image: url('assets/images/towels.jpg');
+  background-image: url('/assets/images/towels.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1892,7 +1892,7 @@ z-index: 5;
 }
 
 .services .wrapper-pic .pic-3 {
-  background-image: url('assets/images/grape.jpg');
+  background-image: url('/assets/images/grape.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1907,7 +1907,7 @@ z-index: 5;
 }
 
 .services .wrapper-pic .pic-4 {
-  background-image: url('assets/images/leggera.jpg');
+  background-image: url('/assets/images/leggera.jpg');
   background-position: center bottom;
   background-size: cover;
   background-repeat: no-repeat;
