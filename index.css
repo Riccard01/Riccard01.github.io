@@ -1907,7 +1907,7 @@ z-index: 5;
 }
 
 .services .wrapper-pic .pic-4 {
-  background-image: url('/assets/images/leggera.jpg');
+  background-image: url('/assets/images/leggeraa.jpg') !important;
   background-position: center bottom;
   background-size: cover;
   background-repeat: no-repeat;
