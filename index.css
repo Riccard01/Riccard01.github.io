@@ -433,7 +433,7 @@ button:focus {
   background-image: url('assets/images/wild.jpg');
   background-size: cover;
   border-bottom: none;
-  background-position: center;
+  background-position: -27rem center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
