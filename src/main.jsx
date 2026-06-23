@@ -12,7 +12,7 @@ if (redirect) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/Riccard01.github.io">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </StrictMode>,
