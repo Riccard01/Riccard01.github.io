@@ -1,0 +1,139 @@
+.footer {
+  width: 100%;
+  background: #031824;
+  padding: 40px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px; /* Aumentato leggermente per dare più respiro tra i blocchi */
+  border-top: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.footer-top-bar {
+  width: 100%;
+  max-width: 1200px; /* O la larghezza massima del tuo layout */
+  display: flex;
+  flex-direction: row; /* Forza l'allineamento orizzontale */
+  justify-content: space-between; /* Spinge il logo a sinistra e il wrapper-btn a destra */
+  align-items: center; /* Allinea verticalmente al centro logo e bottone */
+}
+
+.footer-logo {
+  height: 40px; /* Modifica l'altezza in base alle esigenze del tuo SVG */
+  width: auto;  /* Ripristina le proporzioni corrette evitando che si rimpicciolisca */
+  display: inline-block;
+}
+
+/* --- Navigazione e Link --- */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-link {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: #21acec;
+  opacity: 1;
+}
+
+.footer-book {
+  font-weight: 600;
+  color: #21acec;
+  border-bottom: 2px solid #21acec;
+  padding-bottom: 2px;
+}
+
+.footer-social {
+  margin-top: 4px;
+}
+
+.footer-social-link svg {
+  display: block;
+  transition: filter 0.2s;
+}
+
+.footer-social-link:hover svg {
+  filter: brightness(1.2) drop-shadow(0 2px 8px #5EABB133);
+}
+
+/* --- Note Legali --- */
+.footer-divider {
+  width: 100%;
+  max-width: 800px;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
+}
+
+.footer-legal {
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 700px;
+}
+
+.legal-company {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.legal-info {
+  font-size: 13px;
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.legal-info a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.legal-tax-note {
+  font-size: 11px;
+  font-style: italic;
+  opacity: 0.5;
+  line-height: 1.4;
+  margin: 4px 0 0 0;
+}
+
+.legal-copyright {
+  font-size: 12px;
+  opacity: 0.4;
+  margin: 8px 0 0 0;
+}
+
+.footer-link.footer-booking {
+  background: #ffffff;
+  color: #031824 !important;
+  border: none;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 8px 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  letter-spacing: -1px !important;
+  cursor: pointer !important;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}

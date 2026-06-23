@@ -1,0 +1,47 @@
+import './Navbar.css';
+import logo from '../assets/logo.svg';
+import phoneIcon from '../assets/phone.svg';
+
+function Navbar() {
+
+  // Modificato qui: usa il protocollo dell'app per saltare la pagina di reindirizzamento web
+  const openWhatsApp = () => {
+    window.location.href = 'whatsapp://send?phone=393463365699';
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="wrapper-navbar-logo">
+          <div className="navbar-logo">
+            <a href="/">
+              <img src={logo} alt="Leggero Tours" className="navbar-logo-img" />
+            </a>
+          </div>
+        </div>
+
+        <div className='wrapper-ul'>
+          <div className="nav-menu" style={{ display: 'flex', gap: '8px' }}>
+            <button className="nav-link" onClick={() => { window.location.href = '/special-events'; }}>Special Events</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/terms'; }}>Terms and Conditions</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/private-transfer'; }}>Private Transfer</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/menu'; }}>Menu</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/reviews'; }}>Reviews</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/departures'; }}>Departures</button>
+            <button className="nav-link" onClick={() => { window.location.href = '/about'; }}>About us</button>
+          </div>
+        </div>
+        
+        <div className='wrapper-btn' style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button className="nav-link nav-booking" onClick={openWhatsApp} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px' }}>
+            <img src={phoneIcon} alt="WhatsApp" style={{ width: '16px', height: '16px' }} />
+          </button>
+          
+          <button className="nav-link nav-booking" onClick={() => { window.location.href = '/book'; }}>Check Availability</button>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;

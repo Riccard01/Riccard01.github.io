@@ -1,0 +1,108 @@
+.faq-section {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  background-color: #e1e7eb;
+}
+
+span {
+    color: #3f6883;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    font-weight: 600;
+    box-sizing: border-box;
+    color: #031824;
+}
+
+.faq-title {
+  font-family: 'Fraunces', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #031824;
+  text-align: center;
+  font-style: italic;
+  margin: 0;
+  padding: 16px;
+  letter-spacing: -1px;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  /* Rimossi tutti i bordi e i border-radius superflui */
+  overflow: hidden;
+}
+
+.faq-item.active {
+  /* Rimosso anche il cambio colore del bordo attivo */
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0; /* Ridotto il padding laterale a 0 per allineare il testo perfettamente ai lati */
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #031824;
+  text-align: left;
+  cursor: pointer;
+  outline: none; /* Rimuove l'outline di default del bottone */
+}
+
+.faqquestion-btn:hover {
+  opacity: 0.7; /* Rende il testo leggermente più opaco al passaggio del mouse per dare un feedback di click */
+}
+
+.faq-icon {
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-left: 20px;
+  color: #031824;
+}
+
+/* Logica per l'animazione fluida della risposta */
+.faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.faq-item.active .faq-answer-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer {
+  overflow: hidden;
+  background: transparent;
+}
+
+.faq-answer p {
+  padding: 0 0 20px 0; /* padding laterale a 0 per allinearsi perfettamente alla domanda sopra */
+  margin: 0;
+  color: #2c3e49;
+  line-height: 1.6;
+
+    margin-right: 16px;
+    margin-top: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    font-weight: 400;
+    box-sizing: border-box;
+}

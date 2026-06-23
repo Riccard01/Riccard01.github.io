@@ -1,0 +1,19 @@
+.cursive-writing-svg {
+  width: 100%;
+  height: auto;
+}
+
+.write-path {
+  /* 1. Dai un valore altissimo che copra l'intera lunghezza del tracciato */
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000; /* Nasconde totalmente il tratto all'inizio */
+  
+  /* 2. Fai scattare l'animazione */
+  animation: writeMe 3s ease-in-out forwards;
+}
+
+@keyframes writeMe {
+  to {
+    stroke-dashoffset: 0; /* Riducendo l'offset a 0, il testo si "rivela" seguendo la curva */
+  }
+}

@@ -1,0 +1,382 @@
+.booking-footer-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #031824;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.24);
+  padding: 24px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  z-index: 10000;
+  box-sizing: border-box;
+  overflow: visible;
+  border-radius: 34px 34px 0 0;
+}
+
+/* Modifica il blocco booking-summary-list in questo modo */
+.booking-summary-list {
+  display: block;
+  width: 100%;
+  height: fit-content;
+  /* Altezza dinamica: occupa lo spazio necessario fino a 180px, poi scrolla */
+  overflow-y: auto;
+  margin-bottom: 12px;
+  /* Aggiungi questo per evitare che il bordo sia attaccato al testo */
+  padding-right: 5px; 
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.26);
+}
+
+.summary-label { font-size: 13px; font-weight: 500; color: #ffffffc0; }
+.summary-value { font-size: 14px; font-weight: 500; color: #ffffff; }
+
+.booking-footer-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 16px;
+}
+
+.booking-footer-price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.booking-footer-total-label { font-size: 12px; color: #ffffffc0; margin-bottom: 2px; }
+.booking-footer-price-column { display: flex; flex-direction: column; align-items: flex-start; }
+.booking-footer-original-price { text-decoration: line-through; color: #aaa8a1; font-size: 12px; }
+.booking-footer-total-price { font-size: 20px; font-weight: 700; color: #ffffff; line-height: 1; }
+
+.booking-footer-buttons-block { display: flex; gap: 12px; }
+
+.booking-footer-btn {
+  padding: 14px 32px;
+  background-color: #ffda73;
+  color: #1e1e1e;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 180px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.booking-footer-btn:disabled { background-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+.booking-footer-btn.secondary { background-color: transparent; border: 1px solid #cbd5e1; }
+
+/* Rosso forzato */
+.summary-value.missing-text {
+  color: #ef4444 !important;
+  font-weight: 700 !important;
+}
+
+.anim-fade { animation: fadeIn 0.4s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.anim-scale { animation: springScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes springScale {
+  0% { transform: scale(0.8); opacity: 0; }
+  80% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* ── CONFIGURAZIONE E STRUTTURA FIXED ────────────────── */
+
+.summary-card-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.summary-image-container {
+  display: block;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  position: relative; /* Consente alla chip interna di posizionarsi in assoluto */
+  /* NOTA: overflow: hidden rimosso per permettere alla chip di sbordare sul fondo */
+  border-radius: 24px;
+}
+
+.summary-boat-large-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px; /* Spostato qui per mantenere il ritaglio dell'immagine dato che il parent non ha più overflow: hidden */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.summary-boat-large-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+}
+
+.summary-card-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px; /* Spazio equilibrato tra le righe */
+  overflow: hidden;
+  flex: 1;
+}
+
+/* ── STILE DEI FONT E GERARCHIA VISIVA ────────────────── */
+
+/* I dati passati: tutti a 16px, Bold e bianchi */
+.highlight-data {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  line-height: 1.2;
+}
+
+/* I connettori (for, from): 16px, leggeri e opachi */
+.connector-text {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Struttura delle righe per l'allineamento dei font */
+.summary-card-row-one,
+.summary-card-row-two {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: pre-wrap;
+}
+
+/* RIGA 3: Info Transfer */
+.summary-card-row-three {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* Evita rotture di layout sui nomi dei porti lunghi */
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px; 
+}
+
+/* Il badge di stato del transfer */
+.transfer-status-tag {
+  background-color: rgba(255, 218, 115, 0.12);
+  color: #ffda73;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Errori o selezioni mancanti */
+.summary-card-info-wrapper .missing-text {
+  font-size: 16px !important;
+  color: #ef4444 !important;
+  font-weight: 500 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ── CONFIGURAZIONE E STRUTTURA FIXED ────────────────── */
+
+.summary-card-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.summary-image-container {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  position: relative; /* Consente alla chip interna di posizionarsi in assoluto */
+  /* NO overflow hidden qui: la chip deve respirare ed uscire dai bordi */
+}
+
+/* NUOVO WRAPPER: Taglia l'immagine a 24px in modo pulito */
+.summary-boat-image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-sizing: border-box;
+}
+
+.summary-boat-large-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.summary-boat-large-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+}
+
+.summary-card-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px; /* Spazio equilibrato tra le righe */
+  overflow: hidden;
+  flex: 1;
+}
+
+/* ── STILE DEI FONT E GERARCHIA VISIVA ────────────────── */
+
+/* I dati passati: tutti a 16px, Bold e bianchi */
+.highlight-data {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  line-height: 1.2;
+}
+
+/* I connettori (for, from): 16px, leggeri e opachi */
+.connector-text {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Struttura delle righe per l'allineamento dei font */
+.summary-card-row-one,
+.summary-card-row-two {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: pre-wrap;
+}
+
+/* RIGA 3: Info Transfer */
+.summary-card-row-three {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* Evita rotture di layout sui nomi dei porti lunghi */
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px; 
+}
+
+/* Il badge di stato del transfer */
+.transfer-status-tag {
+  background-color: rgba(255, 218, 115, 0.12);
+  color: #ffda73;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Errori o selezioni mancanti */
+.summary-card-info-wrapper .missing-text {
+  font-size: 16px !important;
+  color: #ef4444 !important;
+  font-weight: 500 !important;
+}
+
+/* ── LA CHIP DELLE PERSONE (IN POSITION ABSOLUTE, ORA TOTALMENTE VISIBILE ALL'ESTERNO) ── */
+.guests-badge-chip {
+  position: absolute;
+  bottom: -12px; /* Sborda leggermente sul lato inferiore */
+  left: 50%;
+  transform: translateX(-50%); /* Centra perfettamente la chip in orizzontale */
+  
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  background-color: #ffffff; /* Sfondo bianco per staccarsi dallo scuro */
+  color: #031824;            /* Testo scuro contrastante */
+  padding: 3px 8px;
+  border-radius: 12px;       /* Look a pillola pulito */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  white-space: nowrap;
+  z-index: 10; /* Monitora che stia sopra a tutto il blocco */
+}
+
+.guests-badge-chip span {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+.chip-check-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  object-fit: contain;
+}

@@ -1,0 +1,323 @@
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 32px 24px;
+  max-width: 420px;
+  margin: 32px auto 90px auto;
+  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.10);
+}
+
+.booking-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #0B232E;
+  font-size: 1.1rem;
+  gap: 8px;
+}
+
+.booking-form input,
+.booking-form textarea,
+.booking-form select {
+  border-radius: 10px;
+  border: 1.5px solid #dbe2e8;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #f8fafd;
+  color: #0B232E;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus,
+.booking-form select:focus {
+  border: 1.5px solid #0B232E;
+}
+
+.booking-form-phone-row {
+  display: flex;
+  gap: 8px;
+}
+
+.booking-form-country-code {
+  width: 90px;
+  min-width: 70px;
+  font-size: 1rem;
+  padding: 12px 8px;
+}
+
+.booking-form-phone-input {
+  flex: 1;
+}
+
+.booking-form-notes {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.booking-form-submit {
+  margin-top: 18px;
+  background: #0B232E;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.booking-form-submit:hover {
+  background: #03393C;
+}
+
+.stripe-container {
+  width: 100%;
+}
+
+/* ── Checkout panel ─────────────────────────────────── */
+
+.checkout-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 32px 24px;
+  max-width: 420px;
+  margin: 32px auto 90px auto;
+  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.10);
+}
+
+.checkout-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0B232E;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Summary block */
+
+.checkout-summary {
+  background: #f8fafd;
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.97rem;
+}
+
+.checkout-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.checkout-value {
+  color: #0B232E;
+  font-weight: 500;
+  text-align: right;
+  max-width: 60%;
+  word-break: break-all;
+}
+
+.checkout-divider {
+  height: 1px;
+  background: #dbe2e8;
+  margin: 2px 0;
+}
+
+.checkout-total-row {
+  margin-top: 2px;
+}
+
+.checkout-total-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0B232E;
+}
+
+.checkout-total-amount {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0B232E;
+  letter-spacing: -0.02em;
+}
+
+/* Card input */
+
+.checkout-card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-card-label-text {
+  font-weight: 600;
+  color: #0B232E;
+  font-size: 0.97rem;
+}
+
+.checkout-card-badges {
+  display: flex;
+  gap: 5px;
+}
+
+.checkout-card-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  border: 1.5px solid #dbe2e8;
+  border-radius: 5px;
+  padding: 2px 5px;
+  background: #f8fafd;
+}
+
+.checkout-card-element {
+  border: 1.5px solid #dbe2e8;
+  border-radius: 12px;
+  padding: 14px 14px;
+  background: #f8fafd;
+  transition: border-color 0.2s;
+}
+
+.checkout-card-element:focus-within {
+  border-color: #0B232E;
+}
+
+.checkout-error {
+  color: #e53e3e;
+  font-size: 0.88rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Pay button */
+
+.checkout-pay-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0B232E;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+
+.checkout-pay-btn:hover:not(:disabled) {
+  background: #03393C;
+  transform: translateY(-1px);
+}
+
+.checkout-pay-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.checkout-lock-icon {
+  font-size: 1em;
+  opacity: 0.85;
+}
+
+.checkout-btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkout-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: checkout-spin 0.7s linear infinite;
+}
+
+@keyframes checkout-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Security note */
+
+.checkout-secure-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Success state */
+
+.checkout-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.checkout-success-icon {
+  width: 56px;
+  height: 56px;
+  background: #0B232E;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.checkout-success-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0B232E;
+  margin: 0;
+}
+
+.checkout-success-sub {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+
+
+
+
+
+

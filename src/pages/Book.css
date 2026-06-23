@@ -1,0 +1,373 @@
+/* Wrapper per i dropdown sopra le card */
+.book-dropdowns-wrapper {
+  display: flex;
+  width: 95%;
+  max-width: 600px;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  margin-top: 12px;
+}
+.dropdown-orari-flex {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.dropdown-persone-fit {
+  flex: 0 0 auto;
+}
+/* Pagination dots sotto .book */
+.book-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  padding: 8px 12px;
+  /* margin-bottom: 250px; */
+  margin-top: -24px;
+  margin-bottom: 196px;
+}
+.book-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1716143f;
+  display: inline-block;
+  transition: background 0.3s, width 0.3s, height 0.3s;
+}
+.book-dot.active {
+  background: #171614;
+  width: 12px;
+  height: 12px;
+}
+.book-card-slide .boat-card-animate {
+  opacity: 0;
+  transform: translateX(-100vw);
+  transition:
+    opacity 0.15s cubic-bezier(0.4, 0, 1, 1),
+    transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+.book-card-slide .boat-card-animate.in {
+  opacity: 1;
+  transform: none;
+}
+.book.book-slide {
+  transform: translateX(-100vw);
+  opacity: 0;
+  transition:
+    opacity 0.3s cubic-bezier(0.4, 0, 1, 1),
+    transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+}
+.book.book-slide.in {
+  transform: none;
+  opacity: 1;
+}
+/* Wrapper per padding laterale dei filtri */
+.filters-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+/* Nascondi la navbar solo nella pagina Book */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Impedisce al padding di allargare i contenitori */
+}
+
+html, body {
+  background-color: #FFF1E0;
+  width: 100%;
+  overflow-x: hidden; /* Elimina lo scroll orizzontale */
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fbfaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra i figli diretti */
+}
+body.page-book {
+  background-color: #ffffff;
+  width: 100%;
+  overflow-x: hidden; /* Elimina lo scroll orizzontale */
+
+  min-height: 100vh;
+  min-height: -webkit-fill-available; 
+  
+  /* Aggiunge un micro-spazio sul fondo per evitare che il footer si incolli 
+     in modo rigido, costringendo il motore grafico di Safari a calcolare l'altezza */
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  
+  /* Abilita il rimbalzo elastico verticale nativo di iOS, che sveglia Safari */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cta {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: -1.5px;
+  text-align: left;
+  color: #000;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.available-days-label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row;
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+}
+
+.service h2,
+.guests h2 {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: -1px;
+  text-align: left;
+
+}
+
+.service h3 {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+.service .wrapper-option p {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -1px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.guests .option-wrapper p {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -1px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+.filters img[alt~="Chevron"] {
+  filter: brightness(0) invert(1);
+}
+
+
+
+
+
+.book {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 24px 12px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  scroll-snap-align: center;
+}
+
+.book.animating {
+  overflow-x: visible !important;
+  scroll-snap-type: none !important;
+}
+
+.book::-webkit-scrollbar {
+  display: none;
+}
+
+
+.book > .book-card-wrapper {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  /* Assicurati che le card abbiano una larghezza definita */
+}
+
+/* Animazione ingresso BoatCard */
+.boat-card-animate {
+  opacity: 0;
+  transform: translateX(100vw);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 1, 1), /* ease-in */
+    transform 0.7s cubic-bezier(0, 0, 0.2, 1); /* ease-out più veloce */
+  will-change: opacity, transform;
+}
+.boat-card-animate.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Centra il contenuto di .book solo su schermi non mobile */
+@media (min-width: 768px) {
+  .book {
+    justify-content: center;
+  }
+}
+
+/* Topbar back arrow for booking steps */
+.booking-topbar {
+  position: fixed;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  z-index: 60;
+}
+.booking-back-arrow {
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #031824;
+  border-radius: 24px;
+  border: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  cursor: pointer;
+  color: #fff;
+  padding: 0;
+}
+.booking-back-arrow svg {
+  display: block;
+}
+
+/* Confirmation screen styles */
+.booking-confirmation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+.confirmation-card {
+  background: linear-gradient(180deg, #072222 0%, #021515 100%);
+  color: #fff;
+  display: flex;
+  gap: 20px;
+  padding: 22px;
+  border-radius: 12px;
+  max-width: 820px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(2,8,10,0.6);
+  align-items: center;
+}
+.confirmation-boat-image {
+  width: 180px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: #000;
+}
+.confirmation-content h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.3rem;
+}
+.conf-boat-name {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+.conf-details {
+  margin: 0;
+  color: #dbeee6;
+}
+.conf-details strong { display:inline-block; width:70px; }
+.conf-actions { margin-top: 12px; }
+.conf-home-btn {
+  background: #00b37a;
+  color: #04221b;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.booking-footer-slide-wrapper {
+  /* Lo rendiamo fisso rispetto allo schermo, non alla pagina */
+  position: fixed; 
+  /* Lo ancoriamo esplicitamente a tutti e tre i lati inferiori */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+  background: #011010; 
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 0;
+  
+  /* Parte nascosto sotto lo schermo */
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.2s ease-in, visibility 0.2s;
+  
+  /* IMPORTANTE: Impedisce ai tocchi dentro il summary di muovere la pagina sotto */
+  touch-action: none; 
+}
+
+.booking-footer-slide-wrapper.visible {
+  visibility: visible;
+  /* L'animazione lo spara su, e 'forwards' lo blocca nella posizione finale dell'animazione (translateY(0)) */
+  animation: ios-dramatic-bounce 0.55s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+@keyframes ios-dramatic-bounce {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    /* Schizza verso l'alto superando nettamente la posizione finale */
+    transform: translateY(-25px);
+  }
+  75% {
+    /* Rimbalza verso il basso */
+    transform: translateY(8px);
+  }
+  100% {
+    /* Si blocca a zero */
+    transform: translateY(0);
+  }
+}

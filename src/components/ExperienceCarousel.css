@@ -1,0 +1,220 @@
+
+
+
+/* ==========================================================================
+   1. NAVBAR (GLASSMORPHISM & SAFARI COMPATIBLE)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   2. CONTENITORI CAROSELLO E BINARIO DI SCORRIMENTO
+   ========================================================================== */
+
+/* Contenitore esterno per dare respiro al carosello */
+.carousel-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 7rem;
+  background-color: #fbfaff;
+}
+
+/* Il carosello vero e proprio (il binario di scorrimento) */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;     
+  
+  /* Padding verticale a 25px per evitare che l'ombra delle card venga tagliata */
+  padding: 25px 16px;            
+  
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  
+  /* Stile per dispositivi touch */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+}
+
+/* Nasconde la barra di scorrimento su tutti i browser principali */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
+
+/* ==========================================================================
+   3. STRUTTURA DELLE CARD E EFFETTI DINAMICI (OPACITÀ E BLUR)
+   ========================================================================== */
+
+/* Il wrapper principale della singola tessera. 
+   Blocca la larghezza a 270px in modo consistente per evitare l'effetto elastico dei testi. */
+.carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 270px;            
+  width: 270px;               
+  height: fit-content;
+  overflow: visible;
+  
+  /* Di base le card non centrate sono parzialmente trasparenti */
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+/* Quando la card si blocca al centro grazie a React, torna visibile al 100% */
+.carousel-wrapper.is-visible {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* La slide interna configurata in perfetto rapporto 9:16 (Altezza calcolata = 480px) */
+.carousel-slide {
+  width: 100%;
+  height: fit-content;           
+  /* aspect-ratio: 9 / 16;        */
+  scroll-snap-align: center;      
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;            
+  overflow: visible;
+}
+
+/* Stile del blocco interno che racchiude l'immagine */
+.slide-content {
+  width: 100%;
+  height: 350px; 
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  
+  /* Ombra morbida ad alta precisione */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 
+              0 2px 8px rgba(0, 0, 0, 0.05);
+
+  /* Blur rimosso per performance */
+  transition: opacity 0.4s ease, box-shadow 0.3s ease;
+}
+
+/* Quando la card è attiva al centro, riportala opaca/visibile */
+.carousel-wrapper.is-visible .slide-content {
+  opacity: 1;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12),
+              0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Gestione dell'immagine interna */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             
+  border-radius: 0;
+  overflow: hidden;
+  display: block;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.carousel-wrapper.is-visible .slide-image {
+  animation: slowZoom 6s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+/* ==========================================================================
+   4. ANIMAZIONE TESTI (SLIDE DA SINISTRA + BLUR + DISSOLVENZA)
+   ========================================================================== */
+
+/* Stato iniziale nascosto per i testi delle card (blur rimosso) */
+.carousel-wrapper h2,
+.carousel-wrapper h3,
+.carousel-wrapper p {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none; 
+  /* Transizione fluida per l'entrata e l'uscita dei testi */
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* STATO ATTIVO: Quando la card va al centro, i testi si allineano e si sfuocano */
+.carousel-wrapper.is-visible h2,
+.carousel-wrapper.is-visible h3,
+.carousel-wrapper.is-visible p {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Effetto cascata: il paragrafo descrittivo entra con un leggero ritardo rispetto al titolo */
+.carousel-wrapper.is-visible p {
+  transition-delay: 0.1s;
+}
+
+/* ==========================================================================
+   5. TIPOGRAFIA (LOGICA DESIGN SYSTEM "SOFT MINIMALIST")
+   ========================================================================== */
+
+/* Titolo dell'esperienza allineato ai font importati */
+.carousel-wrapper h2,
+.carousel-wrapper h3 {
+  margin-left: 16px;
+  margin-right: 16px;         /* Margine destro di sicurezza per bloccare il testo nei 270px */
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-family: 'Fraunces', sans-serif;
+  font-weight: 500;              
+  font-style: italic;            
+  line-height: 24px;         
+  letter-spacing: -0.01em;       
+  text-align: left;          
+  color: #2a54c6;    
+  box-sizing: border-box;
+}
+
+.carousel-wrapper h3 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.anchor-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Descrizione dell'esperienza */
+.carousel-wrapper p {
+  margin-left: 16px;
+  margin-right: 16px;         /* Impedisce al testo di allargare la card */
+  margin-top: 0;
+  color: #3f6883;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  line-height: 22px;          /* Rapporto di lettura bilanciato per colonne strette */
+  letter-spacing: 0px;       
+  text-align: left;          
+  font-weight: 400;
+  box-sizing: border-box;      
+}

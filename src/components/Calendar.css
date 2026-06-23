@@ -1,0 +1,261 @@
+.calendar-cell.other-month {
+  cursor: pointer;
+  background: none;
+}
+
+.calendar-cell.other-month:hover .calendar-day-number.other-month {
+  background: #e0e0e0;
+  border-radius: 50%;
+}
+
+.calendar-day-number.other-month {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  color: #bfc5c7;
+  opacity: 0.7;
+}
+
+/* Footer sotto la griglia del calendario */
+.calendar-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 12px 0px 0px 8px;
+}
+
+.calendar-total-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.calendar-total-label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  color: #04363B;
+  opacity: 0.8;
+}
+
+.calendar-total-price {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  text-align: left;
+  font-weight: 500;
+  color: #04363B;
+}
+
+.calendar-select-boat-btn {
+  background: #011010;
+  color: #fff;
+  border: none;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 8px 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: -1px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+
+.calendar-select-boat-btn:disabled {
+  background: #bfc5c7;
+  color: #fff;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.calendar-select-boat-btn:hover {
+  background: #04363B;
+}
+
+.calendar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calendar {
+  width: 100%;
+  /* Azzera i margini: ora lo spazio lo gestisce il padding del padre */
+  margin: 0; 
+  background: #fbfaff;
+  /* Rimetti il border-radius completo a 28px così si arrotonda bene dentro la card! */
+  border-radius: 28px; 
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  box-sizing: border-box;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.calendar-month-label {
+  color: #031824;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -1.5px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.calendar-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  transition: background 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: #031824;
+  border-radius: 12px;
+}
+
+
+
+.calendar-chevron {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: #fff;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0.5rem;
+  min-height: 300px;
+}
+
+.calendar-day,
+.calendar-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem 0;
+  height: 40px;
+}
+
+.calendar-day {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #031824;
+  background: none;
+  border-radius: 4px;
+}
+
+.calendar-cell {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+  background: none;
+}
+
+.calendar-cell {
+  position: relative;
+}
+
+.calendar-cell.disabled {
+  cursor: not-allowed;
+  background: none;
+}
+
+.calendar-cell.selected {
+  background: none;
+}
+
+.calendar-cell.today {
+  border: 1px solid #007bff;
+}
+
+.calendar-cell:hover:not(.disabled):not(.selected) {
+  background: #e0e7ff;
+}
+
+.calendar-day-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.calendar-day-number.available {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: .5px;
+  color: #031824;
+  text-decoration: none;
+}
+
+.calendar-day-number.disabled {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 12px;
+  letter-spacing: .5px;
+  color: #848C8C;
+  text-decoration: line-through;
+}
+
+.calendar-day-number.selected {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 14px;
+  color: #EEEEEE;
+  background: #031824;
+  border-radius: 12px;
+}
+
+.discount-seal {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFD54F;
+  color: #4A2B00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  line-height: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}

@@ -1,0 +1,256 @@
+.navbar {
+  background: transparent;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  
+  /* Rimosso effetto sfocatura per performance */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.wrapper-navbar-logo {
+  width: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper-ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto; /* allow center area to grow but not overflow */
+  min-width: 0; /* prevent flex children from forcing overflow */
+}
+
+.wrapper-btn {
+  width: 120px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+/* Ensure logo and button keep their space and don't shrink */
+.wrapper-navbar-logo,
+.wrapper-btn {
+  flex: 0 0 auto;
+}
+
+.navbar-logo a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-logo a:hover {
+  color: #f0f0f0;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: center;
+  overflow-x: auto; /* allow horizontal scroll instead of forcing overflow */
+  white-space: nowrap; /* keep items on one line */
+  max-width: calc(100% - 260px); /* leave room for logo + button (120px + 120px + gaps) */
+}
+
+/* Ensure the horizontal menu doesn't force the booking button offscreen */
+.nav-menu {
+  flex: 1 1 auto;
+  min-width: 0; /* allow children to shrink */
+  justify-content: center;
+  overflow: hidden; /* hide overflowed menu items on very narrow screens */
+}
+
+.nav-item {
+  height: auto;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 0.6rem;
+  transition: color 0.3s ease;
+  font-family: var(--font-nav);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0%;
+  white-space: nowrap;
+}
+
+/* Il bottone Book Now (nav-booking) deve avere testo nero */
+.nav-booking {
+  background-color: rgb(231, 231, 231);
+  color: #111 !important;
+  padding: 8px 24px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #1a1a1a;
+}
+
+.nav-booking {
+  background-color: rgb(0, 0, 0);
+  padding: 8px 24px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+  font-size: 12px;
+}
+
+.nav-booking:hover {
+  background-color: #969696;
+}
+
+
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background-color: #000000;
+    list-style: none;
+    text-align: left;
+    padding: 20px 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  .nav-item {
+    height: auto;
+    line-height: normal;
+    padding: 12px 20px;
+    border-bottom: 1px solid #333;
+    justify-content: flex-start;
+  }
+
+  .nav-item:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link {
+  background: #ffffff;
+  color: #031824 !important;
+  border: none;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 8px 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  letter-spacing: -1px !important;
+  cursor: pointer !important;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  }
+
+  .nav-booking {
+    display: inline-block;
+  }
+
+  /* Restore button in normal flow on mobile */
+  .wrapper-btn {
+    position: static;
+    transform: none;
+    width: auto;
+    margin-left: 0;
+    z-index: auto;
+  }
+
+  .navbar-logo a {
+    font-size: 1.2rem;
+  }
+
+  .navbar-logo-img {
+    height: 35px;
+  }
+
+  .navbar-container {
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-container {
+    padding: 0 15px;
+  }
+
+  .navbar-logo a {
+    font-size: 1rem;
+    gap: 5px;
+  }
+
+  .navbar-logo-img {
+    height: 32px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .hamburger span {
+    width: 20px;
+    height: 2.5px;
+  }
+}

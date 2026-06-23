@@ -1,0 +1,66 @@
+.transfer-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #e2e8f0; /* Bordo sottile elegante */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-top: 24px;
+}
+
+.transfer-margin-bottom{
+  margin-bottom: 120px;
+}
+
+.transfer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.transfer-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a4a4a;
+  gap: 8px;
+}
+
+.transfer-section-pickup {
+  background: #f8fafc; /* Grigio chiarissimo molto elegante */
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 0;
+  border: 1px solid #edf2f7;
+}
+
+.transfer-pickup-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.transfer-pickup-buttons button {
+  flex: 1;
+  background: #ffffff;
+  color: #1e1e1e;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Stato attivo coerente con il tasto dorato del footer */
+.transfer-pickup-buttons button.active {
+  background: #ffda73;
+  color: #1e1e1e;
+  border-color: #ffda73;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(255, 218, 115, 0.2);
+}
