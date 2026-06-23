@@ -24,7 +24,7 @@ import maestrale from '../assets/maestrale.png';
 import allegra from '../assets/allegra.png';
 // Puoi aggiungere altre immagini se disponibili
 
-import './book.css';
+import './Book.css';
 
 function Book() {
   const [animate, setAnimate] = useState(false);
