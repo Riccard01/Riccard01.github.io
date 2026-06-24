@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './FleetSection.css';
 import leggera from "../assets/leggera.webp";
-import lucy from "../assets/lucy.webp";
+import francy from "../assets/francy.webp";
 
 export default function FleetSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,10 +23,10 @@ export default function FleetSection() {
     },
     {
       id: 2,
-      name: "Lucy",
+      name: "Francy",
       type: "Scafo Open Premium / Cabinato",
       description: "Elegante e versatile cabinato che unisce l'esclusività degli ampi spazi aperti alla praticità degli ambienti interni. Dispone di grandi aree prendisole sia a prua sia a poppa, ideali per gustare un aperitivo in totale comodità al tramonto. Sottocoperta offre una cabina con letto matrimoniale e servizi igienici completi.",
-      image: lucy,
+      image: francy,
       specs: [
         { label: "Lunghezza", value: "7.30 metri" },
         { label: "Portata Massima", value: "6 ospiti + skipper" },
