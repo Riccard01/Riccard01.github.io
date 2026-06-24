@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import './ReviewCarousel.css';
 
 // Importazione di tutti gli avatar reali degli ospiti
-import Florence from "../assets/florence.jpg";
-import Logan from "../assets/logan.jpg";
-import Linda from "../assets/linda.jpg";
-import Lana from "../assets/lana.jpg";
+import Florence from "../assets/florence.webp";
+import Logan from "../assets/logan.webp";
+import Linda from "../assets/linda.webp";
+import Lana from "../assets/lana.webp";
 
 export default function ReviewCarousel() {
   const [visibleReviewIndices, setVisibleReviewIndices] = useState({});

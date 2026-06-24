@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './PrivateTransfer.css';
-import Recco from '../assets/port-recco.jpeg';
-import Portoantico from '../assets/portoantico.jpeg';
-import Portofino from '../assets/portofino_extra_fee.jpg';
-import Camogli from '../assets/port-camogli.jpeg';
-import Nervi from '../assets/nervi.jpg'
-import Santa from '../assets/santa_margherita_ligure_extra_fee.jpg'
+import Recco from '../assets/port-recco.webp';
+import Portoantico from '../assets/portoantico.webp';
+import Portofino from '../assets/portofino_extra_fee.webp';
+import Camogli from '../assets/port-camogli.webp';
+import Nervi from '../assets/nervi.webp'
+import Santa from '../assets/santa_margherita_ligure_extra_fee.webp'
 
 
 const AVAILABLE_PORTS = [

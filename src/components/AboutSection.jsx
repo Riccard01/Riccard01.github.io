@@ -1,7 +1,7 @@
 
 import React from 'react';
 import './AboutSection.css';
-import Me from "../assets/me.jpg"; // La tua foto
+import Me from "../assets/me.webp"; // La tua foto
 
 export default function AboutSection() {
   return (

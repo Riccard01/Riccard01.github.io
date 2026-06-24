@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './FleetSection.css';
-import leggera from "../assets/leggera.jpeg";
-import lucy from "../assets/lucy.jpeg";
+import leggera from "../assets/leggera.webp";
+import lucy from "../assets/lucy.webp";
 
 export default function FleetSection() {
   const [activeIndex, setActiveIndex] = useState(0);

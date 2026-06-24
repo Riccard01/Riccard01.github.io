@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./ExperienceCarousel.css";
-import img1 from "../assets/aperitivo.jpg";
-import img2 from "../assets/dolphin.jpg";
-import img3 from "../assets/portofino.jpeg"; 
-import img4 from "../assets/paraggi.jpeg";
-import img6 from "../assets/sanfru.jpeg";
-import img7 from "../assets/puntachiappa.jpeg";
-import img8 from "../assets/stellamaris.jpg";
-import img9 from "../assets/camogli.jpeg";
+import img1 from "../assets/aperitivo.webp";
+import img2 from "../assets/dolphin.webp";
+import img3 from "../assets/portofino.webp"; 
+import img4 from "../assets/paraggi.webp";
+import img6 from "../assets/sanfru.webp";
+import img7 from "../assets/puntachiappa.webp";
+import img8 from "../assets/stellamaris.webp";
+import img9 from "../assets/camogli.webp";
 import img10 from "../assets/anchor.svg";
-import img11 from "../assets/fireworks.jpg";
+import img11 from "../assets/fireworks.webp";
 
 export default function ExperienceCarousel() {
   const carouselRef = useRef(null);

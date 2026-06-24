@@ -6,9 +6,9 @@ import { getBoatsWithAvailability, fetchCaptainsMonthAvailability } from '../uti
 
 import Navbar from '../components/Navbar';
 import Calendar from '../components/Calendar';
-import aperitivo from '../assets/aperitivo.jpg';
-import leggera from '../assets/leggera.png';
-import francy from '../assets/francy.png';
+import aperitivo from '../assets/aperitivo.webp';
+import leggera from '../assets/leggera.webp';
+import francy from '../assets/francy.webp';
 import '../App.css';
 import BoatCard from "../components/BoatCard";
 import DropDown from "../components/DropDown";

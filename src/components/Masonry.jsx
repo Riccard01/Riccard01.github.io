@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 import "./Masonry.css";
-import img1 from "../assets/florence.jpg";
-import img2 from "../assets/aperitivo.jpg";
-import img3 from "../assets/nonna.jpg";
-import img4 from "../assets/ok.jpg";
-import img5 from "../assets/sorso.jpg";
-import img6 from "../assets/thedad.jpg";
-import img7 from "../assets/yalla.jpg";
-import img8 from "../assets/tuffoo.jpg";
-import img9 from "../assets/tuffoo.jpg";
+import img1 from "../assets/florence.webp";
+import img2 from "../assets/aperitivo.webp";
+import img3 from "../assets/nonna.webp";
+import img4 from "../assets/ok.webp";
+import img5 from "../assets/sorso.webp";
+import img6 from "../assets/thedad.webp";
+import img7 from "../assets/yalla.webp";
+import img8 from "../assets/tuffoo.webp";
+import img9 from "../assets/tuffoo.webp";
 
 export default function Masonry() {
   const wrapperRef = useRef(null);
