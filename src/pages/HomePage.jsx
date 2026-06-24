@@ -72,7 +72,7 @@ function HomePage() {
         <div className="app-content">
           <span className="early-bird-chip">Early Bird 10% OFF</span>
           <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
-<p className="hero-subtitle">Una rotta, mille emozioni. Abbiamo selezionato le migliori attività da vivere, dagli amanti di storia, lusso o gruppi di famiglie: scopri la magia dei Due Golfi insieme a chi ami.</p>
+<p className="hero-subtitle">Una rotta, mille emozioni. Abbiamo selezionato le migliori attività da vivere, dalla storia al lusso. Perfetto per coppie e famiglie: scopri la magia dei Due Golfi insieme a chi ami.</p>
 </div>
       </section>
       

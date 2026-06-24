@@ -8,7 +8,7 @@ const faqData = [
   {
     id: "ports",
     question: "Da quali porti partono i tour?",
-    answer: "I nostri tour partono principalmente dai porti principali della costa: Genova, Nervi, Camogli, S. Margherita, Portofino, Rapallo."
+    answer: "I nostri tour partono dai principali porti della costa: Genova (Porto Antico), Nervi, Recco, Camogli, S. Margherita, Portofino, Rapallo."
   },
   {
     id: "cancellation",
