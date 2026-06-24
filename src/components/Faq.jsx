@@ -28,7 +28,7 @@ const faqData = [
   {
     id: "what-is-included",
     question: "Cosa è incluso nel tour?",
-    answer: "A bordo troverete diverse amenità, tra cui asciugamani puliti, snack, bevande fresche, musica e attrezzatura da snorkeling. I pasti non sono inclusi ma siete liberi di portare i vostri!."
+    answer: "A bordo troverete diverse amenità, tra cui asciugamani puliti, snack, bevande fresche, musica e attrezzatura da snorkeling. I pasti non sono inclusi ma siete liberi di portare i vostri!. La benzina è inclusa, zero sorprese extra!"
   },
   {
     id: "are-animals-allowed",
