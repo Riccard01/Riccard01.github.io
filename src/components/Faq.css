@@ -1,9 +1,17 @@
+/* 💻 MEDIA QUERY PER DESKTOP (Sopra i 768px di larghezza) */
+@media (min-width: 769px) {
+  .faq-section {
+    /* Si attiva solo sugli schermi grandi */
+    padding: 80px 300px;
+  }
+}
+
 .faq-section {
+  padding: 60px 20px;
+  max-width: 800px;
   margin: 0 auto;
   font-family: sans-serif;
   background-color: #e1e7eb;
-  padding: 80px 300px;
-  width: 100%;
 }
 
 span {
