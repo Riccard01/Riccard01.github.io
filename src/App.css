@@ -1,0 +1,66 @@
+/* Di default su Mobile il blocco non esiste */
+#desktop-blocker {
+  display: none;
+}
+
+/* 💻 Si attiva solo da Desktop */
+@media (min-width: 769px) {
+  
+  /* Nasconde tutto il resto dentro l'app */
+  #root > *:not(#desktop-blocker) {
+    display: none !important;
+  }
+
+  /* La schermata di blocco con il tuo off-white di sfondo */
+  #desktop-blocker {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fcfbf9; /* L'off-white morbido */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 999999;
+  }
+
+  .blocker-content {
+    max-width: 500px;
+    text-align: center;
+  }
+
+  /* Stile Titolo - Preso dal tuo .faq-title */
+  .blocker-title {
+    font-family: 'Fraunces', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #031824;
+    font-style: italic;
+    letter-spacing: -1px;
+    line-height: 40px;
+    margin: 0 0 20px 0;
+  }
+
+  /* Stile Descrizione - Preso dal tuo .faq-answer p */
+  .blocker-desc {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #2c3e49;
+    margin: 0 0 24px 0;
+  }
+
+  /* Stile Azione F12 - Preso dal tuo span */
+  .blocker-action {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #031824;
+    display: inline-block;
+  }
+}
