@@ -1,9 +1,9 @@
 .faq-section {
-  padding: 60px 20px;
-  max-width: 800px;
   margin: 0 auto;
   font-family: sans-serif;
   background-color: #e1e7eb;
+  padding: 80px 300px;
+  width: 100%;
 }
 
 span {
