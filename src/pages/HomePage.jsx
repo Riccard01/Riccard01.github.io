@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import florence from '../assets/florence.webp';
-import homepageprova from "../assets/homepageprova.webp";
+import homepageprova from "../assets/homepageprova.webm";
 import aperitivo from '../assets/aperitivo.webp';
 import transfer from '../assets/private-transfer.webp';
 import './HomePage.css';
@@ -67,8 +67,7 @@ function HomePage() {
     <>
       <Navbar />
       <section className="hero-section">
-        <img src={homepageprova} alt="Homepage Prova" className="hero-image" />
-        <div className="hero-gradient"></div>
+<video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />        <div className="hero-gradient"></div>
         <div className="app-content">
           <span className="early-bird-chip">Early Bird 10% OFF</span>
           <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
