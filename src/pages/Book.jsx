@@ -37,14 +37,14 @@ function Book() {
 
   const [selectedTime, setSelectedTime] = useState(initialTimeOptions[0]);
   const [timeOptions, setTimeOptions] = useState(initialTimeOptions);
-  const [selectedPeople, setSelectedPeople] = useState("4 persone");
-  // Stato per visibilità transfer
+  const [selectedPeople, setSelectedPeople] = useState("4 people");
+  // State for transfer visibility
   const [showTransfer, setShowTransfer] = useState(false);
-  // Stato per visibilità form
+  // State for form visibility
   const [showForm, setShowForm] = useState(false);
-  // Stato per pagamento confermato
+  // State for payment confirmed
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
-  // Stato per Transfer Imbarco (popolato dai dati in `variables/places`)
+  // State for Transfer Embark (populated from data in `variables/places`)
   const initialPlacesMap = getPlaces();
   const fallbackEmbarkOptions = [];
   const initialEmbarkOptions = (initialPlacesMap && Object.keys(initialPlacesMap).length)
@@ -58,7 +58,7 @@ function Book() {
   const [embarkOptions, setEmbarkOptions] = useState(initialEmbarkOptions);
   const [selectedEmbark, setSelectedEmbark] = useState(portoName || initialEmbarkOptions[0] || "");
   const [arrangePickup, setArrangePickup] = useState(false);
-  // Stato per Transfer Sbarco
+  // State for Transfer Disembark
   const [selectedDisembark, setSelectedDisembark] = useState(portoName || initialEmbarkOptions[0] || "");
   const [arrangeDropoff, setArrangeDropoff] = useState(false);
 
@@ -86,11 +86,11 @@ function Book() {
     }).catch(err => console.error('placesReady rejected', err));
     return () => { mounted = false; };
   }, []);
-  // Stato per giorno selezionato per ogni barca visibile
+  // State for selected day for each visible boat
   const [selectedDates, setSelectedDates] = useState([null, null, null, null]);
   const bookRef = useRef(null);
   useEffect(() => {
-    // Attiva animazione dopo il mount
+    // Activate animation after mount
     const timeout = setTimeout(() => setAnimate(true), 50);
     return () => clearTimeout(timeout);
   }, []);
@@ -101,7 +101,7 @@ function Book() {
     return () => { document.body.classList.remove('page-book'); };
   }, []);
 
-// Sincronizza il tema di Safari e lo sfondo del body con l'apertura del Summary
+// Sync Safari theme and body background with Summary opening
   useEffect(() => {
     let metaTheme = document.querySelector('meta[name="theme-color"]');
     if (!metaTheme) {
@@ -110,27 +110,27 @@ function Book() {
       document.head.appendChild(metaTheme);
     }
 
-    // Controlla se c'è una data selezionata per la barca attiva (Summary visibile)
+    // Check if there's a selected date for the active boat (Summary visible)
     const isSummaryVisible = !!selectedDates[activeIndex];
 
     if (isSummaryVisible) {
-      // Quando il summary APPARE: tutto blu luxury
+      // When the summary APPEARS: all luxury blue
       metaTheme.setAttribute('content', '#031824'); 
       document.body.style.backgroundColor = '#031824';
     } else {
-      // Quando il summary SCOMPARE: ripristina i colori scuri di base
+      // When the summary DISAPPEARS: restore base dark colors
       metaTheme.setAttribute('content', '#FBFAFF'); 
       document.body.style.backgroundColor = '#FBFAFF'; 
     }
 
-    // Sicurezza: se l'utente esce dalla pagina, resetta tutto
+    // Safety: if the user leaves the page, reset everything
     return () => {
       if (metaTheme) metaTheme.setAttribute('content', '#FBFAFF');
       document.body.style.backgroundColor = '';
     };
   }, [selectedDates, activeIndex]);
 
-  // INCOLLA QUESTO QUI PER SAFARI:
+  // PASTE THIS HERE FOR SAFARI:
   useEffect(() => {
     let metaTheme = document.querySelector('meta[name="theme-color"]');
     if (!metaTheme) {
@@ -138,10 +138,10 @@ function Book() {
       metaTheme.setAttribute('name', 'theme-color');
       document.head.appendChild(metaTheme);
     }
-    // Imposta il blu luxury all'ingresso (metti il tuo hex preferito)
+    // Set luxury blue on entry (change to your preferred hex)
     metaTheme.setAttribute('content', '#0a2540'); 
 
-    // Ripristina il colore scuro quando esci dalla pagina Book
+    // Restore dark color when exiting the Book page
     return () => {
       if (metaTheme) metaTheme.setAttribute('content', '#011010');
     };
@@ -186,7 +186,7 @@ function Book() {
     return () => { mounted = false; };
   }, []);
 
-  // Gestione paginazione: aggiorna l'indice attivo in base allo scroll
+  // Pagination handling: update active index based on scroll
   useEffect(() => {
     const el = bookRef.current;
     if (!el) return;
@@ -639,9 +639,9 @@ function Book() {
                 </div>
                 <div className="dropdown-persone-fit">
                   <DropDown
-                    text="Persone"
+                    text="Guests"
                     value={selectedPeople}
-                    options={["1 persona", "2 persone", "3 persone", "4 persone", "5 persone", "6 persone", "7 persone"]}
+                    options={["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"]}
                     onChange={setSelectedPeople}
                     width="fit-content"
                   />
@@ -755,8 +755,8 @@ function Book() {
                   />
                 ))}
               </div>
-{/* MOSTRA IL FOOTER CON IL SUMMARY SOLO SE IL GIORNO È SELEZIONATO */}
-{/* WRAPPER CON ANIMAZIONE TENDINA */}
+{/* SHOW THE FOOTER WITH SUMMARY ONLY IF DAY IS SELECTED */}
+{/* WRAPPER WITH SLIDEDOWN ANIMATION */}
               <div className={`booking-footer-slide-wrapper ${selectedDates[activeIndex] ? 'visible' : ''}`}>
                 <BookingFooter
                   total={computedTotalStr}

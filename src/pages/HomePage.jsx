@@ -17,12 +17,12 @@ import PrivateTransfer from '../components/PrivateTransfer';
 
 function HomePage() {
   const [isVisibleExperiences, setIsVisibleExperiences] = useState(false);
-  // Nuovo stato per gestire il caricamento differito del video
+  // New state to handle deferred video loading
   const [videoSrc, setVideoSrc] = useState(null);
   const experiencesRef = useRef(null);
 
   useEffect(() => {
-    // 1. Logica esistente per l'IntersectionObserver
+    // 1. Existing logic for IntersectionObserver
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -35,7 +35,7 @@ function HomePage() {
       observer.observe(experiencesRef.current);
     }
 
-    // 2. Logica per caricare il video SOLO dopo che il sito è pronto
+    // 2. Logic to load the video ONLY after the site is ready
     const handlePageLoad = () => {
       setTimeout(() => {
         setVideoSrc(gourmet);
@@ -48,7 +48,7 @@ function HomePage() {
       window.addEventListener('load', handlePageLoad);
     }
 
-    // Pulizia di Observer ed Event Listener allo smontaggio
+    // Cleanup of Observer and Event Listener on unmount
     return () => {
       if (experiencesRef.current) {
         observer.unobserve(experiencesRef.current);
@@ -72,7 +72,7 @@ function HomePage() {
         <div className="app-content">
           <span className="early-bird-chip">Early Bird 10% OFF</span>
           <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
-<p className="hero-subtitle">Una rotta, mille emozioni. Abbiamo selezionato le migliori attività da vivere, dalla storia al lusso. Perfetto per coppie e famiglie: scopri la magia dei Due Golfi insieme a chi ami.</p>
+<p className="hero-subtitle">One route, a thousand emotions. Explore the gems of the Two Gulfs or taste the local Aperitivo.</p>
 </div>
       </section>
       

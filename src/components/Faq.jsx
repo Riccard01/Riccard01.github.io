@@ -7,38 +7,38 @@ import "./Faq.css";
 const faqData = [
   {
     id: "ports",
-    question: "Da quali porti partono i tour?",
-    answer: "I nostri tour partono dai principali porti della costa: Genova (Porto Antico), Nervi, Recco, Camogli, S. Margherita, Portofino, Rapallo."
+    question: "Which ports do the tours depart from?",
+    answer: "Our tours depart from the main ports on the coast: Genoa (Porto Antico), Nervi, Recco, Camogli, S. Margherita, Portofino, Rapallo."
   },
   {
     id: "cancellation",
-    question: "Qual è la politica di cancellazione?",
-    answer: "È possibile cancellare gratuitamente fino a 72 ore prima della partenza. Per cancellazioni successive a tale termine, non è previsto il rimborso."
+    question: "What is the cancellation policy?",
+    answer: "You can cancel for free up to 72 hours before departure. For cancellations after that deadline, no refund is provided."
   },
   {
     id: "weather",
-    question: "Cosa succede in caso di maltempo?",
-    answer: "In caso di condizioni meteo avverse che impediscono la navigazione in sicurezza, il tour verrà posticipato o, se non trovi un'altra data disponibile, verrai rimborsato al 100%."
+    question: "What happens in case of bad weather?",
+    answer: "In case of adverse weather conditions that prevent safe navigation, the tour will be postponed or, if you don't find another available date, you will be refunded 100%."
   },
   {
     id: "what-to-bring",
-    question: "Cosa è consigliato portare a bordo?",
-    answer: "Consigliamo di portare acqua, crema solare, costume da bagno, un telo mare e occhiali da sole. A bordo ti forniremo acqua, asciugamani ed attrezzatura da snorkeling. Restate Leggeri!"
+    question: "What is recommended to bring on board?",
+    answer: "We recommend bringing water, sunscreen, swimsuit, a beach towel, and sunglasses. We'll provide water, towels, and snorkeling equipment on board. Stay Light!"
   },
   {
     id: "what-is-included",
-    question: "Cosa è incluso nel tour?",
-    answer: "A bordo troverete diverse amenità, tra cui asciugamani puliti, snack, bevande fresche, musica e attrezzatura da snorkeling. I pasti non sono inclusi ma siete liberi di portare i vostri!. La benzina è inclusa, zero sorprese extra!"
+    question: "What is included in the tour?",
+    answer: "You'll find various amenities on board, including clean towels, snacks, fresh beverages, music, and snorkeling equipment. Meals are not included but you're welcome to bring your own! Fuel is included, zero surprise charges!"
   },
   {
     id: "are-animals-allowed",
-    question: "Gli animali domestici sono ammessi a bordo?",
-    answer: "Sì, siamo molto felici di ospitare i vostri amici a due o quattro zampe, ma devono essere tenuti sotto controllo costante."
+    question: "Are pets allowed on board?",
+    answer: "Yes, we're very happy to welcome your furry friends, but they must be kept under constant supervision."
   },
   {
     id: "is-boat-safe",
-    question: "La barca è sicura?",
-    answer: "Sì, la nostra flotta è costituita da barche ben manutenute, con tutti i necessari dispositivi di sicurezza a bordo, sia obbligatori che facoltativi."
+    question: "Is the boat safe?",
+    answer: "Yes, our fleet consists of well-maintained boats with all necessary safety devices on board, both mandatory and optional."
   }
 ];
 
@@ -48,15 +48,15 @@ export default function Faq() {
 
   const toggleFaq = (index) => {
     if (activeIndex === index) {
-      setActiveIndex(null); // Se è già aperta, la chiude
+      setActiveIndex(null); // If already open, close it
     } else {
-      setActiveIndex(index); // Altrimenti apre quella selezionata
+      setActiveIndex(index); // Otherwise open the selected one
     }
   };
 
   return (
     <section className="faq-section" id="faq">
-      <h2 className="faq-title">Domande Frequenti (FAQ)</h2>
+      <h2 className="faq-title">Frequently Asked Questions (FAQ)</h2>
       <div className="faq-container">
         {faqData.map((item, index) => {
           const isOpen = activeIndex === index;

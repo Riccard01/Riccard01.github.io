@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <>
-      {/* Schermata di blocco totalmente indipendente */}
+      {/* Completely independent blocking screen */}
       <div id="desktop-blocker">
         <div className="blocker-content">
           <h1 className="blocker-title">Mobile view required</h1>

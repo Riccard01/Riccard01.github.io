@@ -3,15 +3,15 @@ import "./Transfer.css";
 import DropDown from "./DropDown";
 
 // Props:
-// - embarkOptions: array di stringhe per il dropdown imbarco
-// - selectedEmbark: valore selezionato
-// - onEmbarkChange: funzione di callback per cambio imbarco
-// - arrangePickup: booleano per pickup
-// - onPickupChange: funzione di callback per cambio pickup
-// - embarkLabel: testo per label imbarco
-// - pickupLabel: testo per label pickup
+// - embarkOptions: array of strings for embark dropdown
+// - selectedEmbark: selected value
+// - onEmbarkChange: callback function for embark change
+// - arrangePickup: boolean for pickup
+// - onPickupChange: callback function for pickup change
+// - embarkLabel: text for embark label
+// - pickupLabel: text for pickup label
 //
-// Icone: usa emoji come placeholder, sostituibili con svg
+// Icons: use emoji as placeholder, replaceable with svg
 
 const Transfer = ({
   embarkOptions = [],
@@ -19,7 +19,7 @@ const Transfer = ({
   onEmbarkChange = () => {},
   arrangePickup = false,
   onPickupChange = () => {},
-  embarkLabel = "Imbarco",
+  embarkLabel = "Embark",
   pickupLabel = "Arrange Pickup?",
   className = ""
 }) => {

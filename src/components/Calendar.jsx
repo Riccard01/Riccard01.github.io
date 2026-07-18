@@ -85,7 +85,7 @@ export default function Calendar({ onDateSelect, onSelectBoat, selectedDate, onM
 				key={"prev-" + day}
 				className="calendar-cell other-month"
 				onClick={() => {
-					// Sposta al mese precedente e seleziona il giorno
+					// Move to previous month and select the day
 					const newMonth = prevMonth;
 					const newYear = prevYear;
 					setCurrentMonth(newMonth);

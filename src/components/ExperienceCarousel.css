@@ -182,9 +182,10 @@
   margin-top: 0;
   margin-bottom: 6px;
   font-family: 'Fraunces', sans-serif;
-  font-weight: 500;              
+  font-weight: 500;     
+  font-size: 24px;         
   font-style: italic;            
-  line-height: 24px;         
+  line-height: 32px;         
   letter-spacing: -0.01em;       
   text-align: left;          
   color: #2a54c6;    
@@ -217,4 +218,45 @@
   text-align: left;          
   font-weight: 400;
   box-sizing: border-box;      
+}
+
+/* Aggiungi queste regole al tuo file CSS */
+
+/* Il contenitore che raggruppa titolo, durata e descrizione */
+.text-content-wrapper {
+  opacity: 0;            /* Inizialmente invisibile */
+  transform: translateY(20px); /* Leggermente spostato verso il basso */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform; /* Ottimizzazione per le animazioni */
+}
+
+/* Quando la card .carousel-wrapper ha anche la classe .is-visible */
+.carousel-wrapper.is-visible .text-content-wrapper {
+  opacity: 1;            /* Diventa visibile */
+  transform: translateY(0); /* Torna alla posizione originale */
+}
+
+/* Opzionale: Aggiungi un leggero ritardo per l'immagine (se vuoi un effetto più sofisticato) */
+.carousel-slide {
+  transition: transform 0.5s ease-out;
+}
+
+.carousel-wrapper.is-visible .carousel-slide {
+  transform: scale(1); /* Esempio: l'immagine scala leggermente se rimpicciolita prima */
+}
+
+/* --- Stili esistenti per titolo e durata (confermati) --- */
+.title-container {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 15px 0 10px 0;
+}
+
+.duration-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
 }

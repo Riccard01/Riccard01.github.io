@@ -1,26 +1,20 @@
-/* ==========================================================================
-   FLEET CAROUSEL (HORIZONTAL MINIMALIST DESIGN)
-   ========================================================================== */
-
 .fleet-section {
   width: 100%;
   background-color: #fbfaff;
-  padding: 10px 0;
+  padding: 60px 20px;
   box-sizing: border-box;
 }
 
 .fleet-header {
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 20px auto;
-  padding: 0 20px;
+  margin: 0 auto 50px auto;
 }
 
 .fleet-header h2 {
   font-family: 'Fraunces', serif;
-  font-size: 1.85rem;
+  font-size: 2rem;
   font-weight: 400;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #1e293b;
   margin: 0;
@@ -35,84 +29,34 @@
 
 .fleet-subtitle {
   font-family: 'Work Sans', sans-serif;
-  font-size: 0.95rem;
   color: #64748b;
-  line-height: 1.6;
-  padding-top: 8px;
-  margin: 0;
 }
 
-/* Container del Carosello */
-.fleet-carousel-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.fleet-carousel {
+/* Layout Verticale */
+.fleet-list-container {
   display: flex;
-  overflow-x: auto;
-  gap: 32px;
-  padding: 40px 24px;
-  
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Nascondiamo la scrollbar nativa */
-.fleet-carousel::-webkit-scrollbar {
-  display: none;
-}
-.fleet-carousel {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
-}
-
-.boat-carousel-wrapper {
-  flex: 0 0 680px;
-  width: 680px;
-  scroll-snap-align: center;
-  box-sizing: border-box;
-  transition: opacity 0.4s ease, transform 0.4s ease; /* Transizione lineare e morbida */
-  opacity: 0.35; /* Abbassata leggermente per accentuare il focus sulla card attiva */
-  transform: scale(0.96);
-}
-
-.boat-carousel-wrapper.is-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Struttura interna della Card (Immagine sopra, contenuto sotto) */
-.boat-card-slide {
+.boat-card-wrapper {
   background: #ffffff;
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid #f1f5f9;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-.boat-carousel-wrapper.is-active .boat-card-slide {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-}
-
-/* Contenitore Foto */
 .boat-image-container {
-  width: 100%;
-  aspect-ratio: 16 / 9; /* Taglio cinematografico widescreen */
   position: relative;
-  overflow: hidden;
+  width: 100%;
 }
 
-/* OBJECT-FIT COVER RIGOROSO */
 .boat-carousel-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -121,110 +65,31 @@
   top: 20px;
   left: 20px;
   background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
   padding: 6px 14px;
   border-radius: 30px;
-  font-family: 'Work Sans', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: #1e293b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Area Testi e Tabelle */
-.boat-content-container {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-}
+.boat-content-container { padding: 32px; }
 
 .boat-content-container h3 {
   font-family: 'Fraunces', serif;
   font-size: 1.6rem;
   color: #1e293b;
   margin: 0 0 12px 0;
-  font-weight: 500;
 }
 
 .boat-carousel-description {
   font-family: 'Work Sans', sans-serif;
-  font-size: 0.9rem;
-  color: #475569;
-  line-height: 1.6;
+  color: #2d3748;
+  line-height: 1.7;
   margin: 0 0 24px 0;
-  font-weight: 300;
 }
 
-/* Tabella Specifiche Tecnica Mini */
-.boat-specs-mini {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid #f1f5f9;
-}
-
-.spec-mini-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 11px 0;
-  border-bottom: 1px solid #f8fafc;
-}
-
-.spec-mini-label {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #1e293b;
-}
-
-.spec-mini-value {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 0.8rem;
-  color: #64748b;
-}
-
-/* Paginazione Dots */
-.fleet-carousel-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.fleet-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #cbd5e1;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.fleet-dot.is-active {
-  width: 20px;
-  border-radius: 4px;
-  background-color: #2a54c6;
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN (MOBILE ADAPTATION)
-   ========================================================================== */
-
-@media (max-width: 768px) {
-  .boat-carousel-wrapper {
-    flex: 0 0 88vw; /* Su mobile prende l'88% della larghezza schermo */
-    width: 88vw;
-  }
-  
-  .boat-content-container {
-    padding: 20px;
-  }
-  
-  .boat-content-container h3 {
-    font-size: 1.35rem;
-  }
-}
+.boat-specs-mini { border-top: 1px solid #f1f5f9; padding-top: 20px; }
+.spec-mini-row { display: flex; justify-content: space-between; padding: 6px 0; }
+.spec-mini-label { font-weight: 600; color: #1e293b; font-size: 0.8rem; }
+.spec-mini-value { color: #64748b; font-size: 0.8rem; }

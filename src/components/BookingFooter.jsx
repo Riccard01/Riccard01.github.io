@@ -72,7 +72,7 @@ export default function BookingFooter({
       <div className="booking-summary-list">
         <div className="summary-card-horizontal">
           
-          {/* IMMAGINE CON CHIP ASSOLUTA IN BASSO */}
+          {/* IMAGE WITH CHIP ABSOLUTE AT BOTTOM */}
           <div key={boatImage || "placeholder"} className="anim-scale summary-image-container">
             <div className="summary-boat-image-wrapper">
               {boatImage ? (
@@ -82,7 +82,7 @@ export default function BookingFooter({
               )}
             </div>
 
-            {/* Chip guests con icona check e solo il numero */}
+            {/* Guests chip with check icon and number only */}
             {selectedGuests && selectedGuests !== "Select guests" && (
               <div className="guests-badge-chip">
                 <img src={checkIcon} alt="Check" className="chip-check-icon" />
@@ -91,10 +91,10 @@ export default function BookingFooter({
             )}
           </div>
 
-          {/* WRAPPER CON LE RIGHE SUDDIVISE PER SCHERMATA */}
+          {/* WRAPPER WITH ROWS DIVIDED BY SCREEN */}
           <div className="summary-card-info-wrapper">
             
-            {/* RIGA 1: Data (Sempre visibile) */}
+            {/* ROW 1: Date (Always visible) */}
             <div className="summary-card-row-one">
               {selectedDate && selectedDate !== "Select date on calendar" ? (
                 <span key={selectedDate} className="anim-fade highlight-data">
@@ -105,17 +105,17 @@ export default function BookingFooter({
               )}
             </div>
 
-            {/* RIGA 2: Slot (Sempre visibile) */}
+            {/* ROW 2: Slot (Always visible) */}
             <div className="summary-card-row-two">
               <span key={selectedSlot} className="anim-fade highlight-data slot-highlight">
                 {selectedBoatName ? selectedSlot : "Selecting experience..."}
               </span>
             </div>
 
-            {/* LE RIGHE 3 E 4 APPARIONO SOLO NELLA SCHERMATA TRANSFER */}
+            {/* ROWS 3 AND 4 ONLY APPEAR IN TRANSFER SCREEN */}
             {showTransferButton && (
               <>
-                {/* RIGA 3: Porti di Imbarco e Sbarco */}
+                {/* ROW 3: Embark and Disembark Ports */}
                 <div className="summary-card-row-three anim-fade">
                   <span className="connector-text">Port: </span>
                   <span key={whereText} className="highlight-data truncate-text">
@@ -123,7 +123,7 @@ export default function BookingFooter({
                   </span>
                 </div>
 
-                {/* RIGA 4: Private Transfer con indicatore grigio a sinistra */}
+                {/* ROW 4: Private Transfer with gray indicator on the left */}
                 <div className="summary-card-row-four anim-fade">
                   <span className="connector-text" style={{ color: 'rgba(255, 255, 255, 0.35)' }}>
                     Private Transfer: 
@@ -155,9 +155,9 @@ export default function BookingFooter({
           </div>
         </div>
 
-        {/* LOGICA BOTTONI INVERTITA E MODIFICATA QUI */}
+        {/* BUTTON LOGIC INVERTED AND MODIFIED HERE */}
         <div className="booking-footer-buttons-block">
-          {/* PRIMA SCHERMATA: Bottone Continua (Giallo/Oro) */}
+          {/* FIRST SCREEN: Continue Button (Yellow/Gold) */}
           {!showTransferButton && showButton && (
             <button 
               className="booking-footer-btn standard-btn" 
@@ -168,7 +168,7 @@ export default function BookingFooter({
             </button>
           )}
 
-          {/* SCHERMATA TRANSFER: Bottone Checkout (Bianco) */}
+          {/* TRANSFER SCREEN: Checkout Button (White) */}
           {showTransferButton && (
             <button 
               className="booking-footer-btn checkout-btn" 

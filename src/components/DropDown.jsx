@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import "./DropDown.css";
 
 export default function DropDown({
-  text = "Seleziona",
+  text = "Select",
   options = [],
   value = null,
   onChange = () => {},
-  width = "fit-content", // accetta anche "100%", "50%", ecc.
+  width = "fit-content", // accepts also "100%", "50%", etc.
 }) {
 
 

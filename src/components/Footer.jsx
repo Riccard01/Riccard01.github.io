@@ -25,17 +25,17 @@ export default function Footer() {
 
       <div className="footer-legal">
         <p className="legal-company">
-          <strong>Leggero Tours</strong> di Bottiglieri Riccardo
+          <strong>Leggero Tours</strong> by Bottiglieri Riccardo
         </p>
         <p className="legal-info">
-          Sede Legale: Genova (GE) — Operativi a Genova e Portofino <br />
-          P.IVA: 03030880995 | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>
+          Headquarters: Genoa (GE) — Operating in Genoa and Portofino <br />
+          Tax ID: 03030880995 | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>
         </p>
         <p className="legal-tax-note">
-          Prestazione svolta in regime forfettario ai sensi dell’art. 1, commi da 54 a 89, della legge n. 190/2014 e successive modifiche, e pertanto non soggetta a IVA.
+          Service provided under the flat-rate regime under article 1, paragraphs 54 to 89 of Law No. 190/2014 and subsequent amendments, and therefore not subject to VAT.
         </p>
         <p className="legal-copyright">
-          © 2026 Leggero Tours. Tutti i diritti riservati.
+          © 2026 Leggero Tours. All rights reserved.
         </p>
       </div>
     </footer>

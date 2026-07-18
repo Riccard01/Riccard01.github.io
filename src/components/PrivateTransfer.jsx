@@ -145,9 +145,9 @@ export default function PrivateTransfer() {
         <div className="private-transfer-content">
           <h2 className="private-transfer-title">Easy transport</h2>
           <p className="private-transfer-subtitle">
-            I nostri tour partono dai principali porti dei due golfi, con la possibilità di includere un servizio di trasferimento privato.
-            Organizza la tua esperienza ideale direttamente dal nostro form interattivo.
-            In base alle tue esigenze logistiche, selezioneremo automaticamente il veicolo più adatto tra la nostra flotta:
+            Our tours depart from the main ports of the two gulfs, with the option to include a private transfer service.
+            Organize your ideal experience directly from our interactive form.
+            Based on your logistical needs, we will automatically select the most suitable vehicle from our fleet:
           </p>
           
           <ul className="fleet-list">
@@ -159,10 +159,10 @@ export default function PrivateTransfer() {
           </ul>
         </div>
 
-        {/* Intestazione Sezione Carosello */}
+        {/* Carousel Header */}
         <div className="carousel-header">
-          <h3 className="carousel-section-title">I nostri porti di partenza:</h3>
-          <p className="carousel-section-hint">È possibile scegliere un punto di partenza e ritorno personalizzato.</p>
+          <h3 className="carousel-section-title">Our departure ports:</h3>
+          <p className="carousel-section-hint">You can choose a custom departure and return point.</p>
         </div>
       </div>
 

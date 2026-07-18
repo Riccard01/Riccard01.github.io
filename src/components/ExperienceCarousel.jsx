@@ -1,39 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./ExperienceCarousel.css";
 import img1 from "../assets/aperitivo.webp";
-import img2 from "../assets/dolphin.webp";
-import img3 from "../assets/portofino.webp"; 
-import img4 from "../assets/paraggi.webp";
 import img6 from "../assets/sanfru.webp";
-import img7 from "../assets/puntachiappa.webp";
-import img8 from "../assets/stellamaris.webp";
-import img9 from "../assets/camogli.webp";
-import img10 from "../assets/anchor.svg";
-import img11 from "../assets/fireworks.webp";
 
 export default function ExperienceCarousel() {
   const carouselRef = useRef(null);
   const [visibleIndices, setVisibleIndices] = useState({});
 
-  // INDICE PER IL CENTRAGGIO: 0 è il primo, 1 è il secondo, ecc.
-  // Se vuoi che la seconda card (Breakfast) sia centrata al caricamento:
-  const initialCenterIndex = 1; 
-  
+  const initialCenterIndex = 1;
   const initialScrollDuration = 200;
   const easeInPower = 4;
   const easeOutPower = 400;
 
-  // ORDINE DEFINITO: Snorkeling e Breakfast sono ora i primi due
   const experiences = [
-    { id: '5', img: img6, title: 'Snorkeling in San Fruttuoso', desc: "Ammira dal mare la maestosa Abbazia millenaria incastonata nella roccia, in una baia magica accessibile solo via mare o a piedi. Poi, indossa maschera e pinne e tuffati per nuotare sopra l'iconica statua sommersa del Cristo degli Abissi, circondato dalla natura selvaggia del monte ed un fondale ricco di vita marina!" },
-    { id: '9', img: img9, title: 'Breakfast in Camogli', desc: "Inizia la giornata nel cuore del borgo marinaro. Sbarca a terra per esplorare i vicoli e fare colazione tra i caffè storici, oppure rimani a bordo ad ammirare le case colorate direttamente dalla rada, cullato dal mare del mattino." },
-    { id: '1', img: img2, title: 'Dancing Dolphins', desc: "Naviga verso il largo alla ricerca dei cetacei nel cuore del Santuario Pelagos. Sai riconoscere una Stenella Striata da un Tursiope?" },
-    { id: '2', img: img3, title: 'Gelato in Portofino', desc: "Sbarca nella piazzetta più famosa del mondo. Goditi una passeggiata tra i vicoli esclusivi e scopri i gusti unici del gelato portofinese, preparato con ingredienti locali di alta qualità." },
-    { id: '0', img: img1, title: 'Happy Hour in Boccadasse', desc: "Un'esperienza gourmet unica: calici di Franciacorta fresco e il leggendario aperitivo firmato 'Il Genovese'. Le delizie calde della tradizione ligure vi raggiungeranno direttamente dal mare in barca, mentre vi godete il tramonto su Boccadasse." },
-    { id: '3', img: img4, title: 'Paraggi Chill', desc: "Rilassati nella baia più elegante della costa, celebre per le sue acque verde smeraldo. Una sosta rigenerante tra musica soft, sole e bagni indimenticabili in un vero angolo di paradiso." },
-    { id: '6', img: img7, title: 'Tuffo in Punta Chiappa', desc: "Il canto delle cicale dai boschi a strapiombo accompagna il relax di Punta Chiappa. Natura selvaggia, roccia vulcanica che taglia il blu e l’iconica altalena sull’acqua: relax selvaggio per tutta la famiglia." },
-    { id: '7', img: img8, title: 'Stella Maris', desc: "Vivi la magia della storica festa dei pescatori di Camogli. Unisciti alla suggestiva sfilata di barche e assisti allo spettacolo emozionante di migliaia di lumini galleggianti lasciati in mare al tramonto. Solo una volta all'anno!" },
-    { id: '8', img: img11, title: 'Rapallo Fireworks', desc: "La magia della notte si accende dal mare. Assisti in prima fila alle storiche Feste di Luglio: lo spettacolo unico dei fuochi d'artificio che illuminano l'intero golfo e il suggestivo incendio del castello sull'acqua. Poche date disponibili!" },
+    {
+      id: '5',
+      img: img6,
+      title: 'Rainbow tour',
+      duration: '5-10 HOURS',
+      desc: "Discover the authentic beauty of the Ligurian coast with our Rainbow Tour, the ultimate private charter for those seeking a perfect blend of relaxation and adventure. We will sail along the most picturesque stretches of the coastline, featuring cliff-side villages, crystal-clear hidden bays, and iconic headlands that make the Riviera a unique destination in the world. Enjoy the journey with a selection of fresh drinks and fresh snacks served on board."
+    },
+    {
+      id: '0',
+      img: img1,
+      title: 'Gourmet Sunset Cruise',
+      duration: '5 HOURS',
+      desc: "As the sky dissolves into shades of gold and violet, we drift toward the charming shores of Boccadasse. Immerse yourself in the sunset with an exclusive Aperitivo curated by 'Il Genovese.' With a glass of prosecco in hand, chilled music on the breeze, and the magic of dancing dolphins alongside us, it is a moment where the Riviera truly comes to life."
+    }
   ];
 
   const animateScrollTo = (element, left, duration) => {
@@ -60,15 +53,15 @@ export default function ExperienceCarousel() {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Assicuriamoci che i wrapper siano renderizzati prima di calcolare la posizione
     const wrappers = carousel.querySelectorAll('.carousel-wrapper');
     const target = wrappers[initialCenterIndex];
-    
+
     if (target) {
       const offset = target.offsetLeft - (carousel.clientWidth - target.clientWidth) / 2;
       animateScrollTo(carousel, offset, initialScrollDuration);
     }
 
+    // L'Observer attiva la classe 'is-visible' quando la card entra nel 50% centrale del carosello
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const id = entry.target.getAttribute('data-index');
@@ -80,29 +73,33 @@ export default function ExperienceCarousel() {
     return () => wrappers.forEach((wrapper) => observer.unobserve(wrapper));
   }, []);
 
-  const renderTitle = (text) => (
-    <h3>
-      <img src={img10} alt="Anchor" className="anchor-icon" />
-      {text}
-    </h3>
-  );
-
   return (
     <div className="carousel-container">
       <div className="carousel" ref={carouselRef}>
         {experiences.map((exp) => (
-          <div 
+          <div
             key={exp.id}
-            className={`carousel-wrapper ${visibleIndices[exp.id] ? 'is-visible' : ''}`} 
+            className={`carousel-wrapper ${visibleIndices[exp.id] ? 'is-visible' : ''}`}
             data-index={exp.id}
           >
+            {/* Parte superiore: Immagine (nessuna animazione richiesta sul contenitore) */}
             <div className="carousel-slide">
               <div className="slide-content">
                 <img src={exp.img} alt={exp.title} className="slide-image" />
               </div>
             </div>
-            {renderTitle(exp.title)}
-            <p>{exp.desc}</p>
+
+            {/* --- MODIFICA --- */}
+            {/* Contenitore che raggruppa tutto il testo: questo blocco ora animerà opacity e translateY */}
+            <div className="text-content-wrapper">
+              <div className="title-container">
+                <h3>{exp.title}</h3>
+                <span className="duration-tag">{exp.duration}</span>
+              </div>
+              <p>{exp.desc}</p>
+            </div>
+            {/* ---------------- */}
+
           </div>
         ))}
       </div>

@@ -106,7 +106,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
             if (code === 'already-exists' || (err?.message && err.message.includes('slot_unavailable'))) {
                 setSlotUnavailable(true);
             } else {
-                alert('Errore durante la creazione della prenotazione');
+                alert('Error creating booking');
             }
         } finally {
             setLoading(false);
@@ -160,7 +160,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         />
                     </label>
                     <label>
-                        Note importanti
+                        Important Notes
                         <textarea
                             name="notes"
                             value={form.notes}
@@ -170,7 +170,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         />
                     </label>
                     <button type="submit" className="booking-form-submit" disabled={loading}>
-                        {slotUnavailable ? 'Slot non più disponibile' : loading ? 'Inoltro al pagamento...' : 'Paga e Prenota'}
+                        {slotUnavailable ? 'Slot no longer available' : loading ? 'Processing payment...' : 'Pay & Book'}
                     </button>
                 </form>
             )}
@@ -242,8 +242,8 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
             <div className="checkout-panel">
                 <div className="checkout-success">
                     <div className="checkout-success-icon">✓</div>
-                    <h3 className="checkout-success-title">Pagamento confermato!</h3>
-                    <p className="checkout-success-sub">La tua prenotazione è stata creata con successo.</p>
+                    <h3 className="checkout-success-title">Payment confirmed!</h3>
+                    <p className="checkout-success-sub">Your booking has been created successfully.</p>
                 </div>
             </div>
         );
@@ -251,11 +251,11 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
 
     return (
         <div className="checkout-panel">
-            <h2 className="checkout-heading">Riepilogo e pagamento</h2>
+            <h2 className="checkout-heading">Summary & Payment</h2>
 
             <div className="checkout-summary">
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Nome</span>
+                    <span className="checkout-label">Name</span>
                     <span className="checkout-value">{form.fullName}</span>
                 </div>
                 <div className="checkout-summary-row">
@@ -264,18 +264,18 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
                 </div>
                 {form.phone && (
                     <div className="checkout-summary-row">
-                        <span className="checkout-label">Telefono</span>
+                        <span className="checkout-label">Phone</span>
                         <span className="checkout-value">{form.countryCode} {form.phone}</span>
                     </div>
                 )}
 
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Data e ora</span>
-                    <span className="checkout-value">{date ? `${date}${startTime ? ` ${startTime}${endTime ? ` - ${endTime}` : ''}` : ''}` : '*Seleziona data'}</span>
+                    <span className="checkout-label">Date & Time</span>
+                    <span className="checkout-value">{date ? `${date}${startTime ? ` ${startTime}${endTime ? ` - ${endTime}` : ''}` : ''}` : '*Select date'}</span>
                 </div>
 
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Porto</span>
+                    <span className="checkout-label">Port</span>
                     <span className="checkout-value">
                         {embark ? `${embark}${arrangePickup ? ' (taxi)' : ''}` : '*N/D'}
                         {' \u2192 '}
@@ -285,14 +285,14 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
 
                 <div className="checkout-divider" />
                 <div className="checkout-summary-row checkout-total-row">
-                    <span className="checkout-total-label">Totale</span>
+                    <span className="checkout-total-label">Total</span>
                     <span className="checkout-total-amount">€{amountDisplay}</span>
                 </div>
             </div>
 
             <div className="checkout-card-section">
                 <div className="checkout-card-header">
-                    <span className="checkout-card-label-text">Dati carta</span>
+                    <span className="checkout-card-label-text">Card Details</span>
                     <div className="checkout-card-badges">
                         <span className="checkout-card-badge">VISA</span>
                         <span className="checkout-card-badge">MC</span>
@@ -317,17 +317,17 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
                 {loading ? (
                     <span className="checkout-btn-loading">
                         <span className="checkout-spinner" />
-                        Elaborazione pagamento…
+                        Processing payment…
                     </span>
                 ) : (
                     <>
-                        Paga €{amountDisplay}
+                        Pay €{amountDisplay}
                     </>
                 )}
             </button>
 
             <p className="checkout-secure-note">
-                Pagamento sicuro · Crittografia SSL 256-bit · Powered by Stripe
+                Secure payment · 256-bit SSL encryption · Powered by Stripe
             </p>
         </div>
     );

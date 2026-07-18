@@ -10,10 +10,10 @@ import Lana from "../assets/lana.webp";
 export default function ReviewCarousel() {
   const [visibleReviewIndices, setVisibleReviewIndices] = useState({});
   const [expandedId, setExpandedId] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0); // Gestisce il pallino attivo (0-based)
+  const [activeIndex, setActiveIndex] = useState(0); // Manages the active dot (0-based)
   const reviewCarouselRef = useRef(null);
 
-  // Ref per mantenere sempre l'ultimo valore aggiornato di expandedId all'interno dell'observer
+  // Ref to always keep the latest updated value of expandedId within the observer
   const expandedIdRef = useRef(expandedId);
   useEffect(() => {
     expandedIdRef.current = expandedId;
@@ -23,14 +23,14 @@ export default function ReviewCarousel() {
     { 
       id: 1, 
       name: "Florence", 
-      role: "Ospite", 
+      role: "Guest", 
       avatarImg: Florence,
       text: "It is imperative to see this sublime Leguria region, of which Genoa is the capital, and which was shaped by the port and sea around it from the lens of the sea. Being on land simply does not do this region justice. Riccardo is an experienced water guide, unimposing, discreet but warm and familiar like an old friend you are reuniting with. He will make you feel like a local for the day living the Italian dream. Everything famous about Italy- the charm, the food, the passion, the history and the nature rolled into one experience on this boat trip. -Florence Kollie, London" 
     },
     { 
       id: 2, 
       name: "Logan", 
-      role: "Ospite", 
+      role: "Guest", 
       avatarImg: Logan,
       text: "What a wonderful experience to take a day on the Ligurian Sea with Riccardo! The views of the Cinque Terre from the water are truly something to behold, and the itinerary can be customized to your liking. I took the trip with my grandmother who uses a cane to walk and it was made so easy and enjoyable by Riccardo's accommodations! We especially enjoyed stepping off in Portofino and diving to see the Christ of the Abyss. In the afternoon we were given a delicious aperitivo of prosciutto and the most delicious melon I have ever eaten! Following a stop back in Genoa for the bathroom, we went back out to enjoy the spectacular sunset behind the mountains. I will absolutely book another tour with this boat the next time I'm in town!! Thanks again Riccardo, I hope our paths cross again soon!!!" 
     },
@@ -44,7 +44,7 @@ export default function ReviewCarousel() {
     { 
       id: 4, 
       name: "Lana", 
-      role: "Ospite", 
+      role: "Guest", 
       avatarImg: Lana,
       text: `The trip was so fun and wonderful\nWe had lots of fun me and my family\nAnd the captain was so nice and flexible with everything\nAnd the boat was very safe, he had all of the safety equipments ready if anything happened, and he was very careful with everything it was very safe.\nAnd the prices were the best compared to any others\nWe would definitely do it again if we had to come back to genoa!` 
     }
@@ -62,7 +62,7 @@ export default function ReviewCarousel() {
           if (entry.isIntersecting) {
             setVisibleReviewIndices((prev) => ({ ...prev, [id]: true }));
             
-            // Trova l'indice dell'array corrispondente all'ID per aggiornare la paginazione
+            // Find the array index corresponding to the ID to update pagination
             const index = reviews.findIndex(r => r.id === id);
             if (index !== -1) {
               setActiveIndex(index);
@@ -113,7 +113,7 @@ export default function ReviewCarousel() {
   return (
     <section className="review-carousel-section">
       <div className="review-carousel-header">
-        <h2>Dicono di noi</h2>
+        <h2>What People Say About Us</h2>
       </div>
 
       <div className="review-carousel-container">
