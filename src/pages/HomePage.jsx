@@ -66,21 +66,25 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <section className="hero-section">
-<video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />        <div className="hero-gradient"></div>
-        <div className="app-content">
-          <span className="early-bird-chip">Early Bird 10% OFF</span>
-          <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
-<p className="hero-subtitle">One route, a thousand emotions. Explore the gems of the Two Gulfs or taste the local Aperitivo.</p>
-</div>
-      </section>
+<section className="hero-section">
+  <video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />
+  <div className="hero-gradient"></div>
+  <div className="app-content">
+    <span className="early-bird-chip">Early Bird 10% OFF</span>
+    <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
+    
+    {/* Sostituisci il <p> precedente con questo blocco */}
+    <div className="hero-subtitle">
+      <div>Santa Margherita • Portofino • Camogli</div>
+      <div>San Fruttuoso • Punta Chiappa • Bogliasco</div>
+      <div>Boccadasse</div>
+    </div>
+  </div>
+</section>
       
       <section className="experiences" ref={experiencesRef}>
         <div className="experiences-content">
           <ExperienceCarousel />
-          <div className="hero-button-wrapper">
-            <button className="hero-link hero-booking" onClick={() => { window.location.href = '/book'; }}>Customize Experience</button>
-          </div>
         </div>
       </section>
 

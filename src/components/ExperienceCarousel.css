@@ -20,23 +20,35 @@
   background-color: #fbfaff;
 }
 
-/* Il carosello vero e proprio (il binario di scorrimento) */
+/* Modifica SOLO queste sezioni nel tuo CSS */
+
 .carousel {
   display: flex;
   overflow-x: auto;
-  gap: 20px;     
-  
-  /* Padding verticale a 25px per evitare che l'ombra delle card venga tagliata */
-  padding: 25px 16px;            
-  
+  /* Gap aumentato per il respiro tra le card */
+  gap: 24px; 
+  margin: 0 auto;
+  /* Margine laterale fisso a 32px e padding per gestire la visibilità del 15% */
+  padding: 40px 40px !important;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  
-  /* Stile per dispositivi touch */
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  overscroll-behavior-y: auto;
 }
+
+.carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* flex-basis a 270px + il padding laterale del carosello 
+     garantiscono che le card adiacenti spuntino per circa il 15% */
+  flex: 0 0 270px; 
+  width: 270px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0.5;
+  transform: scale(0.92);
+  scroll-snap-align: center;
+}
+
 
 /* Nasconde la barra di scorrimento su tutti i browser principali */
 .carousel::-webkit-scrollbar {
@@ -51,22 +63,6 @@
    3. STRUTTURA DELLE CARD E EFFETTI DINAMICI (OPACITÀ E BLUR)
    ========================================================================== */
 
-/* Il wrapper principale della singola tessera. 
-   Blocca la larghezza a 270px in modo consistente per evitare l'effetto elastico dei testi. */
-.carousel-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 270px;            
-  width: 270px;               
-  height: fit-content;
-  overflow: visible;
-  
-  /* Di base le card non centrate sono parzialmente trasparenti */
-  transition: opacity 0.4s ease, transform 0.3s ease;
-  opacity: 1;
-  transform: scale(1);
-  transform-origin: center center;
-}
 
 /* Quando la card si blocca al centro grazie a React, torna visibile al 100% */
 .carousel-wrapper.is-visible {
@@ -90,11 +86,11 @@
 /* Stile del blocco interno che racchiude l'immagine */
 .slide-content {
   width: 100%;
-  height: 350px; 
+  height: auto; 
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 28px;
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
   
@@ -144,30 +140,14 @@
    4. ANIMAZIONE TESTI (SLIDE DA SINISTRA + BLUR + DISSOLVENZA)
    ========================================================================== */
 
-/* Stato iniziale nascosto per i testi delle card (blur rimosso) */
+/* Ensure texts are visible by default (avoid relying on IntersectionObserver for visibility) */
 .carousel-wrapper h2,
 .carousel-wrapper h3,
 .carousel-wrapper p {
-  opacity: 0;
-  transform: translateX(-20px);
-  pointer-events: none; 
-  /* Transizione fluida per l'entrata e l'uscita dei testi */
-  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-              transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* STATO ATTIVO: Quando la card va al centro, i testi si allineano e si sfuocano */
-.carousel-wrapper.is-visible h2,
-.carousel-wrapper.is-visible h3,
-.carousel-wrapper.is-visible p {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
   pointer-events: auto;
-}
-
-/* Effetto cascata: il paragrafo descrittivo entra con un leggero ritardo rispetto al titolo */
-.carousel-wrapper.is-visible p {
-  transition-delay: 0.1s;
+  transition: none;
 }
 
 /* ==========================================================================
@@ -177,18 +157,18 @@
 /* Titolo dell'esperienza allineato ai font importati */
 .carousel-wrapper h2,
 .carousel-wrapper h3 {
-  margin-left: 16px;
-  margin-right: 16px;         /* Margine destro di sicurezza per bloccare il testo nei 270px */
-  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: -12px;
   margin-bottom: 6px;
   font-family: 'Fraunces', sans-serif;
   font-weight: 500;     
-  font-size: 24px;         
-  font-style: italic;            
-  line-height: 32px;         
+  font-size: 22px;         
+  font-style: normal;            
+  line-height: 32px;      
   letter-spacing: -0.01em;       
   text-align: left;          
-  color: #2a54c6;    
+  color: #081f5c;    
   box-sizing: border-box;
 }
 
@@ -207,13 +187,13 @@
 
 /* Descrizione dell'esperienza */
 .carousel-wrapper p {
-  margin-left: 16px;
-  margin-right: 16px;         /* Impedisce al testo di allargare la card */
+  margin-left: 0;
+  margin-right: 0;         /* Impedisce al testo di allargare la card */
   margin-top: 0;
   color: #3f6883;
   font-family: 'Work Sans', sans-serif;
-  font-size: 15px;
-  line-height: 22px;          /* Rapporto di lettura bilanciato per colonne strette */
+  font-size: 14px;
+  line-height: 32px;        /* Increased for readability as requested */
   letter-spacing: 0px;       
   text-align: left;          
   font-weight: 400;
@@ -250,13 +230,89 @@
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin: 15px 0 10px 0;
+  margin: 4px 0 10px 0;
 }
 
 .duration-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #888;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  line-height: 29.7px;
+  letter-spacing: 0px;
+  margin-top: -6px;
+  font-variant: all-small-caps;
+  font-weight: 500;
+  color: #3F6883;
+}
+
+/* --------------------------------------------------------------------------
+   Image grid layout and pill CTA
+   ----------------------------------------------------------------------- */
+/* Sovrascrittura totale per il layout griglia */
+.image-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  gap: 2px !important;
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.grid-item-0 { 
+  grid-column: 1 / 2 !important; 
+  grid-row: 1 / span 2 !important; 
+}
+
+.grid-item-1 { 
+  grid-column: 2 / 3 !important; 
+  grid-row: 1 / 2 !important; 
+}
+
+.grid-item-2 { 
+  grid-column: 2 / 3 !important; 
+  grid-row: 2 / 3 !important; 
+}
+
+.grid-item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+}
+
+
+.pill-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* wrapper non cliccabile, il bottone lo sarà */
+  z-index: 3;
+}
+
+/* Price tag at the bottom of the card */
+.price-tag {
+  margin: 12px 0 0 0;
+  font-family: 'Fraunces', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #030c25;
+}
+
+/* The button will reuse navbar styles: apply pointer events to the button itself */
+.pill-wrapper .nav-booking { pointer-events: auto; }
+
+@media (max-width: 480px) {
+  .carousel-wrapper { flex: 0 0 320px; width: 320px; }
+  .slide-content { height: 300px; }
+  .image-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .grid-item-0 { grid-row: 1 / 2; grid-column: 1 / 3; } /* on small screens make the big image on top */
+  .grid-item-1 { grid-row: 2 / 3; grid-column: 1 / 2; }
+  .grid-item-2 { grid-row: 2 / 3; grid-column: 2 / 3; }
 }
