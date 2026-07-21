@@ -10,6 +10,8 @@ import img7 from "../assets/aperitivor.webp";
 import img8 from "../assets/meape.jpeg";
 import img9 from "../assets/marian.jpeg";
 import img10 from "../assets/melone.jpeg";
+import img11 from "../assets/sori.jpeg";
+import img12 from "../assets/camo.jpeg";
 
 
 export default function ExperienceCarousel() {
@@ -32,19 +34,19 @@ export default function ExperienceCarousel() {
     },
     {
       id: '1',
-      images: [img5, img7, img8],
+      images: [img7, img5, img8],
       title: 'Gourmet Sunset Cruise',
       duration: '3 HOURS • 7 GUESTS',
       price: 'From €390',
-      desc: "Vivi il tramonto più suggestivo della Liguria. Navigazione esclusiva verso Boccadasse con aperitivo gourmet firmato 'Il Genovese'. Prosaic, musica lounge e il fascino unico della costa illuminata dalle luci dorate: il modo migliore per vivere il mare di Genova."
+      desc: "Lasciati cullare dalle onde dorate di Boccadasse mentre una sorpresa dal mare ci raggiunge a bordo, l'aperitivo firmato 'Il Genovese'. Prosecco per tutti, musica lounge e il fascino unico della costa illuminata dalle luci dorate: il modo migliore per vivere il mare di Genova."
     },
     {
       id: '2',
-      images: [img9, img8, img7],
+      images: [img9, img11, img12],
       title: 'Private Transfer',
       duration: '3 HOURS • 7 GUESTS',
       price: 'From €350',
-      desc: "Trasferimenti privati via mare tra le località iconiche della Riviera. Evita il traffico e raggiungi Portofino, San Fruttuoso o le Cinque Terre con il comfort di un charter nautico di lusso. Velocità, stile e panorama mozzafiato per i tuoi spostamenti sulla costa ligure."
+      desc: "Trasferimenti privati via mare tra le località iconiche della Riviera. Evita il traffico e raggiungi Portofino o Camogli, fra delfini danzanti e panorami mozzafiato per i tuoi spostamenti sulla costa ligure."
     }
   ];
 

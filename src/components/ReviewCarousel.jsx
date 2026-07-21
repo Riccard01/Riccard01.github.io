@@ -134,40 +134,38 @@ export default function ReviewCarousel() {
                 data-review-id={review.id}
               >
                 <div className="review-carousel-slide">
-                  <div className="review-slide-content">
-                    
-                    <div className="review-stars">★★★★★</div>
-                    
-                    <div className="review-author-container">
-                      <div className="review-avatar">
-                        {review.avatarImg ? (
-                          <img 
-                            src={review.avatarImg} 
-                            alt={review.name} 
-                            className="review-avatar-img" 
-                          />
-                        ) : (
-                          review.name.charAt(0)
+                  <div
+                    className="review-slide-content"
+                    style={
+                      review.avatarImg
+                        ? {
+                            backgroundImage: `linear-gradient(180deg, rgba(2, 6, 23, 0.18) 0%, rgba(2, 6, 23, 0.86) 100%), url(${review.avatarImg})`
+                          }
+                        : undefined
+                    }
+                  >
+                    <div className="review-slide-overlay">
+                      <div className="review-stars">★★★★★</div>
+
+                      <div className="review-author-container">
+                        <div className="review-author-info">
+                          <h4>{review.name}</h4>
+                          <p>{review.role}</p>
+                        </div>
+                      </div>
+
+                      <p className="review-text">
+                        "{displayedText}"
+                        {isLongText && (
+                          <button 
+                            className="review-expand-btn" 
+                            onClick={() => toggleExpand(review.id)}
+                          >
+                            {isExpanded ? 'Show less' : 'Read more'}
+                          </button>
                         )}
-                      </div>
-                      <div className="review-author-info">
-                        <h4>{review.name}</h4>
-                        <p>{review.role}</p>
-                      </div>
+                      </p>
                     </div>
-
-                    <p className="review-text">
-                      "{displayedText}"
-                      {isLongText && (
-                        <button 
-                          className="review-expand-btn" 
-                          onClick={() => toggleExpand(review.id)}
-                        >
-                          {isExpanded ? 'Show less' : 'Read more'}
-                        </button>
-                      )}
-                    </p>
-
                   </div>
                 </div>
               </div>
