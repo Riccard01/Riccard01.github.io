@@ -8,7 +8,7 @@ export default function FleetSection() {
     {
       id: 1,
       name: "Leggera",
-      type: "Sporty Dinghy for small groups",
+      type: "",
       description: "A fast, responsive, and sporty inflatable boat, ideal for small groups who want to explore the coast dynamically. Designed to maximize outdoor spaces, it offers a spacious and comfortable sunbathing area at the bow to relax in the sun and a comfortable seating area at the stern to enjoy navigation to the rhythm of music.",
       image: leggera,
       specs: [
@@ -16,19 +16,6 @@ export default function FleetSection() {
         { label: "Maximum Capacity", value: "4 guests + skipper" },
         { label: "Engine", value: "Mercury Verado 150HP" },
         { label: "Comfort", value: "Bow sunbed, stern seating, sound system, GPS, canopy, shower" }
-      ]
-    },
-    {
-      id: 2,
-      name: "Francy",
-      type: "Premium Open Hull / Cabin Cruiser",
-      description: "An elegant and versatile cabin cruiser that combines the exclusivity of spacious outdoor areas with the practicality of indoor spaces. It features large sunbathing areas both at the bow and stern, ideal for enjoying an aperitivo in complete comfort at sunset. Below deck offers a cabin with a double bed and complete bathroom facilities.",
-      image: francy,
-      specs: [
-        { label: "Length", value: "7.30 meters" },
-        { label: "Maximum Capacity", value: "6 guests + skipper" },
-        { label: "Engine", value: "Evinrude 200 HP Outboard" },
-        { label: "Comfort", value: "Double sunbed (bow/stern), double cabin, toilet and indoor shower, stereo, GPS" }
       ]
     }
   ];

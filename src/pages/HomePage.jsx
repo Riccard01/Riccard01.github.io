@@ -14,6 +14,7 @@ import ReviewCarousel from '../components/ReviewCarousel';
 import FleetSection from '../components/FleetSection';
 import AboutSection from '../components/AboutSection';
 import PrivateTransfer from '../components/PrivateTransfer';
+import marian from '../assets/marian.jpeg'
 
 function HomePage() {
   const [isVisibleExperiences, setIsVisibleExperiences] = useState(false);
@@ -67,7 +68,19 @@ function HomePage() {
     <>
       <Navbar />
 <section className="hero-section">
-  <video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />
+<img 
+  src={marian} 
+  alt="Marian boat" 
+  style={{
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    zIndex: '-1' 
+  }}
+/>
   <div className="hero-gradient"></div>
   <div className="app-content">
     <span className="early-bird-chip">Early Bird 10% OFF</span>
@@ -86,6 +99,7 @@ function HomePage() {
         <div className="experiences-content">
           <ExperienceCarousel />
         </div>
+<video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />
       </section>
 
       <ReviewCarousel />

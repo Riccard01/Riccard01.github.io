@@ -7,7 +7,7 @@ import img3 from "../assets/logan.webp";
 import img4 from "../assets/mariana.jpeg";
 import img5 from "../assets/aperitivo.webp";
 import img7 from "../assets/aperitivor.webp";
-import img8 from "../assets/meape.jpeg";
+import img8 from "../assets/nape.jpeg";
 import img9 from "../assets/marian.jpeg";
 import img10 from "../assets/melone.jpeg";
 import img11 from "../assets/sori.jpeg";
@@ -29,24 +29,24 @@ export default function ExperienceCarousel() {
       images: [img2, img6, img10],
       title: 'The Rainbow Tour',
       duration: '5-10 HOURS • 4 GUESTS',
-      price: 'From €650',
-      desc: "Charter privato esclusivo lungo la Riviera Ligure. Esplora le perle del Golfo Paradiso e del Tigullio: scogliere a picco, baie incontaminate e borghi marinari. Un’esperienza nautica su misura con drink freschi e snack a bordo per un relax totale tra cielo e mare."
+      price: 'From €750',
+      desc: "Exclusive private charter along the Ligurian Riviera. Explore the hidden gems of Gulf Paradise and the Tigullio Gulf: sheer cliffs, pristine bays, and charming seaside villages. A tailored nautical experience with fresh drinks and onboard snacks for total relaxation between sky and sea."
     },
     {
       id: '1',
-      images: [img7, img5, img8],
+      images: [img5, img7, img8],
       title: 'Gourmet Sunset Cruise',
       duration: '3 HOURS • 7 GUESTS',
       price: 'From €390',
-      desc: "Lasciati cullare dalle onde dorate di Boccadasse mentre una sorpresa dal mare ci raggiunge a bordo, l'aperitivo firmato 'Il Genovese'. Prosecco per tutti, musica lounge e il fascino unico della costa illuminata dalle luci dorate: il modo migliore per vivere il mare di Genova."
+      desc: "Let yourself be cradled by the golden waves of Boccadasse as a special maritime delivery reaches us on board: the signature 'Il Genovese' aperitif. Prosecco for everyone, lounge music, and the unique charm of the coastline illuminated by golden lights—the ultimate way to experience the sea of Genoa."
     },
     {
       id: '2',
-      images: [img9, img11, img12],
+      images: [img4, img11, img12],
       title: 'Private Transfer',
       duration: '3 HOURS • 7 GUESTS',
       price: 'From €350',
-      desc: "Trasferimenti privati via mare tra le località iconiche della Riviera. Evita il traffico e raggiungi Portofino o Camogli, fra delfini danzanti e panorami mozzafiato per i tuoi spostamenti sulla costa ligure."
+      desc: "Private sea transfers between the iconic locations of the Riviera. Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
     }
   ];
 

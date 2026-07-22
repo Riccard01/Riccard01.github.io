@@ -127,7 +127,8 @@ body.page-home #root {
   margin-bottom: 1rem;
   margin-top: 1rem;
   text-align: center;
-  width: fit-content;
+  width: 100vh;
+  transform: rotate(-2deg);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
 }
 
