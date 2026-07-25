@@ -4,9 +4,8 @@ import Recco from '../assets/port-recco.webp';
 import Portoantico from '../assets/portoantico.webp';
 import Portofino from '../assets/portofino_extra_fee.webp';
 import Camogli from '../assets/port-camogli.webp';
-import Nervi from '../assets/nervi.webp'
-import Santa from '../assets/santa_margherita_ligure_extra_fee.webp'
-
+import Nervi from '../assets/nervi.webp';
+import Santa from '../assets/santa_margherita_ligure_extra_fee.webp';
 
 const AVAILABLE_PORTS = [
   {
@@ -64,7 +63,6 @@ export default function PrivateTransfer() {
   const carouselRef = useRef(null);
   const [visibleIndices, setVisibleIndices] = useState({});
 
-  // Parametri di scroll iniziale (inizia centrato sul terzo elemento, es. id 3: Portofino)
   const initialCenterIndex = 2;
   const initialScrollDuration = 200;
   const easeInPower = 4;
@@ -72,7 +70,7 @@ export default function PrivateTransfer() {
 
   const animateScrollTo = (element, left, duration) => {
     if (!element || duration <= 0) {
-      element.scrollLeft = left;
+      if (element) element.scrollLeft = left;
       return;
     }
     const start = element.scrollLeft;
@@ -93,10 +91,10 @@ export default function PrivateTransfer() {
     requestAnimationFrame(animate);
   };
 
-  // Effetto di scroll iniziale al centro
+  // Effetto di scroll iniziale al centro (Solo per schermi mobile/tablet < 1024px)
   useEffect(() => {
     const carousel = carouselRef.current;
-    if (!carousel) return;
+    if (!carousel || window.innerWidth >= 1024) return;
 
     const wrappers = carousel.querySelectorAll('.transfer-carousel-wrapper');
     const target = wrappers[initialCenterIndex];
@@ -115,16 +113,12 @@ export default function PrivateTransfer() {
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute('data-id');
-          if (entry.isIntersecting) {
-            setVisibleIndices((prev) => ({ ...prev, [id]: true }));
-          } else {
-            setVisibleIndices((prev) => ({ ...prev, [id]: false }));
-          }
+          setVisibleIndices((prev) => ({ ...prev, [id]: entry.isIntersecting }));
         });
       },
       {
         root: carousel,
-        rootMargin: '0px -25% 0px -25%',
+        rootMargin: '0px -15% 0px -15%',
         threshold: 0.5
       }
     );
@@ -187,7 +181,7 @@ export default function PrivateTransfer() {
                 </div>
               </div>
 
-              {/* Informazioni e Azione spostate sotto la card */}
+              {/* Informazioni e Azione sotto la card */}
               <h4 className="transfer-port-name">{port.name}</h4>
               
               <div className="transfer-action-wrapper">

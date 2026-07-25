@@ -1,56 +1,45 @@
-
-
-
 /* ==========================================================================
-   1. NAVBAR (GLASSMORPHISM & SAFARI COMPATIBLE)
+   1. CONTENITORI CAROSELLO E BINARIO DI SCORRIMENTO (MOBILE / TABLET)
    ========================================================================== */
 
-
-/* ==========================================================================
-   2. CONTENITORI CAROSELLO E BINARIO DI SCORRIMENTO
-   ========================================================================== */
-
-/* Contenitore esterno per dare respiro al carosello */
 .carousel-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0;
-  padding-top: 7rem;
+  padding-top: 5rem;
   background-color: #fbfaff;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-
-/* Modifica SOLO queste sezioni nel tuo CSS */
 
 .carousel {
   display: flex;
   overflow-x: auto;
-  /* Gap aumentato per il respiro tra le card */
-  gap: 24px; 
+  justify-content: center;
+  gap: 16px;
   margin: 0 auto;
-  /* Margine laterale fisso a 32px e padding per gestire la visibilità del 15% */
-  padding: 40px 40px !important;
+  padding: 30px calc(50vw - 130px) !important;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+  box-sizing: border-box;
 }
 
 .carousel-wrapper {
   display: flex;
   flex-direction: column;
-  /* flex-basis a 270px + il padding laterale del carosello 
-     garantiscono che le card adiacenti spuntino per circa il 15% */
-  flex: 0 0 270px; 
-  width: 270px;
+  flex: 0 0 260px;
+  width: 260px;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  opacity: 0.5;
+  opacity: 0.4;
   transform: scale(0.92);
   scroll-snap-align: center;
+  box-sizing: border-box;
 }
 
-
-/* Nasconde la barra di scorrimento su tutti i browser principali */
+/* Nasconde la barra di scorrimento */
 .carousel::-webkit-scrollbar {
   display: none;
 }
@@ -60,21 +49,17 @@
 }
 
 /* ==========================================================================
-   3. STRUTTURA DELLE CARD E EFFETTI DINAMICI (OPACITÀ E BLUR)
+   2. STRUTTURA CARD ED EFFETTI (MOBILE / TABLET)
    ========================================================================== */
 
-
-/* Quando la card si blocca al centro grazie a React, torna visibile al 100% */
 .carousel-wrapper.is-visible {
   opacity: 1;
-  transform: scale(1.03);
+  transform: scale(1);
 }
 
-/* La slide interna configurata in perfetto rapporto 9:16 (Altezza calcolata = 480px) */
 .carousel-slide {
   width: 100%;
   height: fit-content;           
-  /* aspect-ratio: 9 / 16;        */
   scroll-snap-align: center;      
   box-sizing: border-box;
   display: flex;
@@ -83,33 +68,26 @@
   overflow: visible;
 }
 
-/* Stile del blocco interno che racchiude l'immagine */
 .slide-content {
   width: 100%;
   height: auto; 
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
-  
-  /* Ombra morbida ad alta precisione */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 
               0 2px 8px rgba(0, 0, 0, 0.05);
-
-  /* Blur rimosso per performance */
   transition: opacity 0.4s ease, box-shadow 0.3s ease;
 }
 
-/* Quando la card è attiva al centro, riportala opaca/visibile */
 .carousel-wrapper.is-visible .slide-content {
   opacity: 1;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12),
               0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
-/* Gestione dell'immagine interna */
 .slide-image {
   width: 100%;
   height: 100%;
@@ -117,55 +95,31 @@
   border-radius: 0;
   overflow: hidden;
   display: block;
-  transform: scale(1);
-  transform-origin: center center;
-  transition: transform 0.35s ease;
-  will-change: transform;
-}
-
-.carousel-wrapper.is-visible .slide-image {
-  animation: slowZoom 6s ease-in-out infinite alternate;
-}
-
-@keyframes slowZoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.06);
-  }
 }
 
 /* ==========================================================================
-   4. ANIMAZIONE TESTI (SLIDE DA SINISTRA + BLUR + DISSOLVENZA)
+   3. TIPOGRAFIA ED ANIMAZIONI TESTO
    ========================================================================== */
 
-/* Ensure texts are visible by default (avoid relying on IntersectionObserver for visibility) */
-.carousel-wrapper h2,
-.carousel-wrapper h3,
-.carousel-wrapper p {
+.text-content-wrapper {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, transform;
+}
+
+.carousel-wrapper.is-visible .text-content-wrapper {
   opacity: 1;
-  transform: none;
-  pointer-events: auto;
-  transition: none;
+  transform: translateY(0);
 }
 
-/* ==========================================================================
-   5. TIPOGRAFIA (LOGICA DESIGN SYSTEM "SOFT MINIMALIST")
-   ========================================================================== */
-
-/* Titolo dell'esperienza allineato ai font importati */
 .carousel-wrapper h2,
 .carousel-wrapper h3 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: -12px;
-  margin-bottom: 6px;
-  font-family: 'Fraunces', sans-serif;
+  margin: 0 0 6px 0;
+  font-family: 'Fraunces', serif, sans-serif;
   font-weight: 500;     
-  font-size: 22px;         
-  font-style: normal;            
-  line-height: 32px;      
+  font-size: 20px;         
+  line-height: 28px;      
   letter-spacing: -0.01em;       
   text-align: left;          
   color: #081f5c;    
@@ -179,75 +133,45 @@
   gap: 12px;
 }
 
-.anchor-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-
-/* Descrizione dell'esperienza */
 .carousel-wrapper p {
-  margin-left: 0;
-  margin-right: 0;         /* Impedisce al testo di allargare la card */
-  margin-top: 0;
+  margin: 0;
   color: #3f6883;
   font-family: 'Work Sans', sans-serif;
-  font-size: 14px;
-  line-height: 32px;        /* Increased for readability as requested */
-  letter-spacing: 0px;       
+  font-size: 13px;
+  line-height: 22px;        
   text-align: left;          
   font-weight: 400;
   box-sizing: border-box;      
 }
 
-/* Aggiungi queste regole al tuo file CSS */
-
-/* Il contenitore che raggruppa titolo, durata e descrizione */
-.text-content-wrapper {
-  opacity: 0;            /* Inizialmente invisibile */
-  transform: translateY(20px); /* Leggermente spostato verso il basso */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  will-change: opacity, transform; /* Ottimizzazione per le animazioni */
-}
-
-/* Quando la card .carousel-wrapper ha anche la classe .is-visible */
-.carousel-wrapper.is-visible .text-content-wrapper {
-  opacity: 1;            /* Diventa visibile */
-  transform: translateY(0); /* Torna alla posizione originale */
-}
-
-/* Opzionale: Aggiungi un leggero ritardo per l'immagine (se vuoi un effetto più sofisticato) */
-.carousel-slide {
-  transition: transform 0.5s ease-out;
-}
-
-.carousel-wrapper.is-visible .carousel-slide {
-  transform: scale(1); /* Esempio: l'immagine scala leggermente se rimpicciolita prima */
-}
-
-/* --- Stili esistenti per titolo e durata (confermati) --- */
 .title-container {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin: 4px 0 10px 0;
+  margin: 4px 0 6px 0;
 }
 
 .duration-tag {
   font-family: 'Work Sans', sans-serif;
-  font-size: 12px;
-  line-height: 29.7px;
-  letter-spacing: 0px;
-  margin-top: -6px;
+  font-size: 11px;
+  line-height: 20px;
   font-variant: all-small-caps;
-  font-weight: 500;
+  font-weight: 600;
   color: #3F6883;
 }
 
-/* --------------------------------------------------------------------------
-   Image grid layout and pill CTA
-   ----------------------------------------------------------------------- */
-/* Sovrascrittura totale per il layout griglia */
+.price-tag {
+  margin: 10px 0 0 0;
+  font-family: 'Fraunces', serif, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #030c25;
+}
+
+/* ==========================================================================
+   4. LAYOUT GRIGLIA IMMAGINI E PULSANTE
+   ========================================================================== */
+
 .image-grid {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -283,36 +207,132 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transform-origin: center center;
 }
-
 
 .pill-wrapper {
   position: absolute;
   left: 50%;
-  top: 53%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* wrapper non cliccabile, il bottone lo sarà */
+  pointer-events: none;
   z-index: 3;
 }
 
-/* Price tag at the bottom of the card */
-.price-tag {
-  margin: 12px 0 0 0;
-  font-family: 'Fraunces', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #030c25;
+.pill-wrapper .nav-booking { 
+  pointer-events: auto; 
 }
 
-/* The button will reuse navbar styles: apply pointer events to the button itself */
-.pill-wrapper .nav-booking { pointer-events: auto; }
+/* ==========================================================================
+   5. DESKTOP / TABLET GRANDE (>= 1024px): LAYOUT STATICO IN RIGA SENZA ANIMAZIONI
+   ========================================================================== */
 
-@media (max-width: 480px) {
-  .carousel-wrapper { flex: 0 0 320px; width: 320px; }
-  .slide-content { height: 300px; }
-  .image-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
-  .grid-item-0 { grid-row: 1 / 2; grid-column: 1 / 3; } /* on small screens make the big image on top */
-  .grid-item-1 { grid-row: 2 / 3; grid-column: 1 / 2; }
-  .grid-item-2 { grid-row: 2 / 3; grid-column: 2 / 3; }
+@media (min-width: 1024px) {
+  .carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 6rem;
+  }
+
+  /* Disabilita lo scroll e dispone le card affiancate */
+  .carousel {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px !important;
+    padding: 20px 0 !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* Rimuove opacità e ridimensionamenti: tutte le card sono visibili e attive */
+  .carousel-wrapper {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Testi e immagini sempre visibili senza animazioni di ingresso */
+  .text-content-wrapper {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .slide-content {
+    opacity: 1 !important;
+  }
+
+  /* Disabilita eventuale zoom automatico dell'immagine in desktop per pulizia visiva */
+  .carousel-wrapper.is-visible .slide-image {
+    animation: none !important;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .nav-link {
+  background: #ffffff;
+  color: #031824 !important;
+  border: none;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 8px 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  letter-spacing: -1px !important;
+  cursor: pointer !important;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  }
+
+  .nav-booking {
+    display: inline-block;
+  }

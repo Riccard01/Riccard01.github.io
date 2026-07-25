@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       {/* Completely independent blocking screen */}
-      <div id="desktop-blocker">
+      {/* <div id="desktop-blocker">
         <div className="blocker-content">
           <h1 className="blocker-title">Mobile view required</h1>
           <p className="blocker-desc">
@@ -15,7 +15,7 @@ function App() {
           </p>
           <span className="blocker-action">Please press F12 to continue.</span>
         </div>
-      </div>
+      </div> */}
 
       <Routes>
         <Route path="/" element={<HomePage />} />

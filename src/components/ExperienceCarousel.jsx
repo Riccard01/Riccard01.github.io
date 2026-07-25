@@ -1,27 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./ExperienceCarousel.css";
-import img1 from "../assets/aperitivo.webp";
-import img6 from "../assets/sanfrut.jpeg";
 import img2 from "../assets/florence.webp";
-import img3 from "../assets/logan.webp";
 import img4 from "../assets/mariana.jpeg";
 import img5 from "../assets/aperitivo.webp";
+import img6 from "../assets/sanfrut.jpeg";
 import img7 from "../assets/aperitivor.webp";
 import img8 from "../assets/nape.jpeg";
-import img9 from "../assets/marian.jpeg";
 import img10 from "../assets/melone.jpeg";
 import img11 from "../assets/sori.jpeg";
 import img12 from "../assets/camo.jpeg";
 
 
 export default function ExperienceCarousel() {
+
+  const openWhatsApp = () => {
+    window.location.href = 'whatsapp://send?phone=393463365699';
+  };
+
   const carouselRef = useRef(null);
   const [visibleIndices, setVisibleIndices] = useState({});
 
   const initialCenterIndex = 1;
-  const initialScrollDuration = 200;
-  const easeInPower = 4;
-  const easeOutPower = 400;
+  const initialScrollDuration = 300;
 
   const experiences = [
     {
@@ -52,27 +52,27 @@ export default function ExperienceCarousel() {
 
   const animateScrollTo = (element, left, duration) => {
     if (!element || duration <= 0) {
-      element.scrollLeft = left;
+      if (element) element.scrollLeft = left;
       return;
     }
     const start = element.scrollLeft;
     const change = left - start;
     const startTime = performance.now();
+
     const animate = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const ease = progress < 0.5
-        ? 0.5 * Math.pow(progress * 2, easeInPower)
-        : 0.5 + 0.5 * Math.pow((progress - 0.5) * 2, easeOutPower);
+      const ease = 1 - Math.pow(1 - progress, 3);
       element.scrollLeft = start + change * ease;
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
   };
 
-  useEffect(() => {
+  const centerInitialCard = () => {
     const carousel = carouselRef.current;
-    if (!carousel) return;
+    // Centra la seconda card solo se siamo su schermi mobile/tablet (< 1024px)
+    if (!carousel || window.innerWidth >= 1024) return;
 
     const wrappers = carousel.querySelectorAll('.carousel-wrapper');
     const target = wrappers[initialCenterIndex];
@@ -81,16 +81,29 @@ export default function ExperienceCarousel() {
       const offset = target.offsetLeft - (carousel.clientWidth - target.clientWidth) / 2;
       animateScrollTo(carousel, offset, initialScrollDuration);
     }
+  };
 
-    // L'Observer attiva la classe 'is-visible' quando la card entra nel 50% centrale del carosello
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    centerInitialCard();
+
+    const wrappers = carousel.querySelectorAll('.carousel-wrapper');
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const id = entry.target.getAttribute('data-index');
         setVisibleIndices((prev) => ({ ...prev, [id]: entry.isIntersecting }));
       });
-    }, { root: carousel, rootMargin: '0px -25% 0px -25%', threshold: 0.5 });
+    }, { 
+      root: carousel, 
+      rootMargin: '0px -15% 0px -15%', 
+      threshold: 0.5 
+    });
 
     wrappers.forEach((wrapper) => observer.observe(wrapper));
+
     return () => wrappers.forEach((wrapper) => observer.unobserve(wrapper));
   }, []);
 
@@ -103,7 +116,6 @@ export default function ExperienceCarousel() {
             className={`carousel-wrapper ${visibleIndices[exp.id] ? 'is-visible' : ''}`}
             data-index={exp.id}
           >
-            {/* Parte superiore: Immagine (nessuna animazione richiesta sul contenitore) */}
             <div className="carousel-slide">
               <div className="slide-content">
                 <div className="image-grid">
@@ -114,15 +126,13 @@ export default function ExperienceCarousel() {
                   ))}
                 </div>
                 <div className="pill-wrapper">
-                  <button className="nav-link nav-booking" onClick={() => { window.location.href = '/book'; }}>
+                  <button className="nav-link nav-booking" onClick={openWhatsApp}>
                     Prenota
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* --- MODIFICA --- */}
-            {/* Contenitore che raggruppa tutto il testo: questo blocco ora animerà opacity e translateY */}
             <div className="text-content-wrapper">
               <div className="title-container">
                 <span className="duration-tag">{exp.duration}</span>
@@ -131,8 +141,6 @@ export default function ExperienceCarousel() {
               <p>{exp.desc}</p>
               <div className="price-tag">{exp.price}</div>
             </div>
-            {/* ---------------- */}
-
           </div>
         ))}
       </div>

@@ -26,14 +26,14 @@
 
 .private-transfer-container {
   position: relative;
-  max-w: 1140px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 24px;
   z-index: 2;
 }
 
 .private-transfer-content {
-  max-w: 768px;
+  max-width: 768px;
   margin-bottom: 48px;
 }
 
@@ -100,7 +100,7 @@
 }
 
 /* ==========================================================================
-   STRUTTURA BINARIO CAROSELLO (STILE EXPERIENCE)
+   STRUTTURA BINARIO CAROSELLO (MOBILE / TABLET)
    ========================================================================== */
 .transfer-carousel-container {
   width: 100%;
@@ -118,14 +118,6 @@
   overscroll-behavior-x: contain;
 }
 
-/* Configurazione margini per allineamento a pieno schermo */
-@media (min-width: 1140px) {
-  .transfer-carousel {
-    padding-left: calc((100vw - 1140px) / 2 + 24px);
-    padding-right: calc((100vw - 1140px) / 2 + 24px);
-  }
-}
-
 .transfer-carousel::-webkit-scrollbar {
   display: none;
 }
@@ -135,7 +127,7 @@
 }
 
 /* ==========================================================================
-   IL WRAPPER DELLA CARD (LARGHEZZA CORRETTA E TRANSIZIONI DI ENTRATA)
+   WRAPPER CARD ED EFFETTI (MOBILE / TABLET)
    ========================================================================== */
 .transfer-carousel-wrapper {
   display: flex;
@@ -166,10 +158,10 @@
   overflow: visible;
 }
 
-/* Contenitore Immagine (Rialzato ad alta visibilità) */
+/* Contenitore Immagine */
 .transfer-slide-content {
   width: 100%;
-  height: 380px; /* Altezza verticale bilanciata per foto panoramiche dei porti */
+  height: 380px;
   border-radius: 24px;
   overflow: hidden;
   position: relative;
@@ -194,7 +186,6 @@
   will-change: transform;
 }
 
-/* Slow zoom continuo solo quando l'elemento è centrato */
 .transfer-carousel-wrapper.is-visible .transfer-slide-image {
   animation: transferSlowZoom 6s ease-in-out infinite alternate;
 }
@@ -204,16 +195,14 @@
   to { transform: scale(1.06); }
 }
 
-/* Rimosso l'overlay scuro invasivo, resta trasparente */
 .port-card-overlay {
   display: none;
 }
 
 /* ==========================================================================
-   ANIMAZIONE E STILE DEI TESTI SOTTO LA CARD (FRAUNCES & WORK SANS)
+   ANIMAZIONE E STILE DEI TESTI SOTTO LA CARD (MOBILE / TABLET)
    ========================================================================== */
 
-/* Stato iniziale animazione per i blocchi di testo inferiori */
 .transfer-port-name,
 .transfer-action-wrapper {
   opacity: 0;
@@ -223,7 +212,6 @@
               transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Entrata fluida quando la card riceve la classe is-visible */
 .transfer-carousel-wrapper.is-visible .transfer-port-name,
 .transfer-carousel-wrapper.is-visible .transfer-action-wrapper {
   opacity: 1;
@@ -231,12 +219,10 @@
   pointer-events: auto;
 }
 
-/* Delay della transizione sul bottone per l'effetto cascata sequenziale */
 .transfer-carousel-wrapper.is-visible .transfer-action-wrapper {
   transition-delay: 0.1s;
 }
 
-/* Titolo Location (Font Fraunces Italic) */
 .transfer-port-name {
   margin: 0 8px 12px 8px;
   font-family: 'Fraunces', serif;
@@ -252,7 +238,6 @@
   margin: 0 8px;
 }
 
-/* BOTTONE BIANCO MINIMALE (Font Work Sans) */
 .btn-transfer-discover {
   display: inline-flex;
   align-items: center;
@@ -285,8 +270,56 @@
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   DESKTOP / TABLET GRANDE (>= 1024px): LAYOUT GRIGLIA STATICA SENZA ANIMAZIONI
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+  .transfer-carousel-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Trasforma il carosello scorrevole in una griglia statica */
+  .transfer-carousel {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+    gap: 24px !important;
+    padding: 20px 0 !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* Disabilita trasparenze, ridimensionamenti e animazioni */
+  .transfer-carousel-wrapper {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .transfer-slide-content {
+    height: 320px;
+  }
+
+  /* Nomi dei porti e bottoni sempre visibili e attivi */
+  .transfer-port-name,
+  .transfer-action-wrapper {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+
+  .transfer-carousel-wrapper.is-visible .transfer-slide-image {
+    animation: none !important;
+  }
+}
+
 /* Ottimizzazioni Responsive per Mobile */
-@media (max-w: 480px) {
+@media (max-width: 480px) {
   .fleet-list {
     grid-template-columns: 1fr;
     gap: 8px;

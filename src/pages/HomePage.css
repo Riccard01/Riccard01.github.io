@@ -227,6 +227,7 @@ h2.h1-regular {
 
 .experiences {
   width: 100%;
+
   background-color: #fbfaff;
   position: relative;       /* <--- AGGIUNGI QUESTO */
   z-index: 1;               /* <--- DAI UN VALORE BASSO (es. 1) affinché l'app-content (z-index: 99) ci passi sopra */
