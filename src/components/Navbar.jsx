@@ -15,7 +15,7 @@ function Navbar() {
         <div className="wrapper-navbar-logo">
           <div className="navbar-logo">
             <a href="/">
-              <img src={logo} alt="Leggero Tours" className="navbar-logo-img" />
+              <img src={logo} alt="Leggero Tours" className="navbar-logo-img" />.
             </a>
           </div>
         </div>
@@ -33,11 +33,24 @@ function Navbar() {
         </div>
         
         <div className='wrapper-btn' style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <button className="nav-link nav-booking" onClick={openWhatsApp} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px' }}>
+          <button className="nav-link nav-booking" onClick={openWhatsApp} style={{ display: 'flex', justifyContent: 'center', gap: '8px', alignItems: 'center', width: 'fit-content', height: '40px' }}>
+            WhatsApp Us
             <img src={phoneIcon} alt="WhatsApp" style={{ width: '16px', height: '16px' }} />
+            <span 
+              style={{
+                position: 'absolute',
+                bottom: '12px',
+                right: '45px',
+                width: '10px',
+                height: '10px',
+                backgroundColor: '#25D366', // Verde classico di WhatsApp
+                borderRadius: '50%',
+                border: '1.5px solid white' // Bordino per staccarlo dallo sfondo del bottone
+              }}
+            />
           </button>
           
-          <button className="nav-link nav-booking" onClick={() => { window.location.href = '/book'; }}>Check Availability</button>
+          {/* <button className="nav-link nav-booking" onClick={() => { window.location.href = '/book'; }}>Check Availability</button> */}
         </div>
       </div>
     </nav>
