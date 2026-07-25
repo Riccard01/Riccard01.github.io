@@ -99,7 +99,7 @@ function HomePage() {
         <div className="experiences-content">
           <ExperienceCarousel />
         </div>
-<video src={homepageprova} autoPlay muted loop playsInline className="hero-image" />
+<video src={homepageprova} autoPlay muted loop playsInline className="thevideo" />
       </section>
 
       <ReviewCarousel />

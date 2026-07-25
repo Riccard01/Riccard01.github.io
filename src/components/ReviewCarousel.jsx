@@ -10,10 +10,9 @@ import Lana from "../assets/lana.webp";
 export default function ReviewCarousel() {
   const [visibleReviewIndices, setVisibleReviewIndices] = useState({});
   const [expandedId, setExpandedId] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0); // Manages the active dot (0-based)
+  const [activeIndex, setActiveIndex] = useState(0);
   const reviewCarouselRef = useRef(null);
 
-  // Ref to always keep the latest updated value of expandedId within the observer
   const expandedIdRef = useRef(expandedId);
   useEffect(() => {
     expandedIdRef.current = expandedId;
@@ -62,7 +61,6 @@ export default function ReviewCarousel() {
           if (entry.isIntersecting) {
             setVisibleReviewIndices((prev) => ({ ...prev, [id]: true }));
             
-            // Find the array index corresponding to the ID to update pagination
             const index = reviews.findIndex(r => r.id === id);
             if (index !== -1) {
               setActiveIndex(index);
@@ -78,8 +76,8 @@ export default function ReviewCarousel() {
       },
       {
         root: carousel,
-        rootMargin: '0px -25% 0px -25%',
-        threshold: 0.5 
+        rootMargin: '0px -10% 0px -10%',
+        threshold: 0.4 
       }
     );
 
@@ -89,13 +87,12 @@ export default function ReviewCarousel() {
     return () => {
       wrappers.forEach((wrapper) => observer.unobserve(wrapper));
     };
-  }, [reviews]); // Aggiunto reviews alle dipendenze per l'allineamento degli indici
+  }, [reviews]);
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  // Funzione per scrollare sulla card quando si clicca un pallino
   const handleDotClick = (index) => {
     const carousel = reviewCarouselRef.current;
     if (!carousel) return;
@@ -114,17 +111,17 @@ export default function ReviewCarousel() {
     <section className="review-carousel-section">
       <div className="review-carousel-header">
         <h2>What People Say About Us</h2>
+        <div className="review-carousel-line"></div>
       </div>
 
       <div className="review-carousel-container">
         <div className="review-carousel" ref={reviewCarouselRef}>
           {reviews.map((review) => {
-            // MODIFICA: Alzato il limite a 450 caratteri per mostrare più testo possibile
-            const isLongText = review.text.length > 450;
+            const isLongText = review.text.length > 350;
             const isExpanded = expandedId === review.id;
             
             const displayedText = isLongText && !isExpanded 
-              ? `${review.text.substring(0, 450)}...` 
+              ? `${review.text.substring(0, 350)}...` 
               : review.text;
 
             return (
@@ -138,9 +135,7 @@ export default function ReviewCarousel() {
                     className="review-slide-content"
                     style={
                       review.avatarImg
-                        ? {
-                            backgroundImage: `linear-gradient(180deg, rgba(2, 6, 23, 0.18) 0%, rgba(2, 6, 23, 0.86) 100%), url(${review.avatarImg})`
-                          }
+                        ? { backgroundImage: `url(${review.avatarImg})` }
                         : undefined
                     }
                   >
@@ -173,7 +168,7 @@ export default function ReviewCarousel() {
           })}
         </div>
 
-        {/* ELEMENTO DI PAGINAZIONE (DOT INDICATORS) */}
+        {/* Paginazione pallini (visibile solo su mobile via CSS) */}
         <div className="review-carousel-dots">
           {reviews.map((_, index) => (
             <button

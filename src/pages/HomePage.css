@@ -58,6 +58,12 @@ body.page-home #root {
   z-index: 0;
 }
 
+.thevideo {
+  object-fit: cover;
+  z-index: 0;
+}
+
+
 .hero-gradient {
   position: absolute;
   bottom: -1px;
@@ -127,7 +133,7 @@ body.page-home #root {
   margin-bottom: 1rem;
   margin-top: 1rem;
   text-align: center;
-  width: 100vh;
+  width: 450vh;
   transform: rotate(-2deg);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
 }
@@ -414,4 +420,3 @@ h2.h1-regular {
   align-items: center;
   width: 100%;
 }
-
