@@ -28,7 +28,7 @@ export default function ExperienceCarousel() {
       id: '0',
       images: [img2, img6, img10],
       title: 'The Rainbow Tour',
-      duration: '5-10 HOURS • 4 GUESTS',
+      duration: '5-10 HOURS • 4 GUESTS MAX',
       price: 'From €750',
       desc: "Exclusive private charter along the Ligurian Riviera. Explore the hidden gems of Gulf Paradise and the Tigullio Gulf: sheer cliffs, pristine bays, and charming seaside villages. A tailored nautical experience with fresh drinks and onboard snacks for total relaxation between sky and sea."
     },
@@ -36,7 +36,7 @@ export default function ExperienceCarousel() {
       id: '1',
       images: [img5, img7, img8],
       title: 'Gourmet Sunset Cruise',
-      duration: '3 HOURS • 7 GUESTS',
+      duration: '3 HOURS • 7 GUESTS MAX',
       price: 'From €390',
       desc: "Let yourself be cradled by the golden waves of Boccadasse as a special maritime delivery reaches us on board: the signature 'Il Genovese' aperitif. Prosecco for everyone, lounge music, and the unique charm of the coastline illuminated by golden lights—the ultimate way to experience the sea of Genoa."
     },
@@ -44,7 +44,7 @@ export default function ExperienceCarousel() {
       id: '2',
       images: [img4, img11, img12],
       title: 'Private Transfer',
-      duration: '3 HOURS • 7 GUESTS',
+      duration: '7 GUESTS MAX',
       price: 'From €350',
       desc: "Private sea transfers between the iconic locations of the Riviera. Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
     }
