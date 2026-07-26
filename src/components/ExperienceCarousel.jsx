@@ -9,6 +9,7 @@ import img8 from "../assets/nape.jpeg";
 import img10 from "../assets/melone.jpeg";
 import img11 from "../assets/sori.jpeg";
 import img12 from "../assets/camo.jpeg";
+import img13 from "../assets/special.jpg";
 
 
 export default function ExperienceCarousel() {
@@ -48,6 +49,14 @@ export default function ExperienceCarousel() {
       price: 'From €350',
       desc: "Private sea transfers between the iconic locations of the Riviera. Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
     }
+    // {
+    //   id: '3',
+    //   images: [img13],
+    //   title: 'Stella Maris',
+    //   duration: 'CUSTOM DURATION • 4 GUESTS MAX',
+    //   price: 'From €2000',
+    //   desc: "A unique experience for those who want to explore the Ligurian coast in a luxurious and exclusive way. The Stella Maris is a 20-meter yacht that can accommodate up to 4 guests, offering a private and intimate experience on the sea. Enjoy the comfort of a spacious deck, a fully equipped kitchen, and a cozy cabin while discovering the hidden gems of the Riviera."
+    // }
   ];
 
   const animateScrollTo = (element, left, duration) => {
@@ -96,10 +105,10 @@ export default function ExperienceCarousel() {
         const id = entry.target.getAttribute('data-index');
         setVisibleIndices((prev) => ({ ...prev, [id]: entry.isIntersecting }));
       });
-    }, { 
-      root: carousel, 
-      rootMargin: '0px -15% 0px -15%', 
-      threshold: 0.5 
+    }, {
+      root: carousel,
+      rootMargin: '0px -15% 0px -15%',
+      threshold: 0.5
     });
 
     wrappers.forEach((wrapper) => observer.observe(wrapper));

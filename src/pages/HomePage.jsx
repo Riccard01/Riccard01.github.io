@@ -88,9 +88,7 @@ function HomePage() {
     
     {/* Sostituisci il <p> precedente con questo blocco */}
     <div className="hero-subtitle">
-      <div>Santa Margherita • Portofino • Camogli</div>
-      <div>San Fruttuoso • Punta Chiappa • Bogliasco</div>
-      <div>Boccadasse</div>
+      <div>Experience the sea in complete freedom: private itineraries, exclusive coves, and moments tailored entirely to your own pace.</div>
     </div>
   </div>
 </section>

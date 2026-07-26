@@ -232,16 +232,17 @@ h2.h1-regular {
 }
 
 .experiences {
-  width: 100%;
-
-  background-color: #fbfaff;
-  position: relative;       /* <--- AGGIUNGI QUESTO */
-  z-index: 1;               /* <--- DAI UN VALORE BASSO (es. 1) affinché l'app-content (z-index: 99) ci passi sopra */
+align-items: center;
+    flex-direction: column;
+    background-color: #fbfaff;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    display: flex;
 }
 
 .experiences-content {
-  max-width: 1280px;
-  width: 100%;
+  width: 90%;
   height: fit-content;
   display: flex;
   flex-direction: column;

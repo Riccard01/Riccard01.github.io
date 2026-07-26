@@ -228,7 +228,6 @@
 
 @media (min-width: 1024px) {
   .carousel-container {
-    max-width: 1200px;
     margin: 0 auto;
     padding-top: 6rem;
   }
