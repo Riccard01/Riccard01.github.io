@@ -2,7 +2,7 @@
 import React from "react";
 import Calendar from "./Calendar";
 import "./BoatCard.css";
-import maestraleImg from "../assets/maestrale.png";
+import maestraleImg from "../assets/maestraleImg.webp";
 
 const placeholderImg = maestraleImg;
 

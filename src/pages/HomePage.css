@@ -112,7 +112,25 @@ body.page-home #root {
   letter-spacing: 0px;       
   text-align: center;          
   font-weight: 400; 
-  max-width: 100%;
+  max-width: 30%;
+}
+
+.package-desc {
+  margin-left: 16px;
+  margin-top: -8px;
+  margin-right: 16px;
+  color: #031d2e;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  line-height: 32px;             
+  letter-spacing: 0px;       
+  text-align: center;          
+  font-weight: 400; 
+  max-width: 90%;
+}
+
+p .hero-subtitle {
+  text-align: center;
 }
 
 .early-bird-chip {
@@ -224,6 +242,51 @@ h2.experiences-title {
   line-height: 40px;
 }
 
+
+
+
+
+
+
+.package-title {
+  font-family: 'Fraunces', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #031824;
+  text-align: center;
+  font-style: italic;  
+  margin: 0;
+  padding: 16px;
+  letter-spacing: -1px;
+  line-height: 40px;
+}
+
+h2.experiences-title {
+  color: #0f46df;
+    margin-left: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 700;              
+  font-style: italic;            
+  line-height: 24px;         
+  letter-spacing: -1.56px;       
+  text-align: left;          
+  text-transform: uppercase;  
+  margin-top: 32px;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
 h2.h1-regular {
   font-size: 32px;
   font-weight: 400;
@@ -233,7 +296,7 @@ h2.h1-regular {
 
 .experiences {
   width: 100%;
-
+  padding-top: 8rem;
   background-color: #fbfaff;
   position: relative;       /* <--- AGGIUNGI QUESTO */
   z-index: 1;               /* <--- DAI UN VALORE BASSO (es. 1) affinché l'app-content (z-index: 99) ci passi sopra */
@@ -418,5 +481,11 @@ h2.h1-regular {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+
+.meimmagine {
+  object-fit: cover;
   width: 100%;
 }

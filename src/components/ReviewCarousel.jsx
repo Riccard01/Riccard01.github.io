@@ -110,8 +110,7 @@ export default function ReviewCarousel() {
   return (
     <section className="review-carousel-section">
       <div className="review-carousel-header">
-        <h2>What People Say About Us</h2>
-        <div className="review-carousel-line"></div>
+        <h2>Who Was Leggero</h2>
       </div>
 
       <div className="review-carousel-container">

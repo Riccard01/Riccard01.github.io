@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar';
 import Calendar from '../components/Calendar';
 import aperitivo from '../assets/aperitivo.webp';
 import leggera from '../assets/leggera.webp';
-import francy from '../assets/francy.webp';
 import '../App.css';
 import BoatCard from "../components/BoatCard";
 import DropDown from "../components/DropDown";
@@ -20,8 +19,6 @@ import BookingForm from '../components/BookingForm';
 import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount } from '../utils/priceCalculator';
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
 
-import maestrale from '../assets/maestrale.png';
-import allegra from '../assets/allegra.png';
 // Puoi aggiungere altre immagini se disponibili
 
 import './Book.css';

@@ -7,7 +7,6 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
-  padding-top: 5rem;
   background-color: #fbfaff;
   box-sizing: border-box;
   overflow: hidden;
@@ -164,7 +163,7 @@
   margin: 10px 0 0 0;
   font-family: 'Fraunces', serif, sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   color: #030c25;
 }
 
@@ -336,3 +335,4 @@
   .nav-booking {
     display: inline-block;
   }
+

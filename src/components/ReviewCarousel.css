@@ -16,13 +16,16 @@
 }
 
 .review-carousel-header h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 2.25rem;
+  font-family: 'Fraunces', sans-serif;
+  font-size: 40px;
   font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #1e293b;
-  margin: 0;
+  color: #031824;
+  text-align: center;
+  font-style: italic;  
+  margin-bottom: -2rem;
+  padding: 16px;
+  letter-spacing: -1px;
+  line-height: 40px;
 }
 
 .review-carousel-line {

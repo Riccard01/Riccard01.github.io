@@ -30,7 +30,7 @@ export default function ExperienceCarousel() {
       title: 'The Rainbow Tour',
       duration: '5-10 HOURS • 4 GUESTS MAX',
       price: 'From €750',
-      desc: "Exclusive private charter along the Ligurian Riviera. Explore the hidden gems of Gulf Paradise and the Tigullio Gulf: sheer cliffs, pristine bays, and charming seaside villages. A tailored nautical experience with fresh drinks and onboard snacks for total relaxation between sky and sea."
+      desc: "Your ideal solution to explore the gems of the Two Gulfs at your own pace. Sheer cliffs, pristine bays, and charming seaside villages. A tailored nautical experience with fresh drinks and onboard snacks for total relaxation between sky and sea."
     },
     {
       id: '1',
@@ -46,7 +46,7 @@ export default function ExperienceCarousel() {
       title: 'Private Transfer',
       duration: '7 GUESTS MAX',
       price: 'From €350',
-      desc: "Private sea transfers between the iconic locations of the Riviera. Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
+      desc: "Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
     }
   ];
 
@@ -127,7 +127,7 @@ export default function ExperienceCarousel() {
                 </div>
                 <div className="pill-wrapper">
                   <button className="nav-link nav-booking" onClick={openWhatsApp}>
-                    Prenota
+                    Discover
                   </button>
                 </div>
               </div>

@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import florence from '../assets/florence.webp';
 import homepageprova from "../assets/homepageprova.webm";
 import aperitivo from '../assets/aperitivo.webp';
-import transfer from '../assets/private-transfer.webp';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
 import Masonry from '../components/Masonry';
@@ -15,6 +14,7 @@ import FleetSection from '../components/FleetSection';
 import AboutSection from '../components/AboutSection';
 import PrivateTransfer from '../components/PrivateTransfer';
 import marian from '../assets/marian.jpeg'
+
 
 function HomePage() {
   const [isVisibleExperiences, setIsVisibleExperiences] = useState(false);
@@ -39,7 +39,7 @@ function HomePage() {
     // 2. Logic to load the video ONLY after the site is ready
     const handlePageLoad = () => {
       setTimeout(() => {
-        setVideoSrc(gourmet);
+        setVideoSrc(homepageprova);
       }, 100);
     };
 
@@ -88,22 +88,27 @@ function HomePage() {
     
     {/* Sostituisci il <p> precedente con questo blocco */}
     <div className="hero-subtitle">
-      <div>Experience the sea in complete freedom: private itineraries, exclusive coves, and moments tailored entirely to your own pace.</div>
+      <p>One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Stay Leggero!</p>
     </div>
   </div>
 </section>
       
       <section className="experiences" ref={experiencesRef}>
         <div className="experiences-content">
+          {/* <h2 className='package-title'>Our Packages</h2>
+            <p className='package-desc'>The choice is yours, we've handpicked the best activities ready for you to live!</p> */}
+
           <ExperienceCarousel />
         </div>
+        {/* <img className="meimmagine" src={me}/> */}
+
+      <FleetSection />
+
 <video src={homepageprova} autoPlay muted loop playsInline className="thevideo" />
       </section>
 
       <ReviewCarousel />
       {/* <Masonry /> */}
-
-      <FleetSection />
 
 
 <PrivateTransfer />

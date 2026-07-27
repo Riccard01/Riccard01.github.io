@@ -1,23 +1,32 @@
 .fleet-section {
   width: 100%;
-  background-color: #fbfaff;
-  padding: 60px 20px;
+  background-color: #fbfaff; /* Invariato */
+  padding-top: 60px;
+  padding-bottom: 60px;
   box-sizing: border-box;
 }
 
 .fleet-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 50px auto;
+  margin: 0 auto 40px auto;
 }
 
 .fleet-header h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 2rem;
+  font-family: 'Fraunces', sans-serif;
+  font-size: 40px;
   font-weight: 400;
-  text-transform: uppercase;
-  color: #1e293b;
-  margin: 0;
+  color: #031824;
+  text-align: center;
+  font-style: italic;  
+  margin-bottom: -2rem;
+  padding: 16px;
+  letter-spacing: -1px;
+  line-height: 40px;
 }
 
 .fleet-line {
@@ -30,9 +39,10 @@
 .fleet-subtitle {
   font-family: 'Work Sans', sans-serif;
   color: #64748b;
+  margin-top: 3rem;
+  width: 90%;
 }
 
-/* Layout Verticale */
 .fleet-list-container {
   display: flex;
   flex-direction: column;
@@ -42,7 +52,7 @@
 }
 
 .boat-card-wrapper {
-  background: #ffffff;
+  background: #ffffff; /* Invariato */
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid #f1f5f9;
@@ -52,11 +62,13 @@
 .boat-image-container {
   position: relative;
   width: 100%;
+  display: flex; /* Toglie il margine inferiore bianco tipico dei tag img */
 }
 
 .boat-carousel-img {
   width: 100%;
   height: auto;
+  object-fit: cover;
   display: block;
 }
 
@@ -71,9 +83,59 @@
   font-weight: 600;
   text-transform: uppercase;
   color: #1e293b;
+  z-index: 2;
 }
 
-.boat-content-container { padding: 32px; }
+/* 
+  NUOVO CONTENITORE DETTAGLI: 
+  Sotto l'immagine, strutturato a griglia
+*/
+.boat-specs-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 24px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.spec-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #f8fafc;
+  border-radius: 50%;
+  color: #031824;
+  margin-bottom: 12px;
+}
+
+.spec-value {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.spec-label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.8rem;
+  color: #64748b;
+  text-transform: capitalize;
+}
+
+.boat-content-container { 
+  padding: 32px; 
+}
 
 .boat-content-container h3 {
   font-family: 'Fraunces', serif;
@@ -86,10 +148,18 @@
   font-family: 'Work Sans', sans-serif;
   color: #2d3748;
   line-height: 1.7;
-  margin: 0 0 24px 0;
+  margin: 0;
 }
 
-.boat-specs-mini { border-top: 1px solid #f1f5f9; padding-top: 20px; }
-.spec-mini-row { display: flex; justify-content: space-between; padding: 6px 0; }
-.spec-mini-label { font-weight: 600; color: #1e293b; font-size: 0.8rem; }
-.spec-mini-value { color: #64748b; font-size: 0.8rem; }
+/* Responsività per dispositivi mobili */
+@media (max-width: 600px) {
+  .boat-specs-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile */
+    gap: 24px 16px;
+    padding: 20px;
+  }
+  
+  .boat-content-container {
+    padding: 20px;
+  }
+}
