@@ -35,9 +35,10 @@ export default function ExperienceCarousel({ lang = 'en' }) {
 
   return (
     <div className="carousel-container">
+      <h2 className="experiences-heading">{t.sectionTitle || 'Private boat experiences'}</h2>
       <div className="carousel">
         {experiences.map((exp) => (
-          <div key={exp.id} className="carousel-wrapper" data-index={exp.id}>
+          <article key={exp.id} className="carousel-wrapper" data-index={exp.id}>
             <div className="carousel-slide">
               <div className="slide-content">
                 <div className="price-chip">{exp.price}</div>
@@ -83,7 +84,7 @@ export default function ExperienceCarousel({ lang = 'en' }) {
                 </div>
               )}
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>

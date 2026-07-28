@@ -11,7 +11,22 @@ export default {
     subtitle:
       "Un solo itinerario, mille emozioni: percorsi privati e momenti costruiti interamente sul tuo ritmo. Stay Leggero!",
   },
+  seo: {
+    home: {
+      title: "Tour in Barca Privati a Genova e Portofino | Leggero Tours",
+      description: "Tour privati in barca tra Genova, Camogli e Portofino. Esperienze su misura con skipper, transfer via mare e prenotazione online.",
+    },
+    book: {
+      title: "Prenota il Tuo Tour Privato | Leggero Tours",
+      description: "Prenota online il tuo tour in barca privato in Liguria: scegli orario, ospiti, porto di partenza e transfer dedicato.",
+    },
+    policy: {
+      title: "Policy e Condizioni | Leggero Tours",
+      description: "Consulta policy, condizioni di cancellazione e informazioni legali per i tour privati in barca di Leggero Tours.",
+    },
+  },
   experienceCarousel: {
+    sectionTitle: "Esperienze in barca private",
     prevAria: "Esperienza precedente",
     nextAria: "Prossima esperienza",
     dotAria: (idx) => `Vai all'esperienza ${idx + 1}`,
@@ -150,6 +165,7 @@ export default {
   },
   footer: {
     checkAvailability: "Controlla disponibilità",
+    policyLink: "Policy e condizioni",
     legalCompany: "Leggero Tours by Bottiglieri Riccardo",
     legalInfo: "Sede: Genova (GE) - Operativo tra Genova e Portofino",
     legalTaxId: "P.IVA: 03030880995",
@@ -158,6 +174,7 @@ export default {
     copyright: "© 2026 Leggero Tours. Tutti i diritti riservati.",
   },
   book: {
+    pageHeading: "Prenota il tuo tour privato in barca",
     timeDropdown: "Orario",
     guestsDropdown: "Ospiti",
     guestOptions: ["1 persona", "2 persone", "3 persone", "4 persone", "5 persone", "6 persone", "7 persone"],
@@ -217,5 +234,6 @@ export default {
   },
   policy: {
     title: "Policy",
+    description: "Consulta le condizioni di cancellazione, i dettagli di prenotazione e le note legali per le esperienze private in barca.",
   },
 };

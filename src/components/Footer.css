@@ -101,6 +101,24 @@
   margin: 0;
 }
 
+.legal-policy-link {
+  margin: 0;
+  font-size: 13px;
+}
+
+.legal-policy-link a {
+  color: #ffffff;
+  opacity: 0.85;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.legal-policy-link a:hover,
+.legal-policy-link a:focus {
+  opacity: 1;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
 .legal-info a {
   color: #ffffff;
   text-decoration: none;

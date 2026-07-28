@@ -147,7 +147,7 @@ export default function ReviewCarousel({ lang = 'it' }) {
 
                       <div className="review-author-container">
                         <div className="review-author-info">
-                          <h4>{review.name}</h4>
+                          <h3>{review.name}</h3>
                           <p>{review.role}</p>
                         </div>
                       </div>

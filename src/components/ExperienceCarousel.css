@@ -1,7 +1,3 @@
-/* ==========================================================================
-   1. CONTENITORI CAROSELLO E BINARIO DI SCORRIMENTO (MOBILE / TABLET)
-   ========================================================================== */
-
 .carousel-container {
   width: 100%;
   max-width: 100%;
@@ -9,278 +5,94 @@
   padding: 0;
   background-color: #fbfaff;
   box-sizing: border-box;
-  overflow: visible;
-  position: relative;
 }
 
-.carousel-header-group {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 6vw 8px 6vw;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.carousel-arrows-action-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.carousel-dots-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-}
-
-.carousel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background-color: #c7d2fe;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.carousel-dot.active {
-  background-color: #3446E3;
-  transform: scale(1.25);
+.experiences-heading {
+  margin: 0 0 20px 0;
+  padding: 0 6vw;
+  color: #081f5c;
+  font-family: 'Fraunces', serif, sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
 }
 
 .carousel {
   display: flex;
   flex-direction: column;
-  overflow: visible;
-  justify-content: flex-start;
-  gap: 120px;
+  gap: 40px;
   margin: 0 auto;
-  padding: 10px 6vw 30px 6vw !important;
+  padding: 10px 6vw 30px 6vw;
   box-sizing: border-box;
 }
 
 .carousel-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
   width: 100%;
-  max-width: none;
-  transition: none;
-  opacity: 1;
-  transform: none;
   box-sizing: border-box;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-.carousel {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
-}
-
-/* ==========================================================================
-   1b. FRECCE DI PAGINAZIONE (MOBILE / TABLET)
-   ========================================================================== */
-
-.carousel-arrow {
-  position: relative;
-  z-index: 20;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-}
-
-.carousel-arrow:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background-color: #f9fafb;
-}
-
-.carousel-arrow:active {
-  transform: scale(0.92);
-}
-
-.carousel-arrow:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-.carousel-arrow svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* ==========================================================================
-   2. STRUTTURA CARD ED EFFETTI (MOBILE / TABLET)
-   ========================================================================== */
-
-.carousel-wrapper.is-visible {
-  opacity: 1;
-  transform: scale(1);
 }
 
 .carousel-slide {
   width: 100%;
-  height: fit-content;          
-  scroll-snap-align: center;      
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;            
-  overflow: visible;
+  margin-bottom: 16px;
 }
 
 .slide-content {
   width: 100%;
-  height: auto; 
-  color: white;
+  height: auto;
+  color: #ffffff;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 
-              0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: opacity 0.4s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.carousel-wrapper.is-visible .slide-content {
-  opacity: 1;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12),
-              0 6px 18px rgba(0, 0, 0, 0.06);
-}
-
-.slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;            
-  border-radius: 0;
-  overflow: hidden;
-  display: block;
-}
-
-/* ==========================================================================
-   3. TIPOGRAFIA ED ANIMAZIONI TESTO
-   ========================================================================== */
-
-.text-content-wrapper {
-  opacity: 1;
-  transform: none;
-  transition: none;
-  will-change: auto;
-}
-
-.carousel-wrapper h2,
-.carousel-wrapper h3 {
-  margin: 0 0 6px 0;
-  font-family: 'Fraunces', serif, sans-serif;
-  font-weight: 500;     
-  font-size: 20px;         
-  line-height: 28px;      
-  letter-spacing: -0.01em;       
-  text-align: left;           
-  color: #081f5c;    
-  box-sizing: border-box;
-}
-
-.carousel-wrapper h3 {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-}
-
-.carousel-wrapper p {
-  margin: 0;
-  color: #3f6883;
+.price-chip {
+  position: absolute;
+  top: 15px;
+  left: 15px;
   font-family: 'Work Sans', sans-serif;
-  font-size: 13px;
-  line-height: 22px;        
-  text-align: left;           
   font-weight: 400;
-  box-sizing: border-box;       
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
 }
-
-.title-container {
-  margin-top: 1rem !important; 
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin: 4px 0 6px 0;
-  width: 100%;
-  justify-content: center;
-}
-
-.duration-tag {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  font-variant: all-small-caps;
-  font-weight: 600;
-  color: #3446E3;
-}
-
-/* Stili aggiornati per Chips più grandi e ad alto contrasto */
-.card-chips-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.card-chip {
-  background-color: #081f5c; /* Blu scuro principale per massima visibilità */
-  color: #ffffff;            /* Testo bianco in evidenza */
-  font-family: 'Work Sans', sans-serif;
-  font-size: 13px;           /* Aumentato di 2px (da 11px a 13px) */
-  font-weight: 600;
-  padding: 6px 14px;         /* Padding proporzionato */
-  border-radius: 999px;
-  display: inline-block;
-  line-height: 18px;
-  box-shadow: 0 2px 6px rgba(8, 31, 92, 0.2);
-}
-
-/* ==========================================================================
-   4. LAYOUT GRIGLIA IMMAGINI E PULSANTE
-   ========================================================================== */
 
 .image-grid {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-template-rows: 1fr 1fr !important;
-  gap: 2px !important;
-  width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
-.grid-item-0 { 
-  grid-column: 1 / 2 !important; 
-  grid-row: 1 / span 2 !important; 
+.grid-item-0 {
+  grid-column: 1 / 2;
+  grid-row: 1 / span 2;
 }
 
-.grid-item-1 { 
-  grid-column: 2 / 3 !important; 
-  grid-row: 1 / 2 !important; 
+.grid-item-1 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
 
-.grid-item-2 { 
-  grid-column: 2 / 3 !important; 
-  grid-row: 2 / 3 !important; 
+.grid-item-2 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
 }
 
 .grid-item {
@@ -305,69 +117,60 @@
   z-index: 3;
 }
 
-.pill-wrapper .nav-booking { 
-  pointer-events: auto; 
-}
-
-/* ==========================================================================
-   5. DESKTOP / TABLET GRANDE (>= 1024px): LAYOUT STATICO IN RIGA SENZA ANIMAZIONI
-   ========================================================================== */
-
-@media (min-width: 1024px) {
-  .carousel-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 6rem;
-  }
-
-  .carousel-header-group {
-    display: none !important;
-  }
-
-
-  .carousel-wrapper {
-    width: 100% !important;
-    max-width: none !important;
-    flex: 1 1 auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .text-content-wrapper {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .slide-content {
-    opacity: 1 !important;
-  }
-
-  .carousel-wrapper.is-visible .slide-image {
-    animation: none !important;
-  }
+.pill-wrapper .nav-booking {
+  pointer-events: auto;
 }
 
 .nav-link {
   background: #ffffff;
-  color: #031824 !important;
+  color: #031824;
   border: none;
   min-height: 48px;
   border-radius: 999px;
   padding: 8px 24px;
   font-family: 'Work Sans', sans-serif;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  line-height: 16px !important;
-  letter-spacing: -1px !important;
-  cursor: pointer !important;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -1px;
+  cursor: pointer;
   transition: background 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
 .nav-booking {
   display: inline-block;
+}
+
+.text-content-wrapper h3 {
+  margin: 0 0 6px 0;
+  font-family: 'Fraunces', serif, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #081f5c;
+}
+
+.text-content-wrapper p {
+  margin: 0;
+  color: #3f6883;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  line-height: 22px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.title-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+  width: 100%;
+  justify-content: center;
 }
 
 .meta-info-container {
@@ -383,6 +186,12 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  font-variant: all-small-caps;
+  font-weight: 600;
+  color: #3446e3;
 }
 
 .duration-icon,
@@ -392,28 +201,6 @@
   object-fit: contain;
 }
 
-.slide-content {
-  position: relative;
-}
-
-.price-chip {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  z-index: 10;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  pointer-events: none;
-}
-
-/* Stili aggiornati per Chips trasparenti (stile ghost/border) */
 .card-chips-container {
   display: flex;
   flex-wrap: wrap;
@@ -432,4 +219,17 @@
   border-radius: 999px;
   display: inline-block;
   line-height: 18px;
+}
+
+@media (min-width: 1024px) {
+  .carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 6rem;
+  }
+
+  .carousel {
+    gap: 40px;
+    padding: 20px 0;
+  }
 }

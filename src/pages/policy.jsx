@@ -1,12 +1,13 @@
-import '../policy.css';
+import './policy.css';
 import { getLocale } from '../utils/locale';
 
 export default function Policy({ lang = 'it' }) {
   const dict = getLocale(lang);
 
   return (
-    <div className="policy-container">
+    <main className="policy-container">
         <h1 className="policy-title">{dict.policy.title}</h1>
-    </div>
+        <p className="policy-text">{dict.policy.description || 'Read our policy, cancellation conditions and legal terms for private boat tours.'}</p>
+    </main>
   );
 }

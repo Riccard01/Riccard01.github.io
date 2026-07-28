@@ -11,7 +11,22 @@ export default {
     subtitle:
       "One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Stay Leggero!",
   },
+  seo: {
+    home: {
+      title: "Private Boat Tours in Genoa and Portofino | Leggero Tours",
+      description: "Private boat tours in Liguria between Genoa, Camogli and Portofino. Tailored experiences with skipper, sea transfer and online booking.",
+    },
+    book: {
+      title: "Book Your Private Boat Tour | Leggero Tours",
+      description: "Book your private boat experience online in Liguria. Choose time, guests, departure port and optional transfer service.",
+    },
+    policy: {
+      title: "Policy and Terms | Leggero Tours",
+      description: "Read policy details, cancellation terms and legal information for Leggero Tours private boat experiences.",
+    },
+  },
   experienceCarousel: {
+    sectionTitle: "Private boat experiences",
     prevAria: "Previous experience",
     nextAria: "Next experience",
     dotAria: (idx) => `Go to experience ${idx + 1}`,
@@ -150,6 +165,7 @@ export default {
   },
   footer: {
     checkAvailability: "Check Availability",
+    policyLink: "Policy and terms",
     legalCompany: "Leggero Tours by Bottiglieri Riccardo",
     legalInfo: "Headquarters: Genoa (GE) - Operating in Genoa and Portofino",
     legalTaxId: "Tax ID: 03030880995",
@@ -158,6 +174,7 @@ export default {
     copyright: "© 2026 Leggero Tours. All rights reserved.",
   },
   book: {
+    pageHeading: "Book your private boat tour",
     timeDropdown: "Time",
     guestsDropdown: "Guests",
     guestOptions: ["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"],
@@ -217,5 +234,6 @@ export default {
   },
   policy: {
     title: "Policy",
+    description: "Review cancellation terms, booking details and legal notes for private boat experiences.",
   },
 };

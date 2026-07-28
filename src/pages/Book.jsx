@@ -474,6 +474,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
 
   return (
     <>
+      <h1 className="sr-only">{dict.book.pageHeading || 'Book your private boat tour'}</h1>
       {paymentConfirmed ? (
         <div className="booking-confirmation">
           <div className="confirmation-card">
@@ -490,7 +491,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
               <div className="conf-actions">
                 <button
                   className="conf-home-btn"
-                  onClick={() => { try { window.location.href = '/'; } catch { } }}
+                  onClick={() => { try { window.location.href = `/${lang}`; } catch { } }}
                 >
                   {dict.book.backHome}
                 </button>
