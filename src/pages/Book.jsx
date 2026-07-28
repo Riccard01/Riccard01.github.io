@@ -16,6 +16,9 @@ import guests from "../assets/guests.svg";
 import Transfer from '../components/Transfer';
 import BookingFooter from '../components/BookingFooter';
 import BookingForm from '../components/BookingForm';
+import maestrale from '../assets/leggera.webp'
+import francy from '../assets/leggera.webp'
+import allegra from '../assets/leggera.webp'
 import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount } from '../utils/priceCalculator';
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
 
