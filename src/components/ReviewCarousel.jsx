@@ -11,6 +11,7 @@ import { getLocale } from '../utils/locale';
 export default function ReviewCarousel({ lang = 'it' }) {
   const dict = getLocale(lang);
   const t = dict.reviewCarousel;
+  const baseLocale = getLocale('en');
 
   const [visibleReviewIndices, setVisibleReviewIndices] = useState({});
   const [expandedId, setExpandedId] = useState(null);
@@ -22,36 +23,45 @@ export default function ReviewCarousel({ lang = 'it' }) {
     expandedIdRef.current = expandedId;
   }, [expandedId]);
 
-  const reviews = [
-    { 
-      id: 1, 
-      name: t.reviews?.[0]?.name || "Florence", 
-      role: t.reviews?.[0]?.role || "Guest", 
-      avatarImg: Florence,
-      text: t.reviews?.[0]?.text || "" 
-    },
-    { 
-      id: 2, 
-      name: t.reviews?.[1]?.name || "Logan", 
-      role: t.reviews?.[1]?.role || "Guest", 
-      avatarImg: Logan,
-      text: t.reviews?.[1]?.text || "" 
-    },
-    { 
-      id: 3, 
-      name: t.reviews?.[2]?.name || "Linda", 
-      role: t.reviews?.[2]?.role || "Local Guide", 
-      avatarImg: Linda,
-      text: t.reviews?.[2]?.text || "" 
-    },
-    { 
-      id: 4, 
-      name: t.reviews?.[3]?.name || "Lana", 
-      role: t.reviews?.[3]?.role || "Guest", 
-      avatarImg: Lana,
-      text: t.reviews?.[3]?.text || "" 
+  const sourceReviews = Array.isArray(t?.reviews)
+    ? t.reviews
+    : Array.isArray(baseLocale?.reviewCarousel?.reviews)
+      ? baseLocale.reviewCarousel.reviews
+    : [];
+
+  const orderedReviews = (() => {
+    const florenceIndex = sourceReviews.findIndex((review) => {
+      const normalizedName = (review?.name || '').toLowerCase();
+      return normalizedName.startsWith('florence');
+    });
+
+    if (florenceIndex === -1) {
+      return sourceReviews;
     }
-  ];
+
+    const florenceReview = sourceReviews[florenceIndex];
+    const remainingReviews = sourceReviews.filter((_, idx) => idx !== florenceIndex);
+    return [florenceReview, ...remainingReviews];
+  })();
+
+  const getAvatarByName = (name) => {
+    const normalizedName = (name || '').toLowerCase();
+
+    if (normalizedName.startsWith('florence')) return Florence;
+    if (normalizedName.startsWith('logan')) return Logan;
+    if (normalizedName.startsWith('linda')) return Linda;
+    if (normalizedName.startsWith('lana')) return Lana;
+
+    return null;
+  };
+
+  const reviews = orderedReviews.map((review, idx) => ({
+    id: review.id || idx + 1,
+    name: review.name || `Guest ${idx + 1}`,
+    role: review.role || 'Guest',
+    text: review.text || '',
+    avatarImg: getAvatarByName(review.name),
+  }));
 
   useEffect(() => {
     const carousel = reviewCarouselRef.current;
@@ -115,17 +125,13 @@ export default function ReviewCarousel({ lang = 'it' }) {
     <section className="review-carousel-section">
       <div className="review-carousel-header">
         <h2>{t.title}</h2>
+        <p className="review-count">{reviews.length} {lang === 'it' ? 'recensioni' : 'reviews'}</p>
       </div>
 
       <div className="review-carousel-container">
         <div className="review-carousel" ref={reviewCarouselRef}>
           {reviews.map((review) => {
-            const isLongText = review.text.length > 350;
             const isExpanded = expandedId === review.id;
-            
-            const displayedText = isLongText && !isExpanded 
-              ? `${review.text.substring(0, 350)}...` 
-              : review.text;
 
             return (
               <div 
@@ -134,37 +140,35 @@ export default function ReviewCarousel({ lang = 'it' }) {
                 data-review-id={review.id}
               >
                 <div className="review-carousel-slide">
-                  <div
-                    className="review-slide-content"
-                    style={
-                      review.avatarImg
-                        ? { backgroundImage: `url(${review.avatarImg})` }
-                        : undefined
-                    }
-                  >
-                    <div className="review-slide-overlay">
-                      <div className="review-stars">★★★★★</div>
-
-                      <div className="review-author-container">
-                        <div className="review-author-info">
-                          <h3>{review.name}</h3>
-                          <p>{review.role}</p>
-                        </div>
+                  <article className="review-card">
+                    <div className="review-author-info">
+                      <div className="review-author-top">
+                        <h3>{review.name}</h3>
+                        <span className="review-stars-inline" aria-hidden="true">★★★★★</span>
                       </div>
-
-                      <p className="review-text">
-                        "{displayedText}"
-                        {isLongText && (
-                          <button 
-                            className="review-expand-btn" 
-                            onClick={() => toggleExpand(review.id)}
-                          >
-                            {isExpanded ? t.showLess : t.readMore}
-                          </button>
-                        )}
-                      </p>
+                      <p>{review.role}</p>
                     </div>
-                  </div>
+
+                    <p className={`review-text ${!isExpanded ? 'is-clamped' : ''}`}>
+                      "{review.text}"
+                    </p>
+
+                    <button
+                      className="review-expand-btn"
+                      onClick={() => toggleExpand(review.id)}
+                    >
+                      {isExpanded ? t.showLess : t.readMore}
+                    </button>
+
+                    {review.avatarImg && (
+                      <img
+                        src={review.avatarImg}
+                        alt={review.name}
+                        className="review-image"
+                        loading="lazy"
+                      />
+                    )}
+                  </article>
                 </div>
               </div>
             );

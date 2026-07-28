@@ -70,7 +70,7 @@ function HomePage({ lang = 'it', setLang = () => {} }) {
         </div>
         {/* <img className="meimmagine" src={me}/> */}
 
-      <FleetSection lang={lang} />
+      {/* <FleetSection lang={lang} /> */}
 
 <video src={homepageprova} autoPlay muted loop playsInline className="thevideo" />
       </section>

@@ -57,6 +57,68 @@ export default {
     readMore: "Leer mas",
     showLess: "Mostrar menos",
     dotAria: (idx) => `Ir a la resena ${idx + 1}`,
+    reviews: [
+      {
+        id: 1,
+        name: "Logan Hale",
+        role: "Huesped",
+        text: "Fue una experiencia maravillosa en el mar de Liguria con Riccardo. Las vistas desde el agua son impresionantes y el itinerario puede personalizarse a tu gusto. Nos encanto bajar en Portofino y bucear para ver el Cristo del Abismo. Por la tarde disfrutamos de un aperitivo delicioso y terminamos con un atardecer espectacular.",
+      },
+      {
+        id: 2,
+        name: "Linda",
+        role: "Guia local",
+        text: "Pasamos un tiempo fantastico con Riccardo en su barco. El tour se adapto a nuestras necesidades, con bano en aguas templadas y un precioso aperitivo al atardecer. Se nota el cuidado en cada detalle. El ambiente fue profesional, pero al mismo tiempo muy cercano y agradable.",
+      },
+      {
+        id: 3,
+        name: "Vincent Steenhoute",
+        role: "Huesped",
+        text: "Gracias Riccardo por compartir con nosotros tu hermosa region. Disfrutamos mucho del paseo soleado por la costa y del aperitivo delicioso.",
+      },
+      {
+        id: 4,
+        name: "Vents Dzerkalis",
+        role: "Huesped",
+        text: "Gran experiencia con un guia excelente.",
+      },
+      {
+        id: 5,
+        name: "Andrea Albergo",
+        role: "Huesped",
+        text: "Experiencia inolvidable en barco con Riccardo. Pasamos un dia magico con paisajes impresionantes y agua cristalina. Riccardo fue profesional, simpatico y muy seguro en todo momento. Todo estuvo cuidado al detalle: paradas perfectas para nadar, relajarse y sacar fotos. Lo recomendamos muchisimo.",
+      },
+      {
+        id: 6,
+        name: "Davide Colella",
+        role: "Huesped",
+        text: "Dia perfecto, sin exagerar. Riccardo es una persona increible y super preparada. Si quieres una experiencia unica, Leggero Tour es la respuesta.",
+      },
+      {
+        id: 7,
+        name: "Lana F",
+        role: "Huesped",
+        text: "El viaje fue divertido e inolvidable para toda nuestra familia. El capitan fue atento, flexible y muy enfocado en la seguridad durante toda la jornada. La organizacion tambien fue clara y sencilla. El precio, comparado con otras opciones, fue excelente y lo repetiriamos sin dudar.",
+      },
+      {
+        id: 8,
+        name: "Federico Albani",
+        role: "Huesped",
+        text: "Ver los fuegos artificiales de noche desde el mar no tiene precio. Riccardo transmite entusiasmo y sabe como hacerte vivir una experiencia unica.",
+      },
+      {
+        id: 9,
+        name: "Simone Salek",
+        role: "Huesped",
+        text: "Un viaje inolvidable con vistas espectaculares y una profesionalidad impecable. La experiencia de Riccardo y su atencion a los detalles nos dio una salida segura, autentica y encantadora. Muy recomendable.",
+      },
+      {
+        id: 10,
+        name: "Florence Kollie",
+        role: "Huesped",
+        text: "Para comprender de verdad esta sublime region de Liguria, cuya capital es Genova, hay que verla desde el mar que la moldeo. Desde tierra no se aprecia igual. Riccardo es un guia maritimo experto: discreto, cercano y calido como un viejo amigo. Te hace sentir local por un dia.",
+      },
+    ],
   },
   faq: {
     ...en.faq,

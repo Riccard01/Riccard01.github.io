@@ -5,7 +5,6 @@ import './App.css';
 import { DEFAULT_LANG, getLocale, LOCALES } from './utils/locale';
 
 const Book = lazy(() => import('./pages/Book'));
-const Policy = lazy(() => import('./pages/policy'));
 
 function getPathSuffix(pathname) {
   const normalized = (pathname || '/').replace(/\/+$/, '') || '/';
@@ -26,7 +25,7 @@ function LocalizedPage({ page, onChangeLang }) {
   const safeLang = LOCALES[lang] ? lang : null;
 
   if (!safeLang) {
-    const suffix = page === 'book' ? '/book' : (page === 'policy' ? '/policy' : '');
+    const suffix = page === 'book' ? '/book' : '';
     return <Navigate to={`/${DEFAULT_LANG}${suffix}`} replace />;
   }
 
@@ -38,15 +37,13 @@ function LocalizedPage({ page, onChangeLang }) {
     );
   }
 
-  if (page === 'policy') {
-    return (
-      <Suspense fallback={null}>
-        <Policy lang={safeLang} />
-      </Suspense>
-    );
-  }
-
   return <HomePage lang={safeLang} setLang={onChangeLang} />;
+}
+
+function LegacyPolicyRedirect() {
+  const { lang } = useParams();
+  const safeLang = LOCALES[lang] ? lang : DEFAULT_LANG;
+  return <Navigate to={`/${safeLang}`} replace />;
 }
 
 function App() {
@@ -83,7 +80,7 @@ function App() {
     const suffix = getPathSuffix(location.pathname);
     const head = document.head;
     const locale = getLocale(lang);
-    const pageKey = suffix === '/book' ? 'book' : (suffix === '/policy' ? 'policy' : 'home');
+    const pageKey = suffix === '/book' ? 'book' : 'home';
     const seo = locale?.seo?.[pageKey] || getLocale(DEFAULT_LANG)?.seo?.[pageKey] || {};
     const title = seo.title || 'Leggero Tours';
     const description = seo.description || 'Private boat tours in Liguria between Genoa, Portofino and the Two Gulfs.';
@@ -180,10 +177,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to={`/${lang}`} replace />} />
         <Route path="/book" element={<Navigate to={`/${lang}/book`} replace />} />
-        <Route path="/policy" element={<Navigate to={`/${lang}/policy`} replace />} />
+        <Route path="/policy" element={<Navigate to={`/${lang}`} replace />} />
         <Route path="/:lang" element={<LocalizedPage page="home" onChangeLang={handleChangeLanguage} />} />
         <Route path="/:lang/book" element={<LocalizedPage page="book" onChangeLang={handleChangeLanguage} />} />
-        <Route path="/:lang/policy" element={<LocalizedPage page="policy" onChangeLang={handleChangeLanguage} />} />
+        <Route path="/:lang/policy" element={<LegacyPolicyRedirect />} />
         <Route path="*" element={<Navigate to={`/${DEFAULT_LANG}`} replace />} />
       </Routes>
     </>

@@ -40,9 +40,6 @@ export default function Footer({ lang = 'it' }) {
         <p className="legal-company">
           <strong>Leggero Tours</strong> by Bottiglieri Riccardo
         </p>
-        <p className="legal-policy-link">
-          <a href={`/${lang}/policy`}>{t.policyLink || 'Policy'}</a>
-        </p>
         <p className="legal-info">
           {t.legalInfo} <br />
           {t.legalTaxId} | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>

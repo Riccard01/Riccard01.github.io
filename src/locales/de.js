@@ -57,6 +57,68 @@ export default {
     readMore: "Mehr lesen",
     showLess: "Weniger anzeigen",
     dotAria: (idx) => `Zur Bewertung ${idx + 1}`,
+    reviews: [
+      {
+        id: 1,
+        name: "Logan Hale",
+        role: "Gast",
+        text: "Was fur ein wunderbarer Tag auf dem Ligurischen Meer mit Riccardo. Die Aussicht vom Wasser ist atemberaubend und die Route kann nach Wunsch angepasst werden. Besonders gefallen haben uns Portofino und der Tauchgang zur Christusstatue im Meer. Am Nachmittag gab es einen tollen Aperitivo und zum Abschluss einen spektakularen Sonnenuntergang.",
+      },
+      {
+        id: 2,
+        name: "Linda",
+        role: "Lokaler Guide",
+        text: "Wir hatten eine fantastische Zeit mit Riccardo auf seinem Boot. Die Tour wurde auf unsere Bedurfnisse zugeschnitten, mit Badestopp in warmem Wasser und einem wunderbaren Aperitivo bei Sonnenuntergang. Man merkt die Liebe zum Detail in jedem Schritt. Die Atmosphare war professionell und gleichzeitig sehr freundlich.",
+      },
+      {
+        id: 3,
+        name: "Vincent Steenhoute",
+        role: "Gast",
+        text: "Danke Riccardo, dass du deine wunderschone Region mit uns geteilt hast! Wir haben die sonnige Fahrt entlang der Kuste und den super leckeren Aperitivo sehr genossen.",
+      },
+      {
+        id: 4,
+        name: "Vents Dzerkalis",
+        role: "Gast",
+        text: "Grossartige Erfahrung mit einem grossartigen Guide!",
+      },
+      {
+        id: 5,
+        name: "Andrea Albergo",
+        role: "Gast",
+        text: "Unvergessliche Bootserfahrung mit Riccardo! Wir haben einen wirklich magischen Tag auf diesem spektakularen Ausflug verbracht. Die Landschaft war atemberaubend, das Wasser kristallklar und Riccardo war der grosse Mehrwert: kompetent, sympathisch und professionell. Alles war bis ins Detail organisiert. Sehr empfehlenswert!",
+      },
+      {
+        id: 6,
+        name: "Davide Colella",
+        role: "Gast",
+        text: "Ein perfekter Tag! Riccardo ist super vorbereitet und unglaublich freundlich. Wenn du ein einzigartiges Erlebnis suchst, ist Leggero Tour genau richtig.",
+      },
+      {
+        id: 7,
+        name: "Lana F",
+        role: "Gast",
+        text: "Die Reise war fur unsere ganze Familie ein unvergessliches Erlebnis. Der Skipper war aufmerksam, flexibel und sehr sicherheitsorientiert. Auch die Organisation war klar und unkompliziert. Preis-Leistung im Vergleich zu anderen Angeboten war ausgezeichnet, wir wurden es sofort wieder machen.",
+      },
+      {
+        id: 8,
+        name: "Federico Albani",
+        role: "Gast",
+        text: "Feuerwerk am Abend vom Meer aus zu sehen ist unbezahlbar! Riccardo ist sehr hilfsbereit, voller Begeisterung und weiss genau, wie man ein einzigartiges Erlebnis schafft.",
+      },
+      {
+        id: 9,
+        name: "Simone Salek",
+        role: "Gast",
+        text: "Eine unvergessliche Fahrt mit atemberaubenden Ausblicken und perfekter Professionalitat. Riccardos Erfahrung und Liebe zum Detail sorgten fur ein sicheres, authentisches und sehr charmantes Erlebnis auf dem Meer. Sehr zu empfehlen!",
+      },
+      {
+        id: 10,
+        name: "Florence Kollie",
+        role: "Gast",
+        text: "Um diese wunderbare Region Ligurien wirklich zu verstehen, muss man sie vom Meer aus sehen. Von Land aus wird man ihr nicht gerecht. Riccardo ist ein erfahrener Wasser-Guide: diskret, warmherzig und vertraut wie ein alter Freund. Er lasst dich den italienischen Traum einen Tag lang als Einheimischer erleben.",
+      },
+    ],
   },
   faq: {
     ...en.faq,

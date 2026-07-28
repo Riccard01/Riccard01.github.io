@@ -57,6 +57,68 @@ export default {
     readMore: "Lire plus",
     showLess: "Lire moins",
     dotAria: (idx) => `Aller a l'avis ${idx + 1}`,
+    reviews: [
+      {
+        id: 1,
+        name: "Logan Hale",
+        role: "Invite",
+        text: "Quelle magnifique journee sur la mer de Ligurie avec Riccardo. Les vues depuis l'eau sont splendides et l'itineraire se personnalise selon vos envies. Nous avons adore faire escale a Portofino et plonger pour voir le Christ des Abysses. L'apres-midi, un excellent aperitif nous a ete servi, puis un coucher de soleil spectaculaire.",
+      },
+      {
+        id: 2,
+        name: "Linda",
+        role: "Guide locale",
+        text: "Nous avons passe un moment fantastique avec Riccardo sur son bateau. Le tour a ete adapte a nos besoins, avec baignade dans une eau chaude et un superbe aperitif au coucher du soleil. On ressent le soin apporte a chaque detail. L'ambiance etait professionnelle et en meme temps tres conviviale.",
+      },
+      {
+        id: 3,
+        name: "Vincent Steenhoute",
+        role: "Invite",
+        text: "Merci Riccardo d'avoir partage votre magnifique region avec nous. Nous avons adore la balade ensoleillee le long de la cote et le delicieux aperitif.",
+      },
+      {
+        id: 4,
+        name: "Vents Dzerkalis",
+        role: "Invite",
+        text: "Super experience avec un super guide!",
+      },
+      {
+        id: 5,
+        name: "Andrea Albergo",
+        role: "Invite",
+        text: "Experience inoubliable en bateau avec Riccardo. Nous avons passe une journee magique avec des paysages epoustouflants et une mer cristalline. Riccardo a ete professionnel, sympathique et tres rassurant. Tout etait soigne dans les moindres details. Je recommande vivement.",
+      },
+      {
+        id: 6,
+        name: "Davide Colella",
+        role: "Invite",
+        text: "Journee parfaite! Riccardo est exceptionnel et tres bien prepare. Si vous cherchez une experience unique, Leggero Tour est le bon choix.",
+      },
+      {
+        id: 7,
+        name: "Lana F",
+        role: "Invite",
+        text: "Cette sortie a ete amusante et inoubliable pour toute notre famille. Le capitaine etait attentif, flexible et tres axe sur la securite. L'organisation etait egalement claire et fluide. Le rapport qualite-prix etait excellent par rapport aux autres options, nous recommencerions sans hesitation.",
+      },
+      {
+        id: 8,
+        name: "Federico Albani",
+        role: "Invite",
+        text: "Voir les feux d'artifice le soir depuis la mer n'a pas de prix. Riccardo est tres disponible et sait faire vivre une experience vraiment unique.",
+      },
+      {
+        id: 9,
+        name: "Simone Salek",
+        role: "Invite",
+        text: "Un voyage inoubliable avec des vues magnifiques et une professionalite irreprochable. L'experience de Riccardo et son attention aux details nous ont offert une sortie sure, authentique et pleine de charme.",
+      },
+      {
+        id: 10,
+        name: "Florence Kollie",
+        role: "Invite",
+        text: "Pour comprendre cette sublime Ligurie dont Genes est la capitale, il faut la regarder depuis la mer qui l'a faconnee. Depuis la terre, on ne saisit pas la meme beaute. Riccardo est un guide maritime experimente, discret et chaleureux comme un vieil ami. Il vous fait vivre l'Italie de l'interieur le temps d'une journee.",
+      },
+    ],
   },
   faq: {
     ...en.faq,

@@ -57,6 +57,68 @@ export default {
     readMore: "Czytaj wiecej",
     showLess: "Pokaz mniej",
     dotAria: (idx) => `Przejdz do opinii ${idx + 1}`,
+    reviews: [
+      {
+        id: 1,
+        name: "Logan Hale",
+        role: "Gosc",
+        text: "To byl cudowny dzien na Morzu Liguryjskim z Riccardo. Widoki z lodzi sa niesamowite, a trase mozna dopasowac do swoich oczekiwan. Najbardziej podobal nam sie postoj w Portofino i nurkowanie przy Chrystusie z Otchlani. Po poludniu czekalo na nas swietne aperitivo, a dzien zakonczyl sie spektakularnym zachodem slonca.",
+      },
+      {
+        id: 2,
+        name: "Linda",
+        role: "Lokalna przewodniczka",
+        text: "Spedzilismy fantastyczny czas z Riccardo na lodzi. Wycieczka byla dopasowana do naszych potrzeb, z kapiela w cieplej wodzie i pieknym aperitivo o zachodzie slonca. Widac ogromna dbalosc o detale na kazdym etapie. Atmosfera byla profesjonalna, ale jednoczesnie bardzo przyjazna i swobodna.",
+      },
+      {
+        id: 3,
+        name: "Vincent Steenhoute",
+        role: "Gosc",
+        text: "Dziekujemy Riccardo za pokazanie nam Twojego pieknego regionu! Sloneczny rejs wzdluz wybrzeza i pyszne aperitivo byly znakomite.",
+      },
+      {
+        id: 4,
+        name: "Vents Dzerkalis",
+        role: "Gosc",
+        text: "Swietne doswiadczenie ze swietnym przewodnikiem!",
+      },
+      {
+        id: 5,
+        name: "Andrea Albergo",
+        role: "Gosc",
+        text: "Niezapomniana wycieczka lodzia z Riccardo! To byl magiczny dzien: przepiekne widoki, krystaliczna woda i doskonala organizacja. Riccardo byl profesjonalny, serdeczny i dbal o kazdy detal. Goraco polecamy.",
+      },
+      {
+        id: 6,
+        name: "Davide Colella",
+        role: "Gosc",
+        text: "Dzien idealny! Riccardo jest swietnie przygotowany i bardzo pozytywny. Jesli chcesz wyjatkowego doswiadczenia, Leggero Tour to najlepszy wybor.",
+      },
+      {
+        id: 7,
+        name: "Lana F",
+        role: "Gosc",
+        text: "To byl zabawny i niezapomniany wyjazd dla calej naszej rodziny. Kapitan byl uwazny, elastyczny i bardzo skupiony na bezpieczenstwie. Organizacja byla jasna i bezproblemowa. W porownaniu z innymi ofertami stosunek jakosci do ceny okazal sie znakomity, chetnie zrobilibysmy to ponownie.",
+      },
+      {
+        id: 8,
+        name: "Federico Albani",
+        role: "Gosc",
+        text: "Wieczorne fajerwerki oglądane z morza sa bezcenne! Riccardo ma ogromny entuzjazm i potrafi stworzyc naprawde wyjatkowe przezycie.",
+      },
+      {
+        id: 9,
+        name: "Simone Salek",
+        role: "Gosc",
+        text: "Niezapomniana podroz z zapierajacymi dech widokami i perfekcyjnym profesjonalizmem. Dzieki doswiadczeniu Riccardo i trosce o szczegoly czulismy sie bezpiecznie i swobodnie przez caly rejs.",
+      },
+      {
+        id: 10,
+        name: "Florence Kollie",
+        role: "Gosc",
+        text: "Aby naprawde zrozumiec Ligurie i jej zwiazek z morzem, trzeba zobaczyc ja od strony wody. Genua i cale to wybrzeze pokazuja swoj prawdziwy charakter wlasnie z morza. Riccardo to doswiadczony, dyskretny, a jednoczesnie bardzo serdeczny przewodnik, dzieki ktoremu mozna poczuc sie jak lokalny mieszkaniec na jeden dzien.",
+      },
+    ],
   },
   faq: {
     ...en.faq,
