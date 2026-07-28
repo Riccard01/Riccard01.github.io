@@ -9,6 +9,8 @@ import img8 from "../assets/nape.jpeg";
 import img10 from "../assets/melone.jpeg";
 import img11 from "../assets/sori.jpeg";
 import img12 from "../assets/camo.jpeg";
+import clockIcon from "../assets/clock_dark.svg";
+import guestsIcon from "../assets/guests_dark.svg";
 
 
 export default function ExperienceCarousel() {
@@ -27,26 +29,29 @@ export default function ExperienceCarousel() {
     {
       id: '0',
       images: [img2, img6, img10],
-      title: 'The Rainbow Tour',
-      duration: '5-10 HOURS • 4 GUESTS MAX',
-      price: 'From €750',
-      desc: "Your ideal solution to explore the gems of the Two Gulfs at your own pace. Sheer cliffs, pristine bays, and charming seaside villages. A tailored nautical experience with fresh drinks and onboard snacks for total relaxation between sky and sea."
+      title: 'Portofino Private Boat Tour',
+      time: '5-10 Hrs',
+      guests: '5 Max',
+      price: 'From €750 per group',
+      desc: "Explore the gems of the Two Gulfs at your own pace. Discover sheer cliffs, pristine bays, and charming seaside villages with drinks and onboard snacks included."
     },
     {
       id: '1',
       images: [img5, img7, img8],
       title: 'Gourmet Sunset Cruise',
-      duration: '3 HOURS • 7 GUESTS MAX',
-      price: 'From €390',
-      desc: "Let yourself be cradled by the golden waves of Boccadasse as a special maritime delivery reaches us on board: the signature 'Il Genovese' aperitif. Prosecco for everyone, lounge music, and the unique charm of the coastline illuminated by golden lights—the ultimate way to experience the sea of Genoa."
+      time: '4 Hrs',
+      guests: '14 Max',
+      price: 'From €390 per group',
+      desc: "Experience a golden-hour sunset cruise off Genoa and Boccadasse featuring the signature 'Il Genovese' aperitif, Prosecco, and lounge music."
     },
     {
       id: '2',
       images: [img4, img11, img12],
       title: 'Private Transfer',
-      duration: '7 GUESTS MAX',
-      price: 'From €350',
-      desc: "Skip the traffic and reach Portofino or Camogli, amidst dancing dolphins and breathtaking views for your travels along the Ligurian coast."
+      time: '30 min',
+      guests: '7 Max',
+      price: 'From €250 per group',
+      desc: "Skip the traffic along the Ligurian coast with a fast, scenic water transfer directly to Portofino or Camogli."
     }
   ];
 
@@ -71,7 +76,6 @@ export default function ExperienceCarousel() {
 
   const centerInitialCard = () => {
     const carousel = carouselRef.current;
-    // Centra la seconda card solo se siamo su schermi mobile/tablet (< 1024px)
     if (!carousel || window.innerWidth >= 1024) return;
 
     const wrappers = carousel.querySelectorAll('.carousel-wrapper');
@@ -118,6 +122,7 @@ export default function ExperienceCarousel() {
           >
             <div className="carousel-slide">
               <div className="slide-content">
+                <div className="price-chip">{exp.price}</div>
                 <div className="image-grid">
                   {exp.images && exp.images.map((src, idx) => (
                     <div key={idx} className={`grid-item grid-item-${idx}`}>
@@ -127,19 +132,27 @@ export default function ExperienceCarousel() {
                 </div>
                 <div className="pill-wrapper">
                   <button className="nav-link nav-booking" onClick={openWhatsApp}>
-                    Discover
+                    Call Us
                   </button>
                 </div>
               </div>
             </div>
 
             <div className="text-content-wrapper">
-              <div className="title-container">
-                <span className="duration-tag">{exp.duration}</span>
-              </div>
               <h3>{exp.title}</h3>
               <p>{exp.desc}</p>
-              <div className="price-tag">{exp.price}</div>
+              <div className="title-container">
+                <div className="meta-info-container">
+                  <span className="duration-tag">
+                    <img src={clockIcon} alt="Duration" className="duration-icon" />
+                    {exp.time}
+                  </span>
+                  <span className="duration-tag">
+                    <img src={guestsIcon} alt="Guests" className="guests-icon" />
+                    {exp.guests}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         ))}

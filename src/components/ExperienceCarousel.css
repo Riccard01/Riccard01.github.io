@@ -152,11 +152,11 @@
 
 .duration-tag {
   font-family: 'Work Sans', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 20px;
   font-variant: all-small-caps;
   font-weight: 600;
-  color: #3F6883;
+  color: #3446E3;
 }
 
 .price-tag {
@@ -336,3 +336,53 @@
     display: inline-block;
   }
 
+
+
+
+.title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.meta-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 16px;
+}
+
+.duration-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.duration-icon,
+.guests-icon {
+  width: 18px; /* Modifica a piacimento se vuoi renderle ancora più piccole o grandi */
+  height: 18px;
+  object-fit: contain;
+}
+
+.slide-content {
+  position: relative;
+}
+
+.price-chip {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
