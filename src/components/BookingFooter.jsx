@@ -1,8 +1,10 @@
 import React from "react";
 import "./BookingFooter.css";
 import checkIcon from '../assets/people.svg';
+import { getLocale } from '../utils/locale';
 
 export default function BookingFooter({
+  lang = 'it',
   total = "€0.00",
   originalTotal = null,
   discountedTotal = null,
@@ -22,36 +24,21 @@ export default function BookingFooter({
   selectedEmbark = "Porto Antico",
   selectedDisembark = "Porto Antico"
 }) {
-  const isMissing = (val) => !val || val === "Select date on calendar" || val === "Select guests" || val === "";
-
-  let serviceName = "Standard Charter";
-  if (selectedSlot) {
-    serviceName = selectedSlot.split(" (")[0]; 
-  }
-
-  const cleanTime = selectedSlot ? selectedSlot.split(" (")[0] : "";
+  const dict = getLocale(lang);
+  const t = dict.bookingFooter;
 
   let formattedDate = null;
-  if (selectedDate && selectedDate !== "Select date on calendar") {
+  if (selectedDate) {
     const [year, month, day] = selectedDate.split("-");
     const dateObj = new Date(year, month - 1, day);
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    
-    let englishDate = dateObj.toLocaleDateString('en-US', options);
-    const dayNum = parseInt(day, 10);
-    let suffix = "th";
-    if (dayNum === 1 || dayNum === 21 || dayNum === 31) suffix = "st";
-    else if (dayNum === 2 || dayNum === 22) suffix = "nd";
-    else if (dayNum === 3 || dayNum === 23) suffix = "rd";
-    
-    formattedDate = englishDate.replace(`, ${year}`, `${suffix} ${year}`);
+    formattedDate = dateObj.toLocaleDateString(dict.localeCode || 'it-IT', options);
   }
 
-  // Logica ripristinata per il trasferimento
-  let transferStatus = "None";
-  if (arrangePickup && arrangeDropoff) transferStatus = "Round-Trip Ticket";
-  else if (arrangePickup) transferStatus = "One-Way (Inbound)";
-  else if (arrangeDropoff) transferStatus = "One-Way (Outbound)";
+  let transferStatus = t.transferNone;
+  if (arrangePickup && arrangeDropoff) transferStatus = t.transferRoundTrip;
+  else if (arrangePickup) transferStatus = t.transferInbound;
+  else if (arrangeDropoff) transferStatus = t.transferOutbound;
 
   const cleanPortName = (name) => {
     if (!name) return "";
@@ -83,7 +70,7 @@ export default function BookingFooter({
             </div>
 
             {/* Guests chip with check icon and number only */}
-            {selectedGuests && selectedGuests !== "Select guests" && (
+            {selectedGuests && (
               <div className="guests-badge-chip">
                 <img src={checkIcon} alt="Check" className="chip-check-icon" />
                 <span>{selectedGuests.match(/\d+/)?.[0] || selectedGuests}</span>
@@ -96,19 +83,19 @@ export default function BookingFooter({
             
             {/* ROW 1: Date (Always visible) */}
             <div className="summary-card-row-one">
-              {selectedDate && selectedDate !== "Select date on calendar" ? (
+              {selectedDate ? (
                 <span key={selectedDate} className="anim-fade highlight-data">
                   {formattedDate}
                 </span>
               ) : (
-                <span className="missing-text">*Select date on calendar</span>
+                <span className="missing-text">*{t.missingDate}</span>
               )}
             </div>
 
             {/* ROW 2: Slot (Always visible) */}
             <div className="summary-card-row-two">
               <span key={selectedSlot} className="anim-fade highlight-data slot-highlight">
-                {selectedBoatName ? selectedSlot : "Selecting experience..."}
+                {selectedBoatName ? selectedSlot : t.selectingExperience}
               </span>
             </div>
 
@@ -117,19 +104,19 @@ export default function BookingFooter({
               <>
                 {/* ROW 3: Embark and Disembark Ports */}
                 <div className="summary-card-row-three anim-fade">
-                  <span className="connector-text">Port: </span>
+                  <span className="connector-text">{t.port} </span>
                   <span key={whereText} className="highlight-data truncate-text">
-                    {whereText ? whereText : "Selecting ports..."}
+                    {whereText ? whereText : t.selectingPorts}
                   </span>
                 </div>
 
                 {/* ROW 4: Private Transfer with gray indicator on the left */}
                 <div className="summary-card-row-four anim-fade">
                   <span className="connector-text" style={{ color: 'rgba(255, 255, 255, 0.35)' }}>
-                    Private Transfer: 
+                    {t.privateTransfer} 
                   </span>
                   <span key={transferStatus} className="transfer-status-tag">
-                    {transferStatus ? transferStatus : "Pending"}
+                    {transferStatus ? transferStatus : t.pending}
                   </span>
                 </div>
               </>
@@ -142,7 +129,7 @@ export default function BookingFooter({
 
       <div className="booking-footer-action-row">
         <div className="booking-footer-price-block">
-          <span className="booking-footer-total-label">Total</span>
+          <span className="booking-footer-total-label">{t.total}</span>
           <div className="booking-footer-price-column">
             {discountedTotal && originalTotal && discountedTotal !== originalTotal ? (
               <>
@@ -164,7 +151,7 @@ export default function BookingFooter({
               disabled={buttonDisabled} 
               onClick={onButtonClick}
             >
-              Continue
+              {buttonLabel || t.continue}
             </button>
           )}
 
@@ -174,7 +161,7 @@ export default function BookingFooter({
               className="booking-footer-btn checkout-btn" 
               onClick={onTransferClick}
             >
-              Proceed to Checkout
+              {t.proceedToCheckout}
             </button>
           )}
         </div>

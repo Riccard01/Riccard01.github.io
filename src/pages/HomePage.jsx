@@ -1,60 +1,28 @@
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import florence from '../assets/florence.webp';
 import homepageprova from "../assets/homepageprova.webm";
-import aperitivo from '../assets/aperitivo.webp';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
-import Masonry from '../components/Masonry';
-// import gourmet from '../assets/gourmet.mp4';
 import Faq from '../components/Faq';
 import ReviewCarousel from '../components/ReviewCarousel';
 import FleetSection from '../components/FleetSection';
-import AboutSection from '../components/AboutSection';
 import PrivateTransfer from '../components/PrivateTransfer';
 import marian from '../assets/marian.jpeg'
+import { getLocale } from '../utils/locale';
 
-
-function HomePage() {
-  const [isVisibleExperiences, setIsVisibleExperiences] = useState(false);
-  // New state to handle deferred video loading
-  const [videoSrc, setVideoSrc] = useState(null);
+function HomePage({ lang = 'it', setLang = () => {} }) {
+  const dict = getLocale(lang);
   const experiencesRef = useRef(null);
 
   useEffect(() => {
-    // 1. Existing logic for IntersectionObserver
-    const observer = new window.IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisibleExperiences(true);
-        }
-      },
-      { threshold: 0.7 }
-    );
-    if (experiencesRef.current) {
-      observer.observe(experiencesRef.current);
-    }
+    const section = experiencesRef.current;
+    if (!section) return;
+    const observer = new window.IntersectionObserver(() => {}, { threshold: 0.7 });
+    observer.observe(section);
 
-    // 2. Logic to load the video ONLY after the site is ready
-    const handlePageLoad = () => {
-      setTimeout(() => {
-        setVideoSrc(homepageprova);
-      }, 100);
-    };
-
-    if (document.readyState === 'complete') {
-      handlePageLoad();
-    } else {
-      window.addEventListener('load', handlePageLoad);
-    }
-
-    // Cleanup of Observer and Event Listener on unmount
     return () => {
-      if (experiencesRef.current) {
-        observer.unobserve(experiencesRef.current);
-      }
-      window.removeEventListener('load', handlePageLoad);
+      observer.unobserve(section);
     };
   }, []);
 
@@ -66,7 +34,7 @@ function HomePage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar lang={lang} setLang={setLang} />
 <section className="hero-section">
 <img 
   src={marian} 
@@ -83,12 +51,12 @@ function HomePage() {
 />
   <div className="hero-gradient"></div>
   <div className="app-content">
-    <span className="early-bird-chip">Early Bird 10% OFF</span>
-    <h1 className="main-title">Private Boat tours<br/> of the Two Gulfs</h1>
+    <span className="early-bird-chip">{dict.homepage.earlyBird}</span>
+    <h1 className="main-title">{dict.homepage.title.split('\n')[0]}<br/> {dict.homepage.title.split('\n')[1]}</h1>
     
     {/* Sostituisci il <p> precedente con questo blocco */}
     <div className="hero-subtitle">
-      <p>One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Stay Leggero!</p>
+      <p>{dict.homepage.subtitle}</p>
     </div>
   </div>
 </section>
@@ -98,26 +66,23 @@ function HomePage() {
           {/* <h2 className='package-title'>Our Packages</h2>
             <p className='package-desc'>The choice is yours, we've handpicked the best activities ready for you to live!</p> */}
 
-          <ExperienceCarousel />
+          <ExperienceCarousel lang={lang} />
         </div>
         {/* <img className="meimmagine" src={me}/> */}
 
-      <FleetSection />
+      <FleetSection lang={lang} />
 
 <video src={homepageprova} autoPlay muted loop playsInline className="thevideo" />
       </section>
 
-      <ReviewCarousel />
-      {/* <Masonry /> */}
+      <ReviewCarousel lang={lang} />
 
-
-<PrivateTransfer />
+    <PrivateTransfer lang={lang} />
 
       <section className="Faq-section">
-        <Faq />
-      {/* <AboutSection /> */}
+        <Faq lang={lang} />
       </section>
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }

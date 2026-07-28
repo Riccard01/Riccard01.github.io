@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import "./Calendar.css";
-import { t, getLanguage } from "../utils/i18n";
 import { findApplicableEarlyDiscount } from "../utils/priceCalculator";
 import chevronUp from "../assets/chevron-up.svg";
 import chevronDown from "../assets/chevron-down.svg";
+import { getLocale } from '../utils/locale';
 
 function getDaysInMonth(year, month) {
 	return new Date(year, month + 1, 0).getDate();
@@ -17,7 +17,18 @@ function getFirstDayOfWeek(year, month) {
 	return day === 0 ? 6 : day - 1;
 }
 
-export default function Calendar({ onDateSelect, onSelectBoat, selectedDate, onMonthChange, isDateEnabled, discounts = null }) {
+export default function Calendar({ lang = 'it', onDateSelect, selectedDate, onMonthChange, isDateEnabled, discounts = null }) {
+	const dict = getLocale(lang);
+	const localeCode = dict.localeCode || 'it-IT';
+
+	const daysFormatter = new Intl.DateTimeFormat(localeCode, { weekday: 'short' });
+	const monthFormatter = new Intl.DateTimeFormat(localeCode, { month: 'long' });
+
+	const daysOfWeek = Array.from({ length: 7 }, (_, i) => {
+		const d = new Date(2026, 5, 1 + i);
+		return daysFormatter.format(d).replace('.', '');
+	});
+
 	const today = new Date();
 	const [currentMonth, setCurrentMonth] = useState(today.getMonth());
 	const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -35,7 +46,6 @@ export default function Calendar({ onDateSelect, onSelectBoat, selectedDate, onM
 
 	const daysInMonth = getDaysInMonth(currentYear, currentMonth);
 	const firstDayOfWeek = getFirstDayOfWeek(currentYear, currentMonth);
-	const daysOfWeek = t("daysShort");
 
 	const handlePrevMonth = () => {
 		let newMonth, newYear;
@@ -162,14 +172,14 @@ export default function Calendar({ onDateSelect, onSelectBoat, selectedDate, onM
 			   <div className="calendar-content">
 				<div className="calendar-header">
 					<div className="calendar-month-label">
-						{t("months")[currentMonth]} {currentYear}
+						{monthFormatter.format(new Date(currentYear, currentMonth, 1))} {currentYear}
 					</div>
 					<div className="calendar-nav">
-						<button className="calendar-nav-btn" onClick={handlePrevMonth} aria-label="Mese precedente">
-							<img src={chevronUp} alt="Mese precedente" className="calendar-chevron" />
+						<button className="calendar-nav-btn" onClick={handlePrevMonth} aria-label={dict.calendar.prevMonth}>
+							<img src={chevronUp} alt={dict.calendar.prevMonth} className="calendar-chevron" />
 						</button>
-						<button className="calendar-nav-btn" onClick={handleNextMonth} aria-label="Mese successivo">
-							<img src={chevronDown} alt="Mese successivo" className="calendar-chevron" />
+						<button className="calendar-nav-btn" onClick={handleNextMonth} aria-label={dict.calendar.nextMonth}>
+							<img src={chevronDown} alt={dict.calendar.nextMonth} className="calendar-chevron" />
 						</button>
 					</div>
 				</div>

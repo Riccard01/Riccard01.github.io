@@ -6,6 +6,7 @@ import Portofino from '../assets/portofino_extra_fee.webp';
 import Camogli from '../assets/port-camogli.webp';
 import Nervi from '../assets/nervi.webp';
 import Santa from '../assets/santa_margherita_ligure_extra_fee.webp';
+import { getLocale } from '../utils/locale';
 
 const AVAILABLE_PORTS = [
   {
@@ -52,14 +53,11 @@ const AVAILABLE_PORTS = [
   }
 ];
 
-const FLEET_VEHICLES = [
-  "Mercedes E Class",
-  "Mercedes Sprinter",
-  "Mercedes V Class",
-  "Iveco Daily"
-];
+export default function PrivateTransfer({ lang = 'it' }) {
+  const dict = getLocale(lang);
+  const t = dict.privateTransfer;
+  const fleetVehicles = t.fleetVehicles || [];
 
-export default function PrivateTransfer() {
   const carouselRef = useRef(null);
   const [visibleIndices, setVisibleIndices] = useState({});
 
@@ -137,15 +135,11 @@ export default function PrivateTransfer() {
       <div className="private-transfer-container">
         {/* Contenuto Principale */}
         <div className="private-transfer-content">
-          <h2 className="private-transfer-title">Easy transport</h2>
-          <p className="private-transfer-subtitle">
-            Our tours depart from the main ports of the two gulfs, with the option to include a private transfer service.
-            Organize your ideal experience directly from our interactive form.
-            Based on your logistical needs, we will automatically select the most suitable vehicle from our fleet:
-          </p>
+          <h2 className="private-transfer-title">{t.title}</h2>
+          <p className="private-transfer-subtitle">{t.subtitle}</p>
           
           <ul className="fleet-list">
-            {FLEET_VEHICLES.map((vehicle, index) => (
+            {fleetVehicles.map((vehicle, index) => (
               <li key={index} className="fleet-item">
                 <span className="fleet-bullet">•</span> {vehicle}
               </li>
@@ -155,8 +149,8 @@ export default function PrivateTransfer() {
 
         {/* Carousel Header */}
         <div className="carousel-header">
-          <h3 className="carousel-section-title">Our departure ports:</h3>
-          <p className="carousel-section-hint">You can choose a custom departure and return point.</p>
+          <h3 className="carousel-section-title">{t.portsTitle}</h3>
+          <p className="carousel-section-hint">{t.portsHint}</p>
         </div>
       </div>
 
@@ -201,7 +195,7 @@ export default function PrivateTransfer() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  Scopri Location
+                  {t.discoverLocation}
                 </a>
               </div>
             </div>

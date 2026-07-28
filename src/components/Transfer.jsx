@@ -1,6 +1,7 @@
 import React from "react";
 import "./Transfer.css";
 import DropDown from "./DropDown";
+import { getLocale } from '../utils/locale';
 
 // Props:
 // - embarkOptions: array of strings for embark dropdown
@@ -14,6 +15,7 @@ import DropDown from "./DropDown";
 // Icons: use emoji as placeholder, replaceable with svg
 
 const Transfer = ({
+  lang = 'it',
   embarkOptions = [],
   selectedEmbark = "",
   onEmbarkChange = () => {},
@@ -23,6 +25,8 @@ const Transfer = ({
   pickupLabel = "Arrange Pickup?",
   className = ""
 }) => {
+  const dict = getLocale(lang);
+
   return (
     <div className={`transfer-container ${className}`.trim()}>
       <div className="transfer-section">
@@ -49,14 +53,14 @@ const Transfer = ({
             onClick={() => onPickupChange(true)}
             type="button"
           >
-            Yes
+            {dict.transfer.yes}
           </button>
           <button
             className={!arrangePickup ? "active" : ""}
             onClick={() => onPickupChange(false)}
             type="button"
           >
-            No
+            {dict.transfer.no}
           </button>
         </div>
       </div>

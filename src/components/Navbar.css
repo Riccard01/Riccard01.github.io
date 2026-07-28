@@ -19,7 +19,7 @@
 
 .navbar-container {
   display: flex;
-  justify-content: flex-end; /* Allinea il bottone a destra */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1320px;
@@ -28,9 +28,42 @@
   box-sizing: border-box;
 }
 
+.navbar-brand {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
 /* Contenitore Bottone */
 .wrapper-btn {
   pointer-events: auto; /* Riattiva i click sul bottone */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang-switcher {
+  min-height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(3, 24, 36, 0.6);
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.lang-switcher option {
+  color: #0b232e;
 }
 
 /* Bottone WhatsApp Verde */
@@ -38,9 +71,9 @@
   background: #25D366 !important;
   color: #ffffff !important;
   border: none;
-  min-height: 42px;
+  max-height: 48px;
   border-radius: 999px;
-  padding: 8px 20px;
+  padding: 8px 8px;
   font-family: 'Work Sans', sans-serif;
   font-size: 14px !important;
   font-weight: 600 !important;
@@ -50,7 +83,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   outline: none;
 }
@@ -69,6 +102,14 @@
   width: 18px;
   height: 18px;
   filter: brightness(0) invert(1); /* Rende l'icona bianca */
+}
+
+.whatsapp-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
 }
 
 /* Pallino Verde/Bianco d'Inizio Online con effetto Pulsante */
@@ -102,8 +143,19 @@
   .navbar-container {
     padding: 0 16px;
   }
+  .navbar-logo {
+    height: 28px;
+  }
+  .lang-switcher {
+    max-width: 90px;
+    padding: 8px 10px;
+  }
   .nav-whatsapp {
-    padding: 8px 16px;
+    padding: 8px 8px;
     font-size: 13px !important;
+  }
+  .whatsapp-avatar {
+    width: 34px;
+    height: 34px;
   }
 }

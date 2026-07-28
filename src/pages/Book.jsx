@@ -5,14 +5,11 @@ import { db } from '../firebase';
 import { getBoatsWithAvailability, fetchCaptainsMonthAvailability } from '../utils/boatHelper';
 
 import Navbar from '../components/Navbar';
-import Calendar from '../components/Calendar';
 import aperitivo from '../assets/aperitivo.webp';
 import leggera from '../assets/leggera.webp';
 import '../App.css';
 import BoatCard from "../components/BoatCard";
 import DropDown from "../components/DropDown";
-import service from "../assets/service.svg";
-import guests from "../assets/guests.svg";
 import Transfer from '../components/Transfer';
 import BookingFooter from '../components/BookingFooter';
 import BookingForm from '../components/BookingForm';
@@ -21,12 +18,15 @@ import francy from '../assets/leggera.webp'
 import allegra from '../assets/leggera.webp'
 import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount } from '../utils/priceCalculator';
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
+import { getLocale } from '../utils/locale';
 
 // Puoi aggiungere altre immagini se disponibili
 
 import './Book.css';
 
-function Book() {
+function Book({ lang = 'it', setLang = () => {} }) {
+  const dict = getLocale(lang);
+
   const [animate, setAnimate] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   // Load cached slot objects synchronously from module-level cache
@@ -37,7 +37,7 @@ function Book() {
 
   const [selectedTime, setSelectedTime] = useState(initialTimeOptions[0]);
   const [timeOptions, setTimeOptions] = useState(initialTimeOptions);
-  const [selectedPeople, setSelectedPeople] = useState("4 people");
+  const [selectedPeople, setSelectedPeople] = useState(dict.book.guestOptions?.[3] || "4 people");
   // State for transfer visibility
   const [showTransfer, setShowTransfer] = useState(false);
   // State for form visibility
@@ -192,8 +192,6 @@ function Book() {
     if (!el) return;
     const onScroll = () => {
       const children = Array.from(el.children);
-      const scrollLeft = el.scrollLeft;
-      const elWidth = el.offsetWidth;
       let minDiff = Infinity;
       let idx = 0;
       children.forEach((child, i) => {
@@ -268,9 +266,9 @@ function Book() {
           setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd));
         }
       }
-    } catch (e) {
+    } catch {
       // on error be conservative and clear selection
-      try { setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd)); } catch (_) { }
+      try { setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd)); } catch { }
     }
   }, [displayNameToSlotKey]);
 
@@ -376,7 +374,7 @@ function Book() {
 
         if (!chosen) chosen = caps[0] || null;
         if (mounted) setSelectedCaptain(chosen);
-      } catch (e) {
+      } catch {
         if (mounted) setSelectedCaptain(boat.captains && boat.captains[0] ? boat.captains[0] : null);
       }
     }
@@ -401,13 +399,13 @@ function Book() {
     try {
       window.history.replaceState({ bookingStep: 'list' }, '');
       lastPushedStep.current = 'list';
-    } catch (e) { }
+    } catch { }
 
     const onPop = (ev) => {
       const step = (ev.state && ev.state.bookingStep) || 'list';
       // If payment confirmed or we're on the post-confirmation state, go to home
       if (step === 'confirmed' || step === 'postconfirm') {
-        try { window.location.href = '/'; } catch (e) { }
+        try { window.location.href = '/'; } catch { }
         return;
       }
       if (step === 'list') {
@@ -434,7 +432,7 @@ function Book() {
       try {
         window.history.pushState({ bookingStep: step }, '');
         lastPushedStep.current = step;
-      } catch (e) { }
+      } catch { }
     }
   }, [showTransfer, showForm]);
 
@@ -449,7 +447,6 @@ function Book() {
     numPax: ppl,
   });
   const computedTotalStr = formatCurrency(computedTotal);
-  const computedAmountCents = eurosToCents(computedTotal);
   // compute discounted total (if a date is selected and discounts exist)
   const selDateStr = selectedDates[activeIndex] || null;
   const discountedTotalVal = (discounts && selDateStr) ? computeTotalPriceWithDiscount({
@@ -471,8 +468,8 @@ function Book() {
     try {
       const [y, m, d] = dateStr.split('-');
       const dt = new Date(+y, +m - 1, +d);
-      return dt.toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    } catch (e) { return dateStr; }
+      return dt.toLocaleDateString(dict.localeCode || 'it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    } catch { return dateStr; }
   };
 
   return (
@@ -481,21 +478,21 @@ function Book() {
         <div className="booking-confirmation">
           <div className="confirmation-card">
             <div className="confirmation-content">
-              <h2>Prenotazione confermata</h2>
+              <h2>{dict.book.confirmationTitle}</h2>
               <p className="conf-boat-name">{visibleBoats[activeIndex]?.name}</p>
               <p className="conf-details">
-                <strong>Giorno:</strong> {formatBookingDate(selectedDates[activeIndex])}
+                <strong>{dict.book.confirmationDay}</strong> {formatBookingDate(selectedDates[activeIndex])}
                 <br />
-                <strong>Ora:</strong> {selectedTime}
+                <strong>{dict.book.confirmationTime}</strong> {selectedTime}
                 <br />
-                <strong>Imbarco:</strong> {selectedEmbark}
+                <strong>{dict.book.confirmationEmbark}</strong> {selectedEmbark}
               </p>
               <div className="conf-actions">
                 <button
                   className="conf-home-btn"
-                  onClick={() => { try { window.location.href = '/'; } catch (e) { } }}
+                  onClick={() => { try { window.location.href = '/'; } catch { } }}
                 >
-                  Torna alla home
+                  {dict.book.backHome}
                 </button>
               </div>
             </div>
@@ -507,8 +504,8 @@ function Book() {
             <div className="booking-topbar">
               <button
                 className="booking-back-arrow"
-                onClick={() => { try { window.history.back(); } catch (e) { } }}
-                aria-label="Indietro"
+                onClick={() => { try { window.history.back(); } catch { } }}
+                aria-label={dict.book.backAria}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -516,9 +513,10 @@ function Book() {
               </button>
             </div>
           )}
-          {/* <Navbar /> */}
+          <Navbar lang={lang} setLang={setLang} />
           {showForm ? (
             <BookingForm
+              lang={lang}
               onSubmit={data => {
                 // when payment is confirmed inside BookingForm, start confirmation flow
                 try {
@@ -533,10 +531,10 @@ function Book() {
                     }
 
                     // mark the confirmed state and push a post-confirm state so back -> home
-                    try { window.history.replaceState({ bookingStep: 'confirmed' }, ''); } catch (e) { }
-                    try { window.history.pushState({ bookingStep: 'postconfirm' }, ''); lastPushedStep.current = 'postconfirm'; } catch (e) { }
+                    try { window.history.replaceState({ bookingStep: 'confirmed' }, ''); } catch { }
+                    try { window.history.pushState({ bookingStep: 'postconfirm' }, ''); lastPushedStep.current = 'postconfirm'; } catch { }
                   }
-                } catch (e) { }
+                } catch { }
                 // allow parent to handle submission as well
               }}
               onSlotUnavailableRetry={async () => {
@@ -587,26 +585,29 @@ function Book() {
             <div className="transfer-page-wrapper" style={{ paddingBottom: '180px' }}>
               {/* Transfer Imbarco */}
               <Transfer
+                lang={lang}
                 embarkOptions={embarkOptions}
                 selectedEmbark={selectedEmbark}
                 onEmbarkChange={setSelectedEmbark}
                 arrangePickup={arrangePickup}
                 onPickupChange={setArrangePickup}
-                embarkLabel="Imbarco"
-                pickupLabel="Richiedi private transfer fino al porto"
+                embarkLabel={dict.book.transferEmbarkLabel}
+                pickupLabel={dict.book.transferPickupLabel}
               />
               {/* Transfer Sbarco */}
               <Transfer
+                lang={lang}
                 embarkOptions={disembarkOptions}
                 selectedEmbark={selectedDisembark}
                 onEmbarkChange={setSelectedDisembark}
                 arrangePickup={arrangeDropoff}
                 onPickupChange={setArrangeDropoff}
-                embarkLabel="Sbarco"
-                pickupLabel="Richiedi private transfer fino al porto"
+                embarkLabel={dict.book.transferDisembarkLabel}
+                pickupLabel={dict.book.transferPickupLabel}
                 className="transfer-margin-bottom"
               />
               <BookingFooter
+                lang={lang}
                 total={computedTotalStr}
                 originalTotal={computedTotalStr}
                 discountedTotal={discountedTotalStr}
@@ -638,7 +639,7 @@ function Book() {
               <div className="book-dropdowns-wrapper">
                 <div className="dropdown-orari-flex">
                   <DropDown
-                    text="Orario"
+                    text={dict.book.timeDropdown}
                     value={selectedTime}
                     options={timeOptions}
                     onChange={setSelectedTime}
@@ -647,15 +648,15 @@ function Book() {
                 </div>
                 <div className="dropdown-persone-fit">
                   <DropDown
-                    text="Guests"
+                    text={dict.book.guestsDropdown}
                     value={selectedPeople}
-                    options={["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"]}
+                    options={dict.book.guestOptions || ["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"]}
                     onChange={setSelectedPeople}
                     width="fit-content"
                   />
                 </div>
               </div>
-              <div className="cta">{visibleBoats.length} solutions for the selected filters.</div>
+              <div className="cta">{dict.book.solutionsText(visibleBoats.length)}</div>
               <div
                 ref={bookRef}
                 className={`book${!animate ? ' animating' : ''}`}
@@ -672,6 +673,7 @@ function Book() {
                         image={boat.image || localImages[boat.name]}
                         background={boat.background || "#011010"}
                         calendarProps={{
+                          lang,
                           selectedDate: selectedDates[idx],
                           onDateSelect: date => {
                             const y = date.getFullYear();
@@ -743,7 +745,7 @@ function Book() {
 
                               // No information for this day -> treat as unavailable
                               return false;
-                            } catch (e) {
+                            } catch {
                               return false;
                             }
                           },
@@ -767,6 +769,7 @@ function Book() {
 {/* WRAPPER WITH SLIDEDOWN ANIMATION */}
               <div className={`booking-footer-slide-wrapper ${selectedDates[activeIndex] ? 'visible' : ''}`}>
                 <BookingFooter
+                  lang={lang}
                   total={computedTotalStr}
                   originalTotal={computedTotalStr}
                   discountedTotal={discountedTotalStr}

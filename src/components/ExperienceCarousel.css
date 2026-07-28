@@ -9,7 +9,7 @@
   padding: 0;
   background-color: #fbfaff;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
@@ -54,29 +54,24 @@
 
 .carousel {
   display: flex;
-  overflow-x: auto;
+  flex-direction: column;
+  overflow: visible;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 120px;
   margin: 0 auto;
   padding: 10px 6vw 30px 6vw !important;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
   box-sizing: border-box;
 }
 
 .carousel-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 0 0 88vw;
-  width: 88vw;
-  max-width: 480px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  opacity: 0.4;
-  transform: scale(0.92);
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: none;
+  transition: none;
+  opacity: 1;
+  transform: none;
   box-sizing: border-box;
 }
 
@@ -183,15 +178,10 @@
    ========================================================================== */
 
 .text-content-wrapper {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  will-change: opacity, transform;
-}
-
-.carousel-wrapper.is-visible .text-content-wrapper {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  transition: none;
+  will-change: auto;
 }
 
 .carousel-wrapper h2,
@@ -334,14 +324,6 @@
     display: none !important;
   }
 
-  .carousel {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 28px !important;
-    padding: 20px 0 !important;
-    overflow-x: visible !important;
-    scroll-snap-type: none !important;
-  }
 
   .carousel-wrapper {
     width: 100% !important;

@@ -1,8 +1,19 @@
 import React from "react";
 import "./Footer.css";
 import logo from '../assets/logo.svg';
+import phoneIcon from '../assets/phone.svg';
+import meAvatar from '../assets/me.webp';
+import { getLocale } from '../utils/locale';
 
-export default function Footer() {
+export default function Footer({ lang = 'it' }) {
+  const dict = getLocale(lang);
+  const t = dict.footer;
+  const navT = dict.navbar;
+
+  const openWhatsApp = () => {
+    window.location.href = 'whatsapp://send?phone=393463365699';
+  };
+
   return (
     <footer className="footer">
       <div className="footer-top-bar">
@@ -10,9 +21,11 @@ export default function Footer() {
           {/* Modificato src per usare il logo importato */}
           <img src={logo} alt="Leggero Tours Logo" className="footer-logo" />
         </div>
-        <div className='wrapper-btn'>
-          <button className="footer-link footer-booking" onClick={() => { window.location.href = '/book'; }}>
-            Check Availability
+        <div className='footer-btn-wrap'>
+          <button className="footer-whatsapp" onClick={openWhatsApp}>
+            <img src={meAvatar} alt="Riccardo" className="whatsapp-avatar" />
+            {navT.whatsappUs}
+            <img src={phoneIcon} alt="WhatsApp" className="whatsapp-icon" />
           </button>
         </div>
       </div>
@@ -28,14 +41,14 @@ export default function Footer() {
           <strong>Leggero Tours</strong> by Bottiglieri Riccardo
         </p>
         <p className="legal-info">
-          Headquarters: Genoa (GE) — Operating in Genoa and Portofino <br />
-          Tax ID: 03030880995 | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>
+          {t.legalInfo} <br />
+          {t.legalTaxId} | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>
         </p>
         <p className="legal-tax-note">
-          Service provided under the flat-rate regime under article 1, paragraphs 54 to 89 of Law No. 190/2014 and subsequent amendments, and therefore not subject to VAT.
+          {t.legalTaxNote}
         </p>
         <p className="legal-copyright">
-          © 2026 Leggero Tours. All rights reserved.
+          {t.copyright}
         </p>
       </div>
     </footer>

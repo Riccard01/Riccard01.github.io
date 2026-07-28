@@ -43,8 +43,6 @@ body.page-home #root {
   justify-content: flex-end;
   width: 100%;
   min-height: 80vh;
-
-
   overflow: visible; /* <--- IMPORTANTE: Cambia da hidden a visible, altrimenti il testo spinto sotto viene tagliato fisicamente dall'Hero stesso */
   z-index: 10;
 }
@@ -57,6 +55,7 @@ body.page-home #root {
   object-fit: cover;
   z-index: 0;
 }
+
 
 .thevideo {
   object-fit: cover;
@@ -91,28 +90,39 @@ body.page-home #root {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  width: 100%;
   max-width: 1280px;
-  text-align: left;
+  text-align: center;
 
   z-index: 99;              /* <--- AUMENTA QUESTO (es. da 2 a 99) */
   position: relative;       /* <--- ASSICURATI CHE CI SIA (lo z-index funziona solo con position relative/absolute/fixed) */
   overflow: visible;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-bottom: -3rem;
   margin-bottom: -7rem;
 }
 
 .hero-subtitle {
-  margin-left: 16px;
+  margin-left: 0;
   margin-bottom: 16px;
-  margin-right: 16px;
+  margin-right: 0;
   color: #031d2e;
   font-family: 'Work Sans', sans-serif;
   font-size: 16px;
-  line-height: 32px;             
+  line-height: 1.8;
   letter-spacing: 0px;       
   text-align: center;          
   font-weight: 400; 
-  max-width: 30%;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.hero-subtitle p {
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .package-desc {
@@ -127,10 +137,6 @@ body.page-home #root {
   text-align: center;          
   font-weight: 400; 
   max-width: 90%;
-}
-
-p .hero-subtitle {
-  text-align: center;
 }
 
 .early-bird-chip {
@@ -215,15 +221,35 @@ h2 {
 
 .main-title {
   font-family: 'Fraunces', sans-serif;
-  font-size: 40px;
+  font-size: clamp(36px, 7.6vw, 52px);
   font-weight: 400;
   color: #031824;
   text-align: center;
   font-style: italic;  
   margin: 0;
-  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  padding: 16px 0;
   letter-spacing: -1px;
-  line-height: 40px;
+  line-height: 1.06;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 480px) {
+  .app-content {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .main-title {
+    font-size: clamp(32px, 10.6vw, 42px);
+    letter-spacing: -0.8px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.65;
+  }
 }
 
 h2.experiences-title {
@@ -340,7 +366,7 @@ h2.h1-regular {
 
 .image-bottom {
   z-index: 1;
-} */
+}
 
 
 

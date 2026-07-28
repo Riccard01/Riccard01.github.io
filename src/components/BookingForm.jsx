@@ -4,6 +4,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getApp } from 'firebase/app';
 import "./BookingForm.css";
+import { getLocale } from '../utils/locale';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -15,7 +16,10 @@ const countryCodes = [
     { code: "+44", country: "🇬🇧" },
 ];
 
-export default function BookingForm({ onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
+export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
+    const dict = getLocale(lang);
+    const t = dict.bookingForm;
+
     const [form, setForm] = useState({
         fullName: "",
         countryCode: countryCodes[0].code,
@@ -106,7 +110,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
             if (code === 'already-exists' || (err?.message && err.message.includes('slot_unavailable'))) {
                 setSlotUnavailable(true);
             } else {
-                alert('Error creating booking');
+                alert(t.errorCreatingBooking);
             }
         } finally {
             setLoading(false);
@@ -118,7 +122,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
             {!paymentPhase && (
                 <form className="booking-form" onSubmit={handleInitialSubmit}>
                     <label>
-                        Full Name
+                        {t.fullName}
                         <input
                             type="text"
                             name="fullName"
@@ -128,7 +132,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         />
                     </label>
                     <label>
-                        Phone
+                        {t.phone}
                         <div className="booking-form-phone-row">
                             <select
                                 className="booking-form-country-code"
@@ -150,7 +154,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         </div>
                     </label>
                     <label>
-                        Email
+                        {t.email}
                         <input
                             type="email"
                             name="email"
@@ -160,7 +164,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         />
                     </label>
                     <label>
-                        Important Notes
+                        {t.notes}
                         <textarea
                             name="notes"
                             value={form.notes}
@@ -170,7 +174,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                         />
                     </label>
                     <button type="submit" className="booking-form-submit" disabled={loading}>
-                        {slotUnavailable ? 'Slot no longer available' : loading ? 'Processing payment...' : 'Pay & Book'}
+                        {slotUnavailable ? t.slotUnavailable : loading ? t.processing : t.payAndBook}
                     </button>
                 </form>
             )}
@@ -183,6 +187,7 @@ export default function BookingForm({ onSubmit, boatId = null, date = null, slot
                             form={form}
                             bookingId={bookingId}
                             onDone={(result) => { paymentCompletedRef.current = true; setPaid(true); if (onSubmit) onSubmit({ ...form, bookingId, ...result }); }}
+                            lang={lang}
                             date={date}
                             startTime={startTime}
                             endTime={endTime}
@@ -211,7 +216,10 @@ const CARD_ELEMENT_OPTIONS = {
     },
 };
 
-function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null, startTime = null, endTime = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false }) {
+function CardPaymentSection({ lang = 'it', clientSecret, form, bookingId, onDone, date = null, startTime = null, endTime = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false }) {
+    const dict = getLocale(lang);
+    const t = dict.bookingForm;
+
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
@@ -242,8 +250,8 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
             <div className="checkout-panel">
                 <div className="checkout-success">
                     <div className="checkout-success-icon">✓</div>
-                    <h3 className="checkout-success-title">Payment confirmed!</h3>
-                    <p className="checkout-success-sub">Your booking has been created successfully.</p>
+                    <h3 className="checkout-success-title">{t.paymentConfirmed}</h3>
+                    <p className="checkout-success-sub">{t.bookingCreated}</p>
                 </div>
             </div>
         );
@@ -251,35 +259,35 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
 
     return (
         <div className="checkout-panel">
-            <h2 className="checkout-heading">Summary & Payment</h2>
+            <h2 className="checkout-heading">{t.summaryPayment}</h2>
 
             <div className="checkout-summary">
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Name</span>
+                    <span className="checkout-label">{t.name}</span>
                     <span className="checkout-value">{form.fullName}</span>
                 </div>
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Email</span>
+                    <span className="checkout-label">{t.email}</span>
                     <span className="checkout-value">{form.email}</span>
                 </div>
                 {form.phone && (
                     <div className="checkout-summary-row">
-                        <span className="checkout-label">Phone</span>
+                        <span className="checkout-label">{t.phone}</span>
                         <span className="checkout-value">{form.countryCode} {form.phone}</span>
                     </div>
                 )}
 
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Date & Time</span>
-                    <span className="checkout-value">{date ? `${date}${startTime ? ` ${startTime}${endTime ? ` - ${endTime}` : ''}` : ''}` : '*Select date'}</span>
+                    <span className="checkout-label">{t.dateTime}</span>
+                    <span className="checkout-value">{date ? `${date}${startTime ? ` ${startTime}${endTime ? ` - ${endTime}` : ''}` : ''}` : `*${t.selectDate}`}</span>
                 </div>
 
                 <div className="checkout-summary-row">
-                    <span className="checkout-label">Port</span>
+                    <span className="checkout-label">{t.port}</span>
                     <span className="checkout-value">
-                        {embark ? `${embark}${arrangePickup ? ' (taxi)' : ''}` : '*N/D'}
+                        {embark ? `${embark}${arrangePickup ? ' (taxi)' : ''}` : `*${t.notAvailable}`}
                         {' \u2192 '}
-                        {disembark ? `${disembark}${arrangeDropoff ? ' (taxi)' : ''}` : '*N/D'}
+                        {disembark ? `${disembark}${arrangeDropoff ? ' (taxi)' : ''}` : `*${t.notAvailable}`}
                     </span>
                 </div>
 
@@ -292,7 +300,7 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
 
             <div className="checkout-card-section">
                 <div className="checkout-card-header">
-                    <span className="checkout-card-label-text">Card Details</span>
+                    <span className="checkout-card-label-text">{t.cardDetails}</span>
                     <div className="checkout-card-badges">
                         <span className="checkout-card-badge">VISA</span>
                         <span className="checkout-card-badge">MC</span>
@@ -317,7 +325,7 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
                 {loading ? (
                     <span className="checkout-btn-loading">
                         <span className="checkout-spinner" />
-                        Processing payment…
+                        {t.processing}
                     </span>
                 ) : (
                     <>
@@ -327,7 +335,7 @@ function CardPaymentSection({ clientSecret, form, bookingId, onDone, date = null
             </button>
 
             <p className="checkout-secure-note">
-                Secure payment · 256-bit SSL encryption · Powered by Stripe
+                {t.secureNote}
             </p>
         </div>
     );
