@@ -47,7 +47,7 @@ export default {
         guests: "Max 7",
         price: "Ab 250 € pro Gruppe",
         desc: "Uberspringe den Verkehr an der ligurischen Kuste mit einem schnellen und panoramischen Transfer auf dem Wasser.",
-        chips: ["Skipper"],
+        chips: ["Treibstoff inklusive", "Skipper"],
       },
     ],
   },

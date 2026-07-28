@@ -524,12 +524,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                   if (data && data.success) {
                     setPaymentConfirmed(true);
 
-                    // AGGIUNGI QUESTA RIGA PER GOOGLE ADS:
-                    if (typeof window.gtag === 'function') {
-                      window.gtag('event', 'conversion', {
-                        'send_to': 'AW-18340336234/FOTtCPyloNQcEOqkralE'
-                      });
-                    }
+
 
                     // mark the confirmed state and push a post-confirm state so back -> home
                     try { window.history.replaceState({ bookingStep: 'confirmed' }, ''); } catch { }

@@ -47,7 +47,7 @@ export default {
         guests: "Max 7",
         price: "Od 250 € za grupe",
         desc: "Uniknij korkow na liguryjskim wybrzezu dzieki szybkiemu i widokowemu transferowi droga wodna.",
-        chips: ["Skipper"],
+        chips: ["Paliwo w cenie", "Skipper"],
       },
     ],
   },

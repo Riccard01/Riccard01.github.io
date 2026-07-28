@@ -59,7 +59,7 @@ export default {
         guests: "Max 7",
         price: "Da €250 a gruppo",
         desc: "Salta il traffico lungo la costa ligure con un trasferimento via acqua veloce e panoramico direttamente verso Portofino o Camogli.",
-        chips: ["Skipper"],
+        chips: ["Carburante Incluso", "Skipper"],
       },
     ],
   },

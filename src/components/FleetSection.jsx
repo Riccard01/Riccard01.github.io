@@ -89,7 +89,7 @@ export default function FleetSection({ lang = 'it' }) {
           <div key={boat.id} className="boat-card-wrapper">
             
             <div className="boat-image-container">
-              <img src={boat.image} alt={t.imageAlt} className="boat-carousel-img" />
+              <img src={boat.image} alt={t.imageAlt} className="boat-carousel-img" loading="lazy" decoding="async" />
             </div>
 
             <div className="boat-specs-container">

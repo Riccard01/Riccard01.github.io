@@ -1,14 +1,14 @@
 import React from 'react';
 import "./ExperienceCarousel.css";
 import img2 from "../assets/florence.webp";
-import img4 from "../assets/mariana.jpeg";
+import img4 from "../assets/mariana.webp";
 import img5 from "../assets/aperitivo.webp";
-import img6 from "../assets/sanfrut.jpeg";
+import img6 from "../assets/sanfrut.webp";
 import img7 from "../assets/aperitivor.webp";
-import img8 from "../assets/nape.jpeg";
-import img10 from "../assets/melone.jpeg";
-import img11 from "../assets/sori.jpeg";
-import img12 from "../assets/camo.jpeg";
+import img8 from "../assets/nape.webp";
+import img10 from "../assets/melone.webp";
+import img11 from "../assets/sori.webp";
+import img12 from "../assets/camo.webp";
 import clockIcon from "../assets/clock_dark.svg";
 import guestsIcon from "../assets/guests_dark.svg";
 import { getLocale } from '../utils/locale';
@@ -45,7 +45,7 @@ export default function ExperienceCarousel({ lang = 'en' }) {
                 <div className="image-grid">
                   {exp.images && exp.images.map((src, idx) => (
                     <div key={idx} className={`grid-item grid-item-${idx}`}>
-                      <img src={src} alt={`${exp.title} ${idx + 1}`} />
+                      <img src={src} alt={`${exp.title} ${idx + 1}`} loading="lazy" decoding="async" />
                     </div>
                   ))}
                 </div>

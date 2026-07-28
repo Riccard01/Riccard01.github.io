@@ -166,6 +166,7 @@ export default function ReviewCarousel({ lang = 'it' }) {
                         alt={review.name}
                         className="review-image"
                         loading="lazy"
+                        decoding="async"
                       />
                     )}
                   </article>

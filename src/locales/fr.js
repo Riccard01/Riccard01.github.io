@@ -47,7 +47,7 @@ export default {
         guests: "Max 7",
         price: "A partir de 250 € par groupe",
         desc: "Evitez le trafic de la cote ligure avec un transfert rapide et panoramique par la mer.",
-        chips: ["Skipper"],
+        chips: ["Carburant inclus", "Skipper"],
       },
     ],
   },

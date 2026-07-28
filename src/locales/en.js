@@ -59,7 +59,7 @@ export default {
         guests: "7 Max",
         price: "From €250 per group",
         desc: "Skip the traffic along the Ligurian coast with a fast, scenic water transfer directly to Portofino or Camogli.",
-        chips: ["Skipper"],
+        chips: ["Fuel Included", "Skipper"],
       },
     ],
   },

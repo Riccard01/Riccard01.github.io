@@ -47,7 +47,7 @@ export default {
         guests: "Max 7",
         price: "Desde 250 € por grupo",
         desc: "Evita el trafico de la costa ligur con un traslado rapido y panoramico por mar.",
-        chips: ["Skipper"],
+        chips: ["Combustible incluido", "Skipper"],
       },
     ],
   },
