@@ -32,6 +32,18 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carousel-wrapper:focus-visible {
+  outline: 2px solid #3446e3;
+  outline-offset: 4px;
+}
+
+.carousel-wrapper:hover {
+  transform: translateY(-2px);
 }
 
 .carousel-slide {
@@ -142,6 +154,10 @@
   display: inline-block;
 }
 
+.text-content-wrapper {
+  cursor: pointer;
+}
+
 .text-content-wrapper h3 {
   margin: 0 0 6px 0;
   font-family: 'Fraunces', serif, sans-serif;
@@ -228,8 +244,24 @@
     padding-top: 6rem;
   }
 
+  .experiences-heading {
+    padding: 0;
+  }
+
   .carousel {
-    gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: start;
+    gap: 32px;
     padding: 20px 0;
+  }
+
+  .carousel-wrapper {
+    max-width: 380px;
+    justify-self: center;
+  }
+
+  .text-content-wrapper p {
+    min-height: 88px;
   }
 }

@@ -38,9 +38,22 @@ export default function ExperienceCarousel({ lang = 'en' }) {
       <h2 className="experiences-heading">{t.sectionTitle || 'Private boat experiences'}</h2>
       <div className="carousel">
         {experiences.map((exp) => (
-          <article key={exp.id} className="carousel-wrapper" data-index={exp.id}>
-            <div className="carousel-slide">
-              <div className="slide-content">
+          <article
+            key={exp.id}
+            className="carousel-wrapper"
+            data-index={exp.id}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openWhatsApp();
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`${exp.title} - ${t.callUs}`}
+          >
+            <div className="carousel-slide" onClick={openWhatsApp}>
+              <div className="slide-content" onClick={openWhatsApp}>
                 <div className="price-chip">{exp.price}</div>
                 <div className="image-grid">
                   {exp.images && exp.images.map((src, idx) => (
@@ -50,14 +63,21 @@ export default function ExperienceCarousel({ lang = 'en' }) {
                   ))}
                 </div>
                 <div className="pill-wrapper">
-                  <button className="nav-link nav-booking" onClick={openWhatsApp}>
+                  <button
+                    type="button"
+                    className="nav-link nav-booking"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openWhatsApp();
+                    }}
+                  >
                     {t.callUs}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="text-content-wrapper">
+            <div className="text-content-wrapper" onClick={openWhatsApp}>
               <h3>{exp.title}</h3>
               <p>{exp.desc}</p>
               
