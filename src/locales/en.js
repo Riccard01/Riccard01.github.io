@@ -35,15 +35,6 @@ export default {
     guestsAlt: "Guests",
     experiences: [
       {
-        id: "0",
-        title: "Portofino Private Boat Tour",
-        time: "5-10 Hrs",
-        guests: "5 Max",
-        price: "From €750 per group",
-        desc: "Explore the gems of the Two Gulfs at your own pace. Discover sheer cliffs, pristine bays, and charming seaside villages with drinks and onboard snacks included.",
-        chips: ["Fuel Included", "Towels", "Snacks", "Fresh Drinks", "Snorkeling Gear", "Skipper"],
-      },
-      {
         id: "1",
         title: "Gourmet Sunset Cruise",
         time: "4 Hrs",
@@ -51,6 +42,15 @@ export default {
         price: "From €390 per group",
         desc: "Experience a golden-hour sunset cruise off Genoa and Boccadasse featuring the signature 'Il Genovese' aperitif, Prosecco, and lounge music.",
         chips: ["Fuel Included", "Towels", "Prosecco", "Snorkeling Gear", "Skipper"],
+      },
+      {
+        id: "0",
+        title: "Portofino Private Boat Tour",
+        time: "5-10 Hrs",
+        guests: "5 Max",
+        price: "From €750 per group",
+        desc: "Explore the gems of the Two Gulfs at your own pace. Discover sheer cliffs, pristine bays, and charming seaside villages with drinks and onboard snacks included.",
+        chips: ["Fuel Included", "Towels", "Snacks", "Fresh Drinks", "Snorkeling Gear", "Skipper"],
       },
       {
         id: "2",

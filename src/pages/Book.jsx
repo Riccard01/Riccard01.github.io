@@ -288,7 +288,22 @@ function Book({ lang = 'it', setLang = () => {} }) {
     Allegra: allegra
   };
 
-  const visibleBoats = (boats && boats.length) ? boats.filter(b => (b.guests || b.capacity || 1) >= ppl && (b.available !== false)) : [
+  const getExperiencePriority = (item) => {
+    const label = String(item?.name || item?.title || item?.id || '').toLowerCase();
+    if (label.includes('aperitivo') || label.includes('gourmet') || label.includes('sunset')) return 0;
+    if (label.includes('rainbow')) return 1;
+    return 2;
+  };
+
+  const visibleBoats = (boats && boats.length)
+    ? boats
+      .filter(b => (b.guests || b.capacity || 1) >= ppl && (b.available !== false))
+      .sort((a, b) => {
+        const pa = getExperiencePriority(a);
+        const pb = getExperiencePriority(b);
+        return pa - pb;
+      })
+    : [
     { id: 2, name: "Leggera", image: leggera, available: true, background: "#011010", guests: 4 },
   ];
 

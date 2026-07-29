@@ -35,15 +35,6 @@ export default {
     guestsAlt: "Ospiti",
     experiences: [
       {
-        id: "0",
-        title: "Tour Privato in Barca a Portofino",
-        time: "5-10 Ore",
-        guests: "Max 5",
-        price: "Da €750 a gruppo",
-        desc: "Esplora le gemme dei Due Golfi al tuo ritmo. Scopri scogliere a picco sul mare, baie incontaminate e borghi marinari con drink e snack a bordo inclusi.",
-        chips: ["Carburante Incluso", "Teli Mare", "Snack", "Drink Freschi", "Attrezzatura Snorkeling", "Skipper"],
-      },
-      {
         id: "1",
         title: "Crociera Gourmet al Tramonto",
         time: "4 Ore",
@@ -51,6 +42,15 @@ export default {
         price: "Da €390 a gruppo",
         desc: "Vivi una crociera al tramonto tra Genova e Boccadasse con l'aperitivo firmato 'Il Genovese', Prosecco e musica lounge.",
         chips: ["Carburante Incluso", "Teli Mare", "Prosecco", "Attrezzatura Snorkeling", "Skipper"],
+      },
+      {
+        id: "0",
+        title: "Tour Privato in Barca a Portofino",
+        time: "5-10 Ore",
+        guests: "Max 5",
+        price: "Da €750 a gruppo",
+        desc: "Esplora le gemme dei Due Golfi al tuo ritmo. Scopri scogliere a picco sul mare, baie incontaminate e borghi marinari con drink e snack a bordo inclusi.",
+        chips: ["Carburante Incluso", "Teli Mare", "Snack", "Drink Freschi", "Attrezzatura Snorkeling", "Skipper"],
       },
       {
         id: "2",
