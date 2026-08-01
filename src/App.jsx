@@ -3,8 +3,10 @@ import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 're
 import HomePage from './pages/HomePage';
 import './App.css';
 import { DEFAULT_LANG, getLocale, LOCALES } from './utils/locale';
+import { getExperienceIdFromSlug } from './utils/experienceRoutes';
 
 const Book = lazy(() => import('./pages/Book'));
+const ExperienceDetailPage = lazy(() => import('./pages/ExperienceDetailPage'));
 
 function getPathSuffix(pathname) {
   const normalized = (pathname || '/').replace(/\/+$/, '') || '/';
@@ -33,6 +35,14 @@ function LocalizedPage({ page, onChangeLang }) {
     return (
       <Suspense fallback={null}>
         <Book lang={safeLang} setLang={onChangeLang} />
+      </Suspense>
+    );
+  }
+
+  if (page === 'experience') {
+    return (
+      <Suspense fallback={null}>
+        <ExperienceDetailPage lang={safeLang} setLang={onChangeLang} />
       </Suspense>
     );
   }
@@ -80,10 +90,20 @@ function App() {
     const suffix = getPathSuffix(location.pathname);
     const head = document.head;
     const locale = getLocale(lang);
-    const pageKey = suffix === '/book' ? 'book' : 'home';
+    const experienceMatch = suffix.match(/^\/(esperienze|experiences)\/([^/]+)$/i);
+    const resolvedExperienceId = experienceMatch ? getExperienceIdFromSlug(experienceMatch[2]) : null;
+    const experience = resolvedExperienceId
+      ? (locale?.experienceCarousel?.experiences || []).find((item) => item.id === resolvedExperienceId)
+      : null;
+
+    const pageKey = suffix === '/book' ? 'book' : (experience ? 'experience' : 'home');
     const seo = locale?.seo?.[pageKey] || getLocale(DEFAULT_LANG)?.seo?.[pageKey] || {};
-    const title = seo.title || 'Leggero Tours';
-    const description = seo.description || 'Private boat tours in Liguria between Genoa, Portofino and the Two Gulfs.';
+    const title = experience
+      ? `${experience.title} | Leggero Tours`
+      : (seo.title || 'Leggero Tours');
+    const description = experience
+      ? experience.desc
+      : (seo.description || 'Private boat tours in Liguria between Genoa, Portofino and the Two Gulfs.');
     const currentUrl = `${origin}/${lang}${suffix}`;
     const localeCode = (locale?.localeCode || 'en_US').replace('-', '_');
 
@@ -180,6 +200,8 @@ function App() {
         <Route path="/policy" element={<Navigate to={`/${lang}`} replace />} />
         <Route path="/:lang" element={<LocalizedPage page="home" onChangeLang={handleChangeLanguage} />} />
         <Route path="/:lang/book" element={<LocalizedPage page="book" onChangeLang={handleChangeLanguage} />} />
+        <Route path="/:lang/esperienze/:experienceId" element={<LocalizedPage page="experience" onChangeLang={handleChangeLanguage} />} />
+        <Route path="/:lang/experiences/:experienceId" element={<LocalizedPage page="experience" onChangeLang={handleChangeLanguage} />} />
         <Route path="/:lang/policy" element={<LegacyPolicyRedirect />} />
         <Route path="*" element={<Navigate to={`/${DEFAULT_LANG}`} replace />} />
       </Routes>

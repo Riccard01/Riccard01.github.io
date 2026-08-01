@@ -111,6 +111,56 @@ function computeTotalPriceWithDiscount({ boatDoc, placesMap, slotObj, embark, di
 }
 
 /**
+ * Sum of a single boat's price contribution (base price * multipliers), no transfer.
+ */
+function computeBoatPricePart(boatDoc, placesMap, slotObj, embark, disembark) {
+  const basePrice = Number((boatDoc && (boatDoc.base_price || boatDoc.price)) || 0);
+  const embarkPlace = getPlaceByName(placesMap, embark);
+  const disembarkPlace = getPlaceByName(placesMap, disembark);
+  const embMult = Number((embarkPlace && embarkPlace.multiplier) || 1) || 1;
+  const disembMult = Number((disembarkPlace && disembarkPlace.multiplier) || 1) || 1;
+  const slotMult = Number((slotObj && slotObj.multiplier) || 1) || 1;
+  return basePrice * embMult * disembMult * slotMult;
+}
+
+/**
+ * Same as computeTotalPrice but for a combined excursion using multiple boats
+ * (e.g. Gourmet Sunset Cruise combined outing). Each boat's price part is summed;
+ * the transfer part (which depends on total passenger count, not per boat) is added once.
+ * @param {Object} params
+ * @param {Object[]} params.boatDocs - Array of boat documents to combine
+ */
+function computeComboTotalPrice({ boatDocs, placesMap, slotObj, embark, disembark, arrangePickup, arrangeDropoff, numPax }) {
+  const boats = Array.isArray(boatDocs) ? boatDocs : [boatDocs];
+  const boatsPart = boats.reduce((sum, b) => sum + computeBoatPricePart(b, placesMap, slotObj, embark, disembark), 0);
+
+  const pax = Number(numPax) || 1;
+  let transferPart = 0;
+  if (arrangePickup) transferPart += getTransferPriceForPlace(getPlaceByName(placesMap, embark), pax);
+  if (arrangeDropoff) transferPart += getTransferPriceForPlace(getPlaceByName(placesMap, disembark), pax);
+
+  return boatsPart + transferPart;
+}
+
+/**
+ * Combo version of computeTotalPriceWithDiscount: the early discount is applied once
+ * to the sum of all boats' price parts.
+ */
+function computeComboTotalPriceWithDiscount({ boatDocs, placesMap, slotObj, embark, disembark, arrangePickup, arrangeDropoff, numPax, bookingDate, discounts }) {
+  const boats = Array.isArray(boatDocs) ? boatDocs : [boatDocs];
+  const boatsPart = boats.reduce((sum, b) => sum + computeBoatPricePart(b, placesMap, slotObj, embark, disembark), 0);
+  const disc = findApplicableEarlyDiscount(discounts, bookingDate);
+  const discountedBoatsPart = disc ? Math.max(0, boatsPart - Number(disc.discount_price || 0)) : boatsPart;
+
+  const pax = Number(numPax) || 1;
+  let transferPart = 0;
+  if (arrangePickup) transferPart += getTransferPriceForPlace(getPlaceByName(placesMap, embark), pax);
+  if (arrangeDropoff) transferPart += getTransferPriceForPlace(getPlaceByName(placesMap, disembark), pax);
+
+  return discountedBoatsPart + transferPart;
+}
+
+/**
  * Convert euros to integer cents (for Stripe).
  * @param {number} euros
  * @returns {number}
@@ -119,4 +169,4 @@ function eurosToCents(euros) {
   return Math.round(Number(euros || 0) * 100);
 }
 
-module.exports = { getTransferPriceForPlace, getPlaceByName, computeTotalPrice, eurosToCents, findApplicableEarlyDiscount, computeTotalPriceWithDiscount };
+module.exports = { getTransferPriceForPlace, getPlaceByName, computeTotalPrice, eurosToCents, findApplicableEarlyDiscount, computeTotalPriceWithDiscount, computeComboTotalPrice, computeComboTotalPriceWithDiscount };

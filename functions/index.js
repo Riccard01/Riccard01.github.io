@@ -5,7 +5,7 @@ const stripePkg = require('stripe');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { createBoatBooking, removeBoatBooking, checkSlotAvailable } = require('./utils/boatHelpers');
-const { computeTotalPrice, computeTotalPriceWithDiscount, findApplicableEarlyDiscount, eurosToCents, getPlaceByName, getTransferPriceForPlace } = require('./utils/priceCalculator');
+const { computeTotalPrice, computeTotalPriceWithDiscount, computeComboTotalPriceWithDiscount, findApplicableEarlyDiscount, eurosToCents, getPlaceByName, getTransferPriceForPlace } = require('./utils/priceCalculator');
 const { sendBookingConfirmationEmail } = require('./utils/mailSender');
 const { onCall, onRequest, HttpsError } = require('firebase-functions/v2/https');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
@@ -109,7 +109,8 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
   console.log('createPaymentIntent normalized payload:', payload);
 
   const { boatId, startTime, endTime, date, slotKey, captainId, title, notes, boatName,
-    fullName, countryCode, phone, email, embark, disembark, arrangePickup, arrangeDropoff, numPax } = payload || {};
+    fullName, countryCode, phone, email, embark, disembark, arrangePickup, arrangeDropoff, numPax,
+    secondaryBoatId, secondaryCaptainId, secondaryBoatName } = payload || {};
   const db = admin.firestore();
 
   // Log parsed param types for easier debugging
@@ -155,6 +156,21 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       console.warn('createPaymentIntent: could not fetch boat doc for price computation', e);
     }
 
+    // Optional second boat for combined excursions (e.g. Gourmet Sunset Cruise with >7 guests)
+    let secondaryBoatDoc = null;
+    if (secondaryBoatId) {
+      try {
+        const secondarySnap = await db.collection('boats').doc(String(secondaryBoatId)).get();
+        if (secondarySnap.exists) secondaryBoatDoc = secondarySnap.data();
+      } catch (e) {
+        console.warn('createPaymentIntent: could not fetch secondary boat doc for price computation', e);
+      }
+      if (!secondaryBoatDoc) {
+        console.error('createPaymentIntent: secondaryBoatId provided but boat doc not found', secondaryBoatId);
+        throw new HttpsError('invalid-argument', 'Secondary boat not found');
+      }
+    }
+
     let serverPlacesMap = null;
     try {
       const placesSnap = await db.collection('variables').doc('places').get();
@@ -176,8 +192,7 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
     const parsedNumPax = Math.max(1, parseInt(numPax, 10) || 1);
     let serverAmountCents;
     if (boatDoc && serverPlacesMap) {
-      const totalEuros = computeTotalPriceWithDiscount({
-        boatDoc,
+      const priceParams = {
         placesMap: serverPlacesMap,
         slotObj: (slotTimetables && slotTimetables[slotKey]) || null,
         embark: embark || null,
@@ -187,9 +202,12 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
         numPax: parsedNumPax,
         bookingDate: date,
         discounts: serverDiscounts,
-      });
+      };
+      const totalEuros = secondaryBoatDoc
+        ? computeComboTotalPriceWithDiscount({ ...priceParams, boatDocs: [boatDoc, secondaryBoatDoc] })
+        : computeTotalPriceWithDiscount({ ...priceParams, boatDoc });
       serverAmountCents = eurosToCents(totalEuros);
-      console.log('createPaymentIntent server-computed price', { totalEuros, serverAmountCents });
+      console.log('createPaymentIntent server-computed price', { totalEuros, serverAmountCents, isCombo: !!secondaryBoatDoc });
     } else {
       // Could not fetch pricing data; reject rather than silently charging wrong amount
       console.error('createPaymentIntent: unable to compute server-side price (boat or places doc missing)');
@@ -217,6 +235,22 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
     if (!slotStillAvailable) {
       console.warn('createPaymentIntent: slot no longer available', { boatId, date, slotKey });
       throw new HttpsError('already-exists', 'slot_unavailable');
+    }
+
+    // For combined excursions, the paired boat must also be free for the same slot
+    if (secondaryBoatId) {
+      const secondarySlotStillAvailable = await checkSlotAvailable({
+        db,
+        boatId: String(secondaryBoatId),
+        date,
+        slotKey,
+        captainId: secondaryCaptainId || null,
+        slotTimetables,
+      });
+      if (!secondarySlotStillAvailable) {
+        console.warn('createPaymentIntent: secondary boat slot no longer available', { secondaryBoatId, date, slotKey });
+        throw new HttpsError('already-exists', 'slot_unavailable');
+      }
     }
 
     // compute a default title: boatName - clientName - startTime (if not provided)
@@ -259,7 +293,44 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       // attach discount metadata if applicable
       discounts: (serverDiscounts ? { early_discount: findApplicableEarlyDiscount(serverDiscounts, date) } : null),
       paymentIntentId: null,
+      comboPeerBoatId: secondaryBoatId || null,
     });
+
+    // For combined excursions, also reserve the paired boat with the same slot/date.
+    // The combined price already includes both boats, so the secondary record's amountCents
+    // is left null (informational only) to avoid implying it was charged independently.
+    if (secondaryBoatId) {
+      await createBoatBooking({
+        bookingId,
+        boatId: secondaryBoatId,
+        date,
+        slotKey,
+        captainId: secondaryCaptainId || null,
+        title: title || computedTitle || null,
+        boatName: secondaryBoatName || (secondaryBoatDoc && (secondaryBoatDoc.name || secondaryBoatDoc.title)) || null,
+        status: 'pending',
+        expiresAt,
+        editorId: effectiveAuth ? effectiveAuth.uid : null,
+        slotTimetables,
+        customer: {
+          fullName: fullName || null,
+          phone: (countryCode || '') + (phone || ''),
+          email: email || null,
+          notes: notes || null,
+          embark: embark || null,
+          disembark: disembark || null,
+          arrangePickup: !!arrangePickup,
+          arrangeDropoff: !!arrangeDropoff,
+          numPax: parsedNumPax,
+        },
+        startTime: resolvedStartTime,
+        endTime: resolvedEndTime,
+        amountCents: null,
+        discounts: (serverDiscounts ? { early_discount: findApplicableEarlyDiscount(serverDiscounts, date) } : null),
+        paymentIntentId: null,
+        comboPeerBoatId: boatId,
+      });
+    }
 
     // Store booking data in pending_bookings only (no separate bookings collection)
     await db.collection('pending_bookings').doc(bookingId).set({
@@ -287,6 +358,9 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       },
       amountCents: serverAmountCents,
       discounts: (serverDiscounts ? { early_discount: findApplicableEarlyDiscount(serverDiscounts, date) } : null),
+      secondaryBoatId: secondaryBoatId || null,
+      secondaryCaptainId: secondaryCaptainId || null,
+      secondaryBoatName: secondaryBoatName || null,
     });
 
     let pendingData = {
@@ -314,6 +388,9 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       },
       amountCents: serverAmountCents,
       discounts: (serverDiscounts ? { early_discount: findApplicableEarlyDiscount(serverDiscounts, date) } : null),
+      secondaryBoatId: secondaryBoatId || null,
+      secondaryCaptainId: secondaryCaptainId || null,
+      secondaryBoatName: secondaryBoatName || null,
     };
 
     // Create PaymentIntent for Stripe Elements
@@ -370,6 +447,34 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       console.warn('createPaymentIntent: unable to patch boat month with paymentIntentId', e);
     }
 
+    // Same annotation for the paired boat in a combined excursion
+    if (secondaryBoatId) {
+      try {
+        const monthKey = String(date).slice(0, 7);
+        const secondaryBoatMonthRef = db.collection('boats').doc(String(secondaryBoatId)).collection('months').doc(monthKey);
+        try {
+          await secondaryBoatMonthRef.update({
+            [`bookings.${date}.${slotKey}.paymentIntentId`]: intent.id,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+        } catch (updErr) {
+          const nested = {
+            bookings: {
+              [date]: {
+                [slotKey]: {
+                  paymentIntentId: intent.id,
+                }
+              }
+            },
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          };
+          await secondaryBoatMonthRef.set(nested, { merge: true });
+        }
+      } catch (e) {
+        console.warn('createPaymentIntent: unable to patch secondary boat month with paymentIntentId', e);
+      }
+    }
+
     console.log('createPaymentIntent succeeded', { bookingId, paymentIntentId: intent.id });
     return { clientSecret: intent.client_secret, paymentIntentId: intent.id, bookingId };
   } catch (err) {
@@ -413,7 +518,7 @@ exports.cancelPendingBooking = onCall(async (req) => {
       }
     }
 
-    const { boatId, date, slotKey, captainId } = pending;
+    const { boatId, date, slotKey, captainId, secondaryBoatId, secondaryCaptainId } = pending;
 
     // Try to read slot timetables for consistent removal behavior
     let slotTimetables = null;
@@ -431,6 +536,15 @@ exports.cancelPendingBooking = onCall(async (req) => {
       }
     } catch (e) {
       console.error('cancelPendingBooking: removeBoatBooking failed', e);
+    }
+
+    // Also release the paired boat for combined excursions
+    try {
+      if (secondaryBoatId && date && slotKey) {
+        await removeBoatBooking({ boatId: secondaryBoatId, date, slotKey, slotTimetables, captainId: secondaryCaptainId || null, editorId: (callerAuth && callerAuth.uid) || 'system' });
+      }
+    } catch (e) {
+      console.error('cancelPendingBooking: removeBoatBooking failed for secondary boat', e);
     }
 
     // Delete pending_bookings doc
@@ -518,7 +632,7 @@ app.post('/webhook', async (req, res) => {
         const pendingSnap = await pendingRef.get();
         if (pendingSnap.exists) {
           const pendingData = pendingSnap.data() || {};
-          const { boatId, date, slotKey } = pendingData;
+          const { boatId, date, slotKey, secondaryBoatId } = pendingData;
           if (boatId && date && slotKey) {
             try {
               const monthKey = String(date).slice(0, 7);
@@ -533,6 +647,28 @@ app.post('/webhook', async (req, res) => {
               const boatMonthRef = db.collection('boats').doc(String(boatId)).collection('months').doc(monthKey);
               const nested = { bookings: { [date]: { [slotKey]: { status: 'confirmed', paymentConfirmedAt: admin.firestore.FieldValue.serverTimestamp() } } }, updatedAt: admin.firestore.FieldValue.serverTimestamp() };
               await boatMonthRef.set(nested, { merge: true });
+            }
+
+            // Mirror the confirmation onto the paired boat for combined excursions
+            if (secondaryBoatId) {
+              try {
+                const monthKey = String(date).slice(0, 7);
+                const secondaryBoatMonthRef = db.collection('boats').doc(String(secondaryBoatId)).collection('months').doc(monthKey);
+                const updateObj = {};
+                updateObj[`bookings.${date}.${slotKey}.status`] = 'confirmed';
+                updateObj[`bookings.${date}.${slotKey}.paymentConfirmedAt`] = admin.firestore.FieldValue.serverTimestamp();
+                updateObj.updatedAt = admin.firestore.FieldValue.serverTimestamp();
+                await secondaryBoatMonthRef.update(updateObj);
+              } catch (err) {
+                try {
+                  const monthKey = String(date).slice(0, 7);
+                  const secondaryBoatMonthRef = db.collection('boats').doc(String(secondaryBoatId)).collection('months').doc(monthKey);
+                  const nested = { bookings: { [date]: { [slotKey]: { status: 'confirmed', paymentConfirmedAt: admin.firestore.FieldValue.serverTimestamp() } } }, updatedAt: admin.firestore.FieldValue.serverTimestamp() };
+                  await secondaryBoatMonthRef.set(nested, { merge: true });
+                } catch (e2) {
+                  console.error('Webhook: failed to confirm secondary boat booking', e2);
+                }
+              }
             }
 
             // --- TUA LOGICA ORIGINALE PREZZI/INVOICE ---
@@ -556,7 +692,8 @@ app.post('/webhook', async (req, res) => {
                 bookingId, slot: slotKey, starthour, endhour, totalPriceCents: totalPaidCents,
                 paymentIntentId: intent.id, boatId: String(boatId), customer: pendingData.customer || null,
                 harboursMultiplier: [Number(embarkPlace?.multiplier || 1), Number(disembarkPlace?.multiplier || 1)],
-                basePriceCents: Math.round(Number(boatDoc?.base_price || boatDoc?.price || 0) * 100)
+                basePriceCents: Math.round(Number(boatDoc?.base_price || boatDoc?.price || 0) * 100),
+                secondaryBoatId: secondaryBoatId || null,
               };
 
               const invoiceRef = db.collection('invoices').doc(String(date).slice(0, 7));
@@ -625,9 +762,9 @@ exports.cleanExpiredBookings = onSchedule('every 5 minutes', async () => {
   for (const docSnap of snapshot.docs) {
     const data = docSnap.data() || {};
     const bookingId = docSnap.id;
-    const { boatId, date, slotKey, captainId } = data;
+    const { boatId, date, slotKey, captainId, secondaryBoatId, secondaryCaptainId } = data;
 
-    console.log('cleanExpiredBookings: processing', { bookingId, boatId, date, slotKey, captainId });
+    console.log('cleanExpiredBookings: processing', { bookingId, boatId, date, slotKey, captainId, secondaryBoatId, secondaryCaptainId });
 
     // Remove booking references from boat and (optionally) captain months
     try {
@@ -639,6 +776,16 @@ exports.cleanExpiredBookings = onSchedule('every 5 minutes', async () => {
       }
     } catch (e) {
       console.error('cleanExpiredBookings: Error removing booking from boat/captain months for', bookingId, e);
+    }
+
+    // Also release the paired boat for combined excursions
+    try {
+      if (secondaryBoatId && date && slotKey) {
+        await removeBoatBooking({ boatId: secondaryBoatId, date, slotKey, slotTimetables, captainId: secondaryCaptainId || null, editorId: 'system' });
+        console.log('cleanExpiredBookings: removed references from secondary boat/captain months for', bookingId);
+      }
+    } catch (e) {
+      console.error('cleanExpiredBookings: Error removing booking from secondary boat/captain months for', bookingId, e);
     }
 
     // Remove from pending_bookings

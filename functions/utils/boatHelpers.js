@@ -92,7 +92,7 @@ function computeBoatMonthView(boat, monthKey, captainsAvailabilitiesMap, boatMon
   };
 }
 
-async function createBoatBooking({ bookingId = null, boatId, date, slotKey, captainId, slotTimetables = null, editorId = null, title = null, notes = null, boatName = null, status = 'pending', expiresAt = null, customer = null, numPax = 1, startTime = null, endTime = null, amountCents = null, paymentIntentId = null, discounts = null }) {
+async function createBoatBooking({ bookingId = null, boatId, date, slotKey, captainId, slotTimetables = null, editorId = null, title = null, notes = null, boatName = null, status = 'pending', expiresAt = null, customer = null, numPax = 1, startTime = null, endTime = null, amountCents = null, paymentIntentId = null, discounts = null, comboPeerBoatId = null }) {
   // monthKey from date
   const monthKey = date.slice(0,7);
   if (!bookingId) bookingId = `b_${Date.now()}`;
@@ -138,6 +138,7 @@ async function createBoatBooking({ bookingId = null, boatId, date, slotKey, capt
     paymentIntentId: paymentIntentId || null,
     customer: safeCustomer,
     discounts: discounts || null,
+    comboPeerBoatId: comboPeerBoatId || null,
   };
   const unavailable = { [date]: {} };
   hours.forEach(h => { unavailable[date][String(h)] = true; });
@@ -177,6 +178,7 @@ async function createBoatBooking({ bookingId = null, boatId, date, slotKey, capt
         departurePort: (safeCustomer && safeCustomer.embark) || null,
         arrivalPort: (safeCustomer && safeCustomer.disembark) || null,
         taxiService: !!(safeCustomer && (safeCustomer.arrangePickup || safeCustomer.arrangeDropoff)),
+        comboPeerBoatId: comboPeerBoatId || null,
       };
     });
     const captainMonthRef = db.collection('captains').doc(captainId).collection('months').doc(monthKey);

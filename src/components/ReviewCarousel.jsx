@@ -6,6 +6,7 @@ import Florence from "../assets/florence.webp";
 import Logan from "../assets/logan.webp";
 import Linda from "../assets/linda.webp";
 import Lana from "../assets/lana.webp";
+import Simone from "../assets/simo.webp";
 import { getLocale } from '../utils/locale';
 
 export default function ReviewCarousel({ lang = 'it' }) {
@@ -51,6 +52,7 @@ export default function ReviewCarousel({ lang = 'it' }) {
     if (normalizedName.startsWith('logan')) return Logan;
     if (normalizedName.startsWith('linda')) return Linda;
     if (normalizedName.startsWith('lana')) return Lana;
+    if (normalizedName.startsWith('simone')) return Simone;
 
     return null;
   };

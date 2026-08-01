@@ -1,7 +1,7 @@
 import React from "react";
 import "./Transfer.css";
 import DropDown from "./DropDown";
-import { getLocale } from '../utils/locale';
+import portIcon from '../assets/port_book.svg';
 
 // Props:
 // - embarkOptions: array of strings for embark dropdown
@@ -11,11 +11,8 @@ import { getLocale } from '../utils/locale';
 // - onPickupChange: callback function for pickup change
 // - embarkLabel: text for embark label
 // - pickupLabel: text for pickup label
-//
-// Icons: use emoji as placeholder, replaceable with svg
 
 const Transfer = ({
-  lang = 'it',
   embarkOptions = [],
   selectedEmbark = "",
   onEmbarkChange = () => {},
@@ -25,14 +22,12 @@ const Transfer = ({
   pickupLabel = "Arrange Pickup?",
   className = ""
 }) => {
-  const dict = getLocale(lang);
-
   return (
     <div className={`transfer-container ${className}`.trim()}>
       <div className="transfer-section">
         <label className="transfer-label">
+          <img className="transfer-icon" src={portIcon} alt="" aria-hidden="true" />
           <span>{embarkLabel}</span>
-          <span className="transfer-icon" role="img" aria-label="boat">⛵</span>
         </label>
         <DropDown
           options={embarkOptions}
@@ -42,27 +37,18 @@ const Transfer = ({
           text={embarkLabel}
         />
       </div>
-      <div className="transfer-section transfer-section-pickup">
-        <label className="transfer-label">
-          <span>{pickupLabel}</span>
-          <span className="transfer-icon" role="img" aria-label="car">🚗</span>
-        </label>
-        <div className="transfer-pickup-buttons">
-          <button
-            className={arrangePickup ? "active" : ""}
-            onClick={() => onPickupChange(true)}
-            type="button"
-          >
-            {dict.transfer.yes}
-          </button>
-          <button
-            className={!arrangePickup ? "active" : ""}
-            onClick={() => onPickupChange(false)}
-            type="button"
-          >
-            {dict.transfer.no}
-          </button>
-        </div>
+      <div className="transfer-pickup-row">
+        <span className="transfer-pickup-label">{pickupLabel}</span>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={arrangePickup}
+          aria-label={pickupLabel}
+          className={`transfer-toggle${arrangePickup ? ' is-on' : ''}`}
+          onClick={() => onPickupChange(!arrangePickup)}
+        >
+          <span className="transfer-toggle-knob" />
+        </button>
       </div>
     </div>
   );

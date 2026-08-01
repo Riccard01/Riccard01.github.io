@@ -16,7 +16,7 @@ const countryCodes = [
     { code: "+44", country: "🇬🇧" },
 ];
 
-export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
+export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
     const dict = getLocale(lang);
     const t = dict.bookingForm;
 
@@ -86,6 +86,9 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
                 startTime: startTime || null,
                 endTime: endTime || null,
                 captainId: captainId || null,
+                secondaryBoatId: secondaryBoatId || null,
+                secondaryCaptainId: secondaryCaptainId || null,
+                secondaryBoatName: secondaryBoatName || null,
                 numPax: numPax || 1,
                 fullName: form.fullName,
                 countryCode: form.countryCode,

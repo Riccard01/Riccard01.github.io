@@ -4,7 +4,7 @@
 }
 
 .calendar-cell.other-month:hover .calendar-day-number.other-month {
-  background: #e0e0e0;
+  background: #eef3ff;
   border-radius: 50%;
 }
 
@@ -94,10 +94,11 @@
   width: 100%;
   /* Azzera i margini: ora lo spazio lo gestisce il padding del padre */
   margin: 0; 
-  background: #fbfaff;
+  background: #ffffff;
   /* Rimetti il border-radius completo a 28px così si arrotonda bene dentro la card! */
-  border-radius: 28px; 
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  border: 1px solid #e4eaf7;
+  box-shadow: 0 14px 30px rgba(9, 31, 91, 0.06);
   padding: 16px;
   box-sizing: border-box;
 }
@@ -109,7 +110,7 @@
 }
 
 .calendar-month-label {
-  color: #031824;
+  color: #0a2558;
   font-family: 'Work Sans', sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -132,7 +133,7 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  background-color: #031824;
+  background-color: #0a2558;
   border-radius: 12px;
 }
 
@@ -170,7 +171,7 @@
   line-height: 14px;
   letter-spacing: 0px;
   text-align: left;
-  color: #031824;
+  color: #5770a1;
   background: none;
   border-radius: 4px;
 }
@@ -196,11 +197,11 @@
 }
 
 .calendar-cell.today {
-  border: 1px solid #007bff;
+  border: 1px solid #0a2558;
 }
 
 .calendar-cell:hover:not(.disabled):not(.selected) {
-  background: #e0e7ff;
+  background: #eef3ff;
 }
 
 .calendar-day-number {
@@ -219,7 +220,7 @@
   font-size: 16px;
   line-height: 16px;
   letter-spacing: .5px;
-  color: #031824;
+  color: #0a2558;
   text-decoration: none;
 }
 
@@ -229,7 +230,7 @@
   font-size: 16px;
   line-height: 12px;
   letter-spacing: .5px;
-  color: #848C8C;
+  color: #9aa9c7;
   text-decoration: line-through;
 }
 
@@ -238,8 +239,8 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 14px;
-  color: #EEEEEE;
-  background: #031824;
+  color: #ffffff;
+  background: #0a2558;
   border-radius: 12px;
 }
 

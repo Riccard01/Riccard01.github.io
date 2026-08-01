@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getBoatSlots, boatSlotsReady, getPlaces, placesReady } from '../utils/databaseVariables';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -6,19 +7,28 @@ import { getBoatsWithAvailability, fetchCaptainsMonthAvailability } from '../uti
 
 import Navbar from '../components/Navbar';
 import aperitivo from '../assets/aperitivo.webp';
-import leggera from '../assets/leggera.webp';
+import sanfruImg from '../assets/sanfru.webp';
+import puntaChiappaImg from '../assets/puntachiappa.webp';
+import specialImg from '../assets/special.webp';
+import marianaImg from '../assets/mariana.webp';
+import guestsStepIcon from '../assets/guests_book.svg';
+import clockStepIcon from '../assets/clock_book.svg';
+import calendarStepIcon from '../assets/calendar_book.svg';
+import portStepIcon from '../assets/port_book.svg';
 import '../App.css';
 import BoatCard from "../components/BoatCard";
-import DropDown from "../components/DropDown";
 import Transfer from '../components/Transfer';
-import BookingFooter from '../components/BookingFooter';
 import BookingForm from '../components/BookingForm';
-import maestrale from '../assets/leggera.webp'
-import francy from '../assets/leggera.webp'
-import allegra from '../assets/leggera.webp'
-import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount } from '../utils/priceCalculator';
+import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount, computeComboTotalPrice, computeComboTotalPriceWithDiscount } from '../utils/priceCalculator';
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
 import { getLocale } from '../utils/locale';
+import {
+  filterSlotsForExperience,
+  getGuestLimitForExperience,
+  isBoatCompatibleWithExperience,
+  normalizeExperienceQuery,
+  getRainbowTourSlotDisplayName,
+} from '../utils/experienceBookingConfig';
 
 // Puoi aggiungere altre immagini se disponibili
 
@@ -26,22 +36,52 @@ import './Book.css';
 
 function Book({ lang = 'it', setLang = () => {} }) {
   const dict = getLocale(lang);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const selectedExperienceId = useMemo(() => {
+    const params = new URLSearchParams(location.search || '');
+    return normalizeExperienceQuery(params.get('exp'));
+  }, [location.search]);
+
+  const selectedExperience = useMemo(
+    () => (dict?.experienceCarousel?.experiences || []).find((item) => item.id === selectedExperienceId) || null,
+    [dict, selectedExperienceId]
+  );
+
+  const experienceIdByTitle = useMemo(() => {
+    const map = {};
+    (dict?.experienceCarousel?.experiences || []).forEach((item) => {
+      map[item.title] = item.id;
+    });
+    return map;
+  }, [dict]);
+
+  const experienceVisualById = {
+    '0': sanfruImg,
+    '1': aperitivo,
+    '2': marianaImg,
+    '3': specialImg,
+    '4': puntaChiappaImg,
+  };
 
   const [animate, setAnimate] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   // Load cached slot objects synchronously from module-level cache
-  const initialSlotObjects = getBoatSlots();
+  const initialSlotObjects = filterSlotsForExperience(getBoatSlots(), selectedExperienceId);
   const initialTimeOptions = (initialSlotObjects && initialSlotObjects.length)
-    ? initialSlotObjects.map(s => s.displayName)
+    ? initialSlotObjects.map((s) => (selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName))
     : [];
 
-  const [selectedTime, setSelectedTime] = useState(initialTimeOptions[0]);
+  const [selectedTime, setSelectedTime] = useState("");
   const [timeOptions, setTimeOptions] = useState(initialTimeOptions);
   const [selectedPeople, setSelectedPeople] = useState(dict.book.guestOptions?.[3] || "4 people");
-  // State for transfer visibility
-  const [showTransfer, setShowTransfer] = useState(false);
+  // Which single booking question ('experience' | 'guests' | 'time' | 'date' | 'transfer') is currently focused
+  const [focusStep, setFocusStep] = useState(() => (selectedExperienceId ? 'guests' : 'experience'));
   // State for form visibility
   const [showForm, setShowForm] = useState(false);
+  // State for the final recap/summary step shown before the data form
+  const [showRecap, setShowRecap] = useState(false);
   // State for payment confirmed
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   // State for Transfer Embark (populated from data in `variables/places`)
@@ -56,10 +96,10 @@ function Book({ lang = 'it', setLang = () => {} }) {
   const portoName = portoObj && portoObj.name;
 
   const [embarkOptions, setEmbarkOptions] = useState(initialEmbarkOptions);
-  const [selectedEmbark, setSelectedEmbark] = useState(portoName || initialEmbarkOptions[0] || "");
+  const [selectedEmbark, setSelectedEmbark] = useState("");
   const [arrangePickup, setArrangePickup] = useState(false);
   // State for Transfer Disembark
-  const [selectedDisembark, setSelectedDisembark] = useState(portoName || initialEmbarkOptions[0] || "");
+  const [selectedDisembark, setSelectedDisembark] = useState("");
   const [arrangeDropoff, setArrangeDropoff] = useState(false);
 
   // load flags (cached) and keep local state
@@ -79,56 +119,49 @@ function Book({ lang = 'it', setLang = () => {} }) {
       const names = Object.keys(places).map(k => places[k] && places[k].name).filter(Boolean);
       if (names.length) {
         setEmbarkOptions(names);
-        const porto = places[portoKey] && places[portoKey].name;
-        setSelectedEmbark(prev => (prev && names.includes(prev)) ? prev : (porto || names[0]));
-        setSelectedDisembark(prev => (prev && names.includes(prev)) ? prev : (porto || names[0]));
+        // Keep the selection empty until the user explicitly picks a port;
+        // only re-validate a previously chosen value against the fresh list.
+        setSelectedEmbark(prev => (prev && names.includes(prev)) ? prev : "");
+        setSelectedDisembark(prev => (prev && names.includes(prev)) ? prev : "");
       }
     }).catch(err => console.error('placesReady rejected', err));
     return () => { mounted = false; };
   }, []);
   // State for selected day for each visible boat
   const [selectedDates, setSelectedDates] = useState([null, null, null, null]);
-  const bookRef = useRef(null);
   useEffect(() => {
     // Activate animation after mount
     const timeout = setTimeout(() => setAnimate(true), 50);
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    const guestLimit = getGuestLimitForExperience(selectedExperienceId);
+    if (!guestLimit) return;
+
+    const options = dict.book.guestOptions || [];
+    const cappedOptions = options.filter((option) => {
+      const match = String(option).match(/(\d+)/);
+      return match ? Number(match[1]) <= guestLimit : true;
+    });
+    const preferredOption = options.find((option) => {
+      const match = String(option).match(/(\d+)/);
+      return match ? Number(match[1]) === guestLimit : false;
+    });
+    const fallbackOption = cappedOptions[cappedOptions.length - 1] || options[0] || selectedPeople;
+
+    if (preferredOption) {
+      setSelectedPeople(preferredOption);
+    } else if (fallbackOption) {
+      setSelectedPeople(fallbackOption);
+    }
+  }, [dict.book.guestOptions, selectedExperienceId]);
+
   // Add page-specific class to body so Book styles are scoped
   useEffect(() => {
     document.body.classList.add('page-book');
     return () => { document.body.classList.remove('page-book'); };
   }, []);
-
-// Sync Safari theme and body background with Summary opening
-  useEffect(() => {
-    let metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (!metaTheme) {
-      metaTheme = document.createElement('meta');
-      metaTheme.setAttribute('name', 'theme-color');
-      document.head.appendChild(metaTheme);
-    }
-
-    // Check if there's a selected date for the active boat (Summary visible)
-    const isSummaryVisible = !!selectedDates[activeIndex];
-
-    if (isSummaryVisible) {
-      // When the summary APPEARS: all luxury blue
-      metaTheme.setAttribute('content', '#031824'); 
-      document.body.style.backgroundColor = '#031824';
-    } else {
-      // When the summary DISAPPEARS: restore base dark colors
-      metaTheme.setAttribute('content', '#FBFAFF'); 
-      document.body.style.backgroundColor = '#FBFAFF'; 
-    }
-
-    // Safety: if the user leaves the page, reset everything
-    return () => {
-      if (metaTheme) metaTheme.setAttribute('content', '#FBFAFF');
-      document.body.style.backgroundColor = '';
-    };
-  }, [selectedDates, activeIndex]);
 
   // PASTE THIS HERE FOR SAFARI:
   useEffect(() => {
@@ -152,19 +185,27 @@ function Book({ lang = 'it', setLang = () => {} }) {
   // When the module fetch actually completes, update local state
   useEffect(() => {
     let mounted = true;
-    boatSlotsReady.then(() => {
+
+    const applySlotOptions = () => {
       if (!mounted) return;
-      const slots = getBoatSlots();
-      const names = (slots && slots.length) ? slots.map(s => s.displayName) : [];
+      const slots = filterSlotsForExperience(getBoatSlots(), selectedExperienceId);
+      const names = (slots && slots.length)
+        ? slots.map((s) => (selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName))
+        : [];
       if (names.length) {
         setTimeOptions(names);
-        setSelectedTime(prev => (prev && names.includes(prev)) ? prev : names[0]);
+        // Keep the selection empty until the user explicitly picks a time slot.
+        setSelectedTime(prev => (prev && names.includes(prev)) ? prev : "");
       }
-    }).catch(err => {
+    };
+
+    applySlotOptions();
+    boatSlotsReady.then(applySlotOptions).catch(err => {
       console.error('boatSlotsReady rejected', err);
     });
+
     return () => { mounted = false; };
-  }, []);
+  }, [selectedExperienceId, lang]);
 
   // Boats loaded from Firestore (fallback to local static if needed)
   const [boats, setBoats] = useState([]);
@@ -186,31 +227,6 @@ function Book({ lang = 'it', setLang = () => {} }) {
     return () => { mounted = false; };
   }, []);
 
-  // Pagination handling: update active index based on scroll
-  useEffect(() => {
-    const el = bookRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const children = Array.from(el.children);
-      let minDiff = Infinity;
-      let idx = 0;
-      children.forEach((child, i) => {
-        const childRect = child.getBoundingClientRect();
-        const elRect = el.getBoundingClientRect();
-        const diff = Math.abs(childRect.left - elRect.left);
-        if (diff < minDiff) {
-          minDiff = diff;
-          idx = i;
-        }
-      });
-      setActiveIndex(idx);
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    // trigger iniziale
-    onScroll();
-    return () => { if (el) el.removeEventListener('scroll', onScroll); };
-  }, [boats, showForm, showTransfer, animate]);
-
   // Reset selectedDate delle altre barche quando cambia activeIndex
   useEffect(() => {
     setSelectedDates(dates => dates.map((d, i) => (i === activeIndex ? d : null)));
@@ -231,13 +247,12 @@ function Book({ lang = 'it', setLang = () => {} }) {
       const day = pad(date.getDate());
       const dateStr = `${year}-${month}-${day}`;
       const monthKey = `${year}-${month}`;
-      const boatId = visibleBoats[activeIndex] && visibleBoats[activeIndex].id;
-      const cacheKey = `${boatId}_${monthKey}`;
-      const boatMonthDoc = boatMonthCache[cacheKey] || null;
+      const boatEntry = visibleBoats[activeIndex];
+      const constituentIds = getConstituentBoatIds(boatEntry);
+      const allLoaded = constituentIds.every(id => Boolean(boatMonthCache[`${id}_${monthKey}`]));
 
-      // If we don't have month data yet, treat as unavailable and clear
-      if (!boatMonthDoc) {
-        setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd));
+      // If month data is not loaded yet, keep current selection until validation data arrives.
+      if (!allLoaded) {
         return;
       }
 
@@ -257,11 +272,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
         }
         const startHourNum = parseInt(String(tt.start).split(':')[0], 10);
         const finishHourNum = parseInt(String(tt.finish).split(':')[0], 10);
-        const dayMap = (boatMonthDoc.availability && boatMonthDoc.availability[dateStr]) || {};
-        let ok = true;
-        for (let h = startHourNum; h < finishHourNum; h++) {
-          if (!dayMap[h]) { ok = false; break; }
-        }
+        const ok = isHourRangeAvailableForBoatEntry(boatEntry, dateStr, monthKey, startHourNum, finishHourNum, boatMonthCache);
         if (!ok) {
           setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd));
         }
@@ -270,7 +281,30 @@ function Book({ lang = 'it', setLang = () => {} }) {
       // on error be conservative and clear selection
       try { setSelectedDates(dates => dates.map((dd, i) => i === activeIndex ? null : dd)); } catch { }
     }
-  }, [displayNameToSlotKey]);
+  }, [selectedTime, activeIndex, selectedDates, boatMonthCache, boats, selectedPeople, selectedExperienceId]);
+
+  // Helpers to support "combined excursion" boat entries (two real boats booked together,
+  // e.g. Gourmet Sunset Cruise + "Rossa" for up to 15 guests). A combo entry exposes
+  // `isCombo: true` and `comboBoatIds: [id1, id2]`; availability must hold for BOTH boats.
+  const getConstituentBoatIds = (boatEntry) => (
+    boatEntry && boatEntry.isCombo && Array.isArray(boatEntry.comboBoatIds)
+      ? boatEntry.comboBoatIds
+      : [boatEntry && boatEntry.id]
+  );
+
+  const isHourRangeAvailableForBoatEntry = (boatEntry, dateStr, monthKey, startHourNum, finishHourNum, cache) => {
+    const ids = getConstituentBoatIds(boatEntry);
+    return ids.every((id) => {
+      if (!id) return false;
+      const boatMonthDoc = cache[`${id}_${monthKey}`] || null;
+      if (!boatMonthDoc) return false;
+      const dayMap = (boatMonthDoc.availability && boatMonthDoc.availability[dateStr]) || {};
+      for (let h = startHourNum; h < finishHourNum; h++) {
+        if (!dayMap[h]) return false;
+      }
+      return true;
+    });
+  };
 
   // prepare visible boats and helper values
   const match = String(selectedPeople).match(/(\d+)/);
@@ -278,15 +312,14 @@ function Book({ lang = 'it', setLang = () => {} }) {
   const slotObjects = getBoatSlots();
   const slotTimetables = {};
   (slotObjects || []).forEach(s => { if (s && s.key) slotTimetables[s.key] = s; });
-  (slotObjects || []).forEach(s => { if (s && s.key && s.displayName) displayNameToSlotKey[s.displayName] = s.key; });
+  (slotObjects || []).forEach(s => {
+    if (s && s.key) {
+      const displayName = selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName;
+      if (s.displayName) displayNameToSlotKey[s.displayName] = s.key;
+      if (displayName) displayNameToSlotKey[displayName] = s.key;
+    }
+  });
   const pad = v => String(v).padStart(2, '0');
-  const localImages = {
-    Maestrale: maestrale,
-    Leggera: leggera,
-    Libeccio: aperitivo,
-    Francy: francy,
-    Allegra: allegra
-  };
 
   const getExperiencePriority = (item) => {
     const label = String(item?.name || item?.title || item?.id || '').toLowerCase();
@@ -295,17 +328,103 @@ function Book({ lang = 'it', setLang = () => {} }) {
     return 2;
   };
 
+  // Boats eligible to be paired for a combined excursion (e.g. Gourmet Sunset Cruise + "Rossa").
+  // Falls back to any available boat for the Gourmet experience so a newly added boat works
+  // even if its name/description doesn't literally match one of the configured keywords.
+  const getComboCandidateBoats = (availableBoats, experienceId) => {
+    if (!experienceId) return [];
+    const strict = availableBoats.filter((boat) => isBoatCompatibleWithExperience(boat, experienceId));
+    if (strict.length >= 2) return strict;
+    if (experienceId === '1' && availableBoats.length >= 2) return availableBoats;
+    return strict;
+  };
+
+  // Highest guest count actually bookable right now (single boat, or combo of two boats).
+  const computeMaxSelectableGuests = (boatsList, experienceId) => {
+    const availableBoats = (boatsList || []).filter((b) => b.available !== false);
+    if (!availableBoats.length) return null;
+
+    let maxCapacity = Math.max(...availableBoats.map((b) => Number(b.guests || b.capacity || 1)));
+
+    const compatibleBoats = getComboCandidateBoats(availableBoats, experienceId);
+    if (compatibleBoats.length >= 2) {
+      const sorted = [...compatibleBoats].sort((a, b) => Number(b.guests || b.capacity || 0) - Number(a.guests || a.capacity || 0));
+      const comboCapacity = Number(sorted[0].guests || sorted[0].capacity || 0) + Number(sorted[1].guests || sorted[1].capacity || 0);
+      maxCapacity = Math.max(maxCapacity, comboCapacity);
+    }
+
+    return maxCapacity;
+  };
+
   const visibleBoats = (boats && boats.length)
-    ? boats
-      .filter(b => (b.guests || b.capacity || 1) >= ppl && (b.available !== false))
-      .sort((a, b) => {
+    ? (() => {
+      const availableBoats = boats.filter(b => b.available !== false);
+      const baseCandidates = availableBoats.filter(b => (b.guests || b.capacity || 1) >= ppl);
+      const experienceCandidates = selectedExperienceId
+        ? baseCandidates.filter((boat) => isBoatCompatibleWithExperience(boat, selectedExperienceId))
+        : baseCandidates;
+
+      if (experienceCandidates.length) {
+        return experienceCandidates.sort((a, b) => getExperiencePriority(a) - getExperiencePriority(b));
+      }
+
+      // No single boat can host this many guests for the selected experience: try a
+      // combined excursion using two boats (e.g. Gourmet Sunset Cruise + "Rossa", up to 15 guests).
+      if (selectedExperienceId) {
+        const compatibleBoats = getComboCandidateBoats(availableBoats, selectedExperienceId);
+        if (compatibleBoats.length >= 2) {
+          const sorted = [...compatibleBoats].sort((a, b) => Number(b.guests || b.capacity || 0) - Number(a.guests || a.capacity || 0));
+          const [boatA, boatB] = sorted;
+          const comboCapacity = Number(boatA.guests || boatA.capacity || 0) + Number(boatB.guests || boatB.capacity || 0);
+          if (comboCapacity >= ppl) {
+            return [{
+              id: `combo_${boatA.id}_${boatB.id}`,
+              name: `${boatA.name || boatA.id} + ${boatB.name || boatB.id}`,
+              available: true,
+              guests: comboCapacity,
+              isCombo: true,
+              comboBoatIds: [boatA.id, boatB.id],
+              comboBoatNames: [boatA.name || boatA.id, boatB.name || boatB.id],
+              comboBoats: [boatA, boatB],
+            }];
+          }
+        }
+      }
+
+      return baseCandidates.sort((a, b) => {
         const pa = getExperiencePriority(a);
         const pb = getExperiencePriority(b);
         return pa - pb;
-      })
+      });
+    })()
     : [
-    { id: 2, name: "Leggera", image: leggera, available: true, background: "#011010", guests: 4 },
+    { id: 2, name: "Leggera", available: true, background: "#011010", guests: 4 },
   ];
+
+  // If selected guests are above available capacity, auto-fallback to the highest valid option.
+  useEffect(() => {
+    if (!boats || !boats.length) return;
+
+    const maxCapacity = computeMaxSelectableGuests(boats, selectedExperienceId);
+    if (maxCapacity == null) return;
+
+    const selectedCountMatch = String(selectedPeople).match(/(\d+)/);
+    const selectedCount = selectedCountMatch ? Number(selectedCountMatch[1]) : 1;
+
+    if (selectedCount <= maxCapacity) return;
+
+    const options = dict.book.guestOptions || [];
+    const fallback = [...options]
+      .reverse()
+      .find((option) => {
+        const match = String(option).match(/(\d+)/);
+        return match ? Number(match[1]) <= maxCapacity : false;
+      });
+
+    if (fallback && fallback !== selectedPeople) {
+      setSelectedPeople(fallback);
+    }
+  }, [boats, selectedPeople, dict.book.guestOptions, selectedExperienceId]);
 
   // Ensure selectedDates array matches visibleBoats length
   useEffect(() => {
@@ -316,8 +435,40 @@ function Book({ lang = 'it', setLang = () => {} }) {
     });
   }, [visibleBoats.length]);
 
+  // Prefetch current month availability so calendar dates become selectable without manual month navigation.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function prefetchCurrentMonth() {
+      if (showForm) return;
+      if (!visibleBoats.length) return;
+
+      const now = new Date();
+      const monthKey = `${now.getFullYear()}-${pad(now.getMonth() + 1)}`;
+      const hasAllVisibleBoats = visibleBoats.every((boat) => getConstituentBoatIds(boat).every((id) => Boolean(boatMonthCache[`${id}_${monthKey}`])));
+      if (hasAllVisibleBoats) return;
+
+      try {
+        const boatsWithAvail = await getBoatsWithAvailability(monthKey);
+        if (cancelled) return;
+        setBoatMonthCache((prev) => {
+          const next = { ...prev };
+          (boatsWithAvail || []).forEach((boat) => {
+            next[`${boat.id}_${monthKey}`] = boat;
+          });
+          return next;
+        });
+      } catch (e) {
+        console.error('prefetch current month availability failed', e);
+      }
+    }
+
+    prefetchCurrentMonth();
+    return () => { cancelled = true; };
+  }, [visibleBoats, boatMonthCache, showForm]);
+
   // determine disembark options depending on selected slot
-  const specialSlotKeys = ['sunset_aperitivo', 'full_day_aperitivo'];
+  const specialSlotKeys = ['sunset_aperitivo', 'full_day_aperitivo', 'full_aperitivo'];
   const selectedSlotKey = displayNameToSlotKey[selectedTime] || null;
   // require both that the selected slot is one of the aperitivo slots
   // and that flags.block_aperitivo is true
@@ -332,33 +483,18 @@ function Book({ lang = 'it', setLang = () => {} }) {
   }, [isAperitivoSlot, portoName]);
 
   // Compute selected captain based on availability and priority when booking form opens
+  const [selectedSecondaryCaptain, setSelectedSecondaryCaptain] = useState(null);
   useEffect(() => {
     let mounted = true;
-    async function computeCaptain() {
-      // reset if no form or no boat/date/slot
-      if (!showForm) {
-        if (mounted) setSelectedCaptain(null);
-        return;
-      }
-      const boat = visibleBoats[activeIndex];
-      const date = selectedDates[activeIndex];
-      const slotKey = displayNameToSlotKey[selectedTime] || null;
-      if (!boat || !date || !slotKey) {
-        if (mounted) setSelectedCaptain(null);
-        return;
-      }
+
+    async function pickCaptainForBoat(captainIds, date, slotKey) {
+      const caps = Array.isArray(captainIds) ? captainIds : [];
+      if (caps.length === 0) return null;
 
       try {
         const monthKey = date.slice(0, 7);
-        const caps = Array.isArray(boat.captains) ? boat.captains : [];
-        if (caps.length === 0) {
-          if (mounted) setSelectedCaptain(null);
-          return;
-        }
-
         const capsAvailMap = await fetchCaptainsMonthAvailability(caps.map(String), monthKey);
 
-        // derive slot hours from slotTimetables
         const tt = slotTimetables[slotKey] && slotTimetables[slotKey].timetable ? slotTimetables[slotKey].timetable : null;
         let startHourNum = null;
         let finishHourNum = null;
@@ -366,14 +502,10 @@ function Book({ lang = 'it', setLang = () => {} }) {
           startHourNum = parseInt(String(tt.start).split(':')[0], 10);
           finishHourNum = parseInt(String(tt.finish).split(':')[0], 10);
         }
-        // fallback: require availability check to pass at least for some hour (conservative)
         if (startHourNum === null || finishHourNum === null) {
-          if (mounted) setSelectedCaptain(caps[0] || null);
-          return;
+          return caps[0] || null;
         }
 
-        // iterate captains in priority order (array order) and pick first that is available for all hours
-        let chosen = null;
         for (const cap of caps) {
           const capKey = String(cap);
           const capMap = capsAvailMap[capKey] || {};
@@ -384,13 +516,45 @@ function Book({ lang = 'it', setLang = () => {} }) {
             const k2 = String(h).padStart(2, '0');
             if (!(dayMap[k1] === true || dayMap[k2] === true)) { ok = false; break; }
           }
-          if (ok) { chosen = cap; break; }
+          if (ok) return cap;
         }
-
-        if (!chosen) chosen = caps[0] || null;
-        if (mounted) setSelectedCaptain(chosen);
+        return caps[0] || null;
       } catch {
-        if (mounted) setSelectedCaptain(boat.captains && boat.captains[0] ? boat.captains[0] : null);
+        return caps[0] || null;
+      }
+    }
+
+    async function computeCaptain() {
+      // reset if no form or no boat/date/slot
+      if (!showForm) {
+        if (mounted) { setSelectedCaptain(null); setSelectedSecondaryCaptain(null); }
+        return;
+      }
+      const boat = visibleBoats[activeIndex];
+      const date = selectedDates[activeIndex];
+      const slotKey = displayNameToSlotKey[selectedTime] || null;
+      if (!boat || !date || !slotKey) {
+        if (mounted) { setSelectedCaptain(null); setSelectedSecondaryCaptain(null); }
+        return;
+      }
+
+      if (boat.isCombo && Array.isArray(boat.comboBoats) && boat.comboBoats.length === 2) {
+        const [boatA, boatB] = boat.comboBoats;
+        const [chosenA, chosenB] = await Promise.all([
+          pickCaptainForBoat(boatA.captains, date, slotKey),
+          pickCaptainForBoat(boatB.captains, date, slotKey),
+        ]);
+        if (mounted) {
+          setSelectedCaptain(chosenA);
+          setSelectedSecondaryCaptain(chosenB);
+        }
+        return;
+      }
+
+      const chosen = await pickCaptainForBoat(boat.captains, date, slotKey);
+      if (mounted) {
+        setSelectedCaptain(chosen);
+        setSelectedSecondaryCaptain(null);
       }
     }
 
@@ -423,16 +587,8 @@ function Book({ lang = 'it', setLang = () => {} }) {
         try { window.location.href = '/'; } catch { }
         return;
       }
-      if (step === 'list') {
-        setShowForm(false);
-        setShowTransfer(false);
-      } else if (step === 'transfer') {
-        setShowForm(false);
-        setShowTransfer(true);
-      } else if (step === 'form') {
-        setShowForm(true);
-        setShowTransfer(false);
-      }
+      setShowForm(step === 'form');
+      setShowRecap(step === 'recap');
       lastPushedStep.current = step;
     };
 
@@ -442,40 +598,67 @@ function Book({ lang = 'it', setLang = () => {} }) {
 
   // Push state when the visible booking step changes
   useEffect(() => {
-    const step = showForm ? 'form' : (showTransfer ? 'transfer' : 'list');
+    const step = showForm ? 'form' : showRecap ? 'recap' : 'list';
     if (step !== lastPushedStep.current) {
       try {
         window.history.pushState({ bookingStep: step }, '');
         lastPushedStep.current = step;
       } catch { }
     }
-  }, [showTransfer, showForm]);
+  }, [showForm, showRecap]);
 
-  const computedTotal = computeTotalPrice({
-    boatDoc: visibleBoats[activeIndex] || {},
-    placesMap: getPlaces(),
-    slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
-    embark: selectedEmbark,
-    disembark: selectedDisembark,
-    arrangePickup,
-    arrangeDropoff,
-    numPax: ppl,
-  });
+  const activeBoatEntry = visibleBoats[activeIndex] || {};
+  const isComboActive = Boolean(activeBoatEntry.isCombo);
+
+  const computedTotal = isComboActive
+    ? computeComboTotalPrice({
+      boatDocs: activeBoatEntry.comboBoats || [],
+      placesMap: getPlaces(),
+      slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
+      embark: selectedEmbark,
+      disembark: selectedDisembark,
+      arrangePickup,
+      arrangeDropoff,
+      numPax: ppl,
+    })
+    : computeTotalPrice({
+      boatDoc: activeBoatEntry,
+      placesMap: getPlaces(),
+      slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
+      embark: selectedEmbark,
+      disembark: selectedDisembark,
+      arrangePickup,
+      arrangeDropoff,
+      numPax: ppl,
+    });
   const computedTotalStr = formatCurrency(computedTotal);
   // compute discounted total (if a date is selected and discounts exist)
   const selDateStr = selectedDates[activeIndex] || null;
-  const discountedTotalVal = (discounts && selDateStr) ? computeTotalPriceWithDiscount({
-    boatDoc: visibleBoats[activeIndex] || {},
-    placesMap: getPlaces(),
-    slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
-    embark: selectedEmbark,
-    disembark: selectedDisembark,
-    arrangePickup,
-    arrangeDropoff,
-    numPax: ppl,
-    bookingDate: selDateStr,
-    discounts,
-  }) : computedTotal;
+  const discountedTotalVal = (discounts && selDateStr) ? (isComboActive
+    ? computeComboTotalPriceWithDiscount({
+      boatDocs: activeBoatEntry.comboBoats || [],
+      placesMap: getPlaces(),
+      slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
+      embark: selectedEmbark,
+      disembark: selectedDisembark,
+      arrangePickup,
+      arrangeDropoff,
+      numPax: ppl,
+      bookingDate: selDateStr,
+      discounts,
+    })
+    : computeTotalPriceWithDiscount({
+      boatDoc: activeBoatEntry,
+      placesMap: getPlaces(),
+      slotObj: slotTimetables[displayNameToSlotKey[selectedTime]] || null,
+      embark: selectedEmbark,
+      disembark: selectedDisembark,
+      arrangePickup,
+      arrangeDropoff,
+      numPax: ppl,
+      bookingDate: selDateStr,
+      discounts,
+    })) : computedTotal;
   const discountedTotalStr = formatCurrency(discountedTotalVal);
   const discountedAmountCents = eurosToCents(discountedTotalVal);
   const formatBookingDate = (dateStr) => {
@@ -485,6 +668,76 @@ function Book({ lang = 'it', setLang = () => {} }) {
       const dt = new Date(+y, +m - 1, +d);
       return dt.toLocaleDateString(dict.localeCode || 'it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     } catch { return dateStr; }
+  };
+
+  const guestOptionsList = dict.book.guestOptions || ["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"];
+  const experienceGuestLimit = getGuestLimitForExperience(selectedExperienceId);
+  const maxSelectableGuests = computeMaxSelectableGuests(boats, selectedExperienceId);
+  const guestSelectionLimit = (() => {
+    const limits = [experienceGuestLimit, maxSelectableGuests]
+      .map((value) => Number(value))
+      .filter((value) => Number.isFinite(value) && value > 0);
+    if (!limits.length) return null;
+    return Math.min(...limits);
+  })();
+  const filteredGuestOptions = guestSelectionLimit != null
+    ? guestOptionsList.filter((option) => {
+      const countMatch = String(option).match(/(\d+)/);
+      return countMatch ? Number(countMatch[1]) <= guestSelectionLimit : true;
+    })
+    : guestOptionsList;
+  const guestIndex = Math.max(0, filteredGuestOptions.indexOf(selectedPeople));
+  const nextGuestOption = filteredGuestOptions[Math.min(filteredGuestOptions.length - 1, guestIndex + 1)];
+  const nextGuestCountMatch = nextGuestOption ? String(nextGuestOption).match(/(\d+)/) : null;
+  const nextGuestCount = nextGuestCountMatch ? Number(nextGuestCountMatch[1]) : null;
+  const guestIncrementDisabled = guestIndex >= filteredGuestOptions.length - 1
+    || (guestSelectionLimit != null && nextGuestCount != null && nextGuestCount > guestSelectionLimit);
+  const dateTabLabel = selectedDates[activeIndex]
+    ? (() => {
+      const [y, m, d] = selectedDates[activeIndex].split('-');
+      return new Date(+y, +m - 1, +d).toLocaleDateString(dict.localeCode || 'it-IT', { day: 'numeric', month: 'short' });
+    })()
+    : (lang === 'it' ? 'Seleziona' : 'Select');
+
+  // Steps of the single-focus wizard, used to drive the sliding progress indicator.
+  // 'experience' only appears while no experience has been chosen yet.
+  const wizardSteps = selectedExperienceId
+    ? ['guests', 'time', 'date', 'transfer']
+    : ['experience', 'guests', 'time', 'date', 'transfer'];
+  const wizardStepIndex = Math.max(0, wizardSteps.indexOf(focusStep));
+  // A step's tab can only be jumped to once a value has actually been chosen for it
+  const wizardStepHasValue = {
+    experience: Boolean(selectedExperienceId),
+    guests: true,
+    time: Boolean(selectedTime),
+    date: Boolean(selectedDates[activeIndex]),
+    transfer: Boolean(selectedEmbark && selectedDisembark),
+  };
+  // Every other step stays locked until an experience has been picked
+  const experiencePending = wizardSteps.includes('experience') && !selectedExperienceId;
+  const cleanPortLabel = (name) => (name || '').replace(/Extra Fee/gi, '').replace(/\s*\([^)]*\)/g, '').trim();
+  const transferTabLabel = (() => {
+    const embark = cleanPortLabel(selectedEmbark);
+    const disembark = cleanPortLabel(selectedDisembark);
+    if (!embark && !disembark) return (lang === 'it' ? 'Seleziona' : 'Select');
+    return embark === disembark ? embark : `${embark} - ${disembark}`;
+  })();
+
+  const handleExperienceSelect = (title) => {
+    const nextExperienceId = experienceIdByTitle[title];
+    if (!nextExperienceId || nextExperienceId === selectedExperienceId) return;
+
+    const params = new URLSearchParams(location.search || '');
+    params.set('exp', nextExperienceId);
+    navigate({ pathname: `/${lang}/book`, search: `?${params.toString()}` });
+
+    // brief delay so the selected card's blink feedback is visible before advancing
+    setTimeout(() => {
+      setShowForm(false);
+      setActiveIndex(0);
+      setSelectedDates((dates) => dates.map(() => null));
+      setFocusStep('guests');
+    }, 500);
   };
 
   return (
@@ -516,7 +769,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
         </div>
       ) : (
         <>
-          {(showTransfer || showForm) && !paymentConfirmed && (
+          {(showForm || showRecap) && !paymentConfirmed && (
             <div className="booking-topbar">
               <button
                 className="booking-back-arrow"
@@ -530,6 +783,39 @@ function Book({ lang = 'it', setLang = () => {} }) {
             </div>
           )}
           <Navbar lang={lang} setLang={setLang} />
+
+          <section className="ap-picker" aria-label={lang === 'it' ? 'Seleziona esperienza' : 'Select experience'}>
+            <p className="ap-picker-eyebrow">{lang === 'it' ? 'Esperienza' : 'Experience'}</p>
+            <div className="ap-picker-row">
+              {(dict?.experienceCarousel?.experiences || []).map((item) => {
+                const isSelected = item.id === selectedExperienceId;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`ap-picker-card${isSelected ? ' is-selected' : ''}`}
+                    onClick={() => handleExperienceSelect(item.title)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="ap-picker-media">
+                      {experienceVisualById[item.id] ? (
+                        <img src={experienceVisualById[item.id]} alt={item.title} loading="lazy" decoding="async" />
+                      ) : null}
+                    </span>
+                    <span className="ap-picker-title">{item.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          <button type="button" className="ap-call-banner" onClick={() => { window.location.href = 'whatsapp://send?phone=393463365699'; }} aria-label={dict.book.callButtonAria}>
+            <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5.24782 12.9815C4.63328 13.3779 3.90097 13.5507 3.17402 13.4708C2.44708 13.3908 1.76983 13.063 1.25617 12.5424L0.807105 12.1033C0.610232 11.9019 0.5 11.6315 0.5 11.3499C0.5 11.0683 0.610232 10.7978 0.807105 10.5965L2.71312 8.71037C2.91281 8.51413 3.18158 8.40417 3.46156 8.40417C3.74153 8.40417 4.01031 8.51413 4.20999 8.71037C4.41136 8.90725 4.6818 9.01748 4.96342 9.01748C5.24504 9.01748 5.51547 8.90725 5.71684 8.71037L8.71058 5.71663C8.81045 5.61821 8.88976 5.50092 8.94389 5.37158C8.99802 5.24224 9.0259 5.10342 9.0259 4.96321C9.0259 4.82299 8.99802 4.68418 8.94389 4.55483C8.88976 4.42549 8.81045 4.3082 8.71058 4.20978C8.51434 4.0101 8.40438 3.74132 8.40438 3.46135C8.40438 3.18137 8.51434 2.9126 8.71058 2.71291L10.6066 0.816871C10.808 0.619997 11.0784 0.509766 11.36 0.509766C11.6417 0.509766 11.9121 0.619997 12.1135 0.816871L12.5526 1.26594C13.0731 1.7796 13.4009 2.45685 13.4809 3.18379C13.5609 3.91074 13.3881 4.64305 12.9916 5.25759C10.9259 8.30196 8.29751 10.9236 5.24782 12.9815Z" fill="#ffffff" />
+            </svg>
+            <span className="ap-call-banner-text">{dict.book.callButtonLabel}</span>
+          </button>
+
           {showForm ? (
             <BookingForm
               lang={lang}
@@ -576,15 +862,17 @@ function Book({ lang = 'it', setLang = () => {} }) {
                   console.error('retry fetch availability failed', e);
                 } finally {
                   setShowForm(false);
-                  setShowTransfer(false);
                 }
               }}
-              boatId={visibleBoats[activeIndex] && visibleBoats[activeIndex].id}
+              boatId={isComboActive ? activeBoatEntry.comboBoatIds?.[0] : (visibleBoats[activeIndex] && visibleBoats[activeIndex].id)}
               date={selectedDates[activeIndex]}
               slotKey={displayNameToSlotKey[selectedTime]}
               startTime={slotTimetables[displayNameToSlotKey[selectedTime]]?.timetable?.start || null}
               endTime={slotTimetables[displayNameToSlotKey[selectedTime]]?.timetable?.finish || null}
               captainId={selectedCaptain}
+              secondaryBoatId={isComboActive ? activeBoatEntry.comboBoatIds?.[1] : null}
+              secondaryCaptainId={isComboActive ? selectedSecondaryCaptain : null}
+              secondaryBoatName={isComboActive ? activeBoatEntry.comboBoatNames?.[1] : null}
               embark={selectedEmbark}
               disembark={selectedDisembark}
               arrangePickup={arrangePickup}
@@ -592,209 +880,384 @@ function Book({ lang = 'it', setLang = () => {} }) {
               numPax={ppl}
               amountCents={discountedAmountCents}
             />
-          ) : showTransfer ? (
-            <div className="transfer-page-wrapper" style={{ paddingBottom: '180px' }}>
-              {/* Transfer Imbarco */}
-              <Transfer
-                lang={lang}
-                embarkOptions={embarkOptions}
-                selectedEmbark={selectedEmbark}
-                onEmbarkChange={setSelectedEmbark}
-                arrangePickup={arrangePickup}
-                onPickupChange={setArrangePickup}
-                embarkLabel={dict.book.transferEmbarkLabel}
-                pickupLabel={dict.book.transferPickupLabel}
-              />
-              {/* Transfer Sbarco */}
-              <Transfer
-                lang={lang}
-                embarkOptions={disembarkOptions}
-                selectedEmbark={selectedDisembark}
-                onEmbarkChange={setSelectedDisembark}
-                arrangePickup={arrangeDropoff}
-                onPickupChange={setArrangeDropoff}
-                embarkLabel={dict.book.transferDisembarkLabel}
-                pickupLabel={dict.book.transferPickupLabel}
-                className="transfer-margin-bottom"
-              />
-              <BookingFooter
-                lang={lang}
-                total={computedTotalStr}
-                originalTotal={computedTotalStr}
-                discountedTotal={discountedTotalStr}
-                showButton={false}
-                showTransferButton={true}
-                onTransferClick={() => setShowForm(true)}
-
-                // AGGIUNGI QUESTE RIGHE QUI SOTTO: GEMINI
-                selectedBoatName={visibleBoats[activeIndex]?.name}
-                selectedSlot={selectedTime}
-                selectedDate={selectedDates[activeIndex]}
-                selectedGuests={selectedPeople}
-
-                // AGGIUNGI QUESTE DUE RIGHE QUI:
-                arrangePickup={arrangePickup}
-                arrangeDropoff={arrangeDropoff}
-
-                // AGGIUNGI QUESTE DUE RIGHE:
-                selectedEmbark={selectedEmbark}
-                selectedDisembark={selectedDisembark}
-
-                boatImage={visibleBoats[activeIndex]?.image || localImages[visibleBoats[activeIndex]?.name]}
-
-              />
+          ) : showRecap ? (
+            <div className="ap-recap" aria-label={dict.book.recapTitle}>
+              <div className="ap-section-head">
+                <h2>{dict.book.recapTitle}</h2>
+                <p>{dict.book.recapSubtitle}</p>
+              </div>
+              <div className="ap-recap-card">
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapExperience}</span>
+                  <span className="ap-recap-value">{selectedExperience?.title || visibleBoats[activeIndex]?.name || ''}</span>
+                </div>
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapGuests}</span>
+                  <span className="ap-recap-value">{selectedPeople}</span>
+                </div>
+                {isComboActive ? (
+                  <div className="ap-recap-row">
+                    <span className="ap-recap-label">{lang === 'it' ? 'Barche' : 'Boats'}</span>
+                    <span className="ap-recap-value">{(activeBoatEntry.comboBoatNames || []).join(' + ')}</span>
+                  </div>
+                ) : null}
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapTime}</span>
+                  <span className="ap-recap-value">{selectedTime}</span>
+                </div>
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapDate}</span>
+                  <span className="ap-recap-value">{formatBookingDate(selectedDates[activeIndex])}</span>
+                </div>
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapEmbark}</span>
+                  <span className="ap-recap-value">{selectedEmbark}</span>
+                </div>
+                <div className="ap-recap-row">
+                  <span className="ap-recap-label">{dict.book.recapDisembark}</span>
+                  <span className="ap-recap-value">{selectedDisembark}</span>
+                </div>
+                {arrangePickup ? (
+                  <div className="ap-recap-row">
+                    <span className="ap-recap-label">{dict.book.recapPickup}</span>
+                    <span className="ap-recap-value">{dict.transfer.yes}</span>
+                  </div>
+                ) : null}
+                {arrangeDropoff ? (
+                  <div className="ap-recap-row">
+                    <span className="ap-recap-label">{dict.book.recapDropoff}</span>
+                    <span className="ap-recap-value">{dict.transfer.yes}</span>
+                  </div>
+                ) : null}
+                <div className="ap-recap-row ap-recap-row-total">
+                  <span className="ap-recap-label">{dict.book.recapTotal}</span>
+                  <span className="ap-recap-value">
+                    {discountedTotalStr !== computedTotalStr ? (
+                      <>
+                        <span className="ap-price-old">{computedTotalStr}</span>
+                        <span className="ap-price-now">{discountedTotalStr}</span>
+                      </>
+                    ) : (
+                      <span className="ap-price-now">{computedTotalStr}</span>
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div className="ap-recap-actions">
+                <button type="button" className="ap-recap-edit" onClick={() => setShowRecap(false)}>
+                  {dict.book.recapEdit}
+                </button>
+                <button type="button" className="ap-flow-next" onClick={() => { setShowRecap(false); setShowForm(true); }}>
+                  {dict.book.recapConfirm}
+                </button>
+              </div>
             </div>
           ) : (
             <>
-              {/* <div className="available-days-label">{availableDays} soluzioni disponibili</div> */}
-              <div className="book-dropdowns-wrapper">
-                <div className="dropdown-orari-flex">
-                  <DropDown
-                    text={dict.book.timeDropdown}
-                    value={selectedTime}
-                    options={timeOptions}
-                    onChange={setSelectedTime}
-                    width="100%"
-                  />
-                </div>
-                <div className="dropdown-persone-fit">
-                  <DropDown
-                    text={dict.book.guestsDropdown}
-                    value={selectedPeople}
-                    options={dict.book.guestOptions || ["1 person", "2 people", "3 people", "4 people", "5 people", "6 people", "7 people"]}
-                    onChange={setSelectedPeople}
-                    width="fit-content"
-                  />
-                </div>
-              </div>
-              <div className="cta">{dict.book.solutionsText(visibleBoats.length)}</div>
-              <div
-                ref={bookRef}
-                className={`book${!animate ? ' animating' : ''}`}
-                style={!animate ? { overflowX: 'visible' } : {}}
-              >
-                {visibleBoats.map((boat, idx) => (
-                  <div
-                    key={boat.id}
-                    className="book-card-wrapper book-card-slide"
-                  >
-                    <div className={`boat-card-animate${animate ? ' in' : ''}`}>
-                      <BoatCard
-                        name={boat.name}
-                        image={boat.image || localImages[boat.name]}
-                        background={boat.background || "#011010"}
-                        calendarProps={{
-                          lang,
-                          selectedDate: selectedDates[idx],
-                          onDateSelect: date => {
-                            const y = date.getFullYear();
-                            const m = String(date.getMonth() + 1).padStart(2, '0');
-                            const d = String(date.getDate()).padStart(2, '0');
-                            const dateStr = `${y}-${m}-${d}`;
-                            setSelectedDates(dates => dates.map((d, i) => i === idx ? dateStr : d));
-                          },
-                          onSelectBoat: () => setShowTransfer(true),
-                          onMonthChange: async (year, month) => {
-                            // reset other boats' selected dates
-                            setSelectedDates(dates => dates.map((d, i) => i === idx ? null : d));
-                            // Prefetch availability for ALL boats for this month and populate cache
-                            try {
-                              const monthKey = `${year}-${pad(month + 1)}`;
-                              // If we already have cached entries for this month, skip fetching
-                              const haveMonth = Object.keys(boatMonthCache || {}).some(k => k.endsWith(`_${monthKey}`));
-                              if (!haveMonth) {
-                                const boatsWithAvail = await getBoatsWithAvailability(monthKey);
-                                setBoatMonthCache(prev => {
-                                  const next = { ...prev };
-                                  (boatsWithAvail || []).forEach(b => {
-                                    const cacheKey = `${b.id}_${monthKey}`;
-                                    next[cacheKey] = b;
-                                  });
-                                  return next;
-                                });
-                              }
-                            } catch (e) {
-                              console.error('fetchBoatsMonth failed', e);
-                            }
-                          },
-                          isDateEnabled: (date) => {
-                            try {
-                              const year = date.getFullYear();
-                              const month = pad(date.getMonth() + 1);
-                              const day = pad(date.getDate());
-                              const dateStr = `${year}-${month}-${day}`;
-                              const monthKey = `${year}-${month}`;
-                              const cacheKey = `${boat.id}_${monthKey}`;
-                              const boatMonthDoc = boatMonthCache[cacheKey] || null;
-
-                              // If we don't yet have data for this month, be pessimistic
-                              if (!boatMonthDoc) return false;
-
-                              // Check if date has passed (today and earlier cannot be booked)
-                              const today = new Date();
-                              today.setHours(0, 0, 0, 0);
-                              if (date <= today) return false;
-
-                              // Determine selected slot key (if any)
-                              const slotKey = displayNameToSlotKey[selectedTime] || null;
-
-                              // If a specific slot is selected, prefer slot-level check
-                              if (slotKey) {
-                                const startHour = slotTimetables[slotKey]["timetable"]["start"].split(":")[0];
-                                const finishHour = slotTimetables[slotKey]["timetable"]["finish"].split(":")[0];
-                                const dayMap = boatMonthDoc.availability || {};
-                                const times = dayMap[dateStr] || {};
-                                // Check if any hour between start and finish is not available
-                                const startHourNum = parseInt(startHour, 10);
-                                const finishHourNum = parseInt(finishHour, 10);
-                                for (let h = startHourNum; h < finishHourNum; h++) {
-                                  if (!times[h]) return false;
-                                }
-                                return true;
-                                // If no explicit info for this slot, fall through to other heuristics
-                              }
-
-                              // No information for this day -> treat as unavailable
-                              return false;
-                            } catch {
-                              return false;
-                            }
-                          },
-                          discounts: discounts,
-                        }}
-                      />
-                    </div>
+              <div className="ap-availability" aria-label={lang === 'it' ? 'Disponibilita esperienza selezionata' : 'Selected experience availability'}>
+                <div className="ap-section-head ap-section-head-with-price">
+                  <div>
+                    <h2>
+                      {selectedExperience
+                        ? (lang === 'it' ? `Personalizza il "${selectedExperience.title}"` : `Customize "${selectedExperience.title}"`)
+                        : (lang === 'it' ? 'Ospiti, orario e data' : 'Guests, time and date')}
+                    </h2>
+                    <p>
+                      {selectedExperience
+                        ? (lang === 'it' ? `Per ${selectedExperience.title}.` : `For ${selectedExperience.title}.`)
+                        : (lang === 'it' ? 'Scegli un\u2019esperienza per iniziare.' : 'Choose an experience to get started.')}
+                    </p>
                   </div>
-                ))}
-              </div>
-              {/* Pagination dots */}
-              <div className="book-pagination">
-                {visibleBoats.map((boat, idx) => (
+                  {selectedExperience ? (
+                    <div className="ap-price-tag">
+                      {discountedTotalStr !== computedTotalStr ? (
+                        <>
+                          <span className="ap-price-old">{computedTotalStr}</span>
+                          <span className="ap-price-now">{discountedTotalStr}</span>
+                        </>
+                      ) : (
+                        <span className="ap-price-now">{computedTotalStr}</span>
+                      )}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="ap-flow-tabs" role="tablist" style={{ gridTemplateColumns: `repeat(${wizardSteps.length}, 1fr)` }}>
+                  {wizardSteps.map((step, i) => {
+                    const tabMeta = {
+                      experience: { label: lang === 'it' ? 'Esperienza' : 'Experience', value: selectedExperience?.title || (lang === 'it' ? 'Seleziona' : 'Select') },
+                      guests: { label: lang === 'it' ? 'Ospiti' : 'Guests', value: selectedPeople, icon: guestsStepIcon },
+                      time: { label: lang === 'it' ? 'Orario' : 'Time', value: selectedTime || (lang === 'it' ? 'Seleziona' : 'Select'), icon: clockStepIcon },
+                      date: { label: lang === 'it' ? 'Data' : 'Date', value: dateTabLabel, icon: calendarStepIcon },
+                      transfer: { label: lang === 'it' ? 'Porti' : 'Ports', value: transferTabLabel, icon: portStepIcon },
+                    }[step];
+                    const stepState = i === wizardStepIndex ? 'is-active' : (i < wizardStepIndex ? 'is-done' : 'is-upcoming');
+                    const isClickable = step === 'experience' || (!experiencePending && (wizardStepHasValue[step] || focusStep === step));
+                    return (
+                      <button
+                        key={step}
+                        type="button"
+                        role="tab"
+                        aria-selected={focusStep === step}
+                        disabled={!isClickable}
+                        className={`ap-flow-tab ${stepState}`}
+                        onClick={() => setFocusStep(step)}
+                      >
+                        {tabMeta.icon ? <img className="ap-flow-tab-icon" src={tabMeta.icon} alt="" aria-hidden="true" /> : null}
+                        <span className="ap-flow-tab-text">
+                          <span className="ap-flow-tab-label">{tabMeta.label}</span>
+                          <span className="ap-flow-tab-value">{tabMeta.value}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="ap-flow-progress" aria-hidden="true">
                   <span
-                    key={boat.id}
-                    className={`book-dot${activeIndex === idx ? ' active' : ''}`}
+                    className="ap-flow-progress-fill"
+                    style={{ width: `${((wizardStepIndex + 1) / wizardSteps.length) * 100}%` }}
                   />
-                ))}
-              </div>
-{/* SHOW THE FOOTER WITH SUMMARY ONLY IF DAY IS SELECTED */}
-{/* WRAPPER WITH SLIDEDOWN ANIMATION */}
-              <div className={`booking-footer-slide-wrapper ${selectedDates[activeIndex] ? 'visible' : ''}`}>
-                <BookingFooter
-                  lang={lang}
-                  total={computedTotalStr}
-                  originalTotal={computedTotalStr}
-                  discountedTotal={discountedTotalStr}
-                  buttonLabel="Proceed to Checkout"
-                  buttonDisabled={false}
-                  onButtonClick={() => setShowTransfer(true)}
-                  showButton={true}
-                  showTransferButton={false}
-                  selectedBoatName={visibleBoats[activeIndex]?.name}
-                  selectedSlot={selectedTime}
-                  selectedDate={selectedDates[activeIndex]}
-                  selectedGuests={selectedPeople}
-                  boatImage={visibleBoats[activeIndex]?.image || localImages[visibleBoats[activeIndex]?.name]}
-                />
+                </div>
+
+                <div className="ap-flow-panel">
+                  {focusStep === 'experience' ? (
+                    <div className="ap-flow-step">
+                      <h3>{lang === 'it' ? 'Scegli un\u2019esperienza' : 'Choose an experience'}</h3>
+                      <p className="ap-flow-step-subtitle">
+                        {lang === 'it'
+                          ? 'Seleziona una delle esperienze qui sopra per continuare con la prenotazione.'
+                          : 'Select one of the experiences above to continue with your booking.'}
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {focusStep === 'guests' ? (
+                    <div className="ap-flow-step">
+                      <h3>{lang === 'it' ? 'Quante persone parteciperanno?' : 'How many guests?'}</h3>
+                      <div className="ap-guest-stepper">
+                        <button
+                          type="button"
+                          className="ap-stepper-btn"
+                          disabled={guestIndex <= 0}
+                          onClick={() => setSelectedPeople(guestOptionsList[Math.max(0, guestIndex - 1)])}
+                          aria-label={lang === 'it' ? 'Diminuisci ospiti' : 'Decrease guests'}
+                        >
+                          −
+                        </button>
+                        <span className="ap-stepper-value">{selectedPeople}</span>
+                        <button
+                          type="button"
+                          className="ap-stepper-btn"
+                          disabled={guestIncrementDisabled}
+                          onClick={() => setSelectedPeople(guestOptionsList[Math.min(guestOptionsList.length - 1, guestIndex + 1)])}
+                          aria-label={lang === 'it' ? 'Aumenta ospiti' : 'Increase guests'}
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button type="button" className="ap-flow-next" onClick={() => setFocusStep('time')}>
+                        {lang === 'it' ? 'Continua' : 'Continue'}
+                      </button>
+                    </div>
+                  ) : null}
+
+                  {focusStep === 'time' ? (
+                    <div className="ap-flow-step">
+                      <h3>{lang === 'it' ? 'Scegli l\u2019orario' : 'Choose a time'}</h3>
+                      <div className="ap-time-options">
+                        {timeOptions.map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`ap-time-pill${selectedTime === option ? ' is-selected' : ''}`}
+                            onClick={() => { setSelectedTime(option); setTimeout(() => setFocusStep('date'), 500); }}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                      {(timeOptions || []).some((option) => String(option).toLowerCase().includes('aperitivo')) ? (
+                        <div className="ap-slot-callout" role="note" aria-live="polite">
+                          <div className="ap-slot-callout-icon" aria-hidden="true">
+                            <span />
+                          </div>
+                          <div className="ap-slot-callout-copy">
+                            <strong>{lang === 'it' ? 'Aperitivo disponibile solo su alcuni slot' : 'Aperitivo available only on selected slots'}</strong>
+                            <p>
+                              {lang === 'it'
+                                ? 'Solo gli slot Tramonto + Aperitivo e Giornata intera + Aperitivo includono l abbinamento con il Gourmet Sunset Cruise. Supplemento €390.'
+                                : 'Only the Sunset + Aperitivo and Full Day + Aperitivo slots include the Gourmet Sunset Cruise pairing. Supplement €390.'}
+                            </p>
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
+
+                  {focusStep === 'date' ? (
+                    visibleBoats.length === 0 ? (
+                      <div className="ap-empty-inline" role="status" aria-live="polite">
+                        <h3>{lang === 'it' ? 'Nessuna barca disponibile con questi filtri' : 'No boats available for these filters'}</h3>
+                        <p>
+                          {lang === 'it'
+                            ? 'Prova a ridurre il numero di ospiti o cambia fascia oraria. Puoi anche rimuovere la preselezione esperienza.'
+                            : 'Try lowering the number of guests or changing the time slot. You can also remove the experience preselection.'}
+                        </p>
+                        <div className="booking-empty-actions">
+                          <button
+                            type="button"
+                            className="booking-empty-btn primary"
+                            onClick={() => {
+                              const defaultGuests = dict.book.guestOptions?.[3] || dict.book.guestOptions?.[0] || selectedPeople;
+                              setSelectedPeople(defaultGuests);
+                              if (timeOptions?.length) setSelectedTime(timeOptions[0]);
+                              setFocusStep('guests');
+                            }}
+                          >
+                            {lang === 'it' ? 'Reset filtri' : 'Reset filters'}
+                          </button>
+                          <button
+                            type="button"
+                            className="booking-empty-btn ghost"
+                            onClick={() => navigate(`/${lang}/book`)}
+                          >
+                            {lang === 'it' ? 'Mostra tutte le esperienze' : 'Show all experiences'}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="ap-flow-step">
+                        <h3>{lang === 'it' ? 'Scegli la data' : 'Choose a date'}</h3>
+                        <div className="ap-boat-block">
+                          {(() => {
+                            const idx = activeIndex;
+                            const boat = visibleBoats[idx];
+                            if (!boat) return null;
+                            return (
+                              <div key={boat.id} className={`boat-card-animate${animate ? ' in' : ''}`}>
+                                <BoatCard
+                                  calendarProps={{
+                                    lang,
+                                    selectedDate: selectedDates[idx],
+                                    onDateSelect: date => {
+                                      const y = date.getFullYear();
+                                      const m = String(date.getMonth() + 1).padStart(2, '0');
+                                      const d = String(date.getDate()).padStart(2, '0');
+                                      const dateStr = `${y}-${m}-${d}`;
+                                      setSelectedDates(dates => dates.map((d, i) => i === idx ? dateStr : d));
+                                    },
+                                    onMonthChange: async (year, month) => {
+                                      // reset other boats' selected dates
+                                      setSelectedDates(dates => dates.map((d, i) => i === idx ? null : d));
+                                      // Prefetch availability for ALL boats for this month and populate cache
+                                      try {
+                                        const monthKey = `${year}-${pad(month + 1)}`;
+                                        // If we already have cached entries for this month, skip fetching
+                                        const haveMonth = Object.keys(boatMonthCache || {}).some(k => k.endsWith(`_${monthKey}`));
+                                        if (!haveMonth) {
+                                          const boatsWithAvail = await getBoatsWithAvailability(monthKey);
+                                          setBoatMonthCache(prev => {
+                                            const next = { ...prev };
+                                            (boatsWithAvail || []).forEach(b => {
+                                              const cacheKey = `${b.id}_${monthKey}`;
+                                              next[cacheKey] = b;
+                                            });
+                                            return next;
+                                          });
+                                        }
+                                      } catch (e) {
+                                        console.error('fetchBoatsMonth failed', e);
+                                      }
+                                    },
+                                    isDateEnabled: (date) => {
+                                      try {
+                                        const year = date.getFullYear();
+                                        const month = pad(date.getMonth() + 1);
+                                        const day = pad(date.getDate());
+                                        const dateStr = `${year}-${month}-${day}`;
+                                        const monthKey = `${year}-${month}`;
+                                        const constituentIds = getConstituentBoatIds(boat);
+                                        const allLoaded = constituentIds.every(id => Boolean(boatMonthCache[`${id}_${monthKey}`]));
+
+                                        // If we don't yet have data for this month, be pessimistic
+                                        if (!allLoaded) return false;
+
+                                        // Check if date has passed (today and earlier cannot be booked)
+                                        const today = new Date();
+                                        today.setHours(0, 0, 0, 0);
+                                        if (date <= today) return false;
+
+                                        // Determine selected slot key (if any)
+                                        const slotKey = displayNameToSlotKey[selectedTime] || null;
+
+                                        // If a specific slot is selected, prefer slot-level check
+                                        if (slotKey) {
+                                          const startHour = slotTimetables[slotKey]["timetable"]["start"].split(":")[0];
+                                          const finishHour = slotTimetables[slotKey]["timetable"]["finish"].split(":")[0];
+                                          const startHourNum = parseInt(startHour, 10);
+                                          const finishHourNum = parseInt(finishHour, 10);
+                                          return isHourRangeAvailableForBoatEntry(boat, dateStr, monthKey, startHourNum, finishHourNum, boatMonthCache);
+                                          // If no explicit info for this slot, fall through to other heuristics
+                                        }
+
+                                        // No information for this day -> treat as unavailable
+                                        return false;
+                                      } catch {
+                                        return false;
+                                      }
+                                    },
+                                    discounts: discounts,
+                                  }}
+                                />
+                              </div>
+                            );
+                          })()}
+                        </div>
+                        {selectedDates[activeIndex] ? (
+                          <button type="button" className="ap-flow-next" onClick={() => setFocusStep('transfer')}>
+                            {lang === 'it' ? 'Continua' : 'Continue'}
+                          </button>
+                        ) : null}
+                      </div>
+                    )
+                  ) : null}
+
+                  {focusStep === 'transfer' ? (
+                    <div className="ap-flow-step">
+                      <h3>{lang === 'it' ? 'Porti e transfer' : 'Ports and transfer'}</h3>
+                      <p className="ap-flow-step-subtitle">
+                        {lang === 'it'
+                          ? 'Scegli porto di partenza, porto finale e se serve un transfer privato via terra.'
+                          : 'Choose departure port, final port, and whether you need private land transfer.'}
+                      </p>
+                      <Transfer
+                        lang={lang}
+                        embarkOptions={embarkOptions}
+                        selectedEmbark={selectedEmbark}
+                        onEmbarkChange={setSelectedEmbark}
+                        arrangePickup={arrangePickup}
+                        onPickupChange={setArrangePickup}
+                        embarkLabel={dict.book.transferEmbarkLabel}
+                        pickupLabel={dict.book.transferPickupLabel}
+                      />
+                      <Transfer
+                        lang={lang}
+                        embarkOptions={disembarkOptions}
+                        selectedEmbark={selectedDisembark}
+                        onEmbarkChange={setSelectedDisembark}
+                        arrangePickup={arrangeDropoff}
+                        onPickupChange={setArrangeDropoff}
+                        embarkLabel={dict.book.transferDisembarkLabel}
+                        pickupLabel={dict.book.transferPickupLabel}
+                        className="transfer-margin-bottom"
+                      />
+                      <button type="button" className="ap-flow-next" onClick={() => setShowRecap(true)}>
+                        {lang === 'it' ? 'Rivedi il riepilogo' : 'Review summary'}
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </>
           )}

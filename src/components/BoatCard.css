@@ -1,96 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
-
 .boat-card {
   position: relative;
   display: flex;
   flex-direction: column;
   height: fit-content;
-  border-radius: 34px;
-  background: #fff;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
-  gap: 0px;
   width: 100%;
-  max-width: 370px;
-  min-width: 370px;
-  padding: 0px;
-  overflow: hidden;
-}
-.boat-card-image-container {
-  width: 100%;
-  height: 200px;
-  flex: 0 0 auto;
-  display: flex;
-  position: relative;
-}
-.boat-card-image-gradient {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 70px;
-  pointer-events: none;
-  z-index: 2;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #031824 100%);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-/* .boat-card-image {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 0;
-  display: block;
-  z-index: 1;
-} */
-
-.boat-card-image {
-  width: 100%;       /* Forza la larghezza del container */
-  height: 100%;      /* Forza l'altezza di 200px del container */
-  object-fit: cover;
-  border-radius: 34px 34px 0px 0px;
-  display: block;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .boat-card-calendar-container {
   width: 100%;
-  /* Aggiungi il padding qui per stringere il calendario dentro la card */
-  padding: 0px 4px 4px 4px; 
   display: block;
   height: auto;
   box-sizing: border-box;
-  background-color: #031824;
 }
-
-.boat-card-name {
-  position: absolute;
-  top: 150px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 30;
-  color: #ffffff;
-  font-family: 'Fraunces', sans-serif;
-  font-size: 28px;
-  font-style: italic;
-  line-height: 1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.822);
-  pointer-events: none;
-  -webkit-font-smoothing: antialiased;
-  padding: 8px;
-}
-
-.boat-card::before {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  content: "";
-
-  mix-blend-mode: overlay;
-  opacity: 0.5;
-  border-radius: 34px;
-  z-index: 10;
-}
-

@@ -271,8 +271,8 @@
 }
 
 /* ==========================================================================
-   DESKTOP / TABLET GRANDE (>= 1024px): LAYOUT GRIGLIA STATICA SENZA ANIMAZIONI
-   ========================================================================== */
+  DESKTOP / TABLET GRANDE (>= 1024px): CARD SINGOLA (UNA IMMAGINE PER VOLTA)
+  ========================================================================== */
 
 @media (min-width: 1024px) {
   .transfer-carousel-container {
@@ -281,27 +281,27 @@
     padding: 0 24px;
   }
 
-  /* Trasforma il carosello scorrevole in una griglia statica */
+  /* Mantieni il carosello: una card piena per viewport */
   .transfer-carousel {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-    gap: 24px !important;
+    display: flex !important;
+    gap: 0 !important;
     padding: 20px 0 !important;
-    overflow-x: visible !important;
-    scroll-snap-type: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
   }
 
-  /* Disabilita trasparenze, ridimensionamenti e animazioni */
+  /* Ogni card occupa tutta la larghezza disponibile */
   .transfer-carousel-wrapper {
     width: 100% !important;
-    flex: 1 1 auto !important;
+    flex: 0 0 100% !important;
+    scroll-snap-align: center !important;
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 
   .transfer-slide-content {
-    height: 320px;
+    height: 460px;
   }
 
   /* Nomi dei porti e bottoni sempre visibili e attivi */

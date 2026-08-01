@@ -1,66 +1,86 @@
 .transfer-container {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #e2e8f0; /* Bordo sottile elegante */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  margin-top: 24px;
+  border: none;
+  box-shadow: none;
+  margin-top: 16px;
 }
 
 .transfer-margin-bottom{
-  margin-bottom: 120px;
+  border-top: 1px solid #e4eaf7;
+  padding-top: 16px;
 }
 
 .transfer-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .transfer-label {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-  color: #4a4a4a;
-  gap: 8px;
-}
-
-.transfer-section-pickup {
-  background: #f8fafc; /* Grigio chiarissimo molto elegante */
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 0;
-  border: 1px solid #edf2f7;
-}
-
-.transfer-pickup-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.transfer-pickup-buttons button {
-  flex: 1;
-  background: #ffffff;
-  color: #1e1e1e;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 10px;
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  color: #0a2558;
+  gap: 8px;
 }
 
-/* Stato attivo coerente con il tasto dorato del footer */
-.transfer-pickup-buttons button.active {
-  background: #ffda73;
-  color: #1e1e1e;
-  border-color: #ffda73;
+.transfer-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.transfer-pickup-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+}
+
+.transfer-pickup-label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(255, 218, 115, 0.2);
+  color: #0a2558;
+}
+
+.transfer-toggle {
+  flex-shrink: 0;
+  position: relative;
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  border: none;
+  background: #dbe6fb;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.transfer-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(9, 31, 91, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.transfer-toggle.is-on {
+  background: #0a2558;
+}
+
+.transfer-toggle.is-on .transfer-toggle-knob {
+  transform: translateX(18px);
 }
