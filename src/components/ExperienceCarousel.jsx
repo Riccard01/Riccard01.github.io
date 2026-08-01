@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import "./ExperienceCarousel.css";
 import img4 from "../assets/mariana.webp";
 import img5 from "../assets/aperitivo.webp";
-import marianImg from "../assets/marian.webp";
 import florenceImg from "../assets/florence.webp";
 import sanfruImg from "../assets/sanfru.webp";
 import specialImg from "../assets/special.webp";
@@ -30,12 +29,11 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   const experienceImages = {
     '0': [img4],
     '1': [img5],
-    '2': [marianImg],
     '3': [specialImg],
     '4': [florenceImg],
   };
 
-  const canonicalOrder = ['1', '4', '0', '2', '3'];
+  const canonicalOrder = ['1', '4', '0', '3'];
   const canonicalExperiences = lang === 'it'
     ? (itLocale?.experienceCarousel?.experiences || [])
     : (enLocale?.experienceCarousel?.experiences || []);
