@@ -11,6 +11,7 @@ import { getLocale } from '../utils/locale';
 import enLocale from '../locales/en';
 import itLocale from '../locales/it';
 import { getExperienceSlugById } from '../utils/experienceRoutes';
+import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 
 export default function ExperienceCarousel({ lang = 'en' }) {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   const detailsLabel = lang === 'it' ? 'Dettagli' : 'Details';
 
   const openWhatsApp = () => {
+    trackWhatsAppClick();
     window.location.href = 'whatsapp://send?phone=393463365699';
   };
 

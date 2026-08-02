@@ -6,6 +6,7 @@ import { getApp } from 'firebase/app';
 import "./BookingForm.css";
 import { getLocale } from '../utils/locale';
 import { getBookingUi } from '../locales/bookingUi';
+import { trackPaymentConversion } from '../utils/googleAdsConversions';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -321,6 +322,7 @@ function CardPaymentSection({ lang = 'it', clientSecret, form, bookingId, onDone
             setCardError(confirm.error.message);
         } else if (confirm.paymentIntent && confirm.paymentIntent.status === 'succeeded') {
             setSuccess(true);
+            trackPaymentConversion({ value: (form.amountCents || 0) / 100, transactionId: bookingId });
             if (onDone) onDone({ success: true, bookingId });
         }
     }

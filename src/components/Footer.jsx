@@ -5,6 +5,7 @@ import logo from '../assets/logo.svg';
 import { getLocale } from '../utils/locale';
 import { FOOTER_AREAS, getFooterUi } from '../locales/footerUi';
 import { getExperienceSlugById } from '../utils/experienceRoutes';
+import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 
 export default function Footer({ lang = 'en' }) {
   const dict = getLocale(lang);
@@ -63,7 +64,7 @@ export default function Footer({ lang = 'en' }) {
           <h2>{ui.contact}</h2>
           <ul className="footer-link-list">
             <li><a href="tel:+393463365699">{ui.call}<span>+39 346 336 5699</span></a></li>
-            <li><a href="https://wa.me/393463365699" target="_blank" rel="noreferrer">{ui.whatsapp}</a></li>
+            <li><a href="https://wa.me/393463365699" target="_blank" rel="noreferrer" onClick={trackWhatsAppClick}>{ui.whatsapp}</a></li>
             <li><a href="mailto:riccardo@leggerotours.com">{ui.email}<span>riccardo@leggerotours.com</span></a></li>
           </ul>
         </address>

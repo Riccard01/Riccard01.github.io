@@ -7,6 +7,7 @@ import { getExperienceIdFromSlug } from '../utils/experienceRoutes';
 import { localizeDolceVita } from '../locales/dolceVitaDetails';
 import { localizeExperienceDetail, localizeRainbowTourContent } from '../locales/experienceDetailLocalization';
 import { getExperienceUi } from '../locales/experienceUi';
+import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 import img4 from '../assets/mariana.webp';
 import img5 from '../assets/aperitivo.webp';
 import marianImg from '../assets/marian.webp';
@@ -1410,6 +1411,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
   };
 
   const openWhatsApp = () => {
+    trackWhatsAppClick();
     window.location.href = 'whatsapp://send?phone=393463365699';
   };
 

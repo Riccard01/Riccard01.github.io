@@ -4,12 +4,14 @@ import phoneIcon from '../assets/phone.svg';
 import meAvatar from '../assets/me.webp';
 import logo from '../assets/logo.svg';
 import { getLocale, LANGUAGE_OPTIONS } from '../utils/locale';
+import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 
 function Navbar({ lang = 'it', setLang = () => {} }) {
   const dict = getLocale(lang);
   const t = dict.navbar;
 
   const openWhatsApp = () => {
+    trackWhatsAppClick();
     window.location.href = 'whatsapp://send?phone=393463365699';
   };
 
