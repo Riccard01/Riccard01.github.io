@@ -4,9 +4,7 @@ import "./ExperienceCarousel.css";
 import img4 from "../assets/mariana.webp";
 import img5 from "../assets/aperitivo.webp";
 import florenceImg from "../assets/florence.webp";
-import sanfruImg from "../assets/sanfru.webp";
 import specialImg from "../assets/special.webp";
-import puntaChiappaImg from "../assets/puntachiappa.webp";
 import clockIcon from "../assets/clock_dark.svg";
 import guestsIcon from "../assets/guests_dark.svg";
 import { getLocale } from '../utils/locale';
@@ -19,7 +17,6 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   const dict = getLocale(lang);
   const t = dict.experienceCarousel;
   const detailsLabel = lang === 'it' ? 'Dettagli' : 'Details';
-  const earlyBirdLabel = dict.homepage?.earlyBird || 'Early Bird 10% OFF';
 
   const openWhatsApp = () => {
     window.location.href = 'whatsapp://send?phone=393463365699';
@@ -34,16 +31,24 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   };
 
   const canonicalOrder = ['1', '4', '0', '3'];
-  const canonicalExperiences = lang === 'it'
+  const localeExperiences = Array.isArray(dict?.experienceCarousel?.experiences)
+    ? dict.experienceCarousel.experiences
+    : [];
+  const fallbackExperiences = lang === 'it'
     ? (itLocale?.experienceCarousel?.experiences || [])
     : (enLocale?.experienceCarousel?.experiences || []);
-  const canonicalById = new Map(canonicalExperiences.map((exp) => [exp.id, exp]));
+  const experienceById = new Map();
 
-  // Use only canonical IT/EN experience content to keep all locales in sync.
+  [...localeExperiences, ...fallbackExperiences].forEach((exp) => {
+    if (exp?.id && !experienceById.has(exp.id)) {
+      experienceById.set(exp.id, exp);
+    }
+  });
+
   const experiences = canonicalOrder
-    .filter((id) => canonicalById.has(id))
+    .filter((id) => experienceById.has(id))
     .map((id) => ({
-      ...canonicalById.get(id),
+      ...experienceById.get(id),
       id,
       images: experienceImages[id] || [],
     }));
@@ -77,7 +82,6 @@ export default function ExperienceCarousel({ lang = 'en' }) {
           >
             <div className="carousel-slide">
               <div className="slide-content">
-                {exp.id === '0' ? <span className="early-bird-ribbon">{earlyBirdLabel}</span> : null}
                 <div className={`image-grid ${exp.images?.length === 1 ? 'single-image' : ''}`}>
                   {exp.images && exp.images.map((src, idx) => (
                     <div key={idx} className={`grid-item ${exp.images.length > 1 ? `grid-item-${idx}` : ''}`.trim()}>

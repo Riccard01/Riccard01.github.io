@@ -2,15 +2,16 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "ar-AE",
+  rtl: true,
   navbar: {
     ...en.navbar,
     whatsappUs: "راسلنا عبر واتساب",
     switchLabel: "تغيير اللغة",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "حجز مبكر خصم 10%",
-    title: "Private boat tours in Genova and Portofino",
+    title: "جولات بحرية خاصة في جنوة وبورتوفيينو",
     subtitle: "مسار واحد وآلاف المشاعر: برامج خاصة ولحظات على وتيرتك. Stay Leggero!",
   },
   experienceCarousel: {
@@ -51,13 +52,22 @@ export default {
         chips: ["الوقود شامل", "ربان"],
       },
       {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "حتى 5",
+        price: "ابتداء من 600 € للمجموعة",
+        desc: "جولة خاصة في آخر بعد الظهر والليل من جنوة مع توقفات للسباحة، كامولي والوصول إلى Punta Chiappa مع عشاء اختياري في مطعم الشريك Stella Maris.",
+        chips: ["خاص", "توقفات سباحة", "مناشف", "معدات السنوكل", "Prosciutto e melone", "صور/فيديو", "ربان"],
+      },
+      {
         id: "3",
         title: "Stella Maris",
-        time: "2 August 2026",
-        guests: "Annual event",
-        price: "€1200 per group",
-        desc: "Camogli sea celebration with marine procession, Dragun and floating lights.",
-        chips: ["Local tradition", "Sea procession", "Dragun", "Floating lights", "مناشف", "معدات سنوركل"],
+        time: "2 أغسطس 2026",
+        guests: "حدث سنوي",
+        price: "1200 € للمجموعة",
+        desc: "أكثر احتفالات كامولي البحرية شهرة: موكب بحري، قارب دراغون، فوانيس طائرة وأجواء فريدة.",
+        chips: ["تقليد محلي", "موكب بحري", "Dragun", "فوانيس", "مناشف", "معدات السنوكل"],
       },
     ],
   },
@@ -142,7 +152,7 @@ export default {
       {
         id: "cancellation",
         question: "ما سياسة الإلغاء؟",
-        answer: "يمكنك الإلغاء مجانًا حتى 72 ساعة قبل الانطلاق. بعد هذه المهلة لا يتوفر استرداد.",
+        answer: "تختلف شروط الإلغاء والاسترداد حسب التجربة؛ تواصل معنا قبل الحجز لتأكيد الشروط المطبقة. إذا ألغينا الرحلة بسبب أحوال جوية غير آمنة، يمكنك تغيير الموعد أو استرداد المبلغ كاملاً.",
       },
       {
         id: "weather",
@@ -185,6 +195,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "احجز جولتك الخاصة بالقارب",
+    guestOptions: ["شخص واحد", "شخصان", "3 أشخاص", "4 أشخاص", "5 أشخاص", "6 أشخاص", "7 أشخاص", "8 أشخاص", "9 أشخاص", "10 أشخاص", "11 شخصاً", "12 شخصاً", "13 شخصاً", "14 شخصاً", "15 شخصاً"],
     timeDropdown: "الوقت",
     guestsDropdown: "الضيوف",
     solutionsText: (count) => `${count} خيارات للفلاتر المحددة.`,

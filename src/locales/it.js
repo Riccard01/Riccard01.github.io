@@ -6,8 +6,7 @@ export default {
     switchLabel: "Cambia lingua",
   },
   homepage: {
-        title: "Rainbow Tour",
-    title: "Private boat tours in Genova and Portofino",
+    title: "Tour privati in barca a Genova e Portofino",
     subtitle:
       "Un solo itinerario, mille emozioni: percorsi privati e momenti costruiti interamente sul tuo ritmo. Stay Leggero!",
   },
@@ -26,7 +25,7 @@ export default {
     },
   },
   experienceCarousel: {
-    sectionTitle: "Le nostra esperienze",
+    sectionTitle: "Le nostre esperienze",
     prevAria: "Esperienza precedente",
     nextAria: "Prossima esperienza",
     dotAria: (idx) => `Vai all'esperienza ${idx + 1}`,
@@ -188,7 +187,7 @@ export default {
       {
         id: "cancellation",
         question: "Qual è la politica di cancellazione?",
-        answer: "Puoi cancellare gratuitamente fino a 72 ore prima della partenza. Oltre questa soglia non è previsto rimborso.",
+        answer: "Le condizioni di cancellazione e rimborso variano in base all'esperienza: contattaci prima di prenotare per confermare quelle applicabili. Se annulliamo per condizioni meteo non sicure, puoi riprogrammare o ricevere il rimborso completo.",
       },
       {
         id: "weather",

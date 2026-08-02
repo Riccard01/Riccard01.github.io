@@ -2,16 +2,16 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "fr-FR",
   navbar: {
     ...en.navbar,
     whatsappUs: "Ecrivez-nous sur WhatsApp",
     switchLabel: "Changer de langue",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "Early Bird 10% OFF",
-    title: "Private boat tours in Genova and Portofino",
-    subtitle: "Un itineraire, mille emotions: experiences privees et moments a votre rythme. Stay Leggero!",
+    title: "Excursions en bateau privées à Gênes et Portofino",
+    subtitle: "Un itinéraire, mille émotions : expériences privées et moments à votre rythme. Stay Leggero!",
   },
   experienceCarousel: {
     ...en.experienceCarousel,
@@ -49,6 +49,15 @@ export default {
         price: "A partir de 250 € par groupe",
         desc: "Evitez le trafic de la cote ligure avec un transfert rapide et panoramique par la mer.",
         chips: ["Carburant inclus", "Skipper"],
+      },
+      {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "Max 5",
+        price: "A partir de 600 € par groupe",
+        desc: "Tour privé de fin d'après-midi et de soirée au départ de Gênes avec arrêts baignade, Camogli et arrivée à Punta Chiappa avec dîner optionnel au restaurant partenaire Stella Maris.",
+        chips: ["Privé", "Arrêts baignade", "Serviettes", "Matériel de snorkeling", "Prosciutto e melone", "Photo/Video", "Skipper"],
       },
       {
         id: "3",
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "Quelle est la politique d'annulation?",
-        answer: "Vous pouvez annuler gratuitement jusqu'a 72 heures avant le depart. Passe ce delai, aucun remboursement n'est prevu.",
+        answer: "Les conditions d'annulation et de remboursement varient selon l'expérience ; contactez-nous avant de réserver pour confirmer les conditions applicables. Si nous annulons en raison d'une météo dangereuse, vous pouvez reporter ou recevoir un remboursement intégral.",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "Réservez votre excursion privée en bateau",
+    guestOptions: ["1 personne", "2 personnes", "3 personnes", "4 personnes", "5 personnes", "6 personnes", "7 personnes", "8 personnes", "9 personnes", "10 personnes", "11 personnes", "12 personnes", "13 personnes", "14 personnes", "15 personnes"],
     timeDropdown: "Horaire",
     guestsDropdown: "Participants",
     solutionsText: (count) => `${count} options pour les filtres selectionnes.`,

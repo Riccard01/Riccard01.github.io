@@ -12,41 +12,48 @@ export default function Faq({ lang = 'it' }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFaq = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null); // If already open, close it
-    } else {
-      setActiveIndex(index); // Otherwise open the selected one
-    }
+    setActiveIndex((currentIndex) => currentIndex === index ? null : index);
   };
 
   return (
-    <section className="faq-section" id="faq">
-      <h2 className="faq-title">{faqTitle}</h2>
-      <div className="faq-container">
-        {faqData.map((item, index) => {
-          const isOpen = activeIndex === index;
-          return (
-            <div 
-              key={item.id} 
-              className={`faq-item ${isOpen ? "active" : ""}`}
-            >
-              <button 
-                className="faq-question-btn" 
-                onClick={() => toggleFaq(index)}
-                aria-expanded={isOpen}
+    <section className="faq-section" id="faq" aria-labelledby="faq-title">
+      <div className="faq-layout">
+        <h2 className="faq-title" id="faq-title">{faqTitle}</h2>
+        <div className="faq-container">
+          {faqData.map((item, index) => {
+            const isOpen = activeIndex === index;
+            const answerId = `faq-${lang}-${item.id}-answer`;
+            return (
+              <article
+                key={item.id}
+                className={`faq-item ${isOpen ? "active" : ""}`}
               >
-                <span>{item.question}</span>
-                <span className="faq-icon">{isOpen ? "−" : "+"}</span>
-              </button>
-              
-              <div className="faq-answer-wrapper">
-                <div className="faq-answer">
-                  <p>{item.answer}</p>
+                <h3>
+                  <button
+                    type="button"
+                    className="faq-question-btn"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
+                  >
+                    <span>{item.question}</span>
+                    <span className="faq-icon" aria-hidden="true" />
+                  </button>
+                </h3>
+
+                <div
+                  className="faq-answer-wrapper"
+                  id={answerId}
+                  aria-hidden={!isOpen}
+                >
+                  <div className="faq-answer">
+                    <p>{item.answer}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getApp } from 'firebase/app';
 import "./BookingForm.css";
 import { getLocale } from '../utils/locale';
+import { getBookingUi } from '../locales/bookingUi';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -16,9 +17,13 @@ const countryCodes = [
     { code: "+44", country: "🇬🇧" },
 ];
 
+// Step-by-step wizard: collect name → phone → email → notes → pay
+const STEPS = ['name', 'phone', 'email', 'notes'];
+
 export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
     const dict = getLocale(lang);
     const t = dict.bookingForm;
+    const ui = getBookingUi(lang);
 
     const [form, setForm] = useState({
         fullName: "",
@@ -28,6 +33,8 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
         notes: "",
         amountCents: amountCents || 0,
     });
+
+    const [stepIndex, setStepIndex] = useState(0);
 
     // Keep displayed amount in sync if parent recomputes it
     useEffect(() => {
@@ -67,8 +74,33 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
         setForm(f => ({ ...f, countryCode: e.target.value }));
     }
 
+    function stepLabel(step) {
+        const labels = {
+            name: ui.formName,
+            phone: ui.formPhone,
+            email: ui.formEmail,
+            notes: ui.formNotes,
+        };
+        return labels[step] || step;
+    }
+
+    function stepIsValid(step) {
+        if (step === 'name')  return form.fullName.trim().length > 0;
+        if (step === 'phone') return form.phone.trim().length > 0;
+        if (step === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
+        return true; // notes is optional
+    }
+
+    function handleNext() {
+        if (stepIndex < STEPS.length - 1) {
+            setStepIndex(s => s + 1);
+        } else {
+            handleInitialSubmit();
+        }
+    }
+
     async function handleInitialSubmit(e) {
-        e.preventDefault();
+        if (e && e.preventDefault) e.preventDefault();
         // If the slot was flagged unavailable, treat this submission as a retry
         // and ask the parent to go back to the booking view with calendars.
         if (slotUnavailable) {
@@ -121,65 +153,110 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
     }
 
     return (
-        <div>
+        <div className="bsf-wrap">
             {!paymentPhase && (
-                <form className="booking-form" onSubmit={handleInitialSubmit}>
-                    <label>
-                        {t.fullName}
-                        <input
-                            type="text"
-                            name="fullName"
-                            value={form.fullName}
-                            onChange={handleChange}
-                            required
+                <>
+                    {/* Progress bar */}
+                    <div className="bsf-progress-bar" aria-hidden="true">
+                        <div
+                            className="bsf-progress-fill"
+                            style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }}
                         />
-                    </label>
-                    <label>
-                        {t.phone}
-                        <div className="booking-form-phone-row">
-                            <select
-                                className="booking-form-country-code"
-                                value={form.countryCode}
-                                onChange={handleCodeChange}
-                            >
-                                {countryCodes.map(opt => (
-                                    <option key={opt.code} value={opt.code}>{opt.country} {opt.code}</option>
-                                ))}
-                            </select>
+                    </div>
+
+                    <div className="bsf-step-counter">
+                        {stepIndex + 1}/{STEPS.length}
+                    </div>
+
+                    <div className="bsf-step">
+                        <h2 className="bsf-step-label">{stepLabel(STEPS[stepIndex])}</h2>
+
+                        {STEPS[stepIndex] === 'name' && (
                             <input
-                                type="tel"
-                                name="phone"
-                                value={form.phone}
+                                className="bsf-input"
+                                type="text"
+                                name="fullName"
+                                value={form.fullName}
                                 onChange={handleChange}
-                                required
-                                className="booking-form-phone-input"
+                                autoFocus
+                                placeholder={t.fullName}
+                                autoComplete="name"
                             />
-                        </div>
-                    </label>
-                    <label>
-                        {t.email}
-                        <input
-                            type="email"
-                            name="email"
-                            value={form.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                    <label>
-                        {t.notes}
-                        <textarea
-                            name="notes"
-                            value={form.notes}
-                            onChange={handleChange}
-                            rows={6}
-                            className="booking-form-notes"
-                        />
-                    </label>
-                    <button type="submit" className="booking-form-submit" disabled={loading}>
-                        {slotUnavailable ? t.slotUnavailable : loading ? t.processing : t.payAndBook}
-                    </button>
-                </form>
+                        )}
+
+                        {STEPS[stepIndex] === 'phone' && (
+                            <div className="bsf-phone-row">
+                                <select
+                                    className="bsf-country-code"
+                                    value={form.countryCode}
+                                    onChange={handleCodeChange}
+                                >
+                                    {countryCodes.map(opt => (
+                                        <option key={opt.code} value={opt.code}>{opt.country} {opt.code}</option>
+                                    ))}
+                                </select>
+                                <input
+                                    className="bsf-input bsf-phone-input"
+                                    type="tel"
+                                    name="phone"
+                                    value={form.phone}
+                                    onChange={handleChange}
+                                    autoFocus
+                                    placeholder={t.phone}
+                                    autoComplete="tel"
+                                />
+                            </div>
+                        )}
+
+                        {STEPS[stepIndex] === 'email' && (
+                            <input
+                                className="bsf-input"
+                                type="email"
+                                name="email"
+                                value={form.email}
+                                onChange={handleChange}
+                                autoFocus
+                                placeholder={t.email}
+                                autoComplete="email"
+                                onKeyDown={e => { if (e.key === 'Enter') handleNext(); }}
+                            />
+                        )}
+
+                        {STEPS[stepIndex] === 'notes' && (
+                            <textarea
+                                className="bsf-input bsf-textarea"
+                                name="notes"
+                                value={form.notes}
+                                onChange={handleChange}
+                                autoFocus
+                                placeholder={ui.optional}
+                                rows={4}
+                            />
+                        )}
+                    </div>
+
+                    <div className="bsf-actions">
+                        {stepIndex > 0 && (
+                            <button
+                                type="button"
+                                className="bsf-back"
+                                onClick={() => setStepIndex(s => s - 1)}
+                            >
+                                {ui.back}
+                            </button>
+                        )}
+                        <button
+                            type="button"
+                            className="bsf-continue"
+                            disabled={loading || !stepIsValid(STEPS[stepIndex])}
+                            onClick={handleNext}
+                        >
+                            {stepIndex < STEPS.length - 1
+                                ? ui.continue
+                                : (slotUnavailable ? t.slotUnavailable : loading ? t.processing : t.payAndBook)}
+                        </button>
+                    </div>
+                </>
             )}
 
             {paymentPhase && (

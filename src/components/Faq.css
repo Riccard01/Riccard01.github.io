@@ -1,116 +1,167 @@
-/* 💻 MEDIA QUERY PER DESKTOP (Sopra i 768px di larghezza) */
-@media (min-width: 769px) {
-  .faq-section {
-    /* Si attiva solo sugli schermi grandi */
-    padding: 80px 300px;
-  }
-}
-
 .faq-section {
-  padding: 60px 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: sans-serif;
-  background-color: #e1e7eb;
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(4rem, 8vw, 7.5rem) clamp(1.25rem, 6vw, 6rem);
+  scroll-margin-top: 5rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 52%),
+    #e5ecec;
+  color: #102f39;
 }
 
-span {
-    color: #3f6883;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 18px;
-    line-height: 22px;
-    letter-spacing: 0px;
-    text-align: left;
-    font-weight: 600;
-    box-sizing: border-box;
-    color: #031824;
+.faq-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.45fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  width: min(1180px, 100%);
+  margin: 0 auto;
 }
 
 .faq-title {
-  font-family: 'Fraunces', sans-serif;
-  font-size: 32px;
-  font-weight: 400;
-  color: #031824;
-  text-align: center;
-  font-style: italic;
   margin: 0;
-  padding: 16px;
-  letter-spacing: -1px;
-  line-height: 40px;
-  margin-bottom: 20px;
+  color: #102f39;
+  font-family: var(--font-heading);
+  font-size: clamp(2.15rem, 4vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.08;
 }
 
 .faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  border-top: 1px solid rgba(16, 47, 57, 0.3);
 }
 
 .faq-item {
-  /* Rimossi tutti i bordi e i border-radius superflui */
-  overflow: hidden;
+  border-bottom: 1px solid rgba(16, 47, 57, 0.3);
 }
 
-.faq-item.active {
-  /* Rimosso anche il cambio colore del bordo attivo */
+.faq-item h3 {
+  margin: 0;
 }
 
 .faq-question-btn {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px;
   align-items: center;
-  padding: 20px 0; /* Ridotto il padding laterale a 0 per allineare il testo perfettamente ai lati */
+  gap: 1.25rem;
+  width: 100%;
+  min-height: 72px;
+  padding: 1.35rem 0;
+  border: 0;
+  border-radius: 0;
   background: transparent;
-  border: none;
-  font-size: 1.1rem;
+  color: #102f39;
+  font-family: var(--font-nav);
+  font-size: 1.02rem;
   font-weight: 600;
-  color: #031824;
-  text-align: left;
-  cursor: pointer;
-  outline: none; /* Rimuove l'outline di default del bottone */
+  line-height: 1.45;
+  text-align: start;
 }
 
-.faqquestion-btn:hover {
-  opacity: 0.7; /* Rende il testo leggermente più opaco al passaggio del mouse per dare un feedback di click */
+.faq-question-btn:hover {
+  border-color: transparent;
+  color: #266a73;
+}
+
+.faq-question-btn:focus-visible {
+  outline: 2px solid #266a73;
+  outline-offset: 5px;
 }
 
 .faq-icon {
-  font-size: 1.4rem;
-  font-weight: 300;
-  margin-left: 20px;
-  color: #031824;
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(16, 47, 57, 0.45);
+  border-radius: 50%;
 }
 
-/* Logica per l'animazione fluida della risposta */
+.faq-icon::before,
+.faq-icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease;
+}
+
+.faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item.active .faq-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
 .faq-answer-wrapper {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-out;
+  visibility: hidden;
+  transition: grid-template-rows 220ms ease, visibility 220ms;
 }
 
 .faq-item.active .faq-answer-wrapper {
   grid-template-rows: 1fr;
+  visibility: visible;
 }
 
 .faq-answer {
+  min-height: 0;
   overflow: hidden;
-  background: transparent;
 }
 
 .faq-answer p {
-  padding: 0 0 20px 0; /* padding laterale a 0 per allinearsi perfettamente alla domanda sopra */
+  max-width: 52rem;
   margin: 0;
-  color: #2c3e49;
-  line-height: 1.6;
+  padding: 0 3.25rem 1.5rem 0;
+  color: #38545c;
+  font-family: var(--font-nav);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: start;
+}
 
-    margin-right: 16px;
-    margin-top: 0;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 15px;
-    line-height: 22px;
-    letter-spacing: 0px;
-    text-align: left;
-    font-weight: 400;
-    box-sizing: border-box;
+[dir='rtl'] .faq-answer p {
+  padding-right: 0;
+  padding-left: 3.25rem;
+}
+
+@media (max-width: 760px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .faq-title {
+    max-width: 15ch;
+  }
+
+  .faq-question-btn {
+    font-size: 0.96rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-question-btn {
+    grid-template-columns: minmax(0, 1fr) 26px;
+    gap: 0.85rem;
+  }
+
+  .faq-answer p,
+  [dir='rtl'] .faq-answer p {
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-icon::before,
+  .faq-icon::after,
+  .faq-answer-wrapper {
+    transition: none;
+  }
 }

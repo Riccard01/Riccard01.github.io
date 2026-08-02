@@ -166,29 +166,6 @@ body.page-home #root {
   max-width: 90%;
 }
 
-.early-bird-chip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #FFD16E;
-  color: #6C2804;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  margin-left: 0px;
-  height: 32px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 0.65rem 1rem;
-  border-radius: 999px;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  text-align: center;
-  width: 450vh;
-  transform: rotate(-2deg);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
-}
-
 .hero-section .subtitle {
   margin-left: 16px;
   margin-bottom: 16px;
@@ -231,5 +208,36 @@ h2 {
   align-items: center;
   margin: 0;
   text-align: left;
+}
+
+@media screen and (min-width: 900px) {
+  .hero-section {
+    min-height: 88vh;
+  }
+
+  .app-content {
+    margin-bottom: -5rem;
+    padding-inline: 40px;
+  }
+
+  .main-title {
+    max-width: 1100px;
+    font-size: clamp(58px, 5.2vw, 76px);
+    line-height: 1;
+  }
+
+  .hero-subtitle {
+    max-width: 780px;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .experiences {
+    padding-top: 7rem;
+  }
+
+  .experiences-content {
+    margin: 0 auto;
+  }
 }
 

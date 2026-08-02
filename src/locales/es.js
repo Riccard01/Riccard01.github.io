@@ -2,15 +2,15 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "es-ES",
   navbar: {
     ...en.navbar,
     whatsappUs: "Escribenos por WhatsApp",
     switchLabel: "Cambiar idioma",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "Early Bird 10% OFF",
-    title: "Private boat tours in Genova and Portofino",
+    title: "Tours privados en barco en Génova y Portofino",
     subtitle: "Una ruta, mil emociones: itinerarios privados y momentos a tu ritmo. Stay Leggero!",
   },
   experienceCarousel: {
@@ -49,6 +49,15 @@ export default {
         price: "Desde 250 € por grupo",
         desc: "Evita el trafico de la costa ligur con un traslado rapido y panoramico por mar.",
         chips: ["Combustible incluido", "Skipper"],
+      },
+      {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "Max 5",
+        price: "Desde 600 € por grupo",
+        desc: "Tour privado de tarde y noche desde Génova con paradas para nadar, Camogli y llegada a Punta Chiappa con cena opcional en el restaurante asociado Stella Maris.",
+        chips: ["Privado", "Paradas para nadar", "Toallas", "Equipo de snorkel", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
         id: "3",
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "Cual es la politica de cancelacion?",
-        answer: "Puedes cancelar gratis hasta 72 horas antes de la salida. Despues de ese plazo no hay reembolso.",
+        answer: "Las condiciones de cancelación y reembolso varían según la experiencia; contáctanos antes de reservar para confirmar las condiciones aplicables. Si cancelamos por condiciones meteorológicas inseguras, puedes cambiar la fecha o recibir un reembolso completo.",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "Reserva tu tour privado en barco",
+    guestOptions: ["1 persona", "2 personas", "3 personas", "4 personas", "5 personas", "6 personas", "7 personas", "8 personas", "9 personas", "10 personas", "11 personas", "12 personas", "13 personas", "14 personas", "15 personas"],
     timeDropdown: "Horario",
     guestsDropdown: "Huespedes",
     solutionsText: (count) => `${count} opciones para los filtros seleccionados.`,

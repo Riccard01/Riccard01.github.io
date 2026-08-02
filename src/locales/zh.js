@@ -2,15 +2,15 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "zh-CN",
   navbar: {
     ...en.navbar,
     whatsappUs: "WhatsApp 联系我们",
     switchLabel: "切换语言",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "早鸟优惠 10% OFF",
-    title: "Private boat tours in Genova and Portofino",
+    title: "热那亚和波托菲诺的私人船游",
     subtitle: "一条航线，千种感受：完全按你的节奏定制私人行程与时刻。Stay Leggero!",
   },
   experienceCarousel: {
@@ -51,13 +51,22 @@ export default {
         chips: ["含燃油", "船长"],
       },
       {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "最多 5 人",
+        price: "每团 600 € 起",
+        desc: "从热那亚出发的私人下午至傍晚船游，设有海水浴停靠、卡莫利以及抵达 Punta Chiappa，并可选择在合作餐厅 Stella Maris 用餐。",
+        chips: ["私人", "游泳停靠", "毛巾", "浮潜装备", "Prosciutto e melone", "照片/视频", "船长"],
+      },
+      {
         id: "3",
         title: "Stella Maris",
-        time: "2 August 2026",
-        guests: "Annual event",
-        price: "€1200 per group",
-        desc: "Camogli sea celebration with marine procession, Dragun and floating lights.",
-        chips: ["Local tradition", "Sea procession", "Dragun", "Floating lights", "毛巾", "浮潜装备"],
+        time: "2026年8月2日",
+        guests: "年度盛典",
+        price: "每团 1200 €",
+        desc: "Camogli 最标志性的海上庆典：海上巡行、Dragun 龙舟、漂浮灯灯，独特氛围与舞台展现。",
+        chips: ["当地传统", "海上巡行", "Dragun", "漂浮灯瘫", "毛巾", "浮潜装备"],
       },
     ],
   },
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "取消政策是什么？",
-        answer: "出发前 72 小时可免费取消。超过该时限将不予退款。",
+        answer: "取消与退款条款因所选体验而异；请在预订前联系我们确认适用条件。若我们因天气不适合安全航行而取消，你可以改期或获得全额退款。",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "预订私人船游行程",
+    guestOptions: ["1 人", "2 人", "3 人", "4 人", "5 人", "6 人", "7 人", "8 人", "9 人", "10 人", "11 人", "12 人", "13 人", "14 人", "15 人"],
     timeDropdown: "时间",
     guestsDropdown: "人数",
     solutionsText: (count) => `符合筛选条件的方案：${count} 个。`,

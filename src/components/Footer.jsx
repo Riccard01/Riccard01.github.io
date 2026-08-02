@@ -1,55 +1,81 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./Footer.css";
 import logo from '../assets/logo.svg';
-import phoneIcon from '../assets/phone.svg';
-import meAvatar from '../assets/me.webp';
 import { getLocale } from '../utils/locale';
+import { FOOTER_AREAS, getFooterUi } from '../locales/footerUi';
+import { getExperienceSlugById } from '../utils/experienceRoutes';
 
-export default function Footer({ lang = 'it' }) {
+export default function Footer({ lang = 'en' }) {
   const dict = getLocale(lang);
-  const t = dict.footer;
-  const navT = dict.navbar;
-
-  const openWhatsApp = () => {
-    window.location.href = 'whatsapp://send?phone=393463365699';
-  };
+  const ui = getFooterUi(lang);
+  const homePath = `/${lang}`;
+  const experiencePathPrefix = lang === 'it' ? 'esperienze' : 'experiences';
+  const experienceOrder = ['1', '4', '0', '3'];
+  const experiences = experienceOrder
+    .map((id) => dict.experienceCarousel?.experiences?.find((experience) => experience.id === id))
+    .filter(Boolean);
 
   return (
-    <footer className="footer">
-      <div className="footer-top-bar">
-        <div className="footer-logo-container">
-          {/* Modificato src per usare il logo importato */}
-          <img src={logo} alt="Leggero Tours Logo" className="footer-logo" />
-        </div>
-        <div className='footer-btn-wrap'>
-          <button className="footer-whatsapp" onClick={openWhatsApp}>
-            <img src={meAvatar} alt="Riccardo" className="whatsapp-avatar" />
-            {navT.whatsappUs}
-            <img src={phoneIcon} alt="WhatsApp" className="whatsapp-icon" />
-          </button>
-        </div>
-      </div>
+    <footer className="site-footer">
+      <div className="footer-grid">
+        <section className="footer-brand" aria-label="Leggero Tours">
+          <Link className="footer-logo-link" to={homePath} aria-label={`${ui.home} - Leggero Tours`}>
+            <img className="footer-logo" src={logo} alt="" />
+            <span className="footer-brand-name">Leggero Tours</span>
+          </Link>
+          <p className="footer-tagline">{ui.tagline}</p>
+          <Link className="footer-booking-link" to={`/${lang}/book`}>
+            {ui.book}
+          </Link>
+        </section>
 
-      <div className="footer-social">
-        {/* I tuoi link social andranno qui */}
-      </div>
+        <nav className="footer-section" aria-label={ui.explore}>
+          <h2>{ui.explore}</h2>
+          <ul className="footer-link-list">
+            <li><Link to={homePath}>{ui.home}</Link></li>
+            <li><Link to={`${homePath}#experiences`}>{ui.experiences}</Link></li>
+            <li><Link to={`${homePath}#faq`}>{ui.faq}</Link></li>
+          </ul>
+        </nav>
 
-      <hr className="footer-divider" />
+        <nav className="footer-section footer-experiences" aria-label={ui.experiences}>
+          <h2>{ui.experiences}</h2>
+          <ul className="footer-link-list">
+            {experiences.map((experience) => (
+              <li key={experience.id}>
+                <Link to={`/${lang}/${experiencePathPrefix}/${getExperienceSlugById(experience.id)}`}>
+                  {experience.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <section className="footer-section footer-areas">
+          <h2>{ui.areas}</h2>
+          <ul>
+            {FOOTER_AREAS.map((area) => <li key={area}>{area}</li>)}
+          </ul>
+        </section>
+
+        <address className="footer-section footer-contact">
+          <h2>{ui.contact}</h2>
+          <ul className="footer-link-list">
+            <li><a href="tel:+393463365699">{ui.call}<span>+39 346 336 5699</span></a></li>
+            <li><a href="https://wa.me/393463365699" target="_blank" rel="noreferrer">{ui.whatsapp}</a></li>
+            <li><a href="mailto:riccardo@leggerotours.com">{ui.email}<span>riccardo@leggerotours.com</span></a></li>
+          </ul>
+        </address>
+      </div>
 
       <div className="footer-legal">
-        <p className="legal-company">
-          <strong>Leggero Tours</strong> by Bottiglieri Riccardo
-        </p>
-        <p className="legal-info">
-          {t.legalInfo} <br />
-          {t.legalTaxId} | <a href="mailto:riccardo@leggerotours.com">riccardo@leggerotours.com</a>
-        </p>
-        <p className="legal-tax-note">
-          {t.legalTaxNote}
-        </p>
-        <p className="legal-copyright">
-          {t.copyright}
-        </p>
+        <div className="footer-legal-heading">
+          <span>{ui.legalInfo}</span>
+          <span>{ui.taxId}</span>
+        </div>
+        <p>{ui.taxNote}</p>
+        <small>{ui.copyright}</small>
       </div>
     </footer>
   );

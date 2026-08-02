@@ -1,13 +1,11 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
+import Faq from '../components/Faq';
 import marian from '../assets/marian.webp';
 import { getLocale } from '../utils/locale';
-
-const ReviewCarousel = lazy(() => import('../components/ReviewCarousel'));
-const Faq = lazy(() => import('../components/Faq'));
 
 function HomePage({ lang = 'it', setLang = () => {} }) {
   const dict = getLocale(lang);
@@ -40,7 +38,6 @@ function HomePage({ lang = 'it', setLang = () => {} }) {
         />
         <div className="hero-gradient"></div>
         <div className="app-content">
-          <span className="early-bird-chip">{dict.homepage.earlyBird}</span>
           <h1 className="main-title">
             {titleLines.length > 1
               ? <>{titleLines[0]}<br /> {titleLines[1]}</>
@@ -52,21 +49,14 @@ function HomePage({ lang = 'it', setLang = () => {} }) {
         </div>
       </section>
 
-      <section className="experiences">
+      <section className="experiences" id="experiences">
         <div className="experiences-content">
           <ExperienceCarousel lang={lang} />
         </div>
       </section>
 
-      <Suspense fallback={null}>
-        <ReviewCarousel lang={lang} />
-      </Suspense>
+      <Faq lang={lang} />
 
-      <section className="Faq-section">
-        <Suspense fallback={null}>
-          <Faq lang={lang} />
-        </Suspense>
-      </section>
       <Footer lang={lang} />
     </>
   );

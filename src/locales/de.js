@@ -2,15 +2,15 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "de-DE",
   navbar: {
     ...en.navbar,
     whatsappUs: "Schreib uns auf WhatsApp",
     switchLabel: "Sprache wechseln",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "Early Bird 10% RABATT",
-    title: "Private boat tours in Genova and Portofino",
+    title: "Private Bootstouren in Genua und Portofino",
     subtitle: "Eine Route, tausend Emotionen: private Routen und Momente komplett nach deinem Tempo. Stay Leggero!",
   },
   experienceCarousel: {
@@ -49,6 +49,15 @@ export default {
         price: "Ab 250 € pro Gruppe",
         desc: "Uberspringe den Verkehr an der ligurischen Kuste mit einem schnellen und panoramischen Transfer auf dem Wasser.",
         chips: ["Treibstoff inklusive", "Skipper"],
+      },
+      {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "Max 5",
+        price: "Ab 600 € pro Gruppe",
+        desc: "Private Nachmittag- und Abendtour ab Genua mit Badestopps, Camogli und Ankunft in Punta Chiappa mit optionalem Abendessen im Partnerrestaurant Stella Maris.",
+        chips: ["Privat", "Badestopps", "Handtücher", "Schnorchelausrüstung", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
         id: "3",
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "Wie sind die Stornierungsbedingungen?",
-        answer: "Du kannst bis 72 Stunden vor Abfahrt kostenlos stornieren. Danach ist keine Erstattung moglich.",
+        answer: "Die Stornierungs- und Erstattungsbedingungen hängen vom gewählten Erlebnis ab; kontaktiere uns vor der Buchung, um die geltenden Bedingungen zu bestätigen. Sagen wir wegen unsicherer Wetterbedingungen ab, kannst du umbuchen oder erhältst eine vollständige Erstattung.",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "Dein privates Bootserlebnis buchen",
+    guestOptions: ["1 Person", "2 Personen", "3 Personen", "4 Personen", "5 Personen", "6 Personen", "7 Personen", "8 Personen", "9 Personen", "10 Personen", "11 Personen", "12 Personen", "13 Personen", "14 Personen", "15 Personen"],
     timeDropdown: "Uhrzeit",
     guestsDropdown: "Gaste",
     solutionsText: (count) => `${count} Optionen fur die gewahlten Filter.`,

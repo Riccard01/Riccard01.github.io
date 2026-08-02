@@ -22,12 +22,14 @@ import BookingForm from '../components/BookingForm';
 import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount, computeComboTotalPrice, computeComboTotalPriceWithDiscount } from '../utils/priceCalculator';
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
 import { getLocale } from '../utils/locale';
+import { getBookingUi } from '../locales/bookingUi';
 import {
   filterSlotsForExperience,
   getGuestLimitForExperience,
   isBoatCompatibleWithExperience,
   normalizeExperienceQuery,
   getRainbowTourSlotDisplayName,
+  hasFixedBookingTime,
 } from '../utils/experienceBookingConfig';
 
 // Puoi aggiungere altre immagini se disponibili
@@ -36,6 +38,7 @@ import './Book.css';
 
 function Book({ lang = 'it', setLang = () => {} }) {
   const dict = getLocale(lang);
+  const ui = getBookingUi(lang);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -65,15 +68,21 @@ function Book({ lang = 'it', setLang = () => {} }) {
     '4': puntaChiappaImg,
   };
 
+  const getSlotDisplayName = (slot) => {
+    if (selectedExperienceId === '0') return getRainbowTourSlotDisplayName(lang, slot.key) || slot.displayName;
+    if (selectedExperienceId === '4') return '17:00 - 21:00';
+    return slot.displayName;
+  };
+
   const [animate, setAnimate] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   // Load cached slot objects synchronously from module-level cache
   const initialSlotObjects = filterSlotsForExperience(getBoatSlots(), selectedExperienceId);
   const initialTimeOptions = (initialSlotObjects && initialSlotObjects.length)
-    ? initialSlotObjects.map((s) => (selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName))
+    ? initialSlotObjects.map(getSlotDisplayName)
     : [];
 
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState(initialTimeOptions.length === 1 ? initialTimeOptions[0] : "");
   const [timeOptions, setTimeOptions] = useState(initialTimeOptions);
   const [selectedPeople, setSelectedPeople] = useState(dict.book.guestOptions?.[3] || "4 people");
   // Which single booking question ('experience' | 'guests' | 'time' | 'date' | 'transfer') is currently focused
@@ -190,12 +199,11 @@ function Book({ lang = 'it', setLang = () => {} }) {
       if (!mounted) return;
       const slots = filterSlotsForExperience(getBoatSlots(), selectedExperienceId);
       const names = (slots && slots.length)
-        ? slots.map((s) => (selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName))
+        ? slots.map(getSlotDisplayName)
         : [];
       if (names.length) {
         setTimeOptions(names);
-        // Keep the selection empty until the user explicitly picks a time slot.
-        setSelectedTime(prev => (prev && names.includes(prev)) ? prev : "");
+        setSelectedTime(prev => names.length === 1 ? names[0] : ((prev && names.includes(prev)) ? prev : ""));
       }
     };
 
@@ -314,7 +322,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
   (slotObjects || []).forEach(s => { if (s && s.key) slotTimetables[s.key] = s; });
   (slotObjects || []).forEach(s => {
     if (s && s.key) {
-      const displayName = selectedExperienceId === '0' ? (getRainbowTourSlotDisplayName(lang, s.key) || s.displayName) : s.displayName;
+      const displayName = getSlotDisplayName(s);
       if (s.displayName) displayNameToSlotKey[s.displayName] = s.key;
       if (displayName) displayNameToSlotKey[displayName] = s.key;
     }
@@ -697,14 +705,19 @@ function Book({ lang = 'it', setLang = () => {} }) {
       const [y, m, d] = selectedDates[activeIndex].split('-');
       return new Date(+y, +m - 1, +d).toLocaleDateString(dict.localeCode || 'it-IT', { day: 'numeric', month: 'short' });
     })()
-    : (lang === 'it' ? 'Seleziona' : 'Select');
+    : ui.select;
 
   // Steps of the single-focus wizard, used to drive the sliding progress indicator.
   // 'experience' only appears while no experience has been chosen yet.
-  const wizardSteps = selectedExperienceId
-    ? ['guests', 'time', 'date', 'transfer']
-    : ['experience', 'guests', 'time', 'date', 'transfer'];
+  const fixedBookingTime = hasFixedBookingTime(selectedExperienceId);
+  const selectionSteps = fixedBookingTime ? ['guests', 'date', 'transfer'] : ['guests', 'time', 'date', 'transfer'];
+  const wizardSteps = selectedExperienceId ? selectionSteps : ['experience', ...selectionSteps];
   const wizardStepIndex = Math.max(0, wizardSteps.indexOf(focusStep));
+  const goToNextWizardStep = (currentStep) => {
+    const currentIndex = wizardSteps.indexOf(currentStep);
+    const nextStep = wizardSteps[currentIndex + 1];
+    if (nextStep) setFocusStep(nextStep);
+  };
   // A step's tab can only be jumped to once a value has actually been chosen for it
   const wizardStepHasValue = {
     experience: Boolean(selectedExperienceId),
@@ -719,7 +732,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
   const transferTabLabel = (() => {
     const embark = cleanPortLabel(selectedEmbark);
     const disembark = cleanPortLabel(selectedDisembark);
-    if (!embark && !disembark) return (lang === 'it' ? 'Seleziona' : 'Select');
+    if (!embark && !disembark) return ui.select;
     return embark === disembark ? embark : `${embark} - ${disembark}`;
   })();
 
@@ -784,7 +797,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
           )}
           <Navbar lang={lang} setLang={setLang} />
 
-          <section className="ap-picker" aria-label={lang === 'it' ? 'Seleziona esperienza' : 'Select experience'}>
+          <section className={`ap-picker${selectedExperienceId ? ' is-hidden' : ''}`} aria-label={ui.chooseExperience}>
             <p className="ap-picker-eyebrow">{lang === 'it' ? 'Esperienza' : 'Experience'}</p>
             <div className="ap-picker-row">
               {(dict?.experienceCarousel?.experiences || []).map((item) => {
@@ -985,11 +998,11 @@ function Book({ lang = 'it', setLang = () => {} }) {
                 <div className="ap-flow-tabs" role="tablist" style={{ gridTemplateColumns: `repeat(${wizardSteps.length}, 1fr)` }}>
                   {wizardSteps.map((step, i) => {
                     const tabMeta = {
-                      experience: { label: lang === 'it' ? 'Esperienza' : 'Experience', value: selectedExperience?.title || (lang === 'it' ? 'Seleziona' : 'Select') },
-                      guests: { label: lang === 'it' ? 'Ospiti' : 'Guests', value: selectedPeople, icon: guestsStepIcon },
-                      time: { label: lang === 'it' ? 'Orario' : 'Time', value: selectedTime || (lang === 'it' ? 'Seleziona' : 'Select'), icon: clockStepIcon },
-                      date: { label: lang === 'it' ? 'Data' : 'Date', value: dateTabLabel, icon: calendarStepIcon },
-                      transfer: { label: lang === 'it' ? 'Porti' : 'Ports', value: transferTabLabel, icon: portStepIcon },
+                      experience: { label: ui.experience, value: selectedExperience?.title || ui.select },
+                      guests: { label: ui.guests, value: selectedPeople, icon: guestsStepIcon },
+                      time: { label: ui.time, value: selectedTime || ui.select, icon: clockStepIcon },
+                      date: { label: ui.date, value: dateTabLabel, icon: calendarStepIcon },
+                      transfer: { label: ui.ports, value: transferTabLabel, icon: portStepIcon },
                     }[step];
                     const stepState = i === wizardStepIndex ? 'is-active' : (i < wizardStepIndex ? 'is-done' : 'is-upcoming');
                     const isClickable = step === 'experience' || (!experiencePending && (wizardStepHasValue[step] || focusStep === step));
@@ -1020,28 +1033,43 @@ function Book({ lang = 'it', setLang = () => {} }) {
                   />
                 </div>
 
+                <div className="ap-flow-counter" aria-live="polite">
+                  {wizardStepIndex + 1}/{wizardSteps.length}
+                </div>
+
+                {selectedExperience ? (
+                  <aside className="ap-live-summary" aria-label={dict.book.recapTitle}>
+                    <div className="ap-live-summary-main">
+                      <strong>{selectedExperience.title}</strong>
+                      <span>{selectedPeople}</span>
+                      {selectedTime ? <span>{selectedTime}</span> : null}
+                      {selectedDates[activeIndex] ? <span>{dateTabLabel}</span> : null}
+                    </div>
+                    <div className="ap-live-summary-price">
+                      {discountedTotalStr !== computedTotalStr ? <small>{computedTotalStr}</small> : null}
+                      <strong>{discountedTotalStr}</strong>
+                    </div>
+                  </aside>
+                ) : null}
+
                 <div className="ap-flow-panel">
                   {focusStep === 'experience' ? (
                     <div className="ap-flow-step">
-                      <h3>{lang === 'it' ? 'Scegli un\u2019esperienza' : 'Choose an experience'}</h3>
-                      <p className="ap-flow-step-subtitle">
-                        {lang === 'it'
-                          ? 'Seleziona una delle esperienze qui sopra per continuare con la prenotazione.'
-                          : 'Select one of the experiences above to continue with your booking.'}
-                      </p>
+                      <h3>{ui.chooseExperience}</h3>
+                      <p className="ap-flow-step-subtitle">{ui.chooseExperienceHint}</p>
                     </div>
                   ) : null}
 
                   {focusStep === 'guests' ? (
                     <div className="ap-flow-step">
-                      <h3>{lang === 'it' ? 'Quante persone parteciperanno?' : 'How many guests?'}</h3>
+                      <h3>{ui.guestQuestion}</h3>
                       <div className="ap-guest-stepper">
                         <button
                           type="button"
                           className="ap-stepper-btn"
                           disabled={guestIndex <= 0}
                           onClick={() => setSelectedPeople(guestOptionsList[Math.max(0, guestIndex - 1)])}
-                          aria-label={lang === 'it' ? 'Diminuisci ospiti' : 'Decrease guests'}
+                          aria-label={ui.decreaseGuests}
                         >
                           −
                         </button>
@@ -1051,20 +1079,20 @@ function Book({ lang = 'it', setLang = () => {} }) {
                           className="ap-stepper-btn"
                           disabled={guestIncrementDisabled}
                           onClick={() => setSelectedPeople(guestOptionsList[Math.min(guestOptionsList.length - 1, guestIndex + 1)])}
-                          aria-label={lang === 'it' ? 'Aumenta ospiti' : 'Increase guests'}
+                          aria-label={ui.increaseGuests}
                         >
                           +
                         </button>
                       </div>
-                      <button type="button" className="ap-flow-next" onClick={() => setFocusStep('time')}>
-                        {lang === 'it' ? 'Continua' : 'Continue'}
+                      <button type="button" className="ap-flow-next" onClick={() => goToNextWizardStep('guests')}>
+                        {ui.continue}
                       </button>
                     </div>
                   ) : null}
 
                   {focusStep === 'time' ? (
                     <div className="ap-flow-step">
-                      <h3>{lang === 'it' ? 'Scegli l\u2019orario' : 'Choose a time'}</h3>
+                      <h3>{ui.chooseTime}</h3>
                       <div className="ap-time-options">
                         {timeOptions.map((option) => (
                           <button
@@ -1077,18 +1105,14 @@ function Book({ lang = 'it', setLang = () => {} }) {
                           </button>
                         ))}
                       </div>
-                      {(timeOptions || []).some((option) => String(option).toLowerCase().includes('aperitivo')) ? (
+                      {selectedExperienceId === '0' && (timeOptions || []).some((option) => String(option).toLowerCase().includes('aperitivo')) ? (
                         <div className="ap-slot-callout" role="note" aria-live="polite">
                           <div className="ap-slot-callout-icon" aria-hidden="true">
                             <span />
                           </div>
                           <div className="ap-slot-callout-copy">
-                            <strong>{lang === 'it' ? 'Aperitivo disponibile solo su alcuni slot' : 'Aperitivo available only on selected slots'}</strong>
-                            <p>
-                              {lang === 'it'
-                                ? 'Solo gli slot Tramonto + Aperitivo e Giornata intera + Aperitivo includono l abbinamento con il Gourmet Sunset Cruise. Supplemento €390.'
-                                : 'Only the Sunset + Aperitivo and Full Day + Aperitivo slots include the Gourmet Sunset Cruise pairing. Supplement €390.'}
-                            </p>
+                            <strong>{ui.aperitivoCalloutTitle}</strong>
+                            <p>{ui.aperitivoCalloutText}</p>
                           </div>
                         </div>
                       ) : null}
@@ -1098,7 +1122,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                   {focusStep === 'date' ? (
                     visibleBoats.length === 0 ? (
                       <div className="ap-empty-inline" role="status" aria-live="polite">
-                        <h3>{lang === 'it' ? 'Nessuna barca disponibile con questi filtri' : 'No boats available for these filters'}</h3>
+                        <h3>{ui.noBoats}</h3>
                         <p>
                           {lang === 'it'
                             ? 'Prova a ridurre il numero di ospiti o cambia fascia oraria. Puoi anche rimuovere la preselezione esperienza.'
@@ -1115,20 +1139,24 @@ function Book({ lang = 'it', setLang = () => {} }) {
                               setFocusStep('guests');
                             }}
                           >
-                            {lang === 'it' ? 'Reset filtri' : 'Reset filters'}
+                            {ui.reset}
                           </button>
                           <button
                             type="button"
                             className="booking-empty-btn ghost"
                             onClick={() => navigate(`/${lang}/book`)}
                           >
-                            {lang === 'it' ? 'Mostra tutte le esperienze' : 'Show all experiences'}
+                            {ui.showAll}
                           </button>
                         </div>
                       </div>
                     ) : (
                       <div className="ap-flow-step">
-                        <h3>{lang === 'it' ? 'Scegli la data' : 'Choose a date'}</h3>
+                        <h3>{ui.chooseDate}</h3>
+                        <div className="ap-discount-legend" role="note" aria-label={`★ ${ui.earlyBirdLegend}`}>
+                          <span className="discount-seal ap-discount-legend-seal" aria-hidden="true">★</span>
+                          <span>{ui.earlyBirdLegend}</span>
+                        </div>
                         <div className="ap-boat-block">
                           {(() => {
                             const idx = activeIndex;
@@ -1216,7 +1244,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                         </div>
                         {selectedDates[activeIndex] ? (
                           <button type="button" className="ap-flow-next" onClick={() => setFocusStep('transfer')}>
-                            {lang === 'it' ? 'Continua' : 'Continue'}
+                            {ui.continue}
                           </button>
                         ) : null}
                       </div>
@@ -1225,12 +1253,8 @@ function Book({ lang = 'it', setLang = () => {} }) {
 
                   {focusStep === 'transfer' ? (
                     <div className="ap-flow-step">
-                      <h3>{lang === 'it' ? 'Porti e transfer' : 'Ports and transfer'}</h3>
-                      <p className="ap-flow-step-subtitle">
-                        {lang === 'it'
-                          ? 'Scegli porto di partenza, porto finale e se serve un transfer privato via terra.'
-                          : 'Choose departure port, final port, and whether you need private land transfer.'}
-                      </p>
+                      <h3>{ui.portsTitle}</h3>
+                      <p className="ap-flow-step-subtitle">{ui.portsHint}</p>
                       <Transfer
                         lang={lang}
                         embarkOptions={embarkOptions}
@@ -1253,11 +1277,20 @@ function Book({ lang = 'it', setLang = () => {} }) {
                         className="transfer-margin-bottom"
                       />
                       <button type="button" className="ap-flow-next" onClick={() => setShowRecap(true)}>
-                        {lang === 'it' ? 'Rivedi il riepilogo' : 'Review summary'}
+                        {ui.review}
                       </button>
                     </div>
                   ) : null}
                 </div>
+                {wizardStepIndex > 0 ? (
+                  <button
+                    type="button"
+                    className="ap-flow-back"
+                    onClick={() => setFocusStep(wizardSteps[wizardStepIndex - 1])}
+                  >
+                    {ui.back}
+                  </button>
+                ) : null}
               </div>
             </>
           )}

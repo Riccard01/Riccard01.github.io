@@ -6,7 +6,6 @@ export default {
     switchLabel: "Switch language",
   },
   homepage: {
-        title: "Rainbow Tour",
     title: "Private boat tours in Genoa and Portofino",
     subtitle:
       "One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Stay Leggero!",
@@ -188,7 +187,7 @@ export default {
       {
         id: "cancellation",
         question: "What is the cancellation policy?",
-        answer: "You can cancel for free up to 72 hours before departure. After this deadline, no refund is provided.",
+        answer: "Cancellation and refund terms vary by experience; contact us before booking to confirm the applicable conditions. If we cancel because weather conditions are unsafe, you can reschedule or receive a full refund.",
       },
       {
         id: "weather",

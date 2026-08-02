@@ -19,6 +19,8 @@ export const EXPERIENCE_BOOKING_CONFIG = {
   },
   '1': {
     slotKeywords: ['sunset', '18:00', '18-22', '18:00-22:00', 'aperitivo'],
+    preferredSlotKeywords: ['gourmet', '18:00-22:00', '18-22'],
+    fixedTime: true,
     boatKeywords: ['gourmet', 'aperitivo', 'sunset', 'boccadasse', 'rossa'],
     guestLimit: 15,
   },
@@ -34,6 +36,9 @@ export const EXPERIENCE_BOOKING_CONFIG = {
   },
   '4': {
     slotKeywords: ['17:00', '17-21', '17:00-21:00', 'sunset'],
+    excludedSlotKeywords: ['aperitivo', 'gourmet'],
+    preferredSlotKeywords: ['17:00-21:00', '17-21', 'sunset'],
+    fixedTime: true,
     boatKeywords: ['dolce vita', 'punta chiappa', 'camogli'],
     guestLimit: 5,
   },
@@ -63,18 +68,42 @@ export function getGuestLimitForExperience(experienceId) {
   return cfg?.guestLimit || null;
 }
 
+export function hasFixedBookingTime(experienceId) {
+  const cfg = EXPERIENCE_BOOKING_CONFIG[String(experienceId)] || null;
+  return cfg?.fixedTime === true;
+}
+
 export function filterSlotsForExperience(slotObjects = [], experienceId = null) {
   const cfg = EXPERIENCE_BOOKING_CONFIG[String(experienceId)] || null;
   const keywords = cfg?.slotKeywords || [];
   if (!keywords.length) return slotObjects;
 
   const normalizedKeywords = keywords.map((k) => k.toLowerCase());
-  const filtered = slotObjects.filter((slot) => {
+  const excludedKeywords = (cfg?.excludedSlotKeywords || []).map((key) => key.toLowerCase());
+  const eligibleSlots = slotObjects.filter((slot) => {
+    const searchable = `${slot?.key || ''} ${slot?.displayName || ''}`.toLowerCase();
+    return !excludedKeywords.some((key) => searchable.includes(key));
+  });
+  const filtered = eligibleSlots.filter((slot) => {
     const searchable = `${slot?.key || ''} ${slot?.displayName || ''}`.toLowerCase();
     return normalizedKeywords.some((key) => searchable.includes(key));
   });
 
-  return filtered.length ? filtered : slotObjects;
+  const matches = filtered.length ? filtered : eligibleSlots;
+  if (!cfg?.fixedTime || matches.length <= 1) return matches;
+
+  const preferredKeywords = (cfg.preferredSlotKeywords || []).map((key) => key.toLowerCase());
+  const ranked = matches.map((slot, index) => {
+    const searchable = `${slot?.key || ''} ${slot?.displayName || ''}`.toLowerCase();
+    const score = preferredKeywords.reduce(
+      (total, keyword, keywordIndex) => total + (searchable.includes(keyword) ? preferredKeywords.length - keywordIndex : 0),
+      0
+    );
+    return { slot, score, index };
+  });
+
+  ranked.sort((a, b) => b.score - a.score || a.index - b.index);
+  return [ranked[0].slot];
 }
 
 export function getRainbowTourSlotDisplayName(lang, slotKey) {

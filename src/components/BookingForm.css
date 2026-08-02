@@ -10,6 +10,153 @@
   box-shadow: 0 2px 24px 0 rgba(0,0,0,0.10);
 }
 
+/* ── Step-form wrapper ────────────────────────────────── */
+
+.bsf-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding: 0 24px 32px;
+  background: #fff;
+}
+
+.bsf-progress-bar {
+  height: 3px;
+  background: #e9eef3;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+
+.bsf-progress-fill {
+  height: 100%;
+  background: #0B232E;
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+.bsf-step-counter {
+  text-align: right;
+  font-size: 0.82rem;
+  color: #9ca3af;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 48px;
+}
+
+.bsf-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.bsf-step-label {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0B232E;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.bsf-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #dbe2e8;
+  border-radius: 0;
+  padding: 14px 0;
+  font-size: 1.15rem;
+  font-family: inherit;
+  background: transparent;
+  color: #0B232E;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.bsf-input:focus {
+  border-bottom-color: #0B232E;
+}
+
+.bsf-textarea {
+  resize: none;
+  border: 1.5px solid #dbe2e8;
+  border-radius: 12px;
+  padding: 14px 14px;
+  font-size: 1rem;
+}
+
+.bsf-phone-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.bsf-country-code {
+  width: 96px;
+  min-width: 72px;
+  border: none;
+  border-bottom: 2px solid #dbe2e8;
+  background: transparent;
+  font-size: 1rem;
+  padding: 14px 0;
+  font-family: inherit;
+  color: #0B232E;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.bsf-phone-input {
+  flex: 1;
+}
+
+.bsf-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 32px;
+}
+
+.bsf-back {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 1.5px solid #dbe2e8;
+  border-radius: 14px;
+  padding: 15px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.bsf-back:hover {
+  border-color: #0B232E;
+  color: #0B232E;
+}
+
+.bsf-continue {
+  flex: 1;
+  background: #0B232E;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.bsf-continue:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.bsf-continue:not(:disabled):hover {
+  background: #03393C;
+}
+
 .booking-form label {
   display: flex;
   flex-direction: column;

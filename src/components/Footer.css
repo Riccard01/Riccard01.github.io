@@ -1,207 +1,225 @@
-.footer {
-  width: 100%;
-  background: #031824;
-  padding: 40px 24px 24px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px; /* Aumentato leggermente per dare più respiro tra i blocchi */
-  border-top: 1px solid #e0e0e0;
+.site-footer {
+  --footer-bg: #0c2f3a;
+  --footer-text: #f7f2e8;
+  --footer-muted: #b9c9c9;
+  --footer-accent: #f2c66d;
   box-sizing: border-box;
+  width: 100%;
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 5vw, 5rem) 1.5rem;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.035), transparent 44%),
+    var(--footer-bg);
+  color: var(--footer-text);
+  font-family: var(--font-nav);
 }
 
-.footer-top-bar {
-  width: 100%;
-  max-width: 1200px; /* O la larghezza massima del tuo layout */
-  display: flex;
-  flex-direction: row; /* Forza l'allineamento orizzontale */
-  justify-content: space-between; /* Spinge il logo a sinistra e il wrapper-btn a destra */
-  align-items: center; /* Allinea verticalmente al centro logo e bottone */
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.35fr) minmax(130px, 0.7fr) minmax(200px, 1.05fr) minmax(180px, 0.95fr) minmax(190px, 1fr);
+  gap: clamp(2rem, 4vw, 4.75rem);
+  width: min(1440px, 100%);
+  margin: 0 auto;
+}
+
+.footer-brand,
+.footer-section {
+  min-width: 0;
+}
+
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  color: var(--footer-text);
 }
 
 .footer-logo {
-  height: 40px; /* Modifica l'altezza in base alle esigenze del tuo SVG */
-  width: auto;  /* Ripristina le proporzioni corrette evitando che si rimpicciolisca */
-  display: inline-block;
-}
-
-/* --- Navigazione e Link --- */
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px 32px;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer-link {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 16px;
-  color: #ffffff;
-  text-decoration: none;
-  opacity: 0.85;
-  transition: opacity 0.2s, color 0.2s;
-}
-
-.footer-link:hover,
-.footer-link:focus {
-  color: #21acec;
-  opacity: 1;
-}
-
-.footer-book {
-  font-weight: 600;
-  color: #21acec;
-  border-bottom: 2px solid #21acec;
-  padding-bottom: 2px;
-}
-
-.footer-social {
-  margin-top: 4px;
-}
-
-.footer-social-link svg {
   display: block;
-  transition: filter 0.2s;
+  width: 32px;
+  height: auto;
 }
 
-.footer-social-link:hover svg {
-  filter: brightness(1.2) drop-shadow(0 2px 8px #5EABB133);
+.footer-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
-/* --- Note Legali --- */
-.footer-divider {
-  width: 100%;
-  max-width: 800px;
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 8px 0;
+.footer-tagline {
+  max-width: 31rem;
+  margin: 1.4rem 0 1.6rem;
+  color: var(--footer-muted);
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.45;
+}
+
+.footer-booking-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.2rem;
+  border: 1px solid var(--footer-accent);
+  border-radius: 4px;
+  background: var(--footer-accent);
+  color: #19343a;
+  font-weight: 600;
+}
+
+.footer-booking-link:hover {
+  border-color: #fff0c7;
+  background: #fff0c7;
+  color: #19343a;
+}
+
+.footer-section h2 {
+  margin: 0 0 1.15rem;
+  color: var(--footer-accent);
+  font-family: var(--font-nav);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.footer-link-list,
+.footer-areas ul,
+.footer-contact ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-link-list {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.footer-link-list a {
+  color: var(--footer-text);
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  text-underline-offset: 0.25em;
+}
+
+.footer-link-list a:hover {
+  color: var(--footer-accent);
+  text-decoration: underline;
+}
+
+.footer-areas ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.48rem 1rem;
+}
+
+.footer-areas li {
+  color: var(--footer-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.footer-contact {
+  font-style: normal;
+}
+
+.footer-contact a {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.footer-contact a span {
+  color: var(--footer-muted);
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .footer-legal {
-  font-family: 'Work Sans', sans-serif;
-  text-align: center;
-  color: #ffffff;
+  width: min(1440px, 100%);
+  margin: clamp(2.75rem, 5vw, 4.5rem) auto 0;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(247, 242, 232, 0.18);
+  color: var(--footer-muted);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.footer-legal-heading {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 700px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 2rem;
+  color: var(--footer-text);
 }
 
-.legal-company {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  margin: 0;
+.footer-legal p {
+  max-width: 78rem;
+  margin: 0.65rem 0;
 }
 
-.legal-info {
-  font-size: 13px;
-  opacity: 0.7;
-  line-height: 1.5;
-  margin: 0;
+.footer-legal small {
+  font-size: inherit;
 }
 
-.legal-policy-link {
-  margin: 0;
-  font-size: 13px;
+.site-footer a:focus-visible {
+  outline: 2px solid var(--footer-accent);
+  outline-offset: 4px;
 }
 
-.legal-policy-link a {
-  color: #ffffff;
-  opacity: 0.85;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+@media (max-width: 1180px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
-.legal-policy-link a:hover,
-.legal-policy-link a:focus {
-  opacity: 1;
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+@media (max-width: 760px) {
+  .site-footer {
+    padding-inline: 1.25rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+
+  .footer-brand,
+  .footer-experiences,
+  .footer-contact {
+    grid-column: 1 / -1;
+  }
 }
 
-.legal-info a {
-  color: #ffffff;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand,
+  .footer-experiences,
+  .footer-contact {
+    grid-column: auto;
+  }
+
+  .footer-areas ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-legal-heading {
+    display: grid;
+  }
 }
 
-.legal-tax-note {
-  font-size: 11px;
-  font-style: italic;
-  opacity: 0.5;
-  line-height: 1.4;
-  margin: 4px 0 0 0;
-}
-
-.legal-copyright {
-  font-size: 12px;
-  opacity: 0.4;
-  margin: 8px 0 0 0;
-}
-
-.footer-link.footer-booking {
-  background: #ffffff;
-  color: #031824 !important;
-  border: none;
-  min-height: 48px;
-  border-radius: 999px;
-  padding: 8px 24px;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  line-height: 16px !important;
-  letter-spacing: -1px !important;
-  cursor: pointer !important;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-}
-
-.footer-btn-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.footer-whatsapp {
-  background: #25D366 !important;
-  color: #ffffff !important;
-  border: none;
-  max-height: 48px;
-  border-radius: 999px;
-  padding: 8px 8px;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  outline: none;
-}
-
-.footer-whatsapp:hover {
-  background: #20ba5a;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
-}
-
-.footer-whatsapp:active {
-  transform: translateY(0);
-}
-
-.footer-whatsapp .whatsapp-icon {
-  width: 18px;
-  height: 18px;
-  filter: brightness(0) invert(1);
-}
-
-.footer-whatsapp .whatsapp-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1.5px solid rgba(255, 255, 255, 0.75);
+[dir='rtl'] .site-footer {
+  text-align: right;
 }

@@ -2,16 +2,16 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "pl-PL",
   navbar: {
     ...en.navbar,
     whatsappUs: "Napisz do nas na WhatsApp",
     switchLabel: "Zmien jezyk",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "Early Bird 10% TANIEJ",
-    title: "Private boat tours in Genova and Portofino",
-    subtitle: "Jedna trasa, tysiac emocji: prywatne plany i chwile dopasowane do Twojego tempa. Stay Leggero!",
+    title: "Prywatne rejsy łodzią w Genui i Portofino",
+    subtitle: "Jedna trasa, tysiąc emocji: prywatne plany i chwile dopasowane do Twojego tempa. Stay Leggero!",
   },
   experienceCarousel: {
     ...en.experienceCarousel,
@@ -49,6 +49,15 @@ export default {
         price: "Od 250 € za grupe",
         desc: "Uniknij korkow na liguryjskim wybrzezu dzieki szybkiemu i widokowemu transferowi droga wodna.",
         chips: ["Paliwo w cenie", "Skipper"],
+      },
+      {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "Max 5",
+        price: "Od 600 € za grupe",
+        desc: "Prywatna wycieczka popołudniowo-wieczorna z Genui z postojami na kąpiel, Camogli i przybyciem do Punta Chiappa z opcjonalną kolacją w restauracji partnerskiej Stella Maris.",
+        chips: ["Prywatne", "Postoje na kąpiel", "Ręczniki", "Sprzęt do snorkelingu", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
         id: "3",
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "Jaka jest polityka anulowania?",
-        answer: "Mozesz bezplatnie anulowac do 72 godzin przed wyplynieciem. Po tym terminie zwrot nie przysluguje.",
+        answer: "Warunki anulowania i zwrotu zależą od wybranej atrakcji; skontaktuj się z nami przed rezerwacją, aby je potwierdzić. Jeśli odwołamy rejs z powodu niebezpiecznej pogody, możesz zmienić termin lub otrzymać pełny zwrot.",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "Zarezerwuj swoj prywatny rejs",
+    guestOptions: ["1 osoba", "2 osoby", "3 osoby", "4 osoby", "5 osob", "6 osob", "7 osob", "8 osob", "9 osob", "10 osob", "11 osob", "12 osob", "13 osob", "14 osob", "15 osob"],
     timeDropdown: "Godzina",
     guestsDropdown: "Goscie",
     solutionsText: (count) => `${count} opcji dla wybranych filtrow.`,

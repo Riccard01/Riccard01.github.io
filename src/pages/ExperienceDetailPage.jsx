@@ -4,6 +4,9 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { getLocale } from '../utils/locale';
 import { getExperienceIdFromSlug } from '../utils/experienceRoutes';
+import { localizeDolceVita } from '../locales/dolceVitaDetails';
+import { localizeExperienceDetail, localizeRainbowTourContent } from '../locales/experienceDetailLocalization';
+import { getExperienceUi } from '../locales/experienceUi';
 import img4 from '../assets/mariana.webp';
 import img5 from '../assets/aperitivo.webp';
 import marianImg from '../assets/marian.webp';
@@ -76,7 +79,7 @@ function getVisiblePortIndexes(total, selectedIndex) {
 function getRainbowTourContent(lang) {
   const isItalian = lang === 'it';
 
-  return isItalian
+  const base = isItalian
     ? {
         heroFacts: ['6 slot orari disponibili', 'Fino a 5 ospiti'],
         basePrice: 600,
@@ -425,9 +428,11 @@ function getRainbowTourContent(lang) {
         ctaTitle: 'Ready to set sail?',
         ctaText: 'Book your Rainbow Tour now, or write to us on WhatsApp for custom requests, extra stops or group needs.',
       };
+
+  return localizeRainbowTourContent(lang, base);
 }
 
-function getDolceVitaContent(lang) {
+function getBaseDolceVitaContent(lang) {
   const isItalian = lang === 'it';
 
   return isItalian
@@ -797,6 +802,10 @@ function getDolceVitaContent(lang) {
         ctaText:
           'Book the tour now and, if you wish, request Stella Maris dinner at the same time for a smooth transition from sea to evening experience.',
       };
+}
+
+function getDolceVitaContent(lang) {
+  return localizeDolceVita(lang, getBaseDolceVitaContent(lang));
 }
 
 const EXPERIENCE_DETAIL_CONTENT = {
@@ -1329,13 +1338,14 @@ const EXPERIENCE_DETAIL_CONTENT = {
 
 function getDetailContent(lang, experienceId) {
   const safeLang = lang === 'it' ? 'it' : 'en';
-  const localized = EXPERIENCE_DETAIL_CONTENT[safeLang] || EXPERIENCE_DETAIL_CONTENT.en;
-  return localized[experienceId] || null;
+  const base = (EXPERIENCE_DETAIL_CONTENT[safeLang] || EXPERIENCE_DETAIL_CONTENT.en)?.[experienceId] || null;
+  return localizeExperienceDetail(lang, experienceId, base);
 }
 
 export default function ExperienceDetailPage({ setLang = () => {} }) {
   const { lang = 'it', experienceId: slug = '' } = useParams();
   const dict = getLocale(lang);
+  const pageUi = getExperienceUi(lang);
   const t = dict.experienceCarousel;
   const [selectedPortIndex, setSelectedPortIndex] = useState(0);
   const heroVideoRef = useRef(null);
@@ -1403,6 +1413,12 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
     window.location.href = 'whatsapp://send?phone=393463365699';
   };
 
+  const callForBooking = () => {
+    window.location.href = 'tel:+393463365699';
+  };
+
+  const isContactOnlyExperience = resolvedExperienceId === '3';
+  const supportsRichLocalizedDetails = ['0', '1', '3', '4'].includes(resolvedExperienceId);
   const bookingPath = `/${lang}/book?exp=${resolvedExperienceId}`;
 
   const renderHeroMeta = (facts = []) => {
@@ -1411,7 +1427,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
     const hideGuestsIcon = resolvedExperienceId === '3';
 
     return (
-      <div className="experience-hero-meta" aria-label={lang === 'it' ? 'Dettagli esperienza' : 'Experience details'}>
+      <div className="experience-hero-meta" aria-label={pageUi.details}>
         <span className="experience-hero-meta-item">
           <img src={clockIcon} alt={t.durationAlt} className="experience-hero-meta-icon" />
           {timeValue}
@@ -1423,6 +1439,73 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
       </div>
     );
   };
+
+  if (!['it', 'en'].includes(lang) && !supportsRichLocalizedDetails) {
+    return (
+      <>
+        <Navbar lang={lang} setLang={setLang} />
+        <main className="experience-detail-page">
+          <section className="experience-hero" aria-label={experience.title}>
+            {hasVideoHero ? (
+              <video
+                ref={heroVideoRef}
+                className="experience-hero-image"
+                src={heroVideo || specialVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster={heroImage}
+                aria-label={experience.title}
+              />
+            ) : (
+              <img src={heroImage} alt={experience.title} className="experience-hero-image" loading="eager" fetchPriority="high" />
+            )}
+            <div className="experience-hero-overlay" />
+            <div className="experience-hero-content">
+              {renderHeroMeta()}
+              <h1>{experience.title}</h1>
+              <div className="experience-hero-cta-row">
+                <Link to={bookingPath} className="experience-primary-cta">{pageUi.book}</Link>
+                <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>{pageUi.request}</button>
+              </div>
+            </div>
+          </section>
+
+          <section className="experience-detail-shell">
+            <article className="experience-info-card experience-intro-card">
+              <h2>{pageUi.details}</h2>
+              <p>{experience.desc}</p>
+            </article>
+            {experience.chips?.length ? (
+              <article className="experience-info-card">
+                <h2>{pageUi.included}</h2>
+                <div className="experience-included-chips" aria-label={pageUi.included}>
+                  {experience.chips.map((chip) => <span key={chip} className="experience-included-chip">{chip}</span>)}
+                </div>
+              </article>
+            ) : null}
+            <section className="experience-cta-banner">
+              <div>
+                <h2>{experience.title}</h2>
+                <p>{experience.desc}</p>
+              </div>
+              <div className="experience-cta-actions">
+                <Link to={bookingPath} className="experience-primary-cta">{pageUi.book}</Link>
+                <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>WhatsApp</button>
+              </div>
+            </section>
+          </section>
+        </main>
+        <div className="experience-sticky-cta">
+          <Link to={bookingPath} className="experience-primary-cta">{pageUi.book}</Link>
+          <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>WhatsApp</button>
+        </div>
+        <Footer lang={lang} />
+      </>
+    );
+  }
 
   if (resolvedExperienceId === '0' && rainbowDetail) {
     const getRainbowDeparturePriceLabel = (point) => {
@@ -1453,7 +1536,6 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               src={camoVideo}
               autoPlay
               muted
-              defaultMuted
               loop
               playsInline
               preload="auto"
@@ -1468,10 +1550,10 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
               <div className="experience-hero-cta-row">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
-                  {lang === 'it' ? 'Richiesta su WhatsApp' : 'Request on WhatsApp'}
+                  {pageUi.request}
                 </button>
               </div>
             </div>
@@ -1518,7 +1600,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                         <small>{point.note}</small>
                         <strong className="departure-port-price">{getRainbowDeparturePriceLabel(point)}</strong>
                         <a href={point.mapsUrl} target="_blank" rel="noopener noreferrer" className="experience-location-button">
-                          {lang === 'it' ? 'Scopri la location' : 'Discover the location'}
+                          {pageUi.location}
                         </a>
                       </div>
                     </article>
@@ -1570,7 +1652,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               </div>
               <div className="experience-cta-actions">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
                   WhatsApp
@@ -1582,7 +1664,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
         <div className="experience-sticky-cta">
           <Link to={bookingPath} className="experience-primary-cta">
-            {lang === 'it' ? 'Prenota ora' : 'Book now'}
+            {pageUi.book}
           </Link>
           <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
             WhatsApp
@@ -1610,7 +1692,6 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               src={camoVideo}
               autoPlay
               muted
-              defaultMuted
               loop
               playsInline
               preload="auto"
@@ -1625,10 +1706,10 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
               <div className="experience-hero-cta-row">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
-                  {lang === 'it' ? 'Richiesta su WhatsApp' : 'Request on WhatsApp'}
+                  {pageUi.request}
                 </button>
               </div>
             </div>
@@ -1664,7 +1745,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <div className="dolce-vita-dinner-important">
-                <strong>{lang === 'it' ? 'Nota importante' : 'Important note'}</strong>
+                <strong>{pageUi.important}</strong>
                 <p>{dolceVitaDetail.dinnerImportant}</p>
               </div>
               <p className="dolce-vita-dinner-booking">{dolceVitaDetail.dinnerBookingNote}</p>
@@ -1699,14 +1780,14 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                       <img src={point.image} alt={point.imageAlt} loading="lazy" decoding="async" />
                       <div>
                         <span className="departure-point-indicator">
-                          {lang === 'it' ? 'Moltiplicatore' : 'Multiplier'} x{point.multiplier}
+                          {pageUi.multiplier} x{point.multiplier}
                         </span>
                         <h3>{point.name}</h3>
                         <p>{point.area}</p>
                         <small>{point.note}</small>
                         <strong className="departure-port-price">{formatEuro(finalPrice)}</strong>
                         <a href={point.mapsUrl} target="_blank" rel="noopener noreferrer" className="experience-location-button">
-                          {lang === 'it' ? 'Scopri la location' : 'Discover the location'}
+                          {pageUi.location}
                         </a>
                       </div>
                     </article>
@@ -1756,7 +1837,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               </div>
               <div className="experience-cta-actions">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
                   WhatsApp
@@ -1768,7 +1849,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
         <div className="experience-sticky-cta">
           <Link to={bookingPath} className="experience-primary-cta">
-            {lang === 'it' ? 'Prenota ora' : 'Book now'}
+            {pageUi.book}
           </Link>
           <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
             WhatsApp
@@ -1793,7 +1874,6 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               src={cinVideo}
               autoPlay
               muted
-              defaultMuted
               loop
               playsInline
               preload="auto"
@@ -1807,10 +1887,10 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               <h1>{experience.title}</h1>
               <div className="experience-hero-cta-row">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
-                  {lang === 'it' ? 'Richiesta su WhatsApp' : 'Request on WhatsApp'}
+                  {pageUi.request}
                 </button>
               </div>
             </div>
@@ -1855,7 +1935,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                 <div className="experience-departure-overlay">
                   <h3>{detail?.departureMapLabel}</h3>
                   <a href={detail?.departureMapUrl} target="_blank" rel="noopener noreferrer" className="experience-location-button">
-                    {lang === 'it' ? 'Scopri la location' : 'Discover the location'}
+                    {pageUi.location}
                   </a>
                 </div>
               </div>
@@ -1917,7 +1997,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               </div>
               <div className="experience-cta-actions">
                 <Link to={bookingPath} className="experience-primary-cta">
-                  {lang === 'it' ? 'Prenota ora' : 'Book now'}
+                  {pageUi.book}
                 </Link>
                 <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
                   {lang === 'it' ? 'WhatsApp' : 'WhatsApp'}
@@ -1929,7 +2009,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
         <div className="experience-sticky-cta">
           <Link to={bookingPath} className="experience-primary-cta">
-            {lang === 'it' ? 'Prenota ora' : 'Book now'}
+            {pageUi.book}
           </Link>
           <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
             {lang === 'it' ? 'WhatsApp' : 'WhatsApp'}
@@ -1954,7 +2034,6 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
               src={heroVideo || specialVideo}
               autoPlay
               muted
-              defaultMuted
               playsInline
               preload="auto"
               poster={resolvedExperienceId === '1' ? img5 : specialImg}
@@ -1976,11 +2055,17 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
             <h1>{experience.title}</h1>
 
             <div className="experience-hero-cta-row">
-              <Link to={bookingPath} className="experience-primary-cta">
-                {lang === 'it' ? 'Prenota ora' : 'Book now'}
-              </Link>
+              {isContactOnlyExperience ? (
+                <button type="button" className="experience-primary-cta" onClick={callForBooking}>
+                  {pageUi.contact || pageUi.request}
+                </button>
+              ) : (
+                <Link to={bookingPath} className="experience-primary-cta">
+                  {pageUi.book}
+                </Link>
+              )}
               <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>
-                {lang === 'it' ? 'Contattaci su WhatsApp' : 'Contact us on WhatsApp'}
+                {pageUi.request}
               </button>
             </div>
           </div>
@@ -1989,7 +2074,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
         <section className="experience-info-grid">
           {detail?.charterType ? (
             <article className="experience-info-card">
-              <h2>{lang === 'it' ? 'Tipologia charter' : 'Charter type'}</h2>
+              <h2>{pageUi.charter}</h2>
               <p>{detail.charterType}</p>
             </article>
           ) : null}
@@ -2007,7 +2092,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
             <article className="experience-info-card">
               <h2>{detail.includedTitle}</h2>
               {experience?.chips?.length ? (
-                <div className="experience-included-chips" aria-label={lang === 'it' ? 'Incluso' : 'Included'}>
+                <div className="experience-included-chips" aria-label={pageUi.included}>
                   {experience.chips.map((chip) => (
                     <span key={chip} className="experience-included-chip">
                       {chip}
@@ -2056,6 +2141,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
             </article>
           ) : null}
 
+          {resolvedExperienceId !== '3' ? (
           <article className="experience-info-card experience-map-card">
             <h2>{detail?.mapTitle}</h2>
             <p className="experience-map-caption">{detail?.mapCaption}</p>
@@ -2068,7 +2154,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                   className="map-carousel-nav map-carousel-prev"
                   onClick={() => setSelectedPortIndex((prev) => Math.max(0, prev - 1))}
                   disabled={selectedPortIndex <= 0}
-                  aria-label={lang === 'it' ? 'Tappa precedente' : 'Previous stop'}
+                  aria-label={pageUi.previous}
                 >
                   {'<'}
                 </button>
@@ -2084,7 +2170,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                     type="button"
                     className={`mini-map-avatar ${sizeClass} ${selectedPortIndex === portIndex ? 'is-active' : ''}`.trim()}
                     onClick={() => setSelectedPortIndex(portIndex)}
-                    aria-label={`${lang === 'it' ? 'Mostra tappa' : 'Show stop'}: ${port.name}`}
+                    aria-label={`${pageUi.show}: ${port.name}`}
                   >
                     <img src={getPortImage(port)} alt={port.name} loading="lazy" decoding="async" />
                   </button>
@@ -2098,7 +2184,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
                   className="map-carousel-nav map-carousel-next"
                   onClick={() => setSelectedPortIndex((prev) => Math.min(ports.length - 1, prev + 1))}
                   disabled={selectedPortIndex >= ports.length - 1}
-                  aria-label={lang === 'it' ? 'Tappa successiva' : 'Next stop'}
+                  aria-label={pageUi.next}
                 >
                   {'>'}
                 </button>
@@ -2116,22 +2202,23 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
             ) : null}
 
             <div className="experience-map-transcript">
-              <h3>{lang === 'it' ? 'Trascrizione mappa' : 'Map transcript'}</h3>
+              <h3>{pageUi.transcript}</h3>
               <div className="experience-map-stages">
                 {ports.map((port, index) => (
                   <article key={`${port.name}-transcript`} className="experience-map-stage">
                     <h4>
-                      {lang === 'it' ? 'Tappa' : 'Stop'} {index + 1}: {port.name}
+                      {pageUi.stop} {index + 1}: {port.name}
                     </h4>
                     <p>{getStageDescription(index)}</p>
                     <a href={port.mapsUrl} target="_blank" rel="noopener noreferrer">
-                      {lang === 'it' ? 'Apri mappa' : 'Open map'}
+                      {pageUi.map}
                     </a>
                   </article>
                 ))}
               </div>
             </div>
           </article>
+          ) : null}
 
           <article className="experience-info-card">
             <h2>{detail?.faqTitle}</h2>
@@ -2147,7 +2234,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
 
           {resolvedExperienceId !== '3' && detail?.sources?.length ? (
             <article className="experience-info-card">
-              <h2>{detail?.sourcesTitle || (lang === 'it' ? 'Fonti' : 'Sources')}</h2>
+              <h2>{detail?.sourcesTitle || pageUi.sources}</h2>
               <ul>
                 {detail.sources.map((source) => (
                   <li key={source.url}>

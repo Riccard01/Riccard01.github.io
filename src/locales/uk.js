@@ -2,15 +2,15 @@ import en from "./en";
 
 export default {
   ...en,
+  localeCode: "uk-UA",
   navbar: {
     ...en.navbar,
     whatsappUs: "Написати у WhatsApp",
     switchLabel: "Змінити мову",
   },
   homepage: {
-        title: "Rainbow Tour",
     earlyBird: "Раннє бронювання: -10%",
-    title: "Private boat tours in Genova and Portofino",
+    title: "Приватні катери в Генуї та Портофіно",
     subtitle: "Один маршрут, тисяча емоцій: приватні маршрути й моменти у вашому темпі. Stay Leggero!",
   },
   experienceCarousel: {
@@ -51,13 +51,22 @@ export default {
         chips: ["Пальне включено", "Шкіпер"],
       },
       {
+        id: "4",
+        title: "Dolce Vita",
+        time: "17:00-21:00",
+        guests: "Макс. 5",
+        price: "Від 600 € за групу",
+        desc: "Приватний вечірній тур з Генуї з зупинками для купання, Камольї та прибуттям до Punta Chiappa з опціональною вечеря в партнерському ресторані Stella Maris.",
+        chips: ["Приватно", "Зупинки для купання", "Рушники", "Спорядження для снорклінгу", "Prosciutto e melone", "Фото/Відео", "Шкіпер"],
+      },
+      {
         id: "3",
         title: "Stella Maris",
-        time: "2 August 2026",
-        guests: "Annual event",
-        price: "€1200 per group",
-        desc: "Camogli sea celebration with marine procession, Dragun and floating lights.",
-        chips: ["Local tradition", "Sea procession", "Dragun", "Floating lights", "Рушники", "Спорядження для снорклінгу"],
+        time: "2 серпня 2026",
+        guests: "Щорічна подія",
+        price: "1200 € за групу",
+        desc: "Найзнакоміше морське свято Camogli: морська процесія, човен Dragun, плавучі свічки та неповторна атмосфера.",
+        chips: ["Місцева традиція", "Морська процесія", "Dragun", "Плавучі свічки", "Рушники", "Спорядження для снорклінгу"],
       },
     ],
   },
@@ -142,7 +151,7 @@ export default {
       {
         id: "cancellation",
         question: "Яка політика скасування?",
-        answer: "Ви можете безкоштовно скасувати бронювання за 72 години до відправлення. Після цього строку повернення коштів не передбачено.",
+        answer: "Умови скасування й повернення залежать від обраної програми; зв'яжіться з нами до бронювання, щоб їх уточнити. Якщо ми скасуємо вихід через небезпечну погоду, ви зможете змінити дату або отримати повне повернення.",
       },
       {
         id: "weather",
@@ -185,6 +194,8 @@ export default {
   },
   book: {
     ...en.book,
+    pageHeading: "Забронюйте приватну прогулянку на човні",
+    guestOptions: ["1 особа", "2 особи", "3 особи", "4 особи", "5 осіб", "6 осіб", "7 осіб", "8 осіб", "9 осіб", "10 осіб", "11 осіб", "12 осіб", "13 осіб", "14 осіб", "15 осіб"],
     timeDropdown: "Час",
     guestsDropdown: "Гості",
     solutionsText: (count) => `${count} варіантів для вибраних фільтрів.`,

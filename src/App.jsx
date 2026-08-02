@@ -3,7 +3,8 @@ import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 're
 import HomePage from './pages/HomePage';
 import './App.css';
 import { DEFAULT_LANG, getLocale, LOCALES } from './utils/locale';
-import { getExperienceIdFromSlug } from './utils/experienceRoutes';
+import { getExperienceIdFromSlug, getExperienceSlugById } from './utils/experienceRoutes';
+import { getSeoUi } from './locales/seoUi';
 
 const Book = lazy(() => import('./pages/Book'));
 const ExperienceDetailPage = lazy(() => import('./pages/ExperienceDetailPage'));
@@ -13,6 +14,15 @@ function getPathSuffix(pathname) {
   const langMatch = normalized.match(/^\/([a-z]{2})(\/.*)?$/i);
   if (langMatch) return langMatch[2] || '';
   return normalized === '/' ? '' : normalized;
+}
+
+function getLocalizedSuffix(suffix, lang) {
+  const experienceMatch = suffix.match(/^\/(esperienze|experiences)\/([^/]+)$/i);
+  const experienceId = experienceMatch ? getExperienceIdFromSlug(experienceMatch[2]) : null;
+  if (!experienceId) return suffix;
+
+  const prefix = lang === 'it' ? 'esperienze' : 'experiences';
+  return `/${prefix}/${getExperienceSlugById(experienceId)}`;
 }
 
 function resolveInitialLanguage() {
@@ -53,24 +63,19 @@ function LocalizedPage({ page, onChangeLang }) {
 function LegacyPolicyRedirect() {
   const { lang } = useParams();
   const safeLang = LOCALES[lang] ? lang : DEFAULT_LANG;
-  return <Navigate to={`/${safeLang}`} replace />;
+  return <Navigate to={`/${safeLang}#faq`} replace />;
 }
 
 function App() {
   const [lang, setLang] = useState(resolveInitialLanguage);
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const currentLang = location.pathname.split('/')[1];
-    if (LOCALES[currentLang] && currentLang !== lang) {
-      setLang(currentLang);
-    }
-  }, [location.pathname, lang]);
+  const pathLang = location.pathname.split('/')[1];
+  const activeLang = LOCALES[pathLang] ? pathLang : lang;
 
   const handleChangeLanguage = (nextLang) => {
     if (!LOCALES[nextLang]) return;
-    const suffix = getPathSuffix(location.pathname);
+    const suffix = getLocalizedSuffix(getPathSuffix(location.pathname), nextLang);
     const nextPath = `/${nextLang}${suffix}`;
     setLang(nextLang);
     if (nextPath !== location.pathname) {
@@ -79,32 +84,33 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem('lang', lang);
-    const locale = LOCALES[lang] || LOCALES[DEFAULT_LANG];
-    document.documentElement.lang = lang;
+    localStorage.setItem('lang', activeLang);
+    const locale = LOCALES[activeLang] || LOCALES[DEFAULT_LANG];
+    document.documentElement.lang = activeLang;
     document.documentElement.dir = locale?.rtl ? 'rtl' : 'ltr';
-  }, [lang]);
+  }, [activeLang]);
 
   useEffect(() => {
     const origin = window.location.origin;
-    const suffix = getPathSuffix(location.pathname);
+    const routeSuffix = getPathSuffix(location.pathname);
     const head = document.head;
-    const locale = getLocale(lang);
-    const experienceMatch = suffix.match(/^\/(esperienze|experiences)\/([^/]+)$/i);
+    const locale = getLocale(activeLang);
+    const experienceMatch = routeSuffix.match(/^\/(esperienze|experiences)\/([^/]+)$/i);
     const resolvedExperienceId = experienceMatch ? getExperienceIdFromSlug(experienceMatch[2]) : null;
     const experience = resolvedExperienceId
       ? (locale?.experienceCarousel?.experiences || []).find((item) => item.id === resolvedExperienceId)
       : null;
 
-    const pageKey = suffix === '/book' ? 'book' : (experience ? 'experience' : 'home');
-    const seo = locale?.seo?.[pageKey] || getLocale(DEFAULT_LANG)?.seo?.[pageKey] || {};
+    const pageKey = routeSuffix === '/book' ? 'book' : (experience ? 'experience' : 'home');
+    const seo = getSeoUi(activeLang, pageKey);
     const title = experience
       ? `${experience.title} | Leggero Tours`
       : (seo.title || 'Leggero Tours');
     const description = experience
       ? experience.desc
       : (seo.description || 'Private boat tours in Liguria between Genoa, Portofino and the Two Gulfs.');
-    const currentUrl = `${origin}/${lang}${suffix}`;
+    const canonicalSuffix = getLocalizedSuffix(routeSuffix, activeLang);
+    const currentUrl = `${origin}/${activeLang}${canonicalSuffix}`;
     const localeCode = (locale?.localeCode || 'en_US').replace('-', '_');
 
     const upsertMeta = (selector, attrs) => {
@@ -121,7 +127,12 @@ function App() {
 
     document.title = title;
     upsertMeta('meta[name="description"]', { name: 'description', content: description });
-    upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' });
+    upsertMeta('meta[name="robots"]', {
+      name: 'robots',
+      content: pageKey === 'book'
+        ? 'noindex,follow'
+        : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+    });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
     upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'Leggero Tours' });
     upsertMeta('meta[property="og:locale"]', { property: 'og:locale', content: localeCode });
@@ -137,21 +148,23 @@ function App() {
     head.querySelectorAll('link[data-seo-lang="true"]').forEach((node) => node.remove());
     head.querySelectorAll('script[data-seo-schema="true"]').forEach((node) => node.remove());
 
-    Object.keys(LOCALES).forEach((code) => {
-      const alt = document.createElement('link');
-      alt.setAttribute('rel', 'alternate');
-      alt.setAttribute('hreflang', code);
-      alt.setAttribute('href', `${origin}/${code}${suffix}`);
-      alt.setAttribute('data-seo-lang', 'true');
-      head.appendChild(alt);
-    });
+    if (pageKey !== 'book') {
+      Object.keys(LOCALES).forEach((code) => {
+        const alt = document.createElement('link');
+        alt.setAttribute('rel', 'alternate');
+        alt.setAttribute('hreflang', code);
+        alt.setAttribute('href', `${origin}/${code}${getLocalizedSuffix(routeSuffix, code)}`);
+        alt.setAttribute('data-seo-lang', 'true');
+        head.appendChild(alt);
+      });
 
-    const xDefault = document.createElement('link');
-    xDefault.setAttribute('rel', 'alternate');
-    xDefault.setAttribute('hreflang', 'x-default');
-    xDefault.setAttribute('href', `${origin}/${DEFAULT_LANG}${suffix}`);
-    xDefault.setAttribute('data-seo-lang', 'true');
-    head.appendChild(xDefault);
+      const xDefault = document.createElement('link');
+      xDefault.setAttribute('rel', 'alternate');
+      xDefault.setAttribute('hreflang', 'x-default');
+      xDefault.setAttribute('href', `${origin}/${DEFAULT_LANG}${getLocalizedSuffix(routeSuffix, DEFAULT_LANG)}`);
+      xDefault.setAttribute('data-seo-lang', 'true');
+      head.appendChild(xDefault);
+    }
 
     const canonical = document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
@@ -159,19 +172,54 @@ function App() {
     canonical.setAttribute('data-seo-lang', 'true');
     head.appendChild(canonical);
 
+    const organizationId = `${origin}/#organization`;
+    const schemaGraph = [{
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: 'Leggero Tours',
+      url: origin,
+      logo: `${origin}/apple-touch-icon.png`,
+      email: 'riccardo@leggerotours.com',
+      telephone: '+39 346 336 5699',
+      areaServed: ['Genova', 'Golfo Paradiso', 'Golfo del Tigullio', 'Camogli', 'San Fruttuoso', 'Portofino'],
+      availableLanguage: Object.keys(LOCALES),
+    }];
+
+    if (pageKey === 'home') {
+      const faqItems = Array.isArray(locale?.faq?.items) ? locale.faq.items : [];
+      if (faqItems.length) {
+        schemaGraph.push({
+          '@type': 'FAQPage',
+          '@id': `${currentUrl}#faq`,
+          inLanguage: locale?.localeCode || activeLang,
+          mainEntity: faqItems.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answer,
+            },
+          })),
+        });
+      }
+    }
+
+    if (experience) {
+      schemaGraph.push({
+        '@type': 'TouristTrip',
+        '@id': `${currentUrl}#tour`,
+        name: experience.title,
+        description,
+        url: currentUrl,
+        provider: { '@id': organizationId },
+        inLanguage: locale?.localeCode || activeLang,
+        areaServed: ['Genova', 'Golfo Paradiso', 'Golfo del Tigullio', 'Camogli', 'San Fruttuoso', 'Portofino'],
+      });
+    }
+
     const schema = {
       '@context': 'https://schema.org',
-      '@type': 'TouristTrip',
-      name: title,
-      description,
-      url: currentUrl,
-      provider: {
-        '@type': 'Organization',
-        name: 'Leggero Tours',
-        url: origin,
-      },
-      inLanguage: lang,
-      areaServed: ['Genova', 'Portofino', 'Camogli', 'Liguria'],
+      '@graph': schemaGraph,
     };
 
     const schemaScript = document.createElement('script');
@@ -179,7 +227,7 @@ function App() {
     schemaScript.setAttribute('data-seo-schema', 'true');
     schemaScript.text = JSON.stringify(schema);
     head.appendChild(schemaScript);
-  }, [lang, location.pathname]);
+  }, [activeLang, location.pathname]);
 
   return (
     <>
@@ -197,7 +245,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to={`/${lang}`} replace />} />
         <Route path="/book" element={<Navigate to={`/${lang}/book`} replace />} />
-        <Route path="/policy" element={<Navigate to={`/${lang}`} replace />} />
+        <Route path="/policy" element={<Navigate to={`/${lang}#faq`} replace />} />
         <Route path="/:lang" element={<LocalizedPage page="home" onChangeLang={handleChangeLanguage} />} />
         <Route path="/:lang/book" element={<LocalizedPage page="book" onChangeLang={handleChangeLanguage} />} />
         <Route path="/:lang/esperienze/:experienceId" element={<LocalizedPage page="experience" onChangeLang={handleChangeLanguage} />} />
