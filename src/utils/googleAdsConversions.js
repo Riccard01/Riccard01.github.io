@@ -5,8 +5,8 @@ const GOOGLE_ADS_ID = 'AW-18340336234';
 // conversion action (Obiettivi > Conversioni > + Crea azione di conversione > Sito web
 // > "Traccia manualmente con il codice"). Each label looks like "AbCdeFGhijKLmnOPqr".
 const CONVERSION_LABELS = {
-  whatsapp: 'REPLACE_WITH_WHATSAPP_CONVERSION_LABEL',
-  payment: 'REPLACE_WITH_PAYMENT_CONVERSION_LABEL',
+  whatsapp: '4n3hCKek5NocEOqkralE',
+  payment: 'b6VSCNqY5NocEOqkralE',
 };
 
 function sendConversion(label, params = {}) {
