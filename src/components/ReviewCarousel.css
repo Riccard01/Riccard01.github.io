@@ -70,9 +70,10 @@
   margin: 0;
   font-family: 'Fraunces', serif;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
+  font-style: italic;
   line-height: 1.1;
-  color: #081f5c;
+  color: #0a2558;
 }
 
 .review-stars-inline {
