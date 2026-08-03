@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
+import ReviewCarousel from '../components/ReviewCarousel';
 import Faq from '../components/Faq';
 import marian from '../assets/marian.webp';
 import { getLocale } from '../utils/locale';
@@ -54,6 +55,8 @@ function HomePage({ lang = 'it', setLang = () => {} }) {
           <ExperienceCarousel lang={lang} />
         </div>
       </section>
+
+      <ReviewCarousel lang={lang} />
 
       <Faq lang={lang} />
 

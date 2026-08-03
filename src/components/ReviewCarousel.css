@@ -14,10 +14,10 @@
 .review-carousel-header h2 {
   margin: 0;
   padding: 0;
-  font-family: 'Fraunces', sans-serif;
+  font-family: 'Fraunces', serif;
   font-size: clamp(30px, 5.6vw, 40px);
   font-weight: 400;
-  color: #031824;
+  color: #0a2558;
   font-style: italic;
   letter-spacing: -1px;
   line-height: 1.08;

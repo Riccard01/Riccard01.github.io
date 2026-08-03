@@ -19,10 +19,11 @@
 
 .faq-title {
   margin: 0;
-  color: #102f39;
-  font-family: var(--font-heading);
+  color: #0a2558;
+  font-family: 'Fraunces', serif;
   font-size: clamp(2.15rem, 4vw, 3.75rem);
-  font-weight: 500;
+  font-style: italic;
+  font-weight: 400;
   line-height: 1.08;
 }
 
