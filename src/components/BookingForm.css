@@ -18,6 +18,7 @@
   min-height: 100svh;
   padding: 0 24px 32px;
   background: #fff;
+  font-family: 'Work Sans', sans-serif;
 }
 
 .bsf-details-header {
@@ -25,20 +26,13 @@
   border-bottom: 1px solid #e5e9ec;
 }
 
-.bsf-details-kicker {
-  margin: 0 0 9px;
-  color: #537078;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .bsf-details-title {
   margin: 0;
-  color: #0B232E;
-  font-size: clamp(1.8rem, 5vw, 2.35rem);
-  font-weight: 700;
+  color: #0a2558;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 5vw, 28px);
+  font-style: italic;
+  font-weight: 400;
   line-height: 1.12;
   letter-spacing: 0;
 }
@@ -46,9 +40,20 @@
 .bsf-details-intro {
   max-width: 520px;
   margin: 14px 0 0;
-  color: #64747a;
-  font-size: 0.98rem;
+  color: #5770a1;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
   line-height: 1.55;
+}
+
+@media (min-width: 900px) {
+  .bsf-details-title {
+    font-size: 34px;
+  }
+
+  .bsf-details-intro {
+    font-size: 16px;
+  }
 }
 
 .bsf-details-list {

@@ -135,7 +135,6 @@ export default function BookingForm({ lang = 'it', onSubmit, onBack = null, boat
             {!paymentPhase && (
                 <>
                     <div className="bsf-details-header">
-                        <p className="bsf-details-kicker">{t.personalDetailsKicker}</p>
                         <h2 className="bsf-details-title">{t.personalDetailsTitle}</h2>
                         <p className="bsf-details-intro">{t.personalDetailsIntro}</p>
                     </div>
