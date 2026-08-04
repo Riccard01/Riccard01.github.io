@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PrivateTransfer from '../components/PrivateTransfer';
 import { getLocale } from '../utils/locale';
 import { getExperienceIdFromSlug } from '../utils/experienceRoutes';
 import { localizeDolceVita } from '../locales/dolceVitaDetails';
@@ -1504,6 +1505,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
           <Link to={bookingPath} className="experience-primary-cta">{pageUi.book}</Link>
           <button type="button" className="experience-secondary-cta" onClick={openWhatsApp}>WhatsApp</button>
         </div>
+        <PrivateTransfer lang={lang} />
         <Footer lang={lang} />
       </>
     );
@@ -1673,6 +1675,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
           </button>
         </div>
 
+        <PrivateTransfer lang={lang} />
         <Footer lang={lang} />
       </>
     );
@@ -1858,6 +1861,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
           </button>
         </div>
 
+        <PrivateTransfer lang={lang} />
         <Footer lang={lang} />
       </>
     );
@@ -2018,6 +2022,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
           </button>
         </div>
 
+        <PrivateTransfer lang={lang} />
         <Footer lang={lang} />
       </>
     );
@@ -2251,6 +2256,7 @@ export default function ExperienceDetailPage({ setLang = () => {} }) {
         </section>
       </main>
 
+      <PrivateTransfer lang={lang} />
       <Footer lang={lang} />
     </>
   );

@@ -10,7 +10,7 @@
   box-shadow: 0 2px 24px 0 rgba(0,0,0,0.10);
 }
 
-/* ── Step-form wrapper ────────────────────────────────── */
+/* ── Personal details page ────────────────────────────── */
 
 .bsf-wrap {
   display: flex;
@@ -20,53 +20,73 @@
   background: #fff;
 }
 
-.bsf-progress-bar {
-  height: 3px;
-  background: #e9eef3;
-  border-radius: 99px;
-  margin-bottom: 20px;
+.bsf-details-header {
+  padding: 44px 0 34px;
+  border-bottom: 1px solid #e5e9ec;
 }
 
-.bsf-progress-fill {
-  height: 100%;
-  background: #0B232E;
-  border-radius: 99px;
-  transition: width 0.35s ease;
+.bsf-details-kicker {
+  margin: 0 0 9px;
+  color: #537078;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.bsf-step-counter {
-  text-align: right;
-  font-size: 0.82rem;
-  color: #9ca3af;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  margin-bottom: 48px;
+.bsf-details-title {
+  margin: 0;
+  color: #0B232E;
+  font-size: clamp(1.8rem, 5vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0;
 }
 
-.bsf-step {
-  flex: 1;
+.bsf-details-intro {
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: #64747a;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.bsf-details-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 24px;
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.bsf-step-label {
-  font-size: 1.45rem;
-  font-weight: 700;
+.bsf-field {
+  display: block;
+  padding: 25px 0;
+  border-bottom: 1px solid #e5e9ec;
+}
+
+.bsf-field-label {
+  display: block;
+  margin-bottom: 7px;
   color: #0B232E;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.bsf-field-optional {
+  margin-left: 5px;
+  color: #819096;
+  font-size: 0.76rem;
+  font-weight: 500;
 }
 
 .bsf-input {
   width: 100%;
   border: none;
-  border-bottom: 2px solid #dbe2e8;
+  border-bottom: 1px solid transparent;
   border-radius: 0;
-  padding: 14px 0;
-  font-size: 1.15rem;
+  padding: 8px 0;
+  font-size: 1.08rem;
   font-family: inherit;
   background: transparent;
   color: #0B232E;
@@ -76,15 +96,12 @@
 }
 
 .bsf-input:focus {
-  border-bottom-color: #0B232E;
+  border-bottom-color: #8aa0a7;
 }
 
 .bsf-textarea {
-  resize: none;
-  border: 1.5px solid #dbe2e8;
-  border-radius: 12px;
-  padding: 14px 14px;
-  font-size: 1rem;
+  min-height: 78px;
+  resize: vertical;
 }
 
 .bsf-phone-row {
@@ -97,10 +114,10 @@
   width: 96px;
   min-width: 72px;
   border: none;
-  border-bottom: 2px solid #dbe2e8;
+  border-bottom: 1px solid transparent;
   background: transparent;
   font-size: 1rem;
-  padding: 14px 0;
+  padding: 8px 0;
   font-family: inherit;
   color: #0B232E;
   outline: none;
@@ -111,10 +128,34 @@
   flex: 1;
 }
 
+.bsf-partner-field {
+  border-bottom: 0;
+}
+
+.bsf-code-input {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bsf-field-help {
+  display: block;
+  margin-top: 7px;
+  color: #74858b;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
 .bsf-actions {
   display: flex;
   gap: 12px;
-  padding-top: 32px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.bsf-payment-actions {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 0 32px;
 }
 
 .bsf-back {

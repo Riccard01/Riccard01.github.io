@@ -18,10 +18,7 @@ const countryCodes = [
     { code: "+44", country: "🇬🇧" },
 ];
 
-// Step-by-step wizard: collect name → phone → email → notes → pay
-const STEPS = ['name', 'phone', 'email', 'notes'];
-
-export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
+export default function BookingForm({ lang = 'it', onSubmit, onBack = null, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
     const dict = getLocale(lang);
     const t = dict.bookingForm;
     const ui = getBookingUi(lang);
@@ -32,10 +29,9 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
         phone: "",
         email: "",
         notes: "",
+        conciergeCode: "",
         amountCents: amountCents || 0,
     });
-
-    const [stepIndex, setStepIndex] = useState(0);
 
     // Keep displayed amount in sync if parent recomputes it
     useEffect(() => {
@@ -68,37 +64,17 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
 
     function handleChange(e) {
         const { name, value, type, checked } = e.target;
-        setForm(f => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
+        const nextValue = name === 'conciergeCode' ? value.toUpperCase() : value;
+        setForm(f => ({ ...f, [name]: type === 'checkbox' ? checked : nextValue }));
     }
 
     function handleCodeChange(e) {
         setForm(f => ({ ...f, countryCode: e.target.value }));
     }
 
-    function stepLabel(step) {
-        const labels = {
-            name: ui.formName,
-            phone: ui.formPhone,
-            email: ui.formEmail,
-            notes: ui.formNotes,
-        };
-        return labels[step] || step;
-    }
-
-    function stepIsValid(step) {
-        if (step === 'name')  return form.fullName.trim().length > 0;
-        if (step === 'phone') return form.phone.trim().length > 0;
-        if (step === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
-        return true; // notes is optional
-    }
-
-    function handleNext() {
-        if (stepIndex < STEPS.length - 1) {
-            setStepIndex(s => s + 1);
-        } else {
-            handleInitialSubmit();
-        }
-    }
+    const personalDetailsValid = form.fullName.trim().length > 0
+        && form.phone.trim().length > 0
+        && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
 
     async function handleInitialSubmit(e) {
         if (e && e.preventDefault) e.preventDefault();
@@ -128,6 +104,7 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
                 phone: form.phone,
                 email: form.email,
                 notes: form.notes,
+                conciergeCode: form.conciergeCode.trim(),
                 embark: embark || null,
                 disembark: disembark || null,
                 arrangePickup: !!arrangePickup,
@@ -157,22 +134,15 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
         <div className="bsf-wrap">
             {!paymentPhase && (
                 <>
-                    {/* Progress bar */}
-                    <div className="bsf-progress-bar" aria-hidden="true">
-                        <div
-                            className="bsf-progress-fill"
-                            style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }}
-                        />
+                    <div className="bsf-details-header">
+                        <p className="bsf-details-kicker">{t.personalDetailsKicker}</p>
+                        <h2 className="bsf-details-title">{t.personalDetailsTitle}</h2>
+                        <p className="bsf-details-intro">{t.personalDetailsIntro}</p>
                     </div>
 
-                    <div className="bsf-step-counter">
-                        {stepIndex + 1}/{STEPS.length}
-                    </div>
-
-                    <div className="bsf-step">
-                        <h2 className="bsf-step-label">{stepLabel(STEPS[stepIndex])}</h2>
-
-                        {STEPS[stepIndex] === 'name' && (
+                    <div className="bsf-details-list">
+                        <label className="bsf-field">
+                            <span className="bsf-field-label">{t.fullName}</span>
                             <input
                                 className="bsf-input"
                                 type="text"
@@ -183,9 +153,10 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
                                 placeholder={t.fullName}
                                 autoComplete="name"
                             />
-                        )}
+                        </label>
 
-                        {STEPS[stepIndex] === 'phone' && (
+                        <label className="bsf-field">
+                            <span className="bsf-field-label">{t.phone}</span>
                             <div className="bsf-phone-row">
                                 <select
                                     className="bsf-country-code"
@@ -202,83 +173,106 @@ export default function BookingForm({ lang = 'it', onSubmit, boatId = null, date
                                     name="phone"
                                     value={form.phone}
                                     onChange={handleChange}
-                                    autoFocus
                                     placeholder={t.phone}
                                     autoComplete="tel"
                                 />
                             </div>
-                        )}
+                        </label>
 
-                        {STEPS[stepIndex] === 'email' && (
+                        <label className="bsf-field">
+                            <span className="bsf-field-label">{t.email}</span>
                             <input
                                 className="bsf-input"
                                 type="email"
                                 name="email"
                                 value={form.email}
                                 onChange={handleChange}
-                                autoFocus
                                 placeholder={t.email}
                                 autoComplete="email"
-                                onKeyDown={e => { if (e.key === 'Enter') handleNext(); }}
                             />
-                        )}
+                        </label>
 
-                        {STEPS[stepIndex] === 'notes' && (
+                        <label className="bsf-field">
+                            <span className="bsf-field-label">
+                                {t.notes} <span className="bsf-field-optional">{ui.optional}</span>
+                            </span>
                             <textarea
                                 className="bsf-input bsf-textarea"
                                 name="notes"
                                 value={form.notes}
                                 onChange={handleChange}
-                                autoFocus
-                                placeholder={ui.optional}
+                                placeholder={t.notesPlaceholder}
                                 rows={4}
                             />
-                        )}
+                        </label>
+
+                        <label className="bsf-field bsf-partner-field">
+                            <span className="bsf-field-label">
+                                {t.conciergeCode} <span className="bsf-field-optional">{ui.optional}</span>
+                            </span>
+                            <input
+                                className="bsf-input bsf-code-input"
+                                type="text"
+                                name="conciergeCode"
+                                value={form.conciergeCode}
+                                onChange={handleChange}
+                                placeholder={t.conciergeCodePlaceholder}
+                                autoComplete="off"
+                                autoCapitalize="characters"
+                                maxLength={40}
+                            />
+                            <span className="bsf-field-help">{t.conciergeCodeHelp}</span>
+                        </label>
                     </div>
 
                     <div className="bsf-actions">
-                        {stepIndex > 0 && (
-                            <button
-                                type="button"
-                                className="bsf-back"
-                                onClick={() => setStepIndex(s => s - 1)}
-                            >
-                                {ui.back}
-                            </button>
-                        )}
+                        <button
+                            type="button"
+                            className="bsf-back"
+                            onClick={onBack}
+                        >
+                            {ui.back}
+                        </button>
                         <button
                             type="button"
                             className="bsf-continue"
-                            disabled={loading || !stepIsValid(STEPS[stepIndex])}
-                            onClick={handleNext}
+                            disabled={loading || !personalDetailsValid}
+                            onClick={handleInitialSubmit}
                         >
-                            {stepIndex < STEPS.length - 1
-                                ? ui.continue
-                                : (slotUnavailable ? t.slotUnavailable : loading ? t.processing : t.payAndBook)}
+                            {slotUnavailable ? t.slotUnavailable : loading ? t.processing : t.payAndBook}
                         </button>
                     </div>
                 </>
             )}
 
             {paymentPhase && (
-                <div className="stripe-container">
-                    <Elements stripe={stripePromise} options={{ clientSecret }}>
-                        <CardPaymentSection
-                            clientSecret={clientSecret}
-                            form={form}
-                            bookingId={bookingId}
-                            onDone={(result) => { paymentCompletedRef.current = true; setPaid(true); if (onSubmit) onSubmit({ ...form, bookingId, ...result }); }}
-                            lang={lang}
-                            date={date}
-                            startTime={startTime}
-                            endTime={endTime}
-                            embark={embark}
-                            disembark={disembark}
-                            arrangePickup={arrangePickup}
-                            arrangeDropoff={arrangeDropoff}
-                        />
-                    </Elements>
-                </div>
+                <>
+                    <div className="stripe-container">
+                        <Elements stripe={stripePromise} options={{ clientSecret }}>
+                            <CardPaymentSection
+                                clientSecret={clientSecret}
+                                form={form}
+                                bookingId={bookingId}
+                                onDone={(result) => { paymentCompletedRef.current = true; setPaid(true); if (onSubmit) onSubmit({ ...form, bookingId, ...result }); }}
+                                lang={lang}
+                                date={date}
+                                startTime={startTime}
+                                endTime={endTime}
+                                embark={embark}
+                                disembark={disembark}
+                                arrangePickup={arrangePickup}
+                                arrangeDropoff={arrangeDropoff}
+                            />
+                        </Elements>
+                    </div>
+                    {onBack ? (
+                        <div className="bsf-payment-actions">
+                            <button type="button" className="bsf-back" onClick={onBack}>
+                                {ui.back}
+                            </button>
+                        </div>
+                    ) : null}
+                </>
             )}
         </div>
     );
@@ -356,6 +350,12 @@ function CardPaymentSection({ lang = 'it', clientSecret, form, bookingId, onDone
                     <div className="checkout-summary-row">
                         <span className="checkout-label">{t.phone}</span>
                         <span className="checkout-value">{form.countryCode} {form.phone}</span>
+                    </div>
+                )}
+                {form.conciergeCode && (
+                    <div className="checkout-summary-row">
+                        <span className="checkout-label">{t.conciergeCode}</span>
+                        <span className="checkout-value">{form.conciergeCode}</span>
                     </div>
                 )}
 

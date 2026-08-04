@@ -56,7 +56,7 @@ export default {
         time: "17:00-21:00",
         guests: "最多 5 人",
         price: "每团 600 € 起",
-        desc: "从热那亚出发的私人下午至傍晚船游，设有海水浴停靠、卡莫利以及抵达 Punta Chiappa，并可选择在合作餐厅 Stella Maris 用餐。",
+        desc: "从热那亚出发的私人傍晚及夜间之旅，途中安排游泳停留并探访卡莫利，最终抵达蓬塔基亚帕；还可选择在当地合作餐厅 Stella Maris 享用一顿令人难忘的晚餐。",
         chips: ["私人", "游泳停靠", "毛巾", "浮潜装备", "Prosciutto e melone", "照片/视频", "船长"],
       },
       {
@@ -224,7 +224,7 @@ export default {
     recapDropoff: "接送至下船地点",
     recapTotal: "总计",
     recapEdit: "编辑",
-    recapConfirm: "确认并继续",
+    recapConfirm: "确认并支付",
   },
   bookingFooter: {
     ...en.bookingFooter,

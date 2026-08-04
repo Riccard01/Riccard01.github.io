@@ -56,7 +56,7 @@ export default {
         time: "17:00-21:00",
         guests: "Max 5",
         price: "Desde 600 € por grupo",
-        desc: "Tour privado de tarde y noche desde Génova con paradas para nadar, Camogli y llegada a Punta Chiappa con cena opcional en el restaurante asociado Stella Maris.",
+        desc: "Tour privado al final de la tarde y por la noche desde Génova, con paradas para bañarse, visita a Camogli y llegada final a Punta Chiappa, con la opción de terminar con una cena inolvidable en Stella Maris, nuestro restaurante asociado en Punta Chiappa.",
         chips: ["Privado", "Paradas para nadar", "Toallas", "Equipo de snorkel", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
@@ -224,7 +224,7 @@ export default {
     recapDropoff: "Traslado de desembarque",
     recapTotal: "Total",
     recapEdit: "Editar",
-    recapConfirm: "Confirmar y continuar",
+    recapConfirm: "Confirmar y pagar",
   },
   bookingFooter: {
     ...en.bookingFooter,

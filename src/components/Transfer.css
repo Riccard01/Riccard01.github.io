@@ -14,6 +14,11 @@
   padding-top: 16px;
 }
 
+.transfer-margin-bottom .dropdown-menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
 .transfer-section {
   display: flex;
   flex-direction: column;

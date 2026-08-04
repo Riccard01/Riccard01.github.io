@@ -56,7 +56,7 @@ export default {
         time: "17:00-21:00",
         guests: "Max 5",
         price: "Ab 600 € pro Gruppe",
-        desc: "Private Nachmittag- und Abendtour ab Genua mit Badestopps, Camogli und Ankunft in Punta Chiappa mit optionalem Abendessen im Partnerrestaurant Stella Maris.",
+        desc: "Private Tour am späten Nachmittag und Abend ab Genua mit Badestopps, einem Besuch in Camogli und abschließender Ankunft in Punta Chiappa, optional mit einem atemberaubenden Abendessen bei Stella Maris, unserem Partner in Punta Chiappa.",
         chips: ["Privat", "Badestopps", "Handtücher", "Schnorchelausrüstung", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
@@ -224,7 +224,7 @@ export default {
     recapDropoff: "Transfer zum Ausstieg",
     recapTotal: "Gesamt",
     recapEdit: "Bearbeiten",
-    recapConfirm: "Bestatigen und fortfahren",
+    recapConfirm: "Bestätigen und bezahlen",
   },
   bookingFooter: {
     ...en.bookingFooter,

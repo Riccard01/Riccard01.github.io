@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
 import ReviewCarousel from '../components/ReviewCarousel';
+import PrivateTransfer from '../components/PrivateTransfer';
 import Faq from '../components/Faq';
 import marian from '../assets/marian.webp';
 import { getLocale } from '../utils/locale';
@@ -57,6 +58,8 @@ function HomePage({ lang = 'it', setLang = () => {} }) {
       </section>
 
       <ReviewCarousel lang={lang} />
+
+    <PrivateTransfer lang={lang} />
 
       <Faq lang={lang} />
 

@@ -2,6 +2,27 @@ import React from "react";
 import "./Transfer.css";
 import DropDown from "./DropDown";
 import portIcon from '../assets/port_book.svg';
+import portoAnticoImg from '../assets/portoantico.webp';
+import reccoImg from '../assets/port-recco.webp';
+import portofinoImg from '../assets/portofino_extra_fee.webp';
+import camogliImg from '../assets/port-camogli.webp';
+import nerviImg from '../assets/nervi.webp';
+import santaMargheritaImg from '../assets/santa_margherita_ligure_extra_fee.webp';
+
+function getPortImage(portName) {
+  const normalizedName = String(portName || '').toLowerCase();
+
+  if (normalizedName.includes('portofino')) return portofinoImg;
+  if (normalizedName.includes('camogli')) return camogliImg;
+  if (normalizedName.includes('recco')) return reccoImg;
+  if (normalizedName.includes('nervi')) return nerviImg;
+  if (normalizedName.includes('santa margherita')) return santaMargheritaImg;
+  if (normalizedName.includes('porto antico') || normalizedName.includes('genova') || normalizedName.includes('genoa')) {
+    return portoAnticoImg;
+  }
+
+  return null;
+}
 
 // Props:
 // - embarkOptions: array of strings for embark dropdown
@@ -35,6 +56,8 @@ const Transfer = ({
           onChange={onEmbarkChange}
           width="100%"
           text={embarkLabel}
+          getOptionImage={getPortImage}
+          placeholderImage={portIcon}
         />
       </div>
       <div className="transfer-pickup-row">

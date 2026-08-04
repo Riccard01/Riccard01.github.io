@@ -56,7 +56,7 @@ export default {
         time: "17:00-21:00",
         guests: "Max 5",
         price: "Od 600 € za grupe",
-        desc: "Prywatna wycieczka popołudniowo-wieczorna z Genui z postojami na kąpiel, Camogli i przybyciem do Punta Chiappa z opcjonalną kolacją w restauracji partnerskiej Stella Maris.",
+        desc: "Prywatna wycieczka późnym popołudniem i wieczorem z Genui, z przystankami na kąpiel, wizytą w Camogli i finałowym przybyciem do Punta Chiappa oraz opcjonalną, niezapomnianą kolacją u naszego partnera Stella Maris w Punta Chiappa.",
         chips: ["Prywatne", "Postoje na kąpiel", "Ręczniki", "Sprzęt do snorkelingu", "Prosciutto e melone", "Foto/Video", "Skipper"],
       },
       {
@@ -224,7 +224,7 @@ export default {
     recapDropoff: "Transfer z miejsca zejscia",
     recapTotal: "Razem",
     recapEdit: "Edytuj",
-    recapConfirm: "Potwierdz i kontynuuj",
+    recapConfirm: "Potwierdź i zapłać",
   },
   bookingFooter: {
     ...en.bookingFooter,

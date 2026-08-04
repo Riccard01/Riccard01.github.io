@@ -56,7 +56,7 @@ export default {
         time: "17:00-21:00",
         guests: "Max 5",
         price: "A partir de 600 € par groupe",
-        desc: "Tour privé de fin d'après-midi et de soirée au départ de Gênes avec arrêts baignade, Camogli et arrivée à Punta Chiappa avec dîner optionnel au restaurant partenaire Stella Maris.",
+        desc: "Excursion privée en fin d'après-midi et en soirée au départ de Gênes, avec des arrêts baignade, une visite de Camogli et une arrivée finale à Punta Chiappa, avec la possibilité de terminer par un dîner exceptionnel chez Stella Maris, notre partenaire à Punta Chiappa.",
         chips: ["Privé", "Arrêts baignade", "Serviettes", "Matériel de snorkeling", "Prosciutto e melone", "Photo/Video", "Skipper"],
       },
       {
@@ -224,7 +224,7 @@ export default {
     recapDropoff: "Transfert debarquement",
     recapTotal: "Total",
     recapEdit: "Modifier",
-    recapConfirm: "Confirmer et continuer",
+    recapConfirm: "Confirmer et payer",
   },
   bookingFooter: {
     ...en.bookingFooter,

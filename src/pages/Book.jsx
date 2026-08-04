@@ -33,6 +33,8 @@ import {
   hasFixedBookingTime,
 } from '../utils/experienceBookingConfig';
 
+const DEFAULT_PORT_NAME = 'Porto Antico';
+
 // Puoi aggiungere altre immagini se disponibili
 
 import './Book.css';
@@ -103,13 +105,13 @@ function Book({ lang = 'it', setLang = () => {} }) {
 
   const portoKey = 'porto_antico';
   const portoObj = initialPlacesMap && initialPlacesMap[portoKey];
-  const portoName = portoObj && portoObj.name;
+  const portoName = (portoObj && portoObj.name) || DEFAULT_PORT_NAME;
 
   const [embarkOptions, setEmbarkOptions] = useState(initialEmbarkOptions);
-  const [selectedEmbark, setSelectedEmbark] = useState("");
+  const [selectedEmbark, setSelectedEmbark] = useState(portoName);
   const [arrangePickup, setArrangePickup] = useState(false);
   // State for Transfer Disembark
-  const [selectedDisembark, setSelectedDisembark] = useState("");
+  const [selectedDisembark, setSelectedDisembark] = useState(portoName);
   const [arrangeDropoff, setArrangeDropoff] = useState(false);
 
   // load flags (cached) and keep local state
@@ -128,11 +130,10 @@ function Book({ lang = 'it', setLang = () => {} }) {
       const places = getPlaces() || {};
       const names = Object.keys(places).map(k => places[k] && places[k].name).filter(Boolean);
       if (names.length) {
+        const defaultPortName = places.porto_antico?.name || DEFAULT_PORT_NAME;
         setEmbarkOptions(names);
-        // Keep the selection empty until the user explicitly picks a port;
-        // only re-validate a previously chosen value against the fresh list.
-        setSelectedEmbark(prev => (prev && names.includes(prev)) ? prev : "");
-        setSelectedDisembark(prev => (prev && names.includes(prev)) ? prev : "");
+        setSelectedEmbark(prev => (prev && names.includes(prev)) ? prev : defaultPortName);
+        setSelectedDisembark(prev => (prev && names.includes(prev)) ? prev : defaultPortName);
       }
     }).catch(err => console.error('placesReady rejected', err));
     return () => { mounted = false; };
@@ -616,6 +617,10 @@ function Book({ lang = 'it', setLang = () => {} }) {
     }
   }, [showForm, showRecap]);
 
+  useEffect(() => {
+    if (showForm || showRecap) window.scrollTo(0, 0);
+  }, [showForm, showRecap]);
+
   const activeBoatEntry = visibleBoats[activeIndex] || {};
   const isComboActive = Boolean(activeBoatEntry.isCombo);
 
@@ -719,13 +724,14 @@ function Book({ lang = 'it', setLang = () => {} }) {
     const nextStep = wizardSteps[currentIndex + 1];
     if (nextStep) setFocusStep(nextStep);
   };
+  const hasSelectedPorts = Boolean(selectedEmbark && selectedDisembark);
   // A step's tab can only be jumped to once a value has actually been chosen for it
   const wizardStepHasValue = {
     experience: Boolean(selectedExperienceId),
     guests: true,
     time: Boolean(selectedTime),
     date: Boolean(selectedDates[activeIndex]),
-    transfer: Boolean(selectedEmbark && selectedDisembark),
+    transfer: hasSelectedPorts,
   };
   // Every other step stays locked until an experience has been picked
   const experiencePending = wizardSteps.includes('experience') && !selectedExperienceId;
@@ -752,6 +758,19 @@ function Book({ lang = 'it', setLang = () => {} }) {
       setSelectedDates((dates) => dates.map(() => null));
       setFocusStep('guests');
     }, 500);
+  };
+
+  const handleBookingBack = () => {
+    try {
+      window.history.back();
+    } catch {
+      if (showForm) {
+        setShowForm(false);
+        setShowRecap(true);
+      } else if (showRecap) {
+        setShowRecap(false);
+      }
+    }
   };
 
   return (
@@ -783,19 +802,6 @@ function Book({ lang = 'it', setLang = () => {} }) {
         </div>
       ) : (
         <>
-          {(showForm || showRecap) && !paymentConfirmed && (
-            <div className="booking-topbar">
-              <button
-                className="booking-back-arrow"
-                onClick={() => { try { window.history.back(); } catch { } }}
-                aria-label={dict.book.backAria}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </div>
-          )}
           <Navbar lang={lang} setLang={setLang} />
 
           <section className={`ap-picker${selectedExperienceId ? ' is-hidden' : ''}`} aria-label={ui.chooseExperience}>
@@ -893,6 +899,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
               arrangeDropoff={arrangeDropoff}
               numPax={ppl}
               amountCents={discountedAmountCents}
+              onBack={handleBookingBack}
             />
           ) : showRecap ? (
             <div className="ap-recap" aria-label={dict.book.recapTitle}>
@@ -958,10 +965,10 @@ function Book({ lang = 'it', setLang = () => {} }) {
                 </div>
               </div>
               <div className="ap-recap-actions">
-                <button type="button" className="ap-recap-edit" onClick={() => setShowRecap(false)}>
-                  {dict.book.recapEdit}
+                <button type="button" className="ap-flow-back" onClick={handleBookingBack}>
+                  {ui.back}
                 </button>
-                <button type="button" className="ap-flow-next" onClick={() => { setShowRecap(false); setShowForm(true); }}>
+                <button type="button" className="ap-flow-next" disabled={!hasSelectedPorts} onClick={() => { setShowRecap(false); setShowForm(true); }}>
                   {dict.book.recapConfirm}
                 </button>
               </div>
@@ -1253,7 +1260,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                   ) : null}
 
                   {focusStep === 'transfer' ? (
-                    <div className="ap-flow-step">
+                    <div className="ap-flow-step ap-transfer-step">
                       <h3>{ui.portsTitle}</h3>
                       <p className="ap-flow-step-subtitle">{ui.portsHint}</p>
                       <Transfer
@@ -1277,7 +1284,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                         pickupLabel={dict.book.transferPickupLabel}
                         className="transfer-margin-bottom"
                       />
-                      <button type="button" className="ap-flow-next" onClick={() => setShowRecap(true)}>
+                      <button type="button" className="ap-flow-next" disabled={!hasSelectedPorts} onClick={() => setShowRecap(true)}>
                         {ui.review}
                       </button>
                     </div>

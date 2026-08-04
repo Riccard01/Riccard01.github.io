@@ -109,9 +109,12 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
   console.log('createPaymentIntent normalized payload:', payload);
 
   const { boatId, startTime, endTime, date, slotKey, captainId, title, notes, boatName,
-    fullName, countryCode, phone, email, embark, disembark, arrangePickup, arrangeDropoff, numPax,
+    fullName, countryCode, phone, email, conciergeCode, embark, disembark, arrangePickup, arrangeDropoff, numPax,
     secondaryBoatId, secondaryCaptainId, secondaryBoatName } = payload || {};
   const db = admin.firestore();
+  const normalizedConciergeCode = typeof conciergeCode === 'string'
+    ? conciergeCode.trim().toUpperCase().slice(0, 40) || null
+    : null;
 
   // Log parsed param types for easier debugging
   console.log('createPaymentIntent parsed params', {
@@ -281,6 +284,7 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
         phone: (countryCode || '') + (phone || ''),
         email: email || null,
         notes: notes || null,
+        conciergeCode: normalizedConciergeCode,
         embark: embark || null,
         disembark: disembark || null,
         arrangePickup: !!arrangePickup,
@@ -317,6 +321,7 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
           phone: (countryCode || '') + (phone || ''),
           email: email || null,
           notes: notes || null,
+          conciergeCode: normalizedConciergeCode,
           embark: embark || null,
           disembark: disembark || null,
           arrangePickup: !!arrangePickup,
@@ -350,6 +355,7 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
         phone: (countryCode || '') + (phone || ''),
         email: email || null,
         notes: notes || null,
+        conciergeCode: normalizedConciergeCode,
         embark: embark || null,
         disembark: disembark || null,
         arrangePickup: !!arrangePickup,
@@ -380,6 +386,7 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
         phone: (countryCode || '') + (phone || ''),
         email: email || null,
         notes: notes || null,
+        conciergeCode: normalizedConciergeCode,
         embark: embark || null,
         disembark: disembark || null,
         arrangePickup: !!arrangePickup,
@@ -410,7 +417,10 @@ exports.createPaymentIntent = onCall({ secrets: [stripeSecretParam] }, async (re
       amount,
       currency: 'eur',
       payment_method_types: ['card'],
-      metadata: { bookingId },
+      metadata: {
+        bookingId,
+        conciergeCode: normalizedConciergeCode || '',
+      },
       description: `Prenotazione barca ${boatId} (${bookingId})`
     });
 
