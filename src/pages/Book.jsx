@@ -175,24 +175,6 @@ function Book({ lang = 'en', setLang = () => {} }) {
     return () => { document.body.classList.remove('page-book'); };
   }, []);
 
-  // PASTE THIS HERE FOR SAFARI:
-  useEffect(() => {
-    let metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (!metaTheme) {
-      metaTheme = document.createElement('meta');
-      metaTheme.setAttribute('name', 'theme-color');
-      document.head.appendChild(metaTheme);
-    }
-    // Set luxury blue on entry (change to your preferred hex)
-    metaTheme.setAttribute('content', '#0a2540'); 
-
-    // Restore dark color when exiting the Book page
-    return () => {
-      if (metaTheme) metaTheme.setAttribute('content', '#011010');
-    };
-  }, []);
-
-
   // Note: data is fetched once in module `src/utils/boatSlots.js` on import
   // When the module fetch actually completes, update local state
   useEffect(() => {

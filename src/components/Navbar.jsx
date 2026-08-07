@@ -16,33 +16,36 @@ function Navbar({ lang = 'en', setLang = () => {} }) {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <a className="navbar-brand" href={`/${lang}`} aria-label="Leggero Tours">
-          <img src={logo} alt="Leggero Tours" className="navbar-logo" />
-        </a>
+    <>
+      <div className="hero-gradient-top" aria-hidden="true" />
+      <nav className="navbar">
+        <div className="navbar-container">
+          <a className="navbar-brand" href={`/${lang}`} aria-label="Leggero Tours">
+            <img src={logo} alt="Leggero Tours" className="navbar-logo" />
+          </a>
 
-        <div className="wrapper-btn">
-          <select
-            className="lang-switcher"
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            aria-label={t.switchLabel}
-          >
-            {LANGUAGE_OPTIONS.map((option) => (
-              <option key={option.code} value={option.code}>
-                {option.flag} {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="wrapper-btn">
+            <select
+              className="lang-switcher"
+              value={lang}
+              onChange={(e) => setLang(e.target.value)}
+              aria-label={t.switchLabel}
+            >
+              {LANGUAGE_OPTIONS.map((option) => (
+                <option key={option.code} value={option.code}>
+                  {option.flag} {option.label}
+                </option>
+              ))}
+            </select>
 
-          <button className="nav-whatsapp" onClick={openWhatsApp}>
-            <span dir="auto">{t.whatsappUs}</span>
-            <img src={meAvatar} alt="Riccardo" className="whatsapp-avatar" />
-          </button>
+            <button className="nav-whatsapp" onClick={openWhatsApp}>
+              <span dir="auto">{t.whatsappUs}</span>
+              <img src={meAvatar} alt="Riccardo" className="whatsapp-avatar" />
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 
