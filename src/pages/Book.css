@@ -946,10 +946,6 @@ body.page-book .ap-stepper-btn {
   height: 42px;
 }
 
-body.page-book .ap-picker:not(.is-hidden) {
-  margin-top: 24px;
-}
-
 @media (min-width: 900px) {
   body.page-book .ap-availability {
     width: min(100%, 720px);

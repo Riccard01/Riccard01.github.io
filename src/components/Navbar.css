@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap');
 
 .hero-gradient-top {
-  position: absolute;
+  position: fixed;
   top: -1px;
   left: 0;
   width: 100%;
