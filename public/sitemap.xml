@@ -10,6 +10,14 @@
   <url><loc>https://leggerotours.com/pl</loc></url>
   <url><loc>https://leggerotours.com/ru</loc></url>
   <url><loc>https://leggerotours.com/uk</loc></url>
+  <url><loc>https://leggerotours.com/pt</loc></url>
+  <url><loc>https://leggerotours.com/nl</loc></url>
+  <url><loc>https://leggerotours.com/he</loc></url>
+  <url><loc>https://leggerotours.com/cs</loc></url>
+  <url><loc>https://leggerotours.com/ro</loc></url>
+  <url><loc>https://leggerotours.com/tr</loc></url>
+  <url><loc>https://leggerotours.com/ja</loc></url>
+  <url><loc>https://leggerotours.com/ko</loc></url>
 
   <url><loc>https://leggerotours.com/it/esperienze/crociera-gourmet-tramonto</loc></url>
   <url><loc>https://leggerotours.com/it/esperienze/dolce-vita</loc></url>
@@ -60,4 +68,37 @@
   <url><loc>https://leggerotours.com/uk/experiences/dolce-vita</loc></url>
   <url><loc>https://leggerotours.com/uk/experiences/tour-privato-portofino</loc></url>
   <url><loc>https://leggerotours.com/uk/experiences/stella-maris-camogli</loc></url>
+
+  <url><loc>https://leggerotours.com/pt/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/pt/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/pt/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/pt/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/nl/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/nl/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/nl/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/nl/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/he/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/he/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/he/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/he/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/cs/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/cs/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/cs/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/cs/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/ro/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/ro/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/ro/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/ro/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/tr/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/tr/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/tr/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/tr/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/ja/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/ja/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/ja/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/ja/experiences/stella-maris-camogli</loc></url>
+  <url><loc>https://leggerotours.com/ko/experiences/crociera-gourmet-tramonto</loc></url>
+  <url><loc>https://leggerotours.com/ko/experiences/dolce-vita</loc></url>
+  <url><loc>https://leggerotours.com/ko/experiences/tour-privato-portofino</loc></url>
+  <url><loc>https://leggerotours.com/ko/experiences/stella-maris-camogli</loc></url>
 </urlset>

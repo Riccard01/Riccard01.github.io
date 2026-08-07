@@ -40,7 +40,7 @@ const DEFAULT_PORT_NAME = 'Porto Antico';
 
 import './Book.css';
 
-function Book({ lang = 'it', setLang = () => {} }) {
+function Book({ lang = 'en', setLang = () => {} }) {
   const dict = getLocale(lang);
   const ui = getBookingUi(lang);
   const location = useLocation();
@@ -681,7 +681,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
     try {
       const [y, m, d] = dateStr.split('-');
       const dt = new Date(+y, +m - 1, +d);
-      return dt.toLocaleDateString(dict.localeCode || 'it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      return dt.toLocaleDateString(dict.localeCode || 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     } catch { return dateStr; }
   };
 
@@ -710,7 +710,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
   const dateTabLabel = selectedDates[activeIndex]
     ? (() => {
       const [y, m, d] = selectedDates[activeIndex].split('-');
-      return new Date(+y, +m - 1, +d).toLocaleDateString(dict.localeCode || 'it-IT', { day: 'numeric', month: 'short' });
+      return new Date(+y, +m - 1, +d).toLocaleDateString(dict.localeCode || 'en-US', { day: 'numeric', month: 'short' });
     })()
     : ui.select;
 
@@ -806,7 +806,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
           <Navbar lang={lang} setLang={setLang} />
 
           <section className={`ap-picker${selectedExperienceId ? ' is-hidden' : ''}`} aria-label={ui.chooseExperience}>
-            <p className="ap-picker-eyebrow">{lang === 'it' ? 'Esperienza' : 'Experience'}</p>
+            <p className="ap-picker-eyebrow">{ui.experience}</p>
             <div className="ap-picker-row">
               {(dict?.experienceCarousel?.experiences || []).map((item) => {
                 const isSelected = item.id === selectedExperienceId;
@@ -919,7 +919,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
                 </div>
                 {isComboActive ? (
                   <div className="ap-recap-row">
-                    <span className="ap-recap-label">{lang === 'it' ? 'Barche' : 'Boats'}</span>
+                    <span className="ap-recap-label">{ui.boats}</span>
                     <span className="ap-recap-value">{(activeBoatEntry.comboBoatNames || []).join(' + ')}</span>
                   </div>
                 ) : null}
@@ -976,18 +976,18 @@ function Book({ lang = 'it', setLang = () => {} }) {
             </div>
           ) : (
             <>
-              <div className="ap-availability" aria-label={lang === 'it' ? 'Disponibilita esperienza selezionata' : 'Selected experience availability'}>
+              <div className="ap-availability" aria-label={ui.availabilityAria}>
                 <div className="ap-section-head ap-section-head-with-price">
                   <div>
                     <h2>
                       {selectedExperience
-                        ? (lang === 'it' ? `Personalizza il "${selectedExperience.title}"` : `Customize "${selectedExperience.title}"`)
-                        : (lang === 'it' ? 'Ospiti, orario e data' : 'Guests, time and date')}
+                        ? ui.customizeExperience(selectedExperience.title)
+                        : ui.filtersTitle}
                     </h2>
                     <p>
                       {selectedExperience
-                        ? (lang === 'it' ? `Per ${selectedExperience.title}.` : `For ${selectedExperience.title}.`)
-                        : (lang === 'it' ? 'Scegli un\u2019esperienza per iniziare.' : 'Choose an experience to get started.')}
+                        ? ui.forExperience(selectedExperience.title)
+                        : ui.chooseStart}
                     </p>
                   </div>
                   {selectedExperience ? (

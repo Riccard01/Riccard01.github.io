@@ -7,7 +7,7 @@ import { getLocale, LANGUAGE_OPTIONS } from '../utils/locale';
 import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 
-function Navbar({ lang = 'it', setLang = () => {} }) {
+function Navbar({ lang = 'en', setLang = () => {} }) {
   const dict = getLocale(lang);
   const t = dict.navbar;
 

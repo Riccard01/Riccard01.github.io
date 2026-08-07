@@ -35,10 +35,11 @@ export default {
       {
         id: "1",
         title: "Gourmet-Sonnenuntergangsfahrt",
-        time: "4 Std",
+        time: "5 Std",
         guests: "Max 14",
-        price: "Ab 390 € pro Gruppe",
-        desc: "Geniesse eine Sunset-Cruise zwischen Genua und Boccadasse mit Aperitif, Prosecco und entspannter Musik.",
+        price: "390 € pro Gruppe",
+        desc: "Lass dich im romantischen Boccadasse von den Wellen und Prosecco wiegen. Genieße den italienischen Aperitivo von ‚Il Genovese‘, während Delfine um uns tanzen und die Sterne von oben zusehen.",
+        occasionTags: ["Perfekt für Geburtstage", "Junggesellen- und Junggesellinnenabschiede"],
         chips: ["Treibstoff inklusive", "Handtucher", "Prosecco", "Schnorchelausrustung", "Skipper"],
       },
       {

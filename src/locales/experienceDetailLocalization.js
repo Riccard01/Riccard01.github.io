@@ -522,10 +522,10 @@ const experienceDetailText = {
   de: {
     '1': {
       charterType: 'Private Erfahrung mit Skipper, exklusives Boot fur die Gruppe',
-      heroFacts: ['18:00-22:00', 'Bis zu 7 Gaste (15 mit zweitem Boot)'],
+      heroFacts: ['18:00-23:00', 'Bis zu 7 Gaste (15 mit zweitem Boot)'],
       introTitle: 'Beschreibung',
       intro: [
-        'Abfahrt im Alten Hafen von Genua und entspannte Kustenfahrt bis Boccadasse.',
+        'Lass dich im romantischen Boccadasse von den Wellen und Prosecco wiegen. Genieße den italienischen Aperitivo von ‚Il Genovese‘, während Delfine um uns tanzen und die Sterne von oben zusehen.',
         'Unterwegs werden haufig Delfine gesichtet, ohne Garantie.',
         'Vor Boccadasse liegt das Boot vor Anker fur Sonnenuntergang und Gourmet-Verkostung an Bord.',
       ],
@@ -544,7 +544,7 @@ const experienceDetailText = {
       routeSteps: ['Abfahrt vom Alten Hafen und Kustenfahrt.', 'Passage vor Boccadasse mit moglicher Delfinsichtung.', 'Ankerstopp vor Boccadasse fur Sonnenuntergang und Verkostung.'],
       routeCaption: 'Eine klare, ruhige Route fur Licht, Meer und hochwertigen Service an Bord.',
       scheduleTitle: 'Zeiten und Dauer',
-      schedule: ['Treffpunkt: 17:40-17:45 im Alten Hafen.', 'Abfahrt: 18:00.', 'Gesamtdauer: 4 Stunden, bis 22:00.', 'Ganzjahrig verfugbar: Uhrzeit bleibt konstant, Sonnenlicht verandert sich saisonal.'],
+      schedule: ['Treffpunkt: 17:40-17:45 im Alten Hafen.', 'Abfahrt: 18:00.', 'Gesamtdauer: 5 Stunden, bis 23:00.', 'Ganzjahrig verfugbar: Uhrzeit bleibt konstant, Sonnenlicht verandert sich saisonal.'],
       practicalTitle: 'Praktische Hinweise',
       practical: ['Leichte Jacke fur den Abend und rutschfeste Schuhe mitbringen.', 'Eigene Kamera moglich; Fotos und Videos sind bereits inklusive.', 'Das Menu ist fest und vollstandig glutenhaltig: ungeeignet bei Glutenunvertraglichkeit und nicht anpassbar.', 'Zusatzliche Getranke uber die drei inkludierten Flaschen hinaus sind kostenpflichtig.'],
       faqTitle: 'Haufige Fragen',
@@ -590,9 +590,9 @@ const experienceDetailText = {
   es: {
     '1': {
       charterType: 'Experiencia privada con patron dedicado y barco exclusivo para el grupo',
-      heroFacts: ['18:00-22:00', 'Hasta 7 personas (15 con segunda embarcacion)'],
+      heroFacts: ['18:00-23:00', 'Hasta 7 personas (15 con segunda embarcacion)'],
       introTitle: 'Descripcion',
-      intro: ['Salida desde Porto Antico de Genova y navegacion costera tranquila hasta Boccadasse.', 'Durante la travesia es frecuente ver delfines, aunque no se puede garantizar.', 'El barco queda fondeado frente a Boccadasse para el atardecer y la degustacion gourmet a bordo.'],
+      intro: ['Déjate mecer por las olas y el Prosecco en el romántico pueblo de Boccadasse. Disfruta del aperitivo italiano firmado por ‘Il Genovese’, mientras los delfines bailan a nuestro alrededor y las estrellas nos miran desde arriba.', 'Durante la travesia es frecuente ver delfines, aunque no se puede garantizar.', 'El barco queda fondeado frente a Boccadasse para el atardecer y la degustacion gourmet a bordo.'],
       includedTitle: 'Que incluye',
       included: ['Patron', 'Combustible', 'Toallas a bordo', 'Equipo de snorkel', 'Degustacion abundante con varios pases y finger food', 'Prosecco: 3 botellas cada 7 personas incluidas', 'Fotos y videos realizados por el equipo'],
       excludedTitle: 'No incluido',
@@ -608,7 +608,7 @@ const experienceDetailText = {
       routeSteps: ['Salida desde Porto Antico y ruta costera.', 'Paso frente a Boccadasse con posible avistamiento de delfines.', 'Parada fondeada frente a Boccadasse para atardecer y servicio gourmet.'],
       routeCaption: 'Ruta esencial y sin prisas, pensada para disfrutar de la luz, el mar y el servicio a bordo.',
       scheduleTitle: 'Horario y duracion',
-      schedule: ['Encuentro: 17:40-17:45 en Porto Antico.', 'Salida: 18:00.', 'Duracion total: 4 horas, hasta las 22:00.', 'Disponible todo el ano: el horario se mantiene, la luz del atardecer cambia segun la temporada.'],
+      schedule: ['Encuentro: 17:40-17:45 en Porto Antico.', 'Salida: 18:00.', 'Duracion total: 5 horas, hasta las 23:00.', 'Disponible todo el ano: el horario se mantiene, la luz del atardecer cambia segun la temporada.'],
       practicalTitle: 'Consejos practicos',
       practical: ['Lleva chaqueta ligera para la noche y calzado antideslizante.', 'Si quieres, trae camara: fotos y videos ya estan incluidos.', 'El menu es fijo y completamente con gluten: no apto para intolerancia al gluten y no personalizable.', 'Las bebidas extra sobre las tres botellas incluidas son de pago.'],
       faqTitle: 'Preguntas frecuentes',
@@ -650,9 +650,9 @@ const experienceDetailText = {
   fr: {
     '1': {
       charterType: 'Experience privee avec skipper dedie et bateau exclusif pour le groupe',
-      heroFacts: ['18:00-22:00', 'Jusqu a 7 personnes (15 avec un deuxieme bateau)'],
+      heroFacts: ['18:00-23:00', 'Jusqu a 7 personnes (15 avec un deuxieme bateau)'],
       introTitle: 'Description',
-      intro: ['Depart du Porto Antico de Genes et navigation cotiere calme jusqu a Boccadasse.', 'Pendant la traversee, il arrive souvent de voir des dauphins sans garantie.', 'Le bateau reste au mouillage devant Boccadasse pour le coucher de soleil et la degustation gourmet a bord.'],
+      intro: ['Laissez-vous bercer par les vagues et le Prosecco dans le village romantique de Boccadasse. Savourez l’aperitivo italien signé ‘Il Genovese’, tandis que les dauphins dansent autour de nous et que les étoiles nous observent d’en haut.', 'Pendant la traversee, il arrive souvent de voir des dauphins sans garantie.', 'Le bateau reste au mouillage devant Boccadasse pour le coucher de soleil et la degustation gourmet a bord.'],
       includedTitle: 'Ce qui est inclus',
       included: ['Skipper', 'Carburant', 'Serviettes a bord', 'Materiel de snorkeling', 'Degustation genereuse avec plusieurs services et finger food', 'Prosecco: 3 bouteilles pour 7 personnes incluses', 'Photos et videos realisees par l equipage'],
       excludedTitle: 'Non inclus',
@@ -668,7 +668,7 @@ const experienceDetailText = {
       routeSteps: ['Depart du Porto Antico et navigation cotiere.', 'Passage devant Boccadasse, avec possible observation de dauphins.', 'Arret au mouillage devant Boccadasse pour coucher de soleil et service gourmet.'],
       routeCaption: 'Route essentielle et sans precipitation, pensee pour la lumiere, la mer et le service a bord.',
       scheduleTitle: 'Horaires et duree',
-      schedule: ['Rendez-vous: 17:40-17:45 au Porto Antico.', 'Depart: 18:00.', 'Duree totale: 4 heures, jusqu a 22:00.', 'Disponible toute l annee: horaire stable, lumiere du coucher variable selon la saison.'],
+      schedule: ['Rendez-vous: 17:40-17:45 au Porto Antico.', 'Depart: 18:00.', 'Duree totale: 5 heures, jusqu a 23:00.', 'Disponible toute l annee: horaire stable, lumiere du coucher variable selon la saison.'],
       practicalTitle: 'Conseils pratiques',
       practical: ['Apportez une veste legere pour le soir et des chaussures antiderapantes.', 'Vous pouvez apporter un appareil photo: photos et videos sont deja incluses.', 'Le menu est fixe et entierement a base de gluten: non adapte aux personnes intolerantes et non personnalisable.', 'Les boissons supplementaires au-dela des trois bouteilles incluses sont payantes.'],
       faqTitle: 'Questions frequentes',
@@ -710,9 +710,9 @@ const experienceDetailText = {
   ar: {
     '1': {
       charterType: 'تجربة خاصة مع ربان مخصص وقارب حصري للمجموعة',
-      heroFacts: ['18:00-22:00', 'حتى 7 ضيوف (15 مع قارب ثان)'],
+      heroFacts: ['18:00-23:00', 'حتى 7 ضيوف (15 مع قارب ثان)'],
       introTitle: 'الوصف',
-      intro: ['الانطلاق من Porto Antico في جنوة ثم إبحار ساحلي هادئ نحو Boccadasse.', 'خلال الطريق يمكن مشاهدة الدلافين غالبا لكن من دون ضمان.', 'يبقى القارب راسيا قبالة Boccadasse للاستمتاع بالغروب والتذوق الذواقي على المتن.'],
+      intro: ['دع الأمواج وProsecco تهدهدانك في قرية بوكاداسي الرومانسية. استمتع بالمقبلات الإيطالية من ‘Il Genovese’ بينما ترقص الدلافين حولنا وتراقبنا النجوم من السماء.', 'خلال الطريق يمكن مشاهدة الدلافين غالبا لكن من دون ضمان.', 'يبقى القارب راسيا قبالة Boccadasse للاستمتاع بالغروب والتذوق الذواقي على المتن.'],
       includedTitle: 'ما يشمله السعر',
       included: ['ربان', 'وقود', 'مناشف على متن القارب', 'معدات سنوركل', 'تذوق غني بعدة أطباق ووجبات صغيرة', 'بروسيكو: 3 زجاجات لكل 7 ضيوف ضمن السعر', 'صور وفيديو من فريق القارب'],
       excludedTitle: 'غير مشمول',
@@ -728,7 +728,7 @@ const experienceDetailText = {
       routeSteps: ['الانطلاق من Porto Antico مع إبحار ساحلي.', 'مرور أمام Boccadasse مع احتمال رؤية الدلافين.', 'توقف راس في عرض Boccadasse للغروب والخدمة الذواقية.'],
       routeCaption: 'مسار بسيط وهادئ للاستمتاع بالضوء والبحر والخدمة على المتن.',
       scheduleTitle: 'الوقت والمدة',
-      schedule: ['موعد اللقاء: 17:40-17:45 في Porto Antico.', 'الانطلاق: 18:00.', 'المدة الإجمالية: 4 ساعات حتى 22:00.', 'متاح طوال العام: وقت الانطلاق ثابت بينما يتغير ضوء الغروب حسب الموسم.'],
+      schedule: ['موعد اللقاء: 17:40-17:45 في Porto Antico.', 'الانطلاق: 18:00.', 'المدة الإجمالية: 5 ساعات حتى 23:00.', 'متاح طوال العام: وقت الانطلاق ثابت بينما يتغير ضوء الغروب حسب الموسم.'],
       practicalTitle: 'نصائح عملية',
       practical: ['احضر سترة خفيفة للمساء وحذاء مانعا للانزلاق.', 'يمكنك احضار كاميرا، مع أن الصور والفيديو مشمولة بالفعل.', 'القائمة ثابتة وكلها مع الغلوتين: غير مناسبة لعدم تحمل الغلوتين وغير قابلة للتخصيص.', 'المشروبات الإضافية فوق الثلاث زجاجات المشمولة تكون مقابل تكلفة إضافية.'],
       faqTitle: 'الاسئلة الشائعة',
@@ -770,9 +770,9 @@ const experienceDetailText = {
   zh: {
     '1': {
       charterType: '私人体验，专属船长，整船仅服务本团',
-      heroFacts: ['18:00-22:00', '最多 7 人（双船可达 15 人）'],
+      heroFacts: ['18:00-23:00', '最多 7 人（双船可达 15 人）'],
       introTitle: '行程描述',
-      intro: ['从热那亚 Porto Antico 出发，沿海平稳航行至 Boccadasse。', '途中经常可能看到海豚，但无法保证。', '船只会在 Boccadasse 海面抛锚，进行日落观赏与船上美食品鉴。'],
+      intro: ['在浪漫的博卡达塞，让海浪与 Prosecco 轻轻拥抱你。品尝由 ‘Il Genovese’ 打造的意式开胃酒，看海豚在身边起舞，仰望繁星从天际凝望。', '途中经常可能看到海豚，但无法保证。', '船只会在 Boccadasse 海面抛锚，进行日落观赏与船上美食品鉴。'],
       includedTitle: '费用包含',
       included: ['船长', '燃油', '船上毛巾', '浮潜装备', '多道式丰富品鉴与 finger food', '普罗塞克：每 7 位客人含 3 瓶', '船员拍摄照片与视频'],
       excludedTitle: '费用不含',
@@ -788,7 +788,7 @@ const experienceDetailText = {
       routeSteps: ['从 Porto Antico 出发沿岸航行。', '经过 Boccadasse 海域，途中可能偶遇海豚。', '在 Boccadasse 外海抛锚，进行日落与美食品鉴。'],
       routeCaption: '简洁不赶路的航线，重点是海上光线、私密氛围与船上服务。',
       scheduleTitle: '时间与时长',
-      schedule: ['集合：17:40-17:45（Porto Antico）。', '出发：18:00。', '总时长：4 小时，至 22:00。', '全年可订：出发时间基本固定，日落光线随季节变化。'],
+      schedule: ['集合：17:40-17:45（Porto Antico）。', '出发：18:00。', '总时长：5 小时，至 23:00。', '全年可订：出发时间基本固定，日落光线随季节变化。'],
       practicalTitle: '实用建议',
       practical: ['晚间建议带轻薄外套和防滑鞋。', '可自带相机，但照片视频已包含。', '菜单固定且为含麸质菜式：不适合麸质不耐受客人，且不可定制。', '超出含量的酒水需额外付费。'],
       faqTitle: '常见问题',
@@ -830,9 +830,9 @@ const experienceDetailText = {
   pl: {
     '1': {
       charterType: 'Prywatne doswiadczenie z dedykowanym skipperem i lodzia na wylacznosc',
-      heroFacts: ['18:00-22:00', 'Do 7 gosci (15 z druga lodzia)'],
+      heroFacts: ['18:00-23:00', 'Do 7 gosci (15 z druga lodzia)'],
       introTitle: 'Opis',
-      intro: ['Start z Porto Antico w Genui i spokojna nawigacja wzdluz wybrzeza do Boccadasse.', 'Po drodze czesto mozna zobaczyc delfiny, ale nie ma gwarancji.', 'Lodz pozostaje na kotwicy przy Boccadasse na zachod slonca i degustacje gourmet na pokladzie.'],
+      intro: ['Pozwól, by fale i Prosecco ukołysały Cię w romantycznym Boccadasse. Delektuj się włoskim aperitivo od ‘Il Genovese’, gdy delfiny tańczą wokół nas, a gwiazdy spoglądają z góry.', 'Po drodze czesto mozna zobaczyc delfiny, ale nie ma gwarancji.', 'Lodz pozostaje na kotwicy przy Boccadasse na zachod slonca i degustacje gourmet na pokladzie.'],
       includedTitle: 'W cenie',
       included: ['Skipper', 'Paliwo', 'Reczniki na pokladzie', 'Sprzet do snorkelingu', 'Bogata degustacja wielodaniowa i finger food', 'Prosecco: 3 butelki na 7 osob w cenie', 'Zdjecia i filmy wykonane przez zaloge'],
       excludedTitle: 'Poza cena',
@@ -848,7 +848,7 @@ const experienceDetailText = {
       routeSteps: ['Wyplyniecie z Porto Antico i nawigacja wzdluz wybrzeza.', 'Przeplyniecie przy Boccadasse z mozliwoscia wypatrzenia delfinow.', 'Postoj na kotwicy przy Boccadasse na zachod slonca i serwis gourmet.'],
       routeCaption: 'Prosta, spokojna trasa zaprojektowana pod swiatlo, morze i serwis na pokladzie.',
       scheduleTitle: 'Godziny i czas trwania',
-      schedule: ['Spotkanie: 17:40-17:45 w Porto Antico.', 'Wyplyniecie: 18:00.', 'Czas laczny: 4 godziny, do 22:00.', 'Dostepne caly rok: godzina startu stala, swiatlo zachodu zmienia sie sezonowo.'],
+      schedule: ['Spotkanie: 17:40-17:45 w Porto Antico.', 'Wyplyniecie: 18:00.', 'Czas laczny: 5 godzin, do 23:00.', 'Dostepne caly rok: godzina startu stala, swiatlo zachodu zmienia sie sezonowo.'],
       practicalTitle: 'Wskazowki praktyczne',
       practical: ['Zabierz lekka kurtke na wieczor i buty antyposlizgowe.', 'Mozesz zabrac aparat; zdjecia i filmy sa juz w cenie.', 'Menu jest stale i w calosci glutenowe: nieodpowiednie dla osob z nietolerancja glutenu i bez mozliwosci personalizacji.', 'Dodatkowe napoje ponad trzy butelki w cenie sa platne dodatkowo.'],
       faqTitle: 'Najczesciej zadawane pytania',
@@ -890,9 +890,9 @@ const experienceDetailText = {
   ru: {
     '1': {
       charterType: 'Частный формат с персональным шкипером и лодкой только для вашей группы',
-      heroFacts: ['18:00-22:00', 'До 7 гостей (15 при второй лодке)'],
+      heroFacts: ['18:00-23:00', 'До 7 гостей (15 при второй лодке)'],
       introTitle: 'Описание',
-      intro: ['Отправление из Porto Antico в Генуе и спокойный прибрежный переход к Boccadasse.', 'По пути часто можно встретить дельфинов, но без гарантии.', 'Лодка встает на якорь у Boccadasse для заката и гастрономической дегустации на борту.'],
+      intro: ['Позвольте волнам и Prosecco убаюкать вас в романтичной Боккадассе. Насладитесь итальянским аперитивом от ‘Il Genovese’, пока дельфины танцуют вокруг нас, а звёзды наблюдают с высоты.', 'По пути часто можно встретить дельфинов, но без гарантии.', 'Лодка встает на якорь у Boccadasse для заката и гастрономической дегустации на борту.'],
       includedTitle: 'Включено',
       included: ['Шкипер', 'Топливо', 'Полотенца на борту', 'Снаряжение для снорклинга', 'Богатая дегустация: несколько подач и finger food', 'Просекко: 3 бутылки на каждые 7 гостей включены', 'Фото и видео от команды на борту'],
       excludedTitle: 'Не включено',
@@ -908,7 +908,7 @@ const experienceDetailText = {
       routeSteps: ['Выход из Porto Antico и прибрежная навигация.', 'Проход вдоль Boccadasse с возможной встречей дельфинов.', 'Якорная стоянка у Boccadasse для заката и gourmet-сервиса.'],
       routeCaption: 'Спокойный маршрут без спешки: свет, море и уровень сервиса на борту.',
       scheduleTitle: 'Время и продолжительность',
-      schedule: ['Сбор: 17:40-17:45 в Porto Antico.', 'Выход: 18:00.', 'Общая длительность: 4 часа, до 22:00.', 'Доступно круглый год: время выхода стабильное, освещение заката меняется по сезону.'],
+      schedule: ['Сбор: 17:40-17:45 в Porto Antico.', 'Выход: 18:00.', 'Общая длительность: 5 часов, до 23:00.', 'Доступно круглый год: время выхода стабильное, освещение заката меняется по сезону.'],
       practicalTitle: 'Практические советы',
       practical: ['Возьмите легкую куртку на вечер и нескользящую обувь.', 'Можно взять свою камеру; фото и видео уже включены.', 'Меню фиксированное и полностью содержит глютен: не подходит при непереносимости и не кастомизируется.', 'Дополнительные напитки сверх трех включенных бутылок оплачиваются отдельно.'],
       faqTitle: 'Частые вопросы',
@@ -950,9 +950,9 @@ const experienceDetailText = {
   uk: {
     '1': {
       charterType: 'Приватний формат із персональним шкіпером та ексклюзивним човном для групи',
-      heroFacts: ['18:00-22:00', 'До 7 гостей (15 із другим човном)'],
+      heroFacts: ['18:00-23:00', 'До 7 гостей (15 із другим човном)'],
       introTitle: 'Опис',
-      intro: ['Відправлення з Porto Antico у Генуї та спокійна прибережна навігація до Boccadasse.', 'Під час переходу часто можна побачити дельфінів, але гарантії немає.', 'Човен стає на якір біля Boccadasse для заходу сонця та gourmet-дегустації на борту.'],
+      intro: ['Дозвольте хвилям і Prosecco заколисати вас у романтичному Боккадассе. Насолоджуйтеся італійським аперитивом від ‘Il Genovese’, поки дельфіни танцюють навколо нас, а зорі спостерігають згори.', 'Під час переходу часто можна побачити дельфінів, але гарантії немає.', 'Човен стає на якір біля Boccadasse для заходу сонця та gourmet-дегустації на борту.'],
       includedTitle: 'Включено',
       included: ['Шкіпер', 'Пальне', 'Рушники на борту', 'Спорядження для снорклінгу', 'Насичена дегустація з кількох подач і finger food', 'Просекко: 3 пляшки на кожні 7 гостей включено', 'Фото та відео від команди на борту'],
       excludedTitle: 'Не включено',
@@ -968,7 +968,7 @@ const experienceDetailText = {
       routeSteps: ['Вихід з Porto Antico і прибережна навігація.', 'Прохід повз Boccadasse з можливою зустріччю дельфінів.', 'Якірна зупинка біля Boccadasse для заходу сонця та gourmet-сервісу.'],
       routeCaption: 'Лаконічний маршрут без поспіху, орієнтований на світло, море й сервіс на борту.',
       scheduleTitle: 'Графік і тривалість',
-      schedule: ['Зустріч: 17:40-17:45 у Porto Antico.', 'Відправлення: 18:00.', 'Загальна тривалість: 4 години, до 22:00.', 'Доступно цілий рік: час стабільний, світло заходу змінюється сезонно.'],
+      schedule: ['Зустріч: 17:40-17:45 у Porto Antico.', 'Відправлення: 18:00.', 'Загальна тривалість: 5 годин, до 23:00.', 'Доступно цілий рік: час стабільний, світло заходу змінюється сезонно.'],
       practicalTitle: 'Практичні поради',
       practical: ['Візьміть легку куртку на вечір і неслизьке взуття.', 'Можна взяти власну камеру; фото й відео вже включені.', 'Меню фіксоване та повністю глютенове: не підходить при непереносимості глютену і не персоналізується.', 'Додаткові напої понад три включені пляшки оплачуються окремо.'],
       faqTitle: 'Поширені запитання',

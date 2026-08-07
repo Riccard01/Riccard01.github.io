@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Faq.css";
 import { getLocale, LOCALES } from '../utils/locale';
 
-export default function Faq({ lang = 'it' }) {
+export default function Faq({ lang = 'en' }) {
   const locale = LOCALES[lang] || getLocale(lang);
   const fallback = LOCALES.en || getLocale('en');
   const faqData = Array.isArray(locale?.faq?.items) && locale.faq.items.length

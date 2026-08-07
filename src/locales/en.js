@@ -36,10 +36,11 @@ export default {
       {
         id: "1",
         title: "Gourmet Sunset Cruise",
-        time: "4 Hrs",
+        time: "5 Hrs",
         guests: "14 Max",
-        price: "From €390 per group",
-        desc: "Experience a golden-hour sunset cruise off Genoa and Boccadasse featuring the signature 'Il Genovese' aperitif, Prosecco, and lounge music.",
+        price: "€390 per group",
+        desc: "Let the waves and Prosecco cradle you in the romantic village of Boccadasse. Enjoy the Italian aperitivo by ‘Il Genovese’ while dolphins dance around us and the stars watch from above.",
+        occasionTags: ["Perfect for birthdays", "Bachelor & bachelorette parties"],
         chips: ["Fuel Included", "Towels", "Prosecco", "Snorkeling Gear", "Skipper"],
       },
       {

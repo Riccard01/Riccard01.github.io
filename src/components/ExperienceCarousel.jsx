@@ -13,12 +13,13 @@ import itLocale from '../locales/it';
 import { getExperienceSlugById } from '../utils/experienceRoutes';
 import { trackWhatsAppClick } from '../utils/googleAdsConversions';
 import { getWhatsAppUrl } from '../utils/whatsapp';
+import { getExperienceUi } from '../locales/experienceUi';
 
 export default function ExperienceCarousel({ lang = 'en' }) {
   const navigate = useNavigate();
   const dict = getLocale(lang);
   const t = dict.experienceCarousel;
-  const detailsLabel = lang === 'it' ? 'Dettagli' : 'Details';
+  const detailsLabel = getExperienceUi(lang).details;
 
   const openWhatsApp = () => {
     trackWhatsAppClick();
@@ -136,6 +137,11 @@ export default function ExperienceCarousel({ lang = 'en' }) {
 
               <p>{exp.desc}</p>
               <span className="price-inline">{exp.price}</span>
+              {exp.occasionTags?.length ? (
+                <div className="card-chips-container" aria-label={exp.title}>
+                  {exp.occasionTags.map((tag) => <span key={tag} className="card-chip">{tag}</span>)}
+                </div>
+              ) : null}
 
             </div>
           </article>

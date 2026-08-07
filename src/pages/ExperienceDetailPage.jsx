@@ -880,12 +880,12 @@ const EXPERIENCE_DETAIL_CONTENT = {
     '1': {
       charterType: 'Esperienza privata con skipper dedicato, barca esclusiva per il gruppo',
       heroFacts: [
-        '18:00–22:00',
+        '18:00–23:00',
         'Fino a 7 ospiti (15 con doppia barca)',
       ],
       introTitle: 'Descrizione',
       intro: [
-        'Si parte dal Porto Antico di Genova e si naviga verso Boccadasse, con una rotta semplice e piacevole lungo costa.',
+        'Lasciati cullare dalle onde e dal Prosecco nel romantico borgo di Boccadasse. Goditi l’aperitivo italiano firmato ‘Il Genovese’, mentre i delfini danzano intorno a noi e le stelle ci osservano dall’alto.',
         'Durante il tragitto capita spesso di incontrare i delfini, senza però poterlo garantire.',
         'La barca resta ormeggiata in rada davanti a Boccadasse per il tramonto e la degustazione gourmet a bordo.',
       ],
@@ -927,7 +927,7 @@ const EXPERIENCE_DETAIL_CONTENT = {
       schedule: [
         'Ritrovo: 17:40-17:45 al Porto Antico.',
         'Partenza: 18:00.',
-        'Durata totale: 4 ore, fino alle 22:00.',
+        'Durata totale: 5 ore, fino alle 23:00.',
         'Disponibile tutto l anno: l orario resta coerente, mentre la luce del tramonto varia con la stagione.',
       ],
       practicalTitle: 'Consigli pratici',
@@ -1140,12 +1140,12 @@ const EXPERIENCE_DETAIL_CONTENT = {
     '1': {
       charterType: 'Private experience with dedicated skipper, exclusive boat for the group',
       heroFacts: [
-        '18:00-22:00',
+        '18:00-23:00',
         'Up to 7 guests (15 with a second boat)',
       ],
       introTitle: 'Description',
       intro: [
-        'You leave from Genoa Old Port and cruise toward Boccadasse on a calm, scenic route along the coast.',
+        'Let the waves and Prosecco cradle you in the romantic village of Boccadasse. Enjoy the Italian aperitivo by ‘Il Genovese’ while dolphins dance around us and the stars watch from above.',
         'Along the way, it is common to spot dolphins, although this cannot be guaranteed.',
         'The boat stays anchored off Boccadasse for sunset and a rich gourmet tasting served on board.',
       ],
@@ -1186,7 +1186,7 @@ const EXPERIENCE_DETAIL_CONTENT = {
       schedule: [
         'Meet-up: 17:40-17:45 at Genoa Old Port.',
         'Departure: 18:00.',
-        'Total duration: 4 hours, until 22:00.',
+        'Total duration: 5 hours, until 23:00.',
         'Available all year: the departure time stays consistent while sunset light changes with the season.',
       ],
       practicalTitle: 'Practical tips',
@@ -1346,7 +1346,7 @@ function getDetailContent(lang, experienceId) {
 }
 
 export default function ExperienceDetailPage({ setLang = () => {} }) {
-  const { lang = 'it', experienceId: slug = '' } = useParams();
+  const { lang = 'en', experienceId: slug = '' } = useParams();
   const dict = getLocale(lang);
   const pageUi = getExperienceUi(lang);
   const t = dict.experienceCarousel;

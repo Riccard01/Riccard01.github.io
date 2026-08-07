@@ -9,7 +9,7 @@ import Lana from "../assets/lana.webp";
 import Simone from "../assets/simo.webp";
 import { getLocale } from '../utils/locale';
 
-export default function ReviewCarousel({ lang = 'it' }) {
+export default function ReviewCarousel({ lang = 'en' }) {
   const dict = getLocale(lang);
   const t = dict.reviewCarousel;
   const baseLocale = getLocale('en');
@@ -127,7 +127,7 @@ export default function ReviewCarousel({ lang = 'it' }) {
     <section className="review-carousel-section">
       <div className="review-carousel-header">
         <h2>{t.title}</h2>
-        <p className="review-count">{reviews.length} {lang === 'it' ? 'recensioni' : 'reviews'}</p>
+        <p className="review-count">{reviews.length} {t.countLabel || (lang === 'it' ? 'recensioni' : 'reviews')}</p>
       </div>
 
       <div className="review-carousel-container">

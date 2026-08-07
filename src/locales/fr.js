@@ -35,10 +35,11 @@ export default {
       {
         id: "1",
         title: "Croisiere Gourmet au Coucher du Soleil",
-        time: "4 h",
+        time: "5 h",
         guests: "Max 14",
-        price: "A partir de 390 € par groupe",
-        desc: "Vivez une croisiere au coucher du soleil entre Genes et Boccadasse avec aperitif, Prosecco et musique lounge.",
+        price: "390 € par groupe",
+        desc: "Laissez-vous bercer par les vagues et le Prosecco dans le village romantique de Boccadasse. Savourez l’aperitivo italien signé ‘Il Genovese’, tandis que les dauphins dansent autour de nous et que les étoiles nous observent d’en haut.",
+        occasionTags: ["Parfait pour les anniversaires", "Enterrements de vie de jeune fille et garçon"],
         chips: ["Carburant inclus", "Serviettes", "Prosecco", "Materiel snorkeling", "Skipper"],
       },
       {

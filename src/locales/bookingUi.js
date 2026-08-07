@@ -1,3 +1,5 @@
+import { additionalBookingExperienceNotes, additionalBookingUi } from './additionalUi';
+
 const bookingUi = {
   it: {
     select: 'Seleziona', experience: 'Esperienza', guests: 'Ospiti', time: 'Orario', date: 'Data', ports: 'Porti',
@@ -7,7 +9,7 @@ const bookingUi = {
     portsHint: 'Scegli il porto di partenza, quello finale e gli eventuali transfer privati.',
     continue: 'Continua', back: 'Indietro', review: 'Rivedi il riepilogo',
     noBoats: 'Nessuna barca disponibile con questi filtri', reset: 'Reset filtri', showAll: 'Mostra tutte le esperienze',
-    formName: 'Come ti chiami?', formPhone: 'Qual è il tuo numero di telefono?', formEmail: 'Qual è la tua email?', formNotes: 'Hai richieste particolari?', optional: 'Facoltativo',
+    formName: 'Come ti chiami?', formPhone: 'Qual è il tuo numero di telefono?', formEmail: 'Qual è la tua email?', formNotes: 'Hai richieste particolari?', optional: 'Facoltativo', boats: 'Barche', availabilityAria: 'Disponibilità esperienza selezionata', customizeExperience: (title) => `Personalizza il "${title}"`, filtersTitle: 'Ospiti, orario e data', forExperience: (title) => `Per ${title}.`, chooseStart: 'Scegli un’esperienza per iniziare.',
   },
   en: {
     select: 'Select', experience: 'Experience', guests: 'Guests', time: 'Time', date: 'Date', ports: 'Ports',
@@ -16,7 +18,7 @@ const bookingUi = {
     chooseTime: 'Choose a time', chooseDate: 'Choose a date', portsTitle: 'Ports and transfer',
     portsHint: 'Choose the departure port, final port and any private transfers.',
     continue: 'Continue', back: 'Back', review: 'Review summary', noBoats: 'No boats available for these filters', reset: 'Reset filters', showAll: 'Show all experiences',
-    formName: 'What is your name?', formPhone: 'What is your phone number?', formEmail: 'What is your email?', formNotes: 'Any special requests?', optional: 'Optional',
+    formName: 'What is your name?', formPhone: 'What is your phone number?', formEmail: 'What is your email?', formNotes: 'Any special requests?', optional: 'Optional', boats: 'Boats', availabilityAria: 'Selected experience availability', customizeExperience: (title) => `Customize "${title}"`, filtersTitle: 'Guests, time and date', forExperience: (title) => `For ${title}.`, chooseStart: 'Choose an experience to get started.',
   },
   de: {
     select: 'Auswählen', experience: 'Erlebnis', guests: 'Gäste', time: 'Uhrzeit', date: 'Datum', ports: 'Häfen',
@@ -50,6 +52,7 @@ const bookingUi = {
     select: 'Обрати', experience: 'Програма', guests: 'Гості', time: 'Час', date: 'Дата', ports: 'Порти',
     chooseExperience: 'Оберіть програму', chooseExperienceHint: 'Оберіть програму, щоб продовжити.', guestQuestion: 'Скільки буде гостей?', decreaseGuests: 'Зменшити кількість гостей', increaseGuests: 'Збільшити кількість гостей', chooseTime: 'Оберіть час', chooseDate: 'Оберіть дату', portsTitle: 'Порти й трансфер', portsHint: 'Оберіть порти відправлення й прибуття та приватний трансфер.', continue: 'Продовжити', back: 'Назад', review: 'Перевірити підсумок', noBoats: 'Немає доступних човнів для цих фільтрів', reset: 'Скинути фільтри', showAll: 'Показати всі програми', formName: 'Як вас звати?', formPhone: 'Ваш номер телефону?', formEmail: 'Ваша електронна адреса?', formNotes: 'Є особливі побажання?', optional: 'Необов’язково',
   },
+  ...additionalBookingUi,
 };
 
 const bookingExperienceNotes = {
@@ -103,9 +106,10 @@ const bookingExperienceNotes = {
     aperitivoCalloutText: 'Лише Захід + аперитив і Повний день + аперитив включають поєднання з Gourmet Sunset Cruise. Доплата €390.',
     earlyBirdLegend: 'Позначає дату зі знижкою раннього бронювання для цієї програми.',
   },
+  ...additionalBookingExperienceNotes,
 };
 
 export function getBookingUi(lang) {
   const safeLang = bookingUi[lang] ? lang : 'en';
-  return { ...bookingUi[safeLang], ...bookingExperienceNotes[safeLang] };
+  return { ...bookingUi.en, ...bookingUi[safeLang], ...bookingExperienceNotes.en, ...bookingExperienceNotes[safeLang] };
 }

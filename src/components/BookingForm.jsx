@@ -18,7 +18,7 @@ const countryCodes = [
     { code: "+44", country: "🇬🇧" },
 ];
 
-export default function BookingForm({ lang = 'it', onSubmit, onBack = null, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
+export default function BookingForm({ lang = 'en', onSubmit, onBack = null, boatId = null, date = null, slotKey = null, startTime = null, endTime = null, captainId = null, secondaryBoatId = null, secondaryCaptainId = null, secondaryBoatName = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false, numPax = 1, amountCents = 0, onSlotUnavailableRetry = null }) {
     const dict = getLocale(lang);
     const t = dict.bookingForm;
     const ui = getBookingUi(lang);
@@ -290,7 +290,7 @@ const CARD_ELEMENT_OPTIONS = {
     },
 };
 
-function CardPaymentSection({ lang = 'it', clientSecret, form, bookingId, onDone, date = null, startTime = null, endTime = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false }) {
+function CardPaymentSection({ lang = 'en', clientSecret, form, bookingId, onDone, date = null, startTime = null, endTime = null, embark = null, disembark = null, arrangePickup = false, arrangeDropoff = false }) {
     const dict = getLocale(lang);
     const t = dict.bookingForm;
 

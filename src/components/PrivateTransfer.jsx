@@ -53,7 +53,7 @@ const AVAILABLE_PORTS = [
   }
 ];
 
-export default function PrivateTransfer({ lang = 'it' }) {
+export default function PrivateTransfer({ lang = 'en' }) {
   const dict = getLocale(lang);
   const t = dict.privateTransfer;
   const fleetVehicles = t.fleetVehicles || [];

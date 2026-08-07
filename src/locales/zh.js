@@ -35,10 +35,11 @@ export default {
       {
         id: "1",
         title: "日落美食巡航",
-        time: "4 小时",
+        time: "5 小时",
         guests: "最多 14 人",
-        price: "每团 390 € 起",
-        desc: "在热那亚与博卡达塞之间享受黄金日落巡航，含特色开胃酒、Prosecco 与轻松音乐。",
+        price: "每团 390 €",
+        desc: "在浪漫的博卡达塞，让海浪与 Prosecco 轻轻拥抱你。品尝由 ‘Il Genovese’ 打造的意式开胃酒，看海豚在身边起舞，仰望繁星从天际凝望。",
+        occasionTags: ["生日庆祝之选", "单身派对"],
         chips: ["含燃油", "毛巾", "Prosecco", "浮潜装备", "船长"],
       },
       {

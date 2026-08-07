@@ -4,7 +4,7 @@ import checkIcon from '../assets/people.svg';
 import { getLocale } from '../utils/locale';
 
 export default function BookingFooter({
-  lang = 'it',
+  lang = 'en',
   total = "€0.00",
   originalTotal = null,
   discountedTotal = null,
@@ -32,7 +32,7 @@ export default function BookingFooter({
     const [year, month, day] = selectedDate.split("-");
     const dateObj = new Date(year, month - 1, day);
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    formattedDate = dateObj.toLocaleDateString(dict.localeCode || 'it-IT', options);
+    formattedDate = dateObj.toLocaleDateString(dict.localeCode || 'en-US', options);
   }
 
   let transferStatus = t.transferNone;

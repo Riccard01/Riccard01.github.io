@@ -36,10 +36,11 @@ export default {
       {
         id: "1",
         title: "Crociera Gourmet al Tramonto",
-        time: "4 Ore",
+        time: "5 Ore",
         guests: "Max 14",
-        price: "Da €390 a gruppo",
-        desc: "Vivi una crociera al tramonto tra Genova e Boccadasse con l'aperitivo firmato 'Il Genovese', Prosecco e musica lounge.",
+        price: "€390 a gruppo",
+        desc: "Lasciati cullare dalle onde e dal Prosecco nel romantico borgo di Boccadasse. Goditi l’aperitivo italiano firmato ‘Il Genovese’, mentre i delfini danzano intorno a noi e le stelle ci osservano dall’alto.",
+        occasionTags: ["Perfetto per compleanni", "Addii al nubilato/celibato"],
         chips: ["Carburante Incluso", "Teli Mare", "Prosecco", "Attrezzatura Snorkeling", "Skipper"],
       },
       {

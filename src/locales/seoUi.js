@@ -1,3 +1,5 @@
+import { additionalSeoUi } from './additionalUi';
+
 const seoUi = {
   it: {
     home: {
@@ -99,6 +101,7 @@ const seoUi = {
       description: 'Оберіть програму, дату, кількість гостей і порт відправлення для приватної прогулянки узбережжям Лігурії.',
     },
   },
+  ...additionalSeoUi,
 };
 
 export function getSeoUi(lang, page) {

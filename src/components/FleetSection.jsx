@@ -3,7 +3,7 @@ import './FleetSection.css';
 import leggera from "../assets/leggera.webp";
 import { getLocale } from '../utils/locale';
 
-export default function FleetSection({ lang = 'it' }) {
+export default function FleetSection({ lang = 'en' }) {
   const dict = getLocale(lang);
   const t = dict.fleetSection;
   const specsText = t.specs || [];

@@ -11,9 +11,17 @@ const WHATSAPP_MESSAGES = {
   pl: 'Cześć Riccardo! Które doświadczenie polecasz nam wybrać?',
   ru: 'Привет, Риккардо! Какую экскурсию ты посоветуешь нам выбрать?',
   uk: 'Привіт, Ріккардо! Яку екскурсію ти порадиш нам обрати?',
+  pt: 'Olá, Riccardo! Qual experiência nos recomenda escolher?',
+  nl: 'Hoi Riccardo! Welke ervaring raad je ons aan?',
+  he: 'היי ריקרדו! איזו חוויה אתה ממליץ לנו לבחור?',
+  cs: 'Ahoj Riccardo! Který zážitek bys nám doporučil?',
+  ro: 'Salut, Riccardo! Ce experiență ne recomanzi să alegem?',
+  tr: 'Merhaba Riccardo! Hangi deneyimi seçmemizi önerirsin?',
+  ja: 'こんにちは、Riccardo！どの体験がおすすめですか？',
+  ko: '안녕하세요, Riccardo! 어떤 체험을 추천하시나요?',
 };
 
-export function getWhatsAppUrl(lang = 'it') {
-  const message = WHATSAPP_MESSAGES[lang] || WHATSAPP_MESSAGES.it;
+export function getWhatsAppUrl(lang = 'en') {
+  const message = WHATSAPP_MESSAGES[lang] || WHATSAPP_MESSAGES.en;
   return `whatsapp://send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
 }

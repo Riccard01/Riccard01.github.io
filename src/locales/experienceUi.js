@@ -1,3 +1,5 @@
+import { additionalExperienceUi } from './additionalUi';
+
 const ui = {
   it: { details: 'Dettagli esperienza', book: 'Prenota ora', contact: 'Contattaci', request: 'Richiesta su WhatsApp', location: 'Scopri la location', important: 'Nota importante', multiplier: 'Moltiplicatore', charter: 'Tipologia charter', included: 'Incluso', previous: 'Tappa precedente', next: 'Tappa successiva', show: 'Mostra tappa', transcript: 'Trascrizione mappa', stop: 'Tappa', map: 'Apri mappa', sources: 'Fonti' },
   en: { details: 'Experience details', book: 'Book now', contact: 'Contact us', request: 'Request on WhatsApp', location: 'Discover the location', important: 'Important note', multiplier: 'Multiplier', charter: 'Charter type', included: 'Included', previous: 'Previous stop', next: 'Next stop', show: 'Show stop', transcript: 'Map transcript', stop: 'Stop', map: 'Open map', sources: 'Sources' },
@@ -9,6 +11,7 @@ const ui = {
   pl: { details: 'Szczegóły atrakcji', book: 'Zarezerwuj', contact: 'Skontaktuj się', request: 'Zapytaj przez WhatsApp', location: 'Zobacz lokalizację', important: 'Ważna informacja', multiplier: 'Mnożnik', charter: 'Rodzaj czarteru', included: 'W cenie', previous: 'Poprzedni przystanek', next: 'Następny przystanek', show: 'Pokaż przystanek', transcript: 'Opis mapy', stop: 'Przystanek', map: 'Otwórz mapę', sources: 'Źródła' },
   ru: { details: 'Детали программы', book: 'Забронировать', contact: 'Связаться', request: 'Запрос в WhatsApp', location: 'Открыть место', important: 'Важная информация', multiplier: 'Коэффициент', charter: 'Тип чартера', included: 'Включено', previous: 'Предыдущая остановка', next: 'Следующая остановка', show: 'Показать остановку', transcript: 'Описание карты', stop: 'Остановка', map: 'Открыть карту', sources: 'Источники' },
   uk: { details: 'Деталі програми', book: 'Забронювати', contact: 'Звʼязатися', request: 'Запит у WhatsApp', location: 'Відкрити місце', important: 'Важлива інформація', multiplier: 'Коефіцієнт', charter: 'Тип чартеру', included: 'Включено', previous: 'Попередня зупинка', next: 'Наступна зупинка', show: 'Показати зупинку', transcript: 'Опис мапи', stop: 'Зупинка', map: 'Відкрити мапу', sources: 'Джерела' },
+  ...additionalExperienceUi,
 };
 
 export function getExperienceUi(lang) {

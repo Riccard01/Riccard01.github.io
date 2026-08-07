@@ -35,10 +35,11 @@ export default {
       {
         id: "1",
         title: "Crucero Gourmet al Atardecer",
-        time: "4 h",
+        time: "5 h",
         guests: "Max 14",
-        price: "Desde 390 € por grupo",
-        desc: "Disfruta un crucero al atardecer entre Genova y Boccadasse con aperitivo, Prosecco y musica lounge.",
+        price: "390 € por grupo",
+        desc: "Déjate mecer por las olas y el Prosecco en el romántico pueblo de Boccadasse. Disfruta del aperitivo italiano firmado por ‘Il Genovese’, mientras los delfines bailan a nuestro alrededor y las estrellas nos miran desde arriba.",
+        occasionTags: ["Perfecto para cumpleaños", "Despedidas de soltero y soltera"],
         chips: ["Combustible incluido", "Toallas", "Prosecco", "Equipo de snorkel", "Skipper"],
       },
       {

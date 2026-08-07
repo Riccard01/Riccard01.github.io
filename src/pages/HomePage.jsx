@@ -9,7 +9,7 @@ import Faq from '../components/Faq';
 import marian from '../assets/marian.webp';
 import { getLocale } from '../utils/locale';
 
-function HomePage({ lang = 'it', setLang = () => {} }) {
+function HomePage({ lang = 'en', setLang = () => {} }) {
   const dict = getLocale(lang);
   const titleLines = (dict.homepage.title || '').split('\n');
 

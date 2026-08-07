@@ -35,10 +35,11 @@ export default {
       {
         id: "1",
         title: "Gourmet Sunset Cruise",
-        time: "4 godz.",
+        time: "5 godz.",
         guests: "Max 14",
-        price: "Od 390 € za grupe",
-        desc: "Rejs o zachodzie slonca miedzy Genua i Boccadasse z aperitivo, Prosecco i muzyka lounge.",
+        price: "390 € za grupę",
+        desc: "Pozwól, by fale i Prosecco ukołysały Cię w romantycznym Boccadasse. Delektuj się włoskim aperitivo od ‘Il Genovese’, gdy delfiny tańczą wokół nas, a gwiazdy spoglądają z góry.",
+        occasionTags: ["Idealny na urodziny", "Wieczory panieńskie i kawalerskie"],
         chips: ["Paliwo w cenie", "Reczniki", "Prosecco", "Sprzet do snorkelingu", "Skipper"],
       },
       {

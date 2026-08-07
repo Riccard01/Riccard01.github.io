@@ -1,3 +1,5 @@
+import { additionalFooterUi } from './additionalUi';
+
 const footerUi = {
   it: {
     tagline: 'Tour privati in barca con skipper tra Genova, Golfo Paradiso e Golfo del Tigullio.',
@@ -79,6 +81,7 @@ const footerUi = {
     taxNote: 'Послуга надається за італійською фіксованою системою оподаткування відповідно до закону № 190/2014 зі змінами, тому не обкладається ПДВ.',
     copyright: '© 2026 Leggero Tours. Усі права захищено.',
   },
+  ...additionalFooterUi,
 };
 
 export const FOOTER_AREAS = ['Genova', 'Nervi', 'Recco', 'Camogli', 'San Fruttuoso', 'Portofino', 'Santa Margherita Ligure', 'Rapallo'];

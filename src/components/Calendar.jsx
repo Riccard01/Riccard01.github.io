@@ -17,9 +17,9 @@ function getFirstDayOfWeek(year, month) {
 	return day === 0 ? 6 : day - 1;
 }
 
-export default function Calendar({ lang = 'it', onDateSelect, selectedDate, onMonthChange, isDateEnabled, discounts = null }) {
+export default function Calendar({ lang = 'en', onDateSelect, selectedDate, onMonthChange, isDateEnabled, discounts = null }) {
 	const dict = getLocale(lang);
-	const localeCode = dict.localeCode || 'it-IT';
+	const localeCode = dict.localeCode || 'en-US';
 
 	const daysFormatter = new Intl.DateTimeFormat(localeCode, { weekday: 'short' });
 	const monthFormatter = new Intl.DateTimeFormat(localeCode, { month: 'long' });

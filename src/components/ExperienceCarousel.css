@@ -252,16 +252,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 4px;
 }
 
 .card-chip {
-  background-color: transparent;
-  color: #081f5c;
-  border: 1.5px solid #e5e9f3;
+  background-color: #fff4ef;
+  color: #8a342f;
+  border: 1px solid #f1c9bd;
   font-family: 'Work Sans', sans-serif;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 600;
   padding: 5px 12px;
   border-radius: 999px;
   display: inline-block;
