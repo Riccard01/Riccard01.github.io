@@ -5,7 +5,7 @@ export default {
   localeCode: "zh-CN",
   navbar: {
     ...en.navbar,
-    whatsappUs: "WhatsApp 联系我们",
+    whatsappUs: "致电我们",
     switchLabel: "切换语言",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "日落美食巡航",
         time: "5 小时",
-        guests: "最多 14 人",
+        guests: "最多 15 人",
         price: "每团 390 €",
         desc: "在浪漫的博卡达塞，让海浪与 Prosecco 轻轻拥抱你。品尝由 ‘Il Genovese’ 打造的意式开胃酒，看海豚在身边起舞，仰望繁星从天际凝望。",
         occasionTags: ["生日庆祝之选", "单身派对"],

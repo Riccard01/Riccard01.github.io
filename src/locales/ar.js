@@ -6,7 +6,7 @@ export default {
   rtl: true,
   navbar: {
     ...en.navbar,
-    whatsappUs: "راسلنا عبر واتساب",
+    whatsappUs: "اتصل بنا",
     switchLabel: "تغيير اللغة",
   },
   homepage: {
@@ -37,7 +37,7 @@ export default {
         id: "1",
         title: "رحلة غروب فاخرة",
         time: "5 ساعات",
-        guests: "حتى 14",
+        guests: "حتى 15",
         price: "390 € للمجموعة",
         desc: "دع الأمواج وProsecco تهدهدانك في قرية بوكاداسي الرومانسية. استمتع بالمقبلات الإيطالية من ‘Il Genovese’ بينما ترقص الدلافين حولنا وتراقبنا النجوم من السماء.",
         occasionTags: ["مثالية لأعياد الميلاد", "حفلات توديع العزوبية"],

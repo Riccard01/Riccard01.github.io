@@ -5,7 +5,7 @@ export default {
   localeCode: "de-DE",
   navbar: {
     ...en.navbar,
-    whatsappUs: "Schreib uns auf WhatsApp",
+    whatsappUs: "Ruf uns an",
     switchLabel: "Sprache wechseln",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "Gourmet-Sonnenuntergangsfahrt",
         time: "5 Std",
-        guests: "Max 14",
+        guests: "Max 15",
         price: "390 € pro Gruppe",
         desc: "Lass dich im romantischen Boccadasse von den Wellen und Prosecco wiegen. Genieße den italienischen Aperitivo von ‚Il Genovese‘, während Delfine um uns tanzen und die Sterne von oben zusehen.",
         occasionTags: ["Perfekt für Geburtstage", "Junggesellen- und Junggesellinnenabschiede"],

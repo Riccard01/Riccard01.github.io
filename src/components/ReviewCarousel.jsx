@@ -9,6 +9,13 @@ import Lana from "../assets/lana.webp";
 import Simone from "../assets/simo.webp";
 import { getLocale } from '../utils/locale';
 
+const CHRISTINA_REVIEW = {
+  id: 11,
+  name: 'Christina Speth',
+  role: 'Guest',
+  text: 'The private boat tour with Riccardo was just absolutely wonderful and for us definitely unique! He’s super friendly, funny, and gave the tour that “dolce vita” vibe. In addition to interesting facts about the area, we were even lucky enough to see shooting stars. Instead of heading back right away, Riccardo took the time to stay and watch the sky with us. That really made the evening special. Thank you so much for the amazing experience! 🌊',
+};
+
 export default function ReviewCarousel({ lang = 'en' }) {
   const dict = getLocale(lang);
   const t = dict.reviewCarousel;
@@ -24,11 +31,14 @@ export default function ReviewCarousel({ lang = 'en' }) {
     expandedIdRef.current = expandedId;
   }, [expandedId]);
 
-  const sourceReviews = Array.isArray(t?.reviews)
+  const localizedReviews = Array.isArray(t?.reviews)
     ? t.reviews
     : Array.isArray(baseLocale?.reviewCarousel?.reviews)
       ? baseLocale.reviewCarousel.reviews
     : [];
+  const sourceReviews = localizedReviews.some((review) => review?.name === CHRISTINA_REVIEW.name)
+    ? localizedReviews
+    : [...localizedReviews, CHRISTINA_REVIEW];
 
   const orderedReviews = (() => {
     const florenceIndex = sourceReviews.findIndex((review) => {

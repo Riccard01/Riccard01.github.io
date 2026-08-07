@@ -19,7 +19,7 @@ export const EXPERIENCE_BOOKING_CONFIG = {
   },
   '1': {
     slotKeywords: ['sunset', '18:00', '18-23', '18:00-23:00', '18-22', '18:00-22:00', 'aperitivo'],
-    preferredSlotKeywords: ['gourmet', '18:00-23:00', '18-23', '18:00-22:00', '18-22'],
+    preferredSlotKeywords: ['sunset_aperitivo', 'gourmet', '18:00-23:00', '18-23', '18:00-22:00', '18-22'],
     fixedTime: true,
     boatKeywords: ['gourmet', 'aperitivo', 'sunset', 'boccadasse', 'rossa'],
     guestLimit: 15,

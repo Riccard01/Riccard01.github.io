@@ -1,6 +1,5 @@
 import React from 'react';
 import './Navbar.css';
-import phoneIcon from '../assets/phone.svg';
 import meAvatar from '../assets/me.webp';
 import logo from '../assets/logo.svg';
 import { getLocale, LANGUAGE_OPTIONS } from '../utils/locale';
@@ -38,9 +37,8 @@ function Navbar({ lang = 'en', setLang = () => {} }) {
           </select>
 
           <button className="nav-whatsapp" onClick={openWhatsApp}>
+            <span dir="auto">{t.whatsappUs}</span>
             <img src={meAvatar} alt="Riccardo" className="whatsapp-avatar" />
-            {t.whatsappUs}
-            <img src={phoneIcon} alt="WhatsApp" className="whatsapp-icon" />
           </button>
         </div>
       </div>

@@ -2,7 +2,7 @@ export default {
   localeCode: "it-IT",
   rtl: false,
   navbar: {
-    whatsappUs: "Scrivici su WhatsApp",
+    whatsappUs: "Chiamaci",
     switchLabel: "Cambia lingua",
   },
   homepage: {
@@ -37,7 +37,7 @@ export default {
         id: "1",
         title: "Crociera Gourmet al Tramonto",
         time: "5 Ore",
-        guests: "Max 14",
+        guests: "Max 15",
         price: "€390 a gruppo",
         desc: "Lasciati cullare dalle onde e dal Prosecco nel romantico borgo di Boccadasse. Goditi l’aperitivo italiano firmato ‘Il Genovese’, mentre i delfini danzano intorno a noi e le stelle ci osservano dall’alto.",
         occasionTags: ["Perfetto per compleanni", "Addii al nubilato/celibato"],

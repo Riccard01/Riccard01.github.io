@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./ExperienceCarousel.css";
 import img4 from "../assets/mariana.webp";
@@ -11,20 +11,62 @@ import { getLocale } from '../utils/locale';
 import enLocale from '../locales/en';
 import itLocale from '../locales/it';
 import { getExperienceSlugById } from '../utils/experienceRoutes';
-import { trackWhatsAppClick } from '../utils/googleAdsConversions';
-import { getWhatsAppUrl } from '../utils/whatsapp';
 import { getExperienceUi } from '../locales/experienceUi';
+import { getAvailabilityUi } from '../locales/availabilityUi';
+
+const EXPERIENCE_REVIEW_CONFIG = {
+  '0': { count: 4, reviewId: 1, keyword: 'Portofino', fallbackSentenceIndex: 2 },
+  '1': { count: 6, reviewId: 3, keyword: 'aperitivo', fallbackSentenceIndex: 1 },
+  '3': { count: 2, reviewId: 8, sentenceIndex: 0 },
+  '4': { count: 2, reviewId: 2, keyword: 'Camogli', fallbackSentenceIndex: 1 },
+};
 
 export default function ExperienceCarousel({ lang = 'en' }) {
   const navigate = useNavigate();
   const dict = getLocale(lang);
   const t = dict.experienceCarousel;
-  const detailsLabel = getExperienceUi(lang).details;
+  const learnMoreLabel = getExperienceUi(lang).learnMore;
+  const availabilityText = getAvailabilityUi(lang);
+  const [availability, setAvailability] = useState({});
 
-  const openWhatsApp = () => {
-    trackWhatsAppClick();
-    window.location.href = getWhatsAppUrl(lang);
+  const localeReviews = Array.isArray(dict?.reviewCarousel?.reviews)
+    ? dict.reviewCarousel.reviews
+    : [];
+  const localizedReviews = localeReviews.length
+    ? localeReviews
+    : (enLocale?.reviewCarousel?.reviews || []);
+  const reviewCount = localizedReviews.length + (
+    localizedReviews.some((review) => review?.name === 'Christina Speth') ? 0 : 1
+  );
+
+  const getReviewPreview = (experienceId) => {
+    const config = EXPERIENCE_REVIEW_CONFIG[experienceId];
+    const review = localizedReviews.find(({ id }) => id === config?.reviewId);
+    if (!review?.text) return '';
+
+    const sentences = [...new Intl.Segmenter(lang, { granularity: 'sentence' }).segment(review.text)]
+      .map(({ segment }) => segment.trim())
+      .filter(Boolean);
+    const contextualSentence = config.keyword
+      ? sentences.find((sentence) => sentence.toLocaleLowerCase(lang).includes(config.keyword.toLocaleLowerCase(lang)))
+      : sentences[config.sentenceIndex];
+    const fallbackSentence = sentences[config.fallbackSentenceIndex ?? config.sentenceIndex ?? 0];
+
+    return contextualSentence || fallbackSentence || sentences[0] || review.text;
   };
+
+  useEffect(() => {
+    let cancelled = false;
+    import('../utils/experienceAvailability')
+      .then(({ getExperienceAvailabilityPreviews }) => getExperienceAvailabilityPreviews())
+      .then((previews) => {
+        if (!cancelled) setAvailability(previews);
+      })
+      .catch(() => {
+        if (!cancelled) setAvailability({});
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   // Associazione delle immagini statiche basata sull'ID dell'esperienza
   const experienceImages = {
@@ -64,11 +106,26 @@ export default function ExperienceCarousel({ lang = 'en' }) {
     navigate(`/${lang}/${experiencePathPrefix}/${slug}`);
   };
 
+  const openBookingPage = (event, experienceId) => {
+    event.stopPropagation();
+    navigate(`/${lang}/book?exp=${experienceId}`);
+  };
+
+  const getAvailabilityLabel = (experienceId) => {
+    const preview = availability[experienceId];
+    if (!preview) return null;
+    return availabilityText.available;
+  };
+
   return (
     <div className="carousel-container">
       <h2 className="experiences-heading">{t.sectionTitle || 'Private boat experiences'}</h2>
       <div className="carousel">
-        {experiences.map((exp) => (
+        {experiences.map((exp) => {
+          const availabilityLabel = getAvailabilityLabel(exp.id);
+          const experienceReviewCount = EXPERIENCE_REVIEW_CONFIG[exp.id]?.count ?? reviewCount;
+          const reviewPreview = getReviewPreview(exp.id);
+          return (
           <article
             key={exp.id}
             className="carousel-wrapper"
@@ -93,36 +150,6 @@ export default function ExperienceCarousel({ lang = 'en' }) {
                     </div>
                   ))}
                 </div>
-                <div className="pill-wrapper">
-                  <div className="pill-actions">
-                    <button
-                      type="button"
-                      className="nav-link nav-details"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openExperiencePage(exp.id);
-                      }}
-                    >
-                      {detailsLabel}
-                    </button>
-                    <button
-                      type="button"
-                      className="nav-link nav-booking"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openWhatsApp();
-                      }}
-                    >
-                      {t.callUs}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-content-wrapper">
-              <div className="title-container">
-                <h3>{exp.title}</h3>
                 <div className="meta-info-container">
                   <span className="duration-tag">
                     <img src={clockIcon} alt={t.durationAlt} className="duration-icon" />
@@ -133,10 +160,47 @@ export default function ExperienceCarousel({ lang = 'en' }) {
                     {exp.guests}
                   </span>
                 </div>
+                <div className="pill-wrapper">
+                  <div className="experience-review-preview" dir={dict.rtl ? 'rtl' : 'ltr'}>
+                    <span className="experience-review-count" aria-label={`${experienceReviewCount} reviews`}>
+                      <span className="experience-review-star" aria-hidden="true">★</span>
+                      {experienceReviewCount}
+                    </span>
+                    <q>{reviewPreview}</q>
+                  </div>
+                  <button
+                    type="button"
+                    className="nav-link nav-booking"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openExperiencePage(exp.id);
+                    }}
+                  >
+                    {learnMoreLabel}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-content-wrapper">
+              <div className="title-container">
+                <h3>{exp.title}</h3>
               </div>
 
               <p>{exp.desc}</p>
               <span className="price-inline">{exp.price}</span>
+              {availabilityLabel ? (
+                <button
+                  type="button"
+                  className="availability-preview"
+                  onClick={(event) => openBookingPage(event, exp.id)}
+                >
+                  <span className="availability-preview-dot" aria-hidden="true" />
+                  <span>
+                    <strong>{availabilityLabel}</strong>
+                  </span>
+                </button>
+              ) : null}
               {exp.occasionTags?.length ? (
                 <div className="card-chips-container" aria-label={exp.title}>
                   {exp.occasionTags.map((tag) => <span key={tag} className="card-chip">{tag}</span>)}
@@ -145,7 +209,8 @@ export default function ExperienceCarousel({ lang = 'en' }) {
 
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

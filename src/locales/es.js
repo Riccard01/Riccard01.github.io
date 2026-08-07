@@ -5,7 +5,7 @@ export default {
   localeCode: "es-ES",
   navbar: {
     ...en.navbar,
-    whatsappUs: "Escribenos por WhatsApp",
+    whatsappUs: "Llámanos",
     switchLabel: "Cambiar idioma",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "Crucero Gourmet al Atardecer",
         time: "5 h",
-        guests: "Max 14",
+        guests: "Max 15",
         price: "390 € por grupo",
         desc: "Déjate mecer por las olas y el Prosecco en el romántico pueblo de Boccadasse. Disfruta del aperitivo italiano firmado por ‘Il Genovese’, mientras los delfines bailan a nuestro alrededor y las estrellas nos miran desde arriba.",
         occasionTags: ["Perfecto para cumpleaños", "Despedidas de soltero y soltera"],

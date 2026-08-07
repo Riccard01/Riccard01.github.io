@@ -5,7 +5,7 @@ export default {
   localeCode: "pl-PL",
   navbar: {
     ...en.navbar,
-    whatsappUs: "Napisz do nas na WhatsApp",
+    whatsappUs: "Zadzwoń do nas",
     switchLabel: "Zmien jezyk",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "Gourmet Sunset Cruise",
         time: "5 godz.",
-        guests: "Max 14",
+        guests: "Max 15",
         price: "390 € za grupę",
         desc: "Pozwól, by fale i Prosecco ukołysały Cię w romantycznym Boccadasse. Delektuj się włoskim aperitivo od ‘Il Genovese’, gdy delfiny tańczą wokół nas, a gwiazdy spoglądają z góry.",
         occasionTags: ["Idealny na urodziny", "Wieczory panieńskie i kawalerskie"],

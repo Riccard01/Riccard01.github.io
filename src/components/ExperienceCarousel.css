@@ -68,21 +68,60 @@
 
 .pill-wrapper {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
   z-index: 3;
-}
-
-.pill-actions {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 12px;
+  direction: ltr;
 }
 
-.pill-actions .nav-link {
-  pointer-events: auto;
+.experience-review-preview {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: rgba(3, 24, 36, 0.68);
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 15px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.experience-review-count {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.experience-review-star {
+  color: #f4c542;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.experience-review-preview q {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  quotes: none;
 }
 
 .image-grid {
@@ -151,15 +190,7 @@
 
 .nav-booking {
   display: inline-block;
-}
-
-.nav-details {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  box-shadow: none;
+  flex: 0 0 auto;
 }
 
 .text-content-wrapper {
@@ -208,6 +239,56 @@
   text-align: left;
 }
 
+.availability-preview {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 4px;
+  padding: 8px 12px;
+  border: 1px solid #b9d8c2;
+  border-radius: 8px;
+  background: #f1faf3;
+  color: #174d2b;
+  font-family: 'Work Sans', sans-serif;
+  text-align: start;
+  cursor: pointer;
+}
+
+.availability-preview:hover {
+  background: #e7f5ea;
+}
+
+.availability-preview-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #1e9b4b;
+  box-shadow: 0 0 0 3px rgba(30, 155, 75, 0.14);
+}
+
+.availability-preview strong,
+.availability-preview small {
+  display: block;
+}
+
+.availability-preview strong {
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 650;
+}
+
+.availability-preview small {
+  margin-top: 2px;
+  color: #3c7050;
+  font-size: 11px;
+  line-height: 15px;
+}
+
 .title-container {
   margin-top: 2px;
   display: flex;
@@ -220,11 +301,20 @@
 }
 
 .meta-info-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  margin-left: auto;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   flex-shrink: 0;
 }
 
@@ -237,8 +327,8 @@
   font-size: 12px;
   line-height: 18px;
   font-variant: all-small-caps;
-  font-weight: 500;
-  color: #ff6f61;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .duration-icon,
@@ -328,7 +418,4 @@
     flex-direction: column;
   }
 
-  .meta-info-container {
-    margin-left: 0;
-  }
 }

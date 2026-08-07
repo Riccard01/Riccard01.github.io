@@ -66,14 +66,15 @@
   color: #0b232e;
 }
 
-/* Bottone WhatsApp Verde */
+/* Bottone contatto */
 .nav-whatsapp {
-  background: #25D366 !important;
+  background: #000000 !important;
   color: #ffffff !important;
   border: none;
-  max-height: 48px;
+  height: 40px;
   border-radius: 999px;
-  padding: 8px 8px;
+  padding: 3px 3px 3px 16px;
+  box-sizing: border-box;
   font-family: 'Work Sans', sans-serif;
   font-size: 14px !important;
   font-weight: 600 !important;
@@ -84,12 +85,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+  direction: ltr;
   gap: 8px;
   outline: none;
 }
 
 .nav-whatsapp:hover {
-  background: #20ba5a !important;
+  background: #000000 !important;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
 }
@@ -98,15 +100,9 @@
   transform: translateY(0);
 }
 
-.whatsapp-icon {
-  width: 18px;
-  height: 18px;
-  filter: brightness(0) invert(1); /* Rende l'icona bianca */
-}
-
 .whatsapp-avatar {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid rgba(255, 255, 255, 0.75);
@@ -151,7 +147,7 @@
     padding: 8px 10px;
   }
   .nav-whatsapp {
-    padding: 8px 8px;
+    padding: 3px 3px 3px 16px;
     font-size: 13px !important;
   }
   .whatsapp-avatar {

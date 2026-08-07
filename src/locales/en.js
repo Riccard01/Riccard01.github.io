@@ -2,13 +2,13 @@ export default {
   localeCode: "en-US",
   rtl: false,
   navbar: {
-    whatsappUs: "WhatsApp Us",
+    whatsappUs: "Call us",
     switchLabel: "Switch language",
   },
   homepage: {
     title: "Private boat tours in Genoa and Portofino",
     subtitle:
-      "One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Stay Leggero!",
+      "One route, a thousand emotions: private itineraries and moments tailored entirely to your own pace. Departures from every port of the Two Gulfs!",
   },
   seo: {
     home: {
@@ -37,7 +37,7 @@ export default {
         id: "1",
         title: "Gourmet Sunset Cruise",
         time: "5 Hrs",
-        guests: "14 Max",
+        guests: "15 Max",
         price: "€390 per group",
         desc: "Let the waves and Prosecco cradle you in the romantic village of Boccadasse. Enjoy the Italian aperitivo by ‘Il Genovese’ while dolphins dance around us and the stars watch from above.",
         occasionTags: ["Perfect for birthdays", "Bachelor & bachelorette parties"],

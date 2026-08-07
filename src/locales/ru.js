@@ -5,7 +5,7 @@ export default {
   localeCode: "ru-RU",
   navbar: {
     ...en.navbar,
-    whatsappUs: "Написать в WhatsApp",
+    whatsappUs: "Позвоните нам",
     switchLabel: "Сменить язык",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "Гурме-круиз на закате",
         time: "5 ч",
-        guests: "Макс. 14",
+        guests: "Макс. 15",
         price: "390 € за группу",
         desc: "Позвольте волнам и Prosecco убаюкать вас в романтичной Боккадассе. Насладитесь итальянским аперитивом от ‘Il Genovese’, пока дельфины танцуют вокруг нас, а звёзды наблюдают с высоты.",
         occasionTags: ["Идеально для дней рождения", "Девичники и мальчишники"],

@@ -5,7 +5,7 @@ export default {
   localeCode: "fr-FR",
   navbar: {
     ...en.navbar,
-    whatsappUs: "Ecrivez-nous sur WhatsApp",
+    whatsappUs: "Appelez-nous",
     switchLabel: "Changer de langue",
   },
   homepage: {
@@ -36,7 +36,7 @@ export default {
         id: "1",
         title: "Croisiere Gourmet au Coucher du Soleil",
         time: "5 h",
-        guests: "Max 14",
+        guests: "Max 15",
         price: "390 € par groupe",
         desc: "Laissez-vous bercer par les vagues et le Prosecco dans le village romantique de Boccadasse. Savourez l’aperitivo italien signé ‘Il Genovese’, tandis que les dauphins dansent autour de nous et que les étoiles nous observent d’en haut.",
         occasionTags: ["Parfait pour les anniversaires", "Enterrements de vie de jeune fille et garçon"],
