@@ -74,7 +74,7 @@ function Book({ lang = 'en', setLang = () => {} }) {
 
   const getSlotDisplayName = (slot) => {
     if (selectedExperienceId === '0') return getRainbowTourSlotDisplayName(lang, slot.key) || slot.displayName;
-    if (selectedExperienceId === '4') return '17:00 - 21:00';
+    if (selectedExperienceId === '4') return '17:00 - 22:00';
     return slot.displayName;
   };
 

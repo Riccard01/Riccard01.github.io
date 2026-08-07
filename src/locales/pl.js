@@ -25,7 +25,7 @@ export default {
     experiences: [
       {
         id: "0",
-        title: "Teczowa Wycieczka",
+        title: "Love in Portofino",
         time: "5-10 godz.",
         guests: "Max 5",
         price: "Od 750 € za grupe",
@@ -54,7 +54,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "Max 5",
         price: "Od 600 € za grupe",
         desc: "Prywatna wycieczka późnym popołudniem i wieczorem z Genui, z przystankami na kąpiel, wizytą w Camogli i finałowym przybyciem do Punta Chiappa oraz opcjonalną, niezapomnianą kolacją u naszego partnera Stella Maris w Punta Chiappa.",

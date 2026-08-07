@@ -25,7 +25,7 @@ export default {
     experiences: [
       {
         id: "0",
-        title: "Tour Arcoiris",
+        title: "Love in Portofino",
         time: "5-10 h",
         guests: "Max 5",
         price: "Desde 750 € por grupo",
@@ -54,7 +54,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "Max 5",
         price: "Desde 600 € por grupo",
         desc: "Tour privado al final de la tarde y por la noche desde Génova, con paradas para bañarse, visita a Camogli y llegada final a Punta Chiappa, con la opción de terminar con una cena inolvidable en Stella Maris, nuestro restaurante asociado en Punta Chiappa.",

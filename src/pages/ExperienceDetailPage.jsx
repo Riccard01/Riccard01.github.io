@@ -441,7 +441,7 @@ function getBaseDolceVitaContent(lang) {
   return isItalian
     ? {
         name: 'Dolce Vita',
-        heroFacts: ['17:00-21:00', 'Fino a 5 ospiti'],
+        heroFacts: ['17:00-22:00', 'Fino a 5 ospiti'],
         basePrice: 600,
         shortDescriptionTitle: 'Descrizione',
         shortDescription: [
@@ -626,7 +626,7 @@ function getBaseDolceVitaContent(lang) {
       }
     : {
         name: 'Dolce Vita',
-        heroFacts: ['17:00-21:00', 'Up to 5 guests'],
+        heroFacts: ['17:00-22:00', 'Up to 5 guests'],
         basePrice: 600,
         shortDescriptionTitle: 'Description',
         shortDescription: [

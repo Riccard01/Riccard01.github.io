@@ -35,9 +35,9 @@ export const EXPERIENCE_BOOKING_CONFIG = {
     guestLimit: 5,
   },
   '4': {
-    slotKeywords: ['17:00', '17-21', '17:00-21:00', 'sunset'],
+    slotKeywords: ['17:00', '17-22', '17:00-22:00', '17-21', '17:00-21:00', 'sunset'],
     excludedSlotKeywords: ['aperitivo', 'gourmet'],
-    preferredSlotKeywords: ['17:00-21:00', '17-21', 'sunset'],
+    preferredSlotKeywords: ['17:00-22:00', '17-22', '17:00-21:00', '17-21', 'sunset'],
     fixedTime: true,
     boatKeywords: ['dolce vita', 'punta chiappa', 'camogli'],
     guestLimit: 5,

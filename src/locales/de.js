@@ -25,7 +25,7 @@ export default {
     experiences: [
       {
         id: "0",
-        title: "Regenbogen-Tour",
+        title: "Love in Portofino",
         time: "5-10 Std",
         guests: "Max 5",
         price: "Ab 750 € pro Gruppe",
@@ -54,7 +54,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "Max 5",
         price: "Ab 600 € pro Gruppe",
         desc: "Private Tour am späten Nachmittag und Abend ab Genua mit Badestopps, einem Besuch in Camogli und abschließender Ankunft in Punta Chiappa, optional mit einem atemberaubenden Abendessen bei Stella Maris, unserem Partner in Punta Chiappa.",

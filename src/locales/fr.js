@@ -25,7 +25,7 @@ export default {
     experiences: [
       {
         id: "0",
-        title: "Tour Arc-en-ciel",
+        title: "Love in Portofino",
         time: "5-10 h",
         guests: "Max 5",
         price: "A partir de 750 € par groupe",
@@ -54,7 +54,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "Max 5",
         price: "A partir de 600 € par groupe",
         desc: "Excursion privée en fin d'après-midi et en soirée au départ de Gênes, avec des arrêts baignade, une visite de Camogli et une arrivée finale à Punta Chiappa, avec la possibilité de terminer par un dîner exceptionnel chez Stella Maris, notre partenaire à Punta Chiappa.",

@@ -45,7 +45,7 @@ export default {
       },
       {
         id: "0",
-        title: "Rainbow Tour",
+        title: "Love in Portofino",
         time: "5-10 Hrs",
         guests: "5 Max",
         price: "From €750 per group",
@@ -64,7 +64,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "5 Max",
         price: "From €600 per group",
         desc: "Private late-afternoon and evening tour from Genoa with swim stops, a visit to Camogli, and final arrival at Punta Chiappa, with the option to end with a breathtaking dinner at Stella Maris, our partner in Punta Chiappa.",

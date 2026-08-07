@@ -6,7 +6,7 @@ const SEARCH_DAYS = 62;
 const PREVIEW_EXPERIENCE_IDS = ['1', '4', '0'];
 const CACHE_TTL_MS = 5 * 60 * 1000;
 const FIXED_OPERATING_HOURS = {
-  '4': { startHour: 17, finishHour: 21, displayTime: '17:00' },
+  '4': { startHour: 17, finishHour: 22, displayTime: '17:00' },
 };
 
 let cachedPreviews = null;

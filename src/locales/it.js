@@ -45,7 +45,7 @@ export default {
       },
       {
         id: "0",
-        title: "Tour Arcobaleno",
+        title: "Love in Portofino",
         time: "5-10 Ore",
         guests: "Max 5",
         price: "Da €750 a gruppo",
@@ -64,7 +64,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "Max 5",
         price: "Da €600 a gruppo",
         desc: "Tour privato nel tardo pomeriggio e in serata da Genova, con soste bagno, visita a Camogli e arrivo finale a Punta Chiappa, con la possibilità di concludere con una cena mozzafiato da Stella Maris, nostro partner a Punta Chiappa.",

@@ -25,7 +25,7 @@ export default {
     experiences: [
       {
         id: "0",
-        title: "彩虹之旅",
+        title: "Love in Portofino",
         time: "5-10 小时",
         guests: "最多 5 人",
         price: "每团 750 € 起",
@@ -54,7 +54,7 @@ export default {
       {
         id: "4",
         title: "Dolce Vita",
-        time: "17:00-21:00",
+        time: "17:00-22:00",
         guests: "最多 5 人",
         price: "每团 600 € 起",
         desc: "从热那亚出发的私人傍晚及夜间之旅，途中安排游泳停留并探访卡莫利，最终抵达蓬塔基亚帕；还可选择在当地合作餐厅 Stella Maris 享用一顿令人难忘的晚餐。",
