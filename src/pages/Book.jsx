@@ -24,6 +24,7 @@ import { computeTotalPrice, eurosToCents, computeTotalPriceWithDiscount, compute
 import { getDiscounts, discountsReady, getFlags, flagsReady } from '../utils/databaseVariables';
 import { getLocale } from '../utils/locale';
 import { getBookingUi } from '../locales/bookingUi';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 import {
   filterSlotsForExperience,
   getGuestLimitForExperience,
@@ -829,7 +830,7 @@ function Book({ lang = 'it', setLang = () => {} }) {
             </div>
           </section>
 
-          <button type="button" className="ap-call-banner" onClick={() => { trackWhatsAppClick(); window.location.href = 'whatsapp://send?phone=393463365699'; }} aria-label={dict.book.callButtonAria}>
+          <button type="button" className="ap-call-banner" onClick={() => { trackWhatsAppClick(); window.location.href = getWhatsAppUrl(lang); }} aria-label={dict.book.callButtonAria}>
             <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M5.24782 12.9815C4.63328 13.3779 3.90097 13.5507 3.17402 13.4708C2.44708 13.3908 1.76983 13.063 1.25617 12.5424L0.807105 12.1033C0.610232 11.9019 0.5 11.6315 0.5 11.3499C0.5 11.0683 0.610232 10.7978 0.807105 10.5965L2.71312 8.71037C2.91281 8.51413 3.18158 8.40417 3.46156 8.40417C3.74153 8.40417 4.01031 8.51413 4.20999 8.71037C4.41136 8.90725 4.6818 9.01748 4.96342 9.01748C5.24504 9.01748 5.51547 8.90725 5.71684 8.71037L8.71058 5.71663C8.81045 5.61821 8.88976 5.50092 8.94389 5.37158C8.99802 5.24224 9.0259 5.10342 9.0259 4.96321C9.0259 4.82299 8.99802 4.68418 8.94389 4.55483C8.88976 4.42549 8.81045 4.3082 8.71058 4.20978C8.51434 4.0101 8.40438 3.74132 8.40438 3.46135C8.40438 3.18137 8.51434 2.9126 8.71058 2.71291L10.6066 0.816871C10.808 0.619997 11.0784 0.509766 11.36 0.509766C11.6417 0.509766 11.9121 0.619997 12.1135 0.816871L12.5526 1.26594C13.0731 1.7796 13.4009 2.45685 13.4809 3.18379C13.5609 3.91074 13.3881 4.64305 12.9916 5.25759C10.9259 8.30196 8.29751 10.9236 5.24782 12.9815Z" fill="#ffffff" />
             </svg>

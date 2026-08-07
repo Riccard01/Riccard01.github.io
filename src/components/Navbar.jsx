@@ -5,6 +5,7 @@ import meAvatar from '../assets/me.webp';
 import logo from '../assets/logo.svg';
 import { getLocale, LANGUAGE_OPTIONS } from '../utils/locale';
 import { trackWhatsAppClick } from '../utils/googleAdsConversions';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
 function Navbar({ lang = 'it', setLang = () => {} }) {
   const dict = getLocale(lang);
@@ -12,7 +13,7 @@ function Navbar({ lang = 'it', setLang = () => {} }) {
 
   const openWhatsApp = () => {
     trackWhatsAppClick();
-    window.location.href = 'whatsapp://send?phone=393463365699';
+    window.location.href = getWhatsAppUrl(lang);
   };
 
   return (

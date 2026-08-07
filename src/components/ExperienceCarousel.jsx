@@ -12,6 +12,7 @@ import enLocale from '../locales/en';
 import itLocale from '../locales/it';
 import { getExperienceSlugById } from '../utils/experienceRoutes';
 import { trackWhatsAppClick } from '../utils/googleAdsConversions';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
 export default function ExperienceCarousel({ lang = 'en' }) {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function ExperienceCarousel({ lang = 'en' }) {
 
   const openWhatsApp = () => {
     trackWhatsAppClick();
-    window.location.href = 'whatsapp://send?phone=393463365699';
+    window.location.href = getWhatsAppUrl(lang);
   };
 
   // Associazione delle immagini statiche basata sull'ID dell'esperienza
