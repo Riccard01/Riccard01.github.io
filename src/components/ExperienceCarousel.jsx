@@ -114,7 +114,13 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   const getAvailabilityLabel = (experienceId) => {
     const preview = availability[experienceId];
     if (!preview) return null;
-    return availabilityText.available;
+
+    const departureDay = preview.dayOffset <= 1
+      ? new Intl.RelativeTimeFormat(lang, { numeric: 'auto' }).format(preview.dayOffset, 'day')
+      : new Intl.DateTimeFormat(lang, { weekday: 'short', day: 'numeric', month: 'short' })
+        .format(new Date(`${preview.date}T12:00:00`));
+
+    return `${availabilityText.available}: ${departureDay}, ${preview.time}`;
   };
 
   return (

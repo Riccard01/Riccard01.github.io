@@ -5,7 +5,7 @@ const rainbowTourText = {
     heroFacts: ['6 verfugbare Zeitfenster', 'Bis zu 5 Gaste'],
     introTitle: 'Beschreibung',
     intro: [
-      'Die Rainbow Tour ist eine private Bootstour entlang der Riviera fur Gruppen, die Navigation und Landstopps kombinieren mochten.',
+      'Love in Portofino ist eine private Bootstour entlang der Riviera fur Gruppen, die Navigation und Landstopps kombinieren mochten.',
       'Der Einstieg erfolgt am praktischsten Hafen, danach fahrt ihr zu den Dorfern mit Zeit zum Spazieren, freien Mittagessen und Meerblick.',
       'An Bord sind Prosciutto und Melone, Foto- und Videoerinnerungen durch die Crew sowie maximale Flexibilitat fur euren Tag inklusive.',
     ],
@@ -87,13 +87,13 @@ const rainbowTourText = {
       { q: 'Wie sind die Stornobedingungen?', a: 'Bitte lies unsere allgemeine Stornierungsrichtlinie.', link: { label: 'Stornierungsrichtlinie ansehen' } },
     ],
     ctaTitle: 'Bereit zum Ablegen?',
-    ctaText: 'Buche jetzt deine Rainbow Tour oder schreibe uns bei WhatsApp fur individuelle Wunsche, Zusatzstopps und Gruppenbedarfe.',
+    ctaText: 'Buche jetzt Love in Portofino oder schreibe uns bei WhatsApp fur individuelle Wunsche, Zusatzstopps und Gruppenbedarfe.',
   },
   es: {
     heroFacts: ['6 franjas horarias disponibles', 'Hasta 5 personas'],
     introTitle: 'Descripcion',
     intro: [
-      'Rainbow Tour es una salida privada por la Riviera para grupos que quieren combinar navegacion y paradas en tierra.',
+      'Love in Portofino es una salida privada por la Riviera para grupos que quieren combinar navegacion y paradas en tierra.',
       'Se embarca en el punto mas comodo y se visita cada pueblo con tiempo para pasear, almorzar por cuenta propia y disfrutar del mar.',
       'A bordo se incluyen prosciutto con melon, fotos y videos del equipo y libertad total para adaptar el ritmo del dia.',
     ],
@@ -154,13 +154,13 @@ const rainbowTourText = {
       { q: 'Cual es la politica de cancelacion?', a: 'Consulta nuestra politica general de cancelacion.', link: { label: 'Consultar politica de cancelacion' } },
     ],
     ctaTitle: 'Listo para zarpar?',
-    ctaText: 'Reserva ahora tu Rainbow Tour o escribenos por WhatsApp para solicitudes personalizadas, paradas extra o necesidades del grupo.',
+    ctaText: 'Reserva ahora Love in Portofino o escribenos por WhatsApp para solicitudes personalizadas, paradas extra o necesidades del grupo.',
   },
   fr: {
     heroFacts: ['6 creneaux disponibles', 'Jusqu a 5 personnes'],
     introTitle: 'Description',
     intro: [
-      'Le Rainbow Tour est une sortie privee le long de la Riviera pour les groupes qui veulent alterner navigation et escales a terre.',
+      'Love in Portofino est une sortie privee le long de la Riviera pour les groupes qui veulent alterner navigation et escales a terre.',
       'Vous embarquez au point le plus pratique, puis vous rejoignez les villages avec du temps libre pour marcher, dejeuner et profiter de la mer.',
       'A bord: jambon cru et melon, photos et videos de l equipage, et une organisation flexible selon votre rythme.',
     ],
@@ -216,13 +216,13 @@ const rainbowTourText = {
       { q: 'Quelle est la politique d annulation?', a: 'Consultez notre politique generale d annulation.', link: { label: 'Consulter la politique d annulation' } },
     ],
     ctaTitle: 'Pret a embarquer?',
-    ctaText: 'Reservez votre Rainbow Tour ou ecrivez-nous sur WhatsApp pour des demandes personnalisees et des escales supplementaires.',
+    ctaText: 'Reservez Love in Portofino ou ecrivez-nous sur WhatsApp pour des demandes personnalisees et des escales supplementaires.',
   },
   ar: {
     heroFacts: ['6 فترات زمنية متاحة', 'حتى 5 ضيوف'],
     introTitle: 'الوصف',
     intro: [
-      'جولة Rainbow Tour رحلة خاصة على الريفييرا لمن يريد الجمع بين الإبحار والتوقفات على اليابسة.',
+      'Love in Portofino رحلة خاصة على الريفييرا لمن يريد الجمع بين الإبحار والتوقفات على اليابسة.',
       'يتم الصعود من أنسب نقطة انطلاق ثم زيارة القرى مع وقت للمشي والغداء بحرية والاستمتاع بإيقاع البحر.',
       'يشمل العرض على متن القارب بروشوتو مع شمام، وصور وفيديو من الطاقم، ومرونة كاملة لتنظيم اليوم.',
     ],
@@ -278,13 +278,13 @@ const rainbowTourText = {
       { q: 'ما سياسة الالغاء؟', a: 'يرجى الاطلاع على سياسة الالغاء العامة.', link: { label: 'الاطلاع على سياسة الالغاء' } },
     ],
     ctaTitle: 'جاهز للابحار؟',
-    ctaText: 'احجز Rainbow Tour الان او راسلنا عبر واتساب لطلبات مخصصة ومحطات اضافية واحتياجات المجموعة.',
+    ctaText: 'احجز Love in Portofino الان او راسلنا عبر واتساب لطلبات مخصصة ومحطات اضافية واحتياجات المجموعة.',
   },
   zh: {
     heroFacts: ['6 个可选时段', '最多 5 位客人'],
     introTitle: '行程介绍',
     intro: [
-      'Rainbow Tour 是沿里维埃拉的私人航线，适合希望把航行与岸上停靠结合的客人。',
+      'Love in Portofino 是沿里维埃拉的私人航线，适合希望把航行与岸上停靠结合的客人。',
       '可从最方便的港口登船，随后前往多个村镇，预留自由步行与自行用餐时间。',
       '船上包含火腿与甜瓜简餐、船员拍摄的照片视频，并可按团队节奏灵活安排。',
     ],
@@ -340,12 +340,12 @@ const rainbowTourText = {
       { q: '取消政策是什么？', a: '请查看我们的通用取消政策。', link: { label: '查看取消政策' } },
     ],
     ctaTitle: '准备启航了吗？',
-    ctaText: '现在预订 Rainbow Tour，或通过 WhatsApp 联系我们，提出定制需求与额外停靠安排。',
+    ctaText: '现在预订 Love in Portofino，或通过 WhatsApp 联系我们，提出定制需求与额外停靠安排。',
   },
   pl: {
     heroFacts: ['6 dostepnych przedzialow czasu', 'Do 5 gosci'],
     introTitle: 'Opis',
-    intro: ['Rainbow Tour to prywatny rejs po Riwierze dla grup, ktore chca laczyc zeglowanie z postojami na ladzie.', 'Wejscie na poklad odbywa sie w najwygodniejszym porcie, potem odwiedzacie miejscowosci z czasem na spacer i samodzielny obiad.', 'Na pokladzie: prosciutto z melonem, zdjecia i filmy zalogi oraz pelna elastycznosc tempa dnia.'],
+    intro: ['Love in Portofino to prywatny rejs po Riwierze dla grup, ktore chca laczyc zeglowanie z postojami na ladzie.', 'Wejscie na poklad odbywa sie w najwygodniejszym porcie, potem odwiedzacie miejscowosci z czasem na spacer i samodzielny obiad.', 'Na pokladzie: prosciutto z melonem, zdjecia i filmy zalogi oraz pelna elastycznosc tempa dnia.'],
     departureProfiles: [
       {
         title: 'Start z Tigullio',
@@ -398,12 +398,12 @@ const rainbowTourText = {
       { q: 'Jaka jest polityka anulowania?', a: 'Sprawdz nasza ogolna polityke anulowania.', link: { label: 'Sprawdz polityke anulowania' } },
     ],
     ctaTitle: 'Gotowi wyplynac?',
-    ctaText: 'Zarezerwuj Rainbow Tour teraz albo napisz na WhatsApp w sprawie planu szytego na miare i dodatkowych przystankow.',
+    ctaText: 'Zarezerwuj Love in Portofino teraz albo napisz na WhatsApp w sprawie planu szytego na miare i dodatkowych przystankow.',
   },
   ru: {
     heroFacts: ['6 доступных временных слотов', 'До 5 гостей'],
     introTitle: 'Описание',
-    intro: ['Rainbow Tour - это частная прогулка вдоль Ривьеры для групп, которые хотят совместить переходы по морю и остановки на берегу.', 'Посадка возможна в самом удобном порту, затем маршрут проходит через прибрежные поселки с временем на прогулку и обед.', 'На борту включены прошутто с дыней, фото и видео от команды, а темп дня легко подстроить под вашу группу.'],
+    intro: ['Love in Portofino - это частная прогулка вдоль Ривьеры для групп, которые хотят совместить переходы по морю и остановки на берегу.', 'Посадка возможна в самом удобном порту, затем маршрут проходит через прибрежные поселки с временем на прогулку и обед.', 'На борту включены прошутто с дыней, фото и видео от команды, а темп дня легко подстроить под вашу группу.'],
     departureProfiles: [
       {
         title: 'Отправление из Тигуллио',
@@ -456,12 +456,12 @@ const rainbowTourText = {
       { q: 'Какая политика отмены?', a: 'Пожалуйста, ознакомьтесь с общей политикой отмены.', link: { label: 'Смотреть политику отмены' } },
     ],
     ctaTitle: 'Готовы к выходу в море?',
-    ctaText: 'Бронируйте Rainbow Tour или пишите в WhatsApp для индивидуальных запросов, дополнительных остановок и задач группы.',
+    ctaText: 'Бронируйте Love in Portofino или пишите в WhatsApp для индивидуальных запросов, дополнительных остановок и задач группы.',
   },
   uk: {
     heroFacts: ['6 доступних часових слотів', 'До 5 гостей'],
     introTitle: 'Опис',
-    intro: ['Rainbow Tour - це приватна подорож уздовж Рив єри для груп, які хочуть поєднати плавання та зупинки на березі.', 'Посадка відбувається у найзручнішому порту, далі маршрут проходить через селища з часом на прогулянку та обід.', 'На борту включено прошуто з динею, фото і відео від команди та гнучкий ритм дня під вашу групу.'],
+    intro: ['Love in Portofino - це приватна подорож уздовж Рив єри для груп, які хочуть поєднати плавання та зупинки на березі.', 'Посадка відбувається у найзручнішому порту, далі маршрут проходить через селища з часом на прогулянку та обід.', 'На борту включено прошуто з динею, фото і відео від команди та гнучкий ритм дня під вашу групу.'],
     departureProfiles: [
       {
         title: 'Відправлення з Тігулліо',
@@ -514,7 +514,7 @@ const rainbowTourText = {
       { q: 'Яка політика скасування?', a: 'Будь ласка, перегляньте загальну політику скасування.', link: { label: 'Переглянути політику скасування' } },
     ],
     ctaTitle: 'Готові вирушати?',
-    ctaText: 'Бронюйте Rainbow Tour зараз або напишіть нам у WhatsApp для індивідуальних запитів та додаткових зупинок.',
+    ctaText: 'Бронюйте Love in Portofino зараз або напишіть нам у WhatsApp для індивідуальних запитів та додаткових зупинок.',
   },
 };
 

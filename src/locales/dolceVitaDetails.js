@@ -39,11 +39,27 @@ const details = {
 export function localizeDolceVita(lang, base) {
   const localized = details[lang];
   if (!localized) return base;
+  const durationWords = {
+    de: ['vier Stunden', 'fünf Stunden'],
+    es: ['cuatro horas', 'cinco horas'],
+    fr: ['quatre heures', 'cinq heures'],
+    ar: ['أربع ساعات', 'خمس ساعات'],
+    zh: ['四小时', '五小时'],
+    pl: ['czterech godzin', 'pięciu godzin'],
+    ru: ['четырех часов', 'пяти часов'],
+    uk: ['чотирьох годин', 'п’яти годин'],
+  };
+  const updateSchedule = (value) => {
+    const [oldDuration, newDuration] = durationWords[lang] || [];
+    const updated = String(value).replaceAll('21:00', '22:00');
+    return oldDuration ? updated.replace(oldDuration, newDuration) : updated;
+  };
   return {
     ...base,
     ...localized,
+    heroFacts: localized.heroFacts.map(updateSchedule),
     routeStops: base.routeStops.map((stop, index) => ({ ...stop, ...(localized.routeStops[index] || {}) })),
     departurePoints: base.departurePoints.map((point) => ({ ...point })),
-    faqs: localized.faqs.map((faq, index) => ({ ...faq, ...(base.faqs[index]?.link ? { link: { ...base.faqs[index].link, href: `/${lang}/policy` } } : {}) })),
+    faqs: localized.faqs.map((faq, index) => ({ ...faq, a: updateSchedule(faq.a), ...(base.faqs[index]?.link ? { link: { ...base.faqs[index].link, href: `/${lang}/policy` } } : {}) })),
   };
 }

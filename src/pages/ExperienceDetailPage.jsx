@@ -88,7 +88,7 @@ function getRainbowTourContent(lang) {
         basePrice: 600,
         introTitle: 'Descrizione',
         intro: [
-          'Il Rainbow Tour è un piccolo viaggio privato lungo la Riviera, pensato per chi vuole alternare la navigazione alle soste a terra.',
+          'Love in Portofino è un piccolo viaggio privato lungo la Riviera, pensato per chi vuole alternare la navigazione alle soste a terra.',
           'Si parte dal punto più comodo, poi si raggiungono i borghi con tempo per passeggiare, pranzare in autonomia e godersi il ritmo del mare.',
           'A bordo restano il prosciutto e melone, le foto e i video dello staff e tutta la libertà di costruire la giornata con il proprio gruppo.',
         ],
@@ -255,14 +255,14 @@ function getRainbowTourContent(lang) {
           { q: 'Qual è la politica di cancellazione?', a: 'Consulta la nostra politica di cancellazione generale.', link: { label: 'Consulta la nostra politica di cancellazione', href: '/it/policy' } },
         ],
         ctaTitle: 'Pronto a salpare?',
-        ctaText: 'Prenota ora il tuo Rainbow Tour oppure scrivici su WhatsApp per richieste personalizzate, tappe extra o esigenze del gruppo.',
+        ctaText: 'Prenota ora Love in Portofino oppure scrivici su WhatsApp per richieste personalizzate, tappe extra o esigenze del gruppo.',
       }
     : {
         heroFacts: ['6 available time slots', 'Up to 5 guests'],
         basePrice: 600,
         introTitle: 'Description',
         intro: [
-          'The Rainbow Tour is a private journey along the Riviera, designed for guests who want to mix cruising with shore stops in the villages.',
+          'Love in Portofino is a private journey along the Riviera, designed for guests who want to mix cruising with shore stops in the villages.',
           'You board from the most convenient departure point and then visit the villages with time to walk around, have lunch on your own and enjoy the rhythm of the sea.',
           'On board you will have prosciutto and melon, photos and videos from the crew, and the freedom to shape the day with your group.',
         ],
@@ -429,7 +429,7 @@ function getRainbowTourContent(lang) {
           { q: 'What is the cancellation policy?', a: 'Please consult our general cancellation policy.', link: { label: 'Consult our cancellation policy', href: '/en/policy' } },
         ],
         ctaTitle: 'Ready to set sail?',
-        ctaText: 'Book your Rainbow Tour now, or write to us on WhatsApp for custom requests, extra stops or group needs.',
+        ctaText: 'Book Love in Portofino now, or write to us on WhatsApp for custom requests, extra stops or group needs.',
       };
 
   return localizeRainbowTourContent(lang, base);
@@ -608,7 +608,7 @@ function getBaseDolceVitaContent(lang) {
           },
           {
             q: 'Quanto dura esattamente il tour?',
-            a: '5 ore complessive, indicativamente dalle 17:00 alle 21:00.',
+            a: '5 ore complessive, indicativamente dalle 17:00 alle 22:00.',
           },
           {
             q: 'Le foto e i video sono inclusi nel prezzo?',
@@ -789,7 +789,7 @@ function getBaseDolceVitaContent(lang) {
           },
           {
             q: 'How long is the tour exactly?',
-            a: 'Total duration is 5 hours, typically from 17:00 to 21:00.',
+            a: 'Total duration is 5 hours, typically from 17:00 to 22:00.',
           },
           {
             q: 'Are photos and videos included in the price?',

@@ -21,7 +21,7 @@
 .carousel {
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: 72px;
   margin: 0 auto;
   padding: 10px 6vw 30px 6vw;
   box-sizing: border-box;
@@ -48,6 +48,7 @@
 
 .carousel-slide {
   width: 100%;
+  height: 570px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -56,7 +57,7 @@
 
 .slide-content {
   width: 100%;
-  height: auto;
+  height: 570px;
   color: #ffffff;
   font-size: 1.5rem;
   font-weight: 700;
@@ -130,7 +131,7 @@
   grid-template-rows: 1fr 1fr;
   gap: 2px;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 570px;
 }
 
 .image-grid.single-image {
@@ -375,17 +376,14 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
-    gap: 52px 32px;
+    row-gap: 88px;
+    column-gap: 32px;
     padding: 20px 0;
   }
 
   .carousel-wrapper {
     max-width: none;
     height: 100%;
-  }
-
-  .image-grid {
-    aspect-ratio: 4 / 3;
   }
 
   .text-content-wrapper h3 {
@@ -406,11 +404,8 @@
 @media (min-width: 1280px) {
   .carousel {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 28px;
-  }
-
-  .image-grid {
-    aspect-ratio: 1 / 1;
+    row-gap: 88px;
+    column-gap: 28px;
   }
 
   .title-container {
