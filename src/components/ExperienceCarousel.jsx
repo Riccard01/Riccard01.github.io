@@ -35,9 +35,11 @@ export default function ExperienceCarousel({ lang = 'en' }) {
   const localizedReviews = localeReviews.length
     ? localeReviews
     : (enLocale?.reviewCarousel?.reviews || []);
-  const reviewCount = localizedReviews.length + (
-    localizedReviews.some((review) => review?.name === 'Christina Speth') ? 0 : 1
-  );
+  const localizedReviewNames = new Set(localizedReviews.map((review) => review?.name));
+  const sharedReviewNames = ['Christina Speth', 'Bradley', 'Angelica Cesarini'];
+  const reviewCount = localizedReviews.length + sharedReviewNames.filter(
+    (name) => !localizedReviewNames.has(name)
+  ).length;
 
   const getReviewPreview = (experienceId) => {
     const config = EXPERIENCE_REVIEW_CONFIG[experienceId];
