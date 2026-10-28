@@ -192,7 +192,7 @@ h2 {
 
 .experiences {
   width: 100%;
-  padding-top: 8rem;
+  padding-top: 3rem;
   background-color: #fbfaff;
   position: relative;       /* <--- AGGIUNGI QUESTO */
   z-index: 1;               /* <--- DAI UN VALORE BASSO (es. 1) affinché l'app-content (z-index: 99) ci passi sopra */
@@ -233,7 +233,7 @@ h2 {
   }
 
   .experiences {
-    padding-top: 7rem;
+    padding-top: 3rem;
   }
 
   .experiences-content {

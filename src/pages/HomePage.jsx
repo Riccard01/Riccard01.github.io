@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './HomePage.css';
 import ExperienceCarousel from '../components/ExperienceCarousel';
+import WhatYouWillExperience from '../components/WhatYouWillExperience';
 import ReviewCarousel from '../components/ReviewCarousel';
 import PrivateTransfer from '../components/PrivateTransfer';
 import Faq from '../components/Faq';
@@ -50,6 +51,8 @@ function HomePage({ lang = 'en', setLang = () => {} }) {
           </div>
         </div>
       </section>
+
+      <WhatYouWillExperience lang={lang} />
 
       <section className="experiences" id="experiences">
         <div className="experiences-content">
