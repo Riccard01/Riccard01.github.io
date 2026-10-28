@@ -52,8 +52,6 @@ function HomePage({ lang = 'en', setLang = () => {} }) {
         </div>
       </section>
 
-      <WhatYouWillExperience lang={lang} />
-
       <section className="experiences" id="experiences">
         <div className="experiences-content">
           <ExperienceCarousel lang={lang} />
